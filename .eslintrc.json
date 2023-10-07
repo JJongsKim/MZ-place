@@ -50,7 +50,6 @@
       { "format": ["PascalCase"], "selector": "interface" },
       { "format": ["PascalCase"], "selector": "typeAlias" }
     ],
-
     "import/no-duplicates": "error"
   }
 }
