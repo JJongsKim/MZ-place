@@ -1,10 +1,15 @@
-import TestCom from '@components/Input';
+import MainPage from '@pages/MainPage';
+import GlobalStyle from '@styles/globalStyle';
+import { theme } from '@styles/theme';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">테스트</header>
-      <TestCom />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <MainPage />
+      </ThemeProvider>
     </div>
   );
 }
