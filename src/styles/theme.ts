@@ -9,6 +9,7 @@ export const theme = {
     text_gray: '#bababa',
     green: '#19bb35',
     light_green: '#02c98d',
+    olive_green: '#9bca3e',
     blue: '#001aff',
   },
   font,
