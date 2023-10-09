@@ -1,8 +1,13 @@
 import Header from '@components/common/Header';
-// import { styled } from 'styled-components';
+import Navigation from '@components/common/Navigation';
 
 const MainPage = () => {
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Navigation />
+    </>
+  );
 };
 
 export default MainPage;
