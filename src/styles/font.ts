@@ -42,5 +42,6 @@ export const font = {
   B_14: FONT({ size: 14, family: 'pretendard', weight: 'B' }),
   B_15: FONT({ size: 15, family: 'pretendard', weight: 'B' }),
   B_16: FONT({ size: 16, family: 'pretendard', weight: 'B' }),
+  B_18: FONT({ size: 18, family: 'pretendard', weight: 'B' }),
   B_22: FONT({ size: 22, family: 'pretendard', weight: 'B' }),
 };
