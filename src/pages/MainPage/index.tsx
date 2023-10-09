@@ -1,7 +1,12 @@
 import { styled } from 'styled-components';
+import mzLogo from '@assets/mz-logo.svg';
 
 const MainPage = () => {
-  return <Test>테스트1</Test>;
+  return (
+    <Test>
+      <img src={mzLogo} />
+    </Test>
+  );
 };
 
 const Test = styled.div`
