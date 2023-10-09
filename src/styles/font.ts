@@ -26,7 +26,7 @@ const FONT = ({ size, weight, family }: Font) => css`
 `;
 
 export const font = {
-  M_11: FONT({ size: 11, family: 'pretendard', weight: 'M' }),
+  M_12: FONT({ size: 12, family: 'pretendard', weight: 'M' }),
   M_14: FONT({ size: 14, family: 'pretendard', weight: 'M' }),
   M_16: FONT({ size: 16, family: 'pretendard', weight: 'M' }),
 

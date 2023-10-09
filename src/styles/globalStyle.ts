@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0 auto;
     font-family: 'pretendard', sans-serif;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   * {
