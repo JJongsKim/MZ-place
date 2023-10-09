@@ -3,6 +3,7 @@ import Chip from '@components/common/Chip';
 import Header from '@components/common/Header';
 import InputBase from '@components/common/InputBase';
 import Navigation from '@components/common/Navigation';
+import WarningMention from '@components/warning';
 
 const MainPage = () => {
   return (
@@ -15,6 +16,7 @@ const MainPage = () => {
         <Chip value="활성화" isClicked={true} />
         <Chip value="작은필터" size="small" />
         <Chip value="활성화" size="small" isClicked={true} />
+        <WarningMention text="경고 문구 들어갈 자리" />
       </div>
       <Navigation />
     </>
