@@ -1,16 +1,8 @@
-import { styled } from 'styled-components';
-import mzLogo from '@assets/mz-logo.svg';
+import Header from '@components/common/Header';
+// import { styled } from 'styled-components';
 
 const MainPage = () => {
-  return (
-    <Test>
-      <img src={mzLogo} />
-    </Test>
-  );
+  return <Header />;
 };
-
-const Test = styled.div`
-  color: ${({ theme }) => theme.colors.green};
-`;
 
 export default MainPage;
