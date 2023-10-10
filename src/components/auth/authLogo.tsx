@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 import BigLogo from '@assets/mz-big-logo.svg';
+import { Link } from 'react-router-dom';
 
 interface AuthLogoProps {
   title: string;
@@ -9,7 +10,9 @@ interface AuthLogoProps {
 const AuthLogo = ({ title }: AuthLogoProps) => {
   return (
     <LogoWrap>
-      <LogoIcon src={BigLogo} />
+      <Link to="/">
+        <LogoIcon src={BigLogo} />
+      </Link>
       <LogoTitle>{title}</LogoTitle>
     </LogoWrap>
   );
@@ -33,10 +36,11 @@ const LogoIcon = styled.img`
 `;
 
 const LogoTitle = styled.p`
-  margin: 36px 0 22px 0;
+  margin: 36px 0 25px 0;
   ${({ theme }) => theme.font.SB_22};
 
   @media screen and (min-width: 1200px) {
+    margin: 50px 0 36px 0;
     ${({ theme }) => theme.font.SB_28};
   }
 `;
