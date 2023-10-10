@@ -1,6 +1,14 @@
+import Layout from '@components/layout';
+import SignIn from '@pages/Auth/signIn';
+import SignUp from '@pages/Auth/signUp';
+import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
+import MyPage from '@pages/MyPage';
+import SearchPage from '@pages/SearchPage';
+
 import GlobalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
@@ -8,7 +16,18 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <MainPage />
+        <Router>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/like" element={<LikePage />} />
+              <Route path="/my-page" element={<MyPage />} />
+            </Route>
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </div>
   );
