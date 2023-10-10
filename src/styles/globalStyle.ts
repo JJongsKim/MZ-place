@@ -3,35 +3,13 @@ import { reset } from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
-
-  @font-face {
-    font-family: pretendard;
-    font-weight: 400; 
-    src: url('/fonts/Pretendard-Regular.ttf');
-  }
-  @font-face {
-    font-family: pretendard;
-    font-weight: 500; 
-    src: url('/fonts/Pretendard-Medium.ttf');
-  }
-  @font-face {
-    font-family: pretendard;
-    font-weight: 600; 
-    src: url('/fonts/Pretendard-SemiBold.ttf');
-  }
-  @font-face {
-    font-family: pretendard;
-    font-weight: 700; 
-    src: url('/fonts/Pretendard-Bold.ttf');
-  }
-
-
+  
   html,
   body {
+    font-family: 'Pretendard', sans-serif;
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    font-family: 'pretendard', sans-serif;
     color: ${({ theme }) => theme.colors.text};
   }
 
