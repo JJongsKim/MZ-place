@@ -20,6 +20,7 @@ const HeaderWrap = styled.header`
   justify-content: center;
   align-items: center;
   background-color: white;
+  z-index: 5;
 
   @media screen and (min-width: 1200px) {
     height: 80px;
