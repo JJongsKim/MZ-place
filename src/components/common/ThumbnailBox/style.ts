@@ -6,6 +6,7 @@ const ThumbWrap = styled.div`
   height: 100px;
   border-radius: 20px;
   background-color: #c4c4c4;
+  cursor: pointer;
 
   @media screen and (min-width: 1200px) {
     width: 330px;
