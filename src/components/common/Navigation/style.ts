@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from 'styled-components';
 
 const NavWrap = styled.nav`
@@ -10,6 +9,7 @@ const NavWrap = styled.nav`
   right: 0;
   width: 100%;
   height: 80px;
+  background-color: white;
 
   @media screen and (min-width: 1200px) {
     height: 100px;

@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0 auto;
     color: ${({ theme }) => theme.colors.text};
+    background-color: #fbfbfb;
   }
 
   * {
