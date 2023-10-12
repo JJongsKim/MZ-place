@@ -5,12 +5,13 @@ const InputWrap = styled.input`
   height: 50px;
   color: ${({ theme }) => theme.colors.text};
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
-  padding-left: 15px;
+  padding: 0 20px;
   ${({ theme }) => theme.font.SB_12};
 
   @media screen and (min-width: 1200px) {
     width: 500px;
     height: 70px;
+    padding: 0 30px;
     ${({ theme }) => theme.font.SB_16};
   }
 

@@ -20,6 +20,7 @@ const NavList = styled.ul`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  place-items: center;
 
   @media screen and (min-width: 1200px) {
     margin: 0 auto;

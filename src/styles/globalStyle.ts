@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   a:link,
   a:visited,
   a:active {
+    color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
     display: inline-block;
   }

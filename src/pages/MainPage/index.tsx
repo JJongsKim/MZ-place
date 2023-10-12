@@ -1,8 +1,6 @@
 import ButtonBase from '@components/common/ButtonBase';
 import Chip from '@components/common/Chip';
-import Header from '@components/common/Header';
 import InputBase from '@components/common/InputBase';
-import Navigation from '@components/common/Navigation';
 import ThumbnailBox from '@components/common/ThumbnailBox';
 import Dropdown from '@components/dropdown';
 import WarningMention from '@components/warning';
@@ -10,7 +8,6 @@ import WarningMention from '@components/warning';
 const MainPage = () => {
   return (
     <>
-      <Header />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <ButtonBase name="버튼테스트" />
         <InputBase placeholder="인풋창테스트" />
@@ -22,7 +19,6 @@ const MainPage = () => {
         <Dropdown />
         <WarningMention text="경고 문구 들어갈 자리" />
       </div>
-      <Navigation />
     </>
   );
 };
