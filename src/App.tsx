@@ -21,8 +21,14 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<MainPage />} />
               <Route path="/search" element={<SearchPage />} />
-              <Route path="/like" element={<LikePage />} />
-              <Route path="/my-page" element={<MyPage />} />
+              <Route
+                path="/like"
+                element={<LikePage key={null} type={undefined} props={undefined} />}
+              />
+              <Route
+                path="/my-page"
+                element={<MyPage key={null} type={undefined} props={undefined} />}
+              />
             </Route>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />

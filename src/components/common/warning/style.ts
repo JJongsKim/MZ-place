@@ -4,6 +4,7 @@ const WarningWrap = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +24,7 @@ const WarningIcon = styled.img`
 
 const WarningText = styled.p`
   margin-top: 20px;
+  color: ${({ theme }) => theme.colors.gray};
   ${({ theme }) => theme.font.B_16};
 
   @media screen and (min-width: 1200px) {
