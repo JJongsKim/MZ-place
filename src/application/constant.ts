@@ -14,6 +14,12 @@ import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
 
+import HealingImg1 from '../images/healing1-picture.jpg';
+import HealingImg2 from '../images/healing2-picture.jpg';
+import MapImg from '../images/map-picture.jpg';
+import MuseumImg from '../images/museum-picture.jpg';
+import PaintImg from '../images/paint-picture.jpg';
+
 import type { NavType } from '../types';
 
 export const NAV_ARRAY: NavType[] = [
@@ -126,4 +132,27 @@ export const REGION_ARRAY = [
   '종로구',
   '중구',
   '중랑구',
+];
+
+export const AutoSlideImgs = [
+  {
+    name: 'healing1Img',
+    src: HealingImg1,
+  },
+  {
+    name: 'mapImg',
+    src: MapImg,
+  },
+  {
+    name: 'healing2Img',
+    src: HealingImg2,
+  },
+  {
+    name: 'museumImg',
+    src: MuseumImg,
+  },
+  {
+    name: 'paintImg',
+    src: PaintImg,
+  },
 ];
