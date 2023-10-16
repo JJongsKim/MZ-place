@@ -106,6 +106,17 @@ export const CUSTOM_MENU = [
   },
 ];
 
+export const MINI_FILTER = [
+  {
+    type: '유료/무료',
+    filters: ['유료', '무료'],
+  },
+  {
+    type: '인원별 추천',
+    filters: ['1인', '2인', '3인', '4인', '5인 이상'],
+  },
+];
+
 export const REGION_ARRAY = [
   '강동구',
   '강남구',

@@ -8,7 +8,7 @@ const ChipWrap = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => (props.size === 'small' ? `70px` : `80px`)};
+  width: ${props => (props.size === 'small' ? `65px` : `80px`)};
   height: ${props => (props.size === 'small' ? `30px` : `32px`)};
   border-radius: 10px;
   background-color: ${props => (props.clicked ? `${theme.colors.olive_green}` : `#eeeeee`)};
