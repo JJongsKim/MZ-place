@@ -49,37 +49,37 @@ export const MENU = [
   {
     name: '유료/무료',
     svg: Cost,
-    path: '',
+    path: 'cost',
   },
   {
     name: '힐링',
     svg: Healing,
-    path: '',
+    path: 'healing',
   },
   {
     name: '예술',
     svg: Art,
-    path: '',
+    path: 'art',
   },
   {
     name: '교육',
     svg: Edu,
-    path: '',
+    path: 'edu',
   },
   {
     name: '쇼핑',
     svg: Shop,
-    path: '',
+    path: 'shop',
   },
   {
     name: '행사',
     svg: Event,
-    path: '',
+    path: 'event',
   },
   {
     name: '핫플레이스',
     svg: HotPlace,
-    path: '',
+    path: 'hot-place',
   },
 ];
 
@@ -87,22 +87,33 @@ export const CUSTOM_MENU = [
   {
     name: '인원별 추천',
     svg: Personnel,
-    path: '',
+    path: 'personnel',
   },
   {
     name: '거리별 추천',
     svg: Map,
-    path: '',
+    path: 'map',
   },
   {
     name: '찜 기반 추천',
     svg: LikeMenu,
-    path: '',
+    path: 'like-menu',
   },
   {
     name: '맞춤 필터',
     svg: Custom,
-    path: '',
+    path: 'custom',
+  },
+];
+
+export const MINI_FILTER = [
+  {
+    type: '유료/무료',
+    filters: ['유료', '무료'],
+  },
+  {
+    type: '인원별 추천',
+    filters: ['1인', '2인', '3인', '4인', '5인 이상'],
   },
 ];
 
