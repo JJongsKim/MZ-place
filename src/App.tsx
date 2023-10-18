@@ -2,6 +2,7 @@ import Layout from '@components/layout';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import DetailPage from '@pages/DetailPage';
+import ExplainPage from '@pages/ExplainPage';
 import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
 import MyPage from '@pages/MyPage';
@@ -23,6 +24,8 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/:menuId" element={<DetailPage />} />
+              {/* 임시 라우터 */}
+              <Route path="/explain" element={<ExplainPage />} />
               <Route
                 path="/like"
                 element={<LikePage key={null} type={undefined} props={undefined} />}
