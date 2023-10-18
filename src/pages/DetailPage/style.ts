@@ -32,4 +32,11 @@ const DetailPageContentList = styled.section`
   }
 `;
 
+// const BottomSheetPageWrap = styled.div`
+//   @media screen and (min-width: 1200px){
+//     display: flex;
+//     justify-content: center;
+//   }
+// `;
+
 export { DetailPageWrap, FilterList, DetailPageContentList };

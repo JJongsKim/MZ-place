@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { DetailPageContentList, DetailPageWrap, FilterList } from './style';
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
+import BottomSheet from '@components/common/BottomSheet';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -21,7 +22,11 @@ const DetailPage = () => {
         ))}
       </FilterList>
       <DetailPageContentList>
-        <ThumbnailList />
+        {location.state === '거리별 추천' || location.state === '맞춤 필터' ? (
+          <BottomSheet />
+        ) : (
+          <ThumbnailList />
+        )}
       </DetailPageContentList>
     </DetailPageWrap>
   );
