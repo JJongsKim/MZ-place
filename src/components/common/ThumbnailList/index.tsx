@@ -6,7 +6,7 @@ const ThumbnailList = () => {
   return (
     <ThumbnailListWrap>
       {MOCKUP1.map(data => (
-        <ThumbnailBox key={data.title} label={data.title} like={data.like} />
+        <ThumbnailBox key={data.title} label={data.title} like={data.like} id={data.id} />
       ))}
     </ThumbnailListWrap>
   );
