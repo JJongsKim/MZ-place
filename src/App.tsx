@@ -24,8 +24,8 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/:menuId" element={<DetailPage />} />
-              {/* 임시 라우터 */}
-              <Route path="/explain" element={<ExplainPage />} />
+              {/* TODO 다시 생각해보기. 게시글 라우터를 이렇게 가져가도 맞는건가? */}
+              <Route path="/content/:id" element={<ExplainPage />} />
               <Route
                 path="/like"
                 element={<LikePage key={null} type={undefined} props={undefined} />}

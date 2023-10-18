@@ -17,16 +17,19 @@ import test from '../../images/IMG_9904.jpg';
 import LikeEmpty from '@assets/like-empty.svg';
 // import LikeFull from '@assets/like-full.svg';
 import { MOCKUP2 } from '@application/mock';
+import { useLocation } from 'react-router-dom';
 
 const ExplainPage = () => {
+  const location = useLocation();
+
   return (
     <ExplainPageWrap>
-      <SearchBar name="김수정 데뷔쇼" backIcon={true} />
+      <SearchBar name={location.state} backIcon={true} />
       <ThumbnailBoxWrap>
         <ThumbnailBox src={test} alt="장소썸네일" />
         <LikeIcon src={LikeEmpty} alt="찜버튼" />
       </ThumbnailBoxWrap>
-      <LocationTitle>김수정 데뷔쇼</LocationTitle>
+      <LocationTitle>{location.state}</LocationTitle>
       <InfoList>
         {MOCKUP2.map(item => (
           <li key={item.type}>
