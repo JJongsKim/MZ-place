@@ -1,8 +1,13 @@
 import { styled } from 'styled-components';
+import { motion } from 'framer-motion';
+import { BOTTOM_SHEET_HEIGHT } from '@application/constant';
+import { useBottomSheet } from '@hooks/useBottomHook';
 
 const BottomSheet = () => {
+  const { sheet } = useBottomSheet();
+
   return (
-    <BottomSheetWrap>
+    <BottomSheetWrap ref={sheet}>
       <HandleWrap>
         <HandleIcon />
       </HandleWrap>
@@ -10,7 +15,7 @@ const BottomSheet = () => {
   );
 };
 
-const BottomSheetWrap = styled.div`
+const BottomSheetWrap = styled(motion.div)`
   display: flex;
   flex-direction: column; // 바텀시트의 핸들, body 세로정렬
   position: fixed;
@@ -20,12 +25,13 @@ const BottomSheetWrap = styled.div`
   z-index: 5;
   width: 375px;
   height: 40px;
+  margin: 0 auto;
   border-radius: 30px 30px 0 0;
   background-color: white;
+  transition: transform 150ms ease-out;
 
   @media screen and (min-width: 1200px) {
     width: 850px;
-    margin: 0 auto;
     bottom: 100px;
   }
 `;
@@ -35,7 +41,8 @@ const HandleWrap = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 40px;
+  /* height: 40px; */
+  height: ${BOTTOM_SHEET_HEIGHT}px;
   border-radius: 30px 30px 0 0;
   background-color: #f3f3f3;
   cursor: pointer;
@@ -44,6 +51,7 @@ const HandleWrap = styled.div`
 const HandleIcon = styled.div`
   width: 100px;
   height: 5px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.text_gray};
 `;
 
