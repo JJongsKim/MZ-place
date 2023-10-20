@@ -168,8 +168,6 @@ export const AutoSlideImgs = [
   },
 ];
 
-// BottomSheet 관련 임시 constant
-// TODO 이대로 구현해보고 높이 적절하게 변경
-export const MIN_Y = 60; // bottom sheet 최대로 높이 올라간 y 값
+export const MIN_Y = 200; // bottom sheet 최대로 높이 올라간 y 값
 export const MAX_Y = window.innerHeight - 80; // bottom sheet 높이 최대로 내려간 y 값
 export const BOTTOM_SHEET_HEIGHT = window.innerHeight - MIN_Y;

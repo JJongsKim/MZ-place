@@ -73,6 +73,16 @@ export const MOCKUP1 = [
     like: true,
     id: 7,
   },
+  {
+    title: '목업데이터8',
+    like: false,
+    id: 8,
+  },
+  {
+    title: '목업데이터9',
+    like: true,
+    id: 9,
+  },
 ];
 
 export const MOCKUP2 = [

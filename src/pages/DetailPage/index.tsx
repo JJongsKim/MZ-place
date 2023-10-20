@@ -34,11 +34,14 @@ const DetailPage = () => {
             <MapPageDropdownWrap>
               <Dropdown />
             </MapPageDropdownWrap>
-            <div>영역</div>
-            <BottomSheet />
+            <BottomSheet>
+              <ThumbnailList />
+            </BottomSheet>
           </MapPageWrap>
         ) : location.state === '맞춤 필터' ? (
-          <BottomSheet />
+          <BottomSheet>
+            <ThumbnailList />
+          </BottomSheet>
         ) : (
           <ThumbnailList />
         )}

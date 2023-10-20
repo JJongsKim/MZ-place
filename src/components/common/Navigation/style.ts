@@ -10,6 +10,7 @@ const NavWrap = styled.nav`
   width: 100%;
   height: 80px;
   background-color: white;
+  z-index: 5;
 
   @media screen and (min-width: 1200px) {
     height: 100px;
