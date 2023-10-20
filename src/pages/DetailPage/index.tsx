@@ -2,9 +2,17 @@ import { MINI_FILTER } from '@application/constant';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 
-import { DetailPageContentList, DetailPageWrap, FilterList } from './style';
+import {
+  DetailPageContentList,
+  DetailPageWrap,
+  FilterList,
+  MapPageDropdownWrap,
+  MapPageWrap,
+} from './style';
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
+import BottomSheet from '@components/common/BottomSheet';
+import Dropdown from '@components/dropdown';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -21,7 +29,22 @@ const DetailPage = () => {
         ))}
       </FilterList>
       <DetailPageContentList>
-        <ThumbnailList />
+        {location.state === '거리별 추천' ? (
+          <MapPageWrap>
+            <MapPageDropdownWrap>
+              <Dropdown />
+            </MapPageDropdownWrap>
+            <BottomSheet>
+              <ThumbnailList />
+            </BottomSheet>
+          </MapPageWrap>
+        ) : location.state === '맞춤 필터' ? (
+          <BottomSheet>
+            <ThumbnailList />
+          </BottomSheet>
+        ) : (
+          <ThumbnailList />
+        )}
       </DetailPageContentList>
     </DetailPageWrap>
   );

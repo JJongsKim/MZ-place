@@ -32,4 +32,22 @@ const DetailPageContentList = styled.section`
   }
 `;
 
-export { DetailPageWrap, FilterList, DetailPageContentList };
+// 거리별 추천 페이지용
+const MapPageWrap = styled.div`
+  width: 100%;
+`;
+
+const MapPageDropdownWrap = styled.div`
+  width: 375px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 25px;
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 1200px) {
+    width: 850px;
+    margin-bottom: 50px;
+  }
+`;
+
+export { DetailPageWrap, FilterList, DetailPageContentList, MapPageWrap, MapPageDropdownWrap };
