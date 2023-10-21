@@ -7,7 +7,7 @@ const SearchBarWrap = styled.div`
   margin: 20px 0;
 
   @media screen and (min-width: 1200px) {
-    margin: 35px 0;
+    margin: 24px 0 20px;
   }
 `;
 

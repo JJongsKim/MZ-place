@@ -8,7 +8,7 @@ const DetailPageWrap = styled.div`
 
 const FilterList = styled.ul`
   display: flex;
-  width: 100%;
+  width: 375px;
   padding: 0 14px;
 
   li {
@@ -28,7 +28,7 @@ const DetailPageContentList = styled.section`
   margin-top: 24px;
 
   @media screen and (min-width: 1200px) {
-    margin-top: 40px;
+    margin-top: 28px;
   }
 `;
 
