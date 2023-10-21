@@ -13,6 +13,7 @@ import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
 import BottomSheet from '@components/common/BottomSheet';
 import Dropdown from '@components/dropdown';
+import Map from '@components/Map';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const DetailPage = () => {
             <MapPageDropdownWrap>
               <Dropdown />
             </MapPageDropdownWrap>
+            <Map />
             <BottomSheet>
               <ThumbnailList />
             </BottomSheet>
