@@ -12,8 +12,9 @@ import {
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
 import BottomSheet from '@components/common/BottomSheet';
-import Dropdown from '@components/dropdown';
+import Dropdown from '@components/Dropdown';
 import Map from '@components/Map';
+import CustomFilter from '@components/CustomFilter';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -42,7 +43,7 @@ const DetailPage = () => {
           </MapPageWrap>
         ) : location.state === '맞춤 필터' ? (
           <BottomSheet>
-            <ThumbnailList />
+            <CustomFilter />
           </BottomSheet>
         ) : (
           <ThumbnailList />

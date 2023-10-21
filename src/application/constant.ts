@@ -117,6 +117,17 @@ export const MINI_FILTER = [
   },
 ];
 
+export const ACTIVE_TASTE = [
+  '취향1',
+  '취향2',
+  '취향3',
+  '취향4',
+  '취향5',
+  '취향6',
+  '취향7',
+  '취향8',
+];
+
 export const REGION_ARRAY = [
   '강동구',
   '강남구',
