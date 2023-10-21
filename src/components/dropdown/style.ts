@@ -6,7 +6,7 @@ const DropdownWrap = styled.div`
   width: 75px;
   height: 26px;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
-  z-index: 3;
+  z-index: 2;
   background-color: white;
 
   @media screen and (min-width: 1200px) {
