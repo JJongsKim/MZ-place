@@ -16,8 +16,8 @@ const SignFormWrap = styled.div`
   align-items: center;
 
   @media screen and (min-width: 1200px) {
-    width: 900px;
-    height: 900px;
+    width: 720px;
+    height: 750px;
     border: 1px solid ${({ theme }) => theme.colors.text_gray};
   }
 `;
@@ -56,7 +56,7 @@ const SubmitText = styled.p`
 
   @media screen and (min-width: 1200px) {
     margin: 15px 0;
-    ${({ theme }) => theme.font.SB_16};
+    ${({ theme }) => theme.font.SB_14};
   }
 `;
 
@@ -75,9 +75,9 @@ const SocialWrap = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-    width: 200px;
+    width: 170px;
     height: 100px;
-    margin-top: 75px;
+    margin-top: 70px;
   }
 `;
 
@@ -87,8 +87,8 @@ const SocialIcon = styled.img`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 `;
 
