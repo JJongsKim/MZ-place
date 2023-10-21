@@ -15,7 +15,7 @@ const MenuListWrap = styled.div`
   row-gap: 35px;
 
   @media screen and (min-width: 1200px) {
-    width: 840px;
+    width: 800px;
   }
 `;
 
