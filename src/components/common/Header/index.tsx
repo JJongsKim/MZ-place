@@ -1,10 +1,13 @@
 import { styled } from 'styled-components';
 import mzLogo from '@assets/mz-logo.svg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <HeaderWrap>
-      <img src={mzLogo} alt="logo" />
+      <Link to="/">
+        <img src={mzLogo} alt="logo" />
+      </Link>
     </HeaderWrap>
   );
 };
