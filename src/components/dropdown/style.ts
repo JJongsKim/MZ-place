@@ -11,7 +11,7 @@ const DropdownWrap = styled.div`
 
   @media screen and (min-width: 1200px) {
     width: 100px;
-    height: 40px;
+    height: 38px;
   }
 `;
 
@@ -21,10 +21,10 @@ const DropdownTextWrap = styled.p`
   align-items: center;
   width: 70%;
   height: 100%;
-  ${({ theme }) => theme.font.B_16};
+  ${({ theme }) => theme.font.B_14};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_18};
+    ${({ theme }) => theme.font.B_16};
   }
 `;
 
@@ -45,8 +45,8 @@ const DropdownBtn = styled.img<{
   transform: ${props => props.clicked && `rotate(180deg)`};
 
   @media screen and (min-width: 1200px) {
-    width: 20px;
-    height: 13px;
+    width: 18px;
+    height: 10px;
   }
 `;
 
@@ -60,27 +60,28 @@ const DropdownListWrap = styled.div`
   background-color: white;
 
   @media screen and (min-width: 1200px) {
-    top: 38px;
+    top: 36px;
     width: 100px;
     height: 240px;
   }
 `;
 
 const DropdownList = styled.ul`
-  ${({ theme }) => theme.font.M_16};
+  ${({ theme }) => theme.font.M_14};
+  user-select: none;
 
   li {
     padding: 0 4px;
-    margin: 14px 0;
+    margin: 15px 0;
     cursor: pointer;
   }
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.M_18};
+    ${({ theme }) => theme.font.M_16};
 
     li {
       padding: 0 10px;
-      margin: 20px 0;
+      margin: 22px 0;
     }
   }
 `;

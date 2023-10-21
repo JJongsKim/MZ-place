@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import {
-  DropdownWrap,
-  DropdownBtn,
-  DropdownBtnWrap,
-  DropdownTextWrap,
-  DropdownListWrap,
-  DropdownList,
-} from './style';
 import activeBtn from '@assets/dropdown.svg';
 import { REGION_ARRAY } from '@application/constant';
+import {
+  DropdownBtn,
+  DropdownBtnWrap,
+  DropdownList,
+  DropdownListWrap,
+  DropdownTextWrap,
+  DropdownWrap,
+} from './style';
 
 const Dropdown = () => {
   const [selectedRegion, setSelectedRegion] = useState('강남구');

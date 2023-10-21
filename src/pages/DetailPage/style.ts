@@ -25,10 +25,10 @@ const FilterList = styled.ul`
 `;
 
 const DetailPageContentList = styled.section`
-  margin-top: 24px;
+  margin-top: 10px;
 
   @media screen and (min-width: 1200px) {
-    margin-top: 28px;
+    margin-top: 12px;
   }
 `;
 
@@ -42,11 +42,11 @@ const MapPageDropdownWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   padding: 0 25px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 
   @media screen and (min-width: 1200px) {
     width: 850px;
-    margin-bottom: 50px;
+    margin-bottom: 28px;
   }
 `;
 
