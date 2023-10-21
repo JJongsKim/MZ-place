@@ -18,7 +18,7 @@ const RecommendTextWrap = styled.div`
   @media screen and (min-width: 1200px) {
     display: flex;
     align-items: center;
-    width: 960px;
+    width: 900px;
     margin-bottom: 18px;
   }
 `;
