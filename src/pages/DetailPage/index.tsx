@@ -12,7 +12,7 @@ import {
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
 import BottomSheet from '@components/common/BottomSheet';
-import Dropdown from '@components/dropdown';
+import Dropdown from '@components/Dropdown';
 import Map from '@components/Map';
 
 const DetailPage = () => {
