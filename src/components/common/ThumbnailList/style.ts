@@ -6,6 +6,7 @@ const ThumbnailListWrap = styled.section`
   grid-template-columns: repeat(2, 1fr);
   place-items: center;
   row-gap: 20px;
+  padding: 0 18px;
   margin-bottom: 100px;
 
   @media screen and (min-width: 1200px) {

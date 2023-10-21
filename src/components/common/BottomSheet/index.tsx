@@ -39,7 +39,7 @@ const BottomSheetWrap = styled(motion.div)`
 
   border-radius: 30px 30px 0 0;
   background-color: white;
-  transition: transform 850ms ease-out;
+  transition: transform 700ms ease-out;
 
   @media screen and (min-width: 1200px) {
     width: 1250px;
