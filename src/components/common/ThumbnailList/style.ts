@@ -10,7 +10,7 @@ const ThumbnailListWrap = styled.section`
   margin-bottom: 100px;
 
   @media screen and (min-width: 1200px) {
-    width: 1200px;
+    width: 1000px;
     grid-template-columns: repeat(3, 1fr);
   }
 `;

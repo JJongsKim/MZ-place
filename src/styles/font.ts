@@ -38,7 +38,7 @@ export const font = {
   SB_18: FONT({ size: 18, family: 'pretendard', weight: 'SB' }),
   SB_20: FONT({ size: 20, family: 'pretendard', weight: 'SB' }),
   SB_22: FONT({ size: 22, family: 'pretendard', weight: 'SB' }),
-  SB_28: FONT({ size: 28, family: 'pretendard', weight: 'SB' }),
+  SB_23: FONT({ size: 23, family: 'pretendard', weight: 'SB' }),
 
   B_13: FONT({ size: 13, family: 'pretendard', weight: 'B' }),
   B_14: FONT({ size: 14, family: 'pretendard', weight: 'B' }),

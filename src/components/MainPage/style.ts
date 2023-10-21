@@ -10,8 +10,9 @@ const AutoSlideWrap = styled.div`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 800px;
-    height: 320px;
+    margin: 15px 0 25px;
+    width: 520px;
+    height: 230px;
   }
 `;
 
@@ -26,8 +27,8 @@ const SlideImage = styled.img`
   object-fit: cover;
 
   @media screen and (min-width: 1200px) {
-    width: 800px;
-    height: 320px;
+    width: 520px;
+    height: 230px;
   }
 `;
 
@@ -44,7 +45,7 @@ const SlideText = styled.p<{
 
   @media screen and (min-width: 1200px) {
     left: 20px;
-    ${({ theme }) => theme.font.SB_28};
+    ${({ theme }) => theme.font.SB_22};
   }
 `;
 

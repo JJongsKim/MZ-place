@@ -23,10 +23,8 @@ const HeaderWrap = styled.header`
   z-index: 5;
 
   @media screen and (min-width: 1200px) {
-    height: 80px;
-
     img {
-      width: 100px;
+      width: 80px;
     }
   }
 `;
