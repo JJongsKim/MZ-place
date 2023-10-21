@@ -6,6 +6,8 @@ const DropdownWrap = styled.div`
   width: 75px;
   height: 26px;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
+  z-index: 2;
+  background-color: white;
 
   @media screen and (min-width: 1200px) {
     width: 100px;
@@ -55,6 +57,7 @@ const DropdownListWrap = styled.div`
   height: 162px;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
   overflow-y: auto;
+  background-color: white;
 
   @media screen and (min-width: 1200px) {
     top: 38px;
