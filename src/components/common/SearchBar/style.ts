@@ -7,7 +7,7 @@ const SearchBarWrap = styled.div`
   margin: 20px 0;
 
   @media screen and (min-width: 1200px) {
-    margin: 35px 0;
+    margin: 24px 0 20px;
   }
 `;
 
@@ -31,7 +31,7 @@ const TitleText = styled.p`
   padding-left: 6px;
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_26};
+    ${({ theme }) => theme.font.B_24};
     padding-left: 8px;
   }
 `;
@@ -51,8 +51,8 @@ const BackIcon = styled.img`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 30px;
-    height: 18px;
+    width: 25px;
+    height: 14px;
   }
 `;
 
@@ -65,8 +65,8 @@ const SearchIcon = styled.img`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 `;
 

@@ -1,10 +1,13 @@
 import { styled } from 'styled-components';
 import mzLogo from '@assets/mz-logo.svg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <HeaderWrap>
-      <img src={mzLogo} alt="logo" />
+      <Link to="/">
+        <img src={mzLogo} alt="logo" />
+      </Link>
     </HeaderWrap>
   );
 };
@@ -23,10 +26,8 @@ const HeaderWrap = styled.header`
   z-index: 5;
 
   @media screen and (min-width: 1200px) {
-    height: 80px;
-
     img {
-      width: 100px;
+      width: 80px;
     }
   }
 `;

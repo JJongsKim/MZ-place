@@ -6,8 +6,8 @@ const ButtonWrap = styled.button`
   background-color: ${({ theme }) => theme.colors.green};
 
   @media screen and (min-width: 1200px) {
-    width: 500px;
-    height: 70px;
+    width: 400px;
+    height: 62px;
   }
 `;
 
@@ -16,7 +16,7 @@ const ButtonText = styled.p`
   ${({ theme }) => theme.font.SB_16};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.SB_20};
+    ${({ theme }) => theme.font.SB_18};
   }
 `;
 

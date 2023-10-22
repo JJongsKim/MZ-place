@@ -23,6 +23,10 @@ const LogoWrap = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 95px;
+
+  @media screen and (min-width: 1200px) {
+    margin-top: 65px;
+  }
 `;
 
 const LogoIcon = styled.img`
@@ -30,8 +34,8 @@ const LogoIcon = styled.img`
   height: 70px;
 
   @media screen and (min-width: 1200px) {
-    width: 120px;
-    height: 112px;
+    width: 100px;
+    height: 92px;
   }
 `;
 
@@ -40,7 +44,7 @@ const LogoTitle = styled.p`
   ${({ theme }) => theme.font.SB_22};
 
   @media screen and (min-width: 1200px) {
-    margin: 50px 0 36px 0;
+    margin: 25px 0 40px;
     ${({ theme }) => theme.font.SB_28};
   }
 `;

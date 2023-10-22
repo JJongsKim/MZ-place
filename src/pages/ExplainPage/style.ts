@@ -13,8 +13,8 @@ const ThumbnailBoxWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.text_gray};
 
   @media screen and (min-width: 1200px) {
-    width: 550px;
-    height: 300px;
+    width: 500px;
+    height: 260px;
   }
 `;
 
@@ -33,18 +33,18 @@ const LikeIcon = styled.img`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 22px;
   }
 `;
 
 const LocationTitle = styled.p`
   padding: 20px 0 30px;
-  ${({ theme }) => theme.font.B_22};
+  ${({ theme }) => theme.font.B_20};
 
   @media screen and (min-width: 1200px) {
     padding: 30px 0 40px;
-    ${({ theme }) => theme.font.B_26};
+    ${({ theme }) => theme.font.B_22};
   }
 `;
 
@@ -56,6 +56,11 @@ const InfoList = styled.ul`
 
   li {
     margin-bottom: 60px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 500px;
+    margin-bottom: 50px;
   }
 `;
 
@@ -79,7 +84,7 @@ const InfoText = styled.p`
   ${({ theme }) => theme.font.B_16}
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_20}
+    ${({ theme }) => theme.font.B_18}
   }
 `;
 

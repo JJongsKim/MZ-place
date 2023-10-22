@@ -42,7 +42,8 @@ const BottomSheetWrap = styled(motion.div)`
   transition: transform 700ms ease-out;
 
   @media screen and (min-width: 1200px) {
-    width: 1250px;
+    top: calc(100% - 135px);
+    width: 980px;
     padding: 80px 25px;
   }
 `;

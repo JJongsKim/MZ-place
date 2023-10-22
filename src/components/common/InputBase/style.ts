@@ -9,10 +9,10 @@ const InputWrap = styled.input`
   ${({ theme }) => theme.font.SB_12};
 
   @media screen and (min-width: 1200px) {
-    width: 500px;
-    height: 70px;
+    width: 400px;
+    height: 62px;
     padding: 0 30px;
-    ${({ theme }) => theme.font.SB_16};
+    ${({ theme }) => theme.font.SB_14};
   }
 
   &::placeholder {

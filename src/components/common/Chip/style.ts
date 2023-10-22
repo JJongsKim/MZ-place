@@ -20,11 +20,11 @@ const ChipWrap = styled.div<{
   }
 
   @media screen and (min-width: 1200px) {
-    width: ${props => (props.size === 'small' ? `90px` : `110px`)};
-    height: ${props => (props.size === 'small' ? `40px` : `45px`)};
+    width: ${props => (props.size === 'small' ? `80px` : `110px`)};
+    height: ${props => (props.size === 'small' ? `33px` : `45px`)};
 
     p {
-      ${theme.font.M_16};
+      ${theme.font.M_14};
     }
   }
 `;

@@ -13,7 +13,7 @@ const NavWrap = styled.nav`
   z-index: 5;
 
   @media screen and (min-width: 1200px) {
-    height: 100px;
+    height: 75px;
   }
 `;
 
@@ -35,8 +35,8 @@ const NavIcon = styled.img`
   height: 22px;
 
   @media screen and (min-width: 1200px) {
-    width: 35px;
-    height: 30px;
+    width: 25px;
+    height: 20px;
   }
 `;
 
@@ -52,7 +52,7 @@ const NavName = styled.p`
   ${({ theme }) => theme.font.B_13}
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_16}
+    ${({ theme }) => theme.font.B_14}
   }
 `;
 

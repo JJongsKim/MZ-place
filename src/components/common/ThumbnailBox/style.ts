@@ -9,8 +9,8 @@ const ThumbWrap = styled.div`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 330px;
-    height: 220px;
+    width: 260px;
+    height: 160px;
   }
 `;
 
@@ -26,7 +26,7 @@ const ThumbLabel = styled.div`
   background-color: #efefef;
 
   @media screen and (min-width: 1200px) {
-    height: 55px;
+    height: 40px;
     padding: 0 20px;
   }
 `;
@@ -35,7 +35,7 @@ const LabelText = styled.p`
   ${({ theme }) => theme.font.M_12};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.M_18};
+    ${({ theme }) => theme.font.M_14};
   }
 `;
 
@@ -48,10 +48,10 @@ const LikeIcon = styled.img`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    width: 30px;
-    height: 28px;
-    top: 20px;
-    right: 24px;
+    width: 24px;
+    height: 22px;
+    top: 15px;
+    right: 20px;
   }
 `;
 

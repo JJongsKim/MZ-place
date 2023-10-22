@@ -15,7 +15,7 @@ const MenuListWrap = styled.div`
   row-gap: 35px;
 
   @media screen and (min-width: 1200px) {
-    width: 840px;
+    width: 800px;
   }
 `;
 
@@ -28,8 +28,8 @@ const MenuIcon = styled.img`
   height: 42px;
 
   @media screen and (min-width: 1200px) {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
   }
 `;
 
@@ -38,7 +38,7 @@ const MenuName = styled.p`
   padding: 14px 0;
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_18};
+    ${({ theme }) => theme.font.B_16};
     padding: 18px 0;
   }
 `;
@@ -47,6 +47,7 @@ const MenuDivideLine = styled(SearchBarLine)`
   margin: 80px 0 30px;
 
   @media screen and (min-width: 1200px) {
+    width: 850px;
     margin: 100px 0 50px;
   }
 `;
