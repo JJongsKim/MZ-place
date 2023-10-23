@@ -8,8 +8,8 @@ const withAuth = (Component: React.ComponentType) => (props: JSX.Element) => {
   const location = useLocation();
   // 임시 코드
   // const loginToken = getAccessToken();
-  const loginToken = 'temporalToken';
-  // const loginToken = null;
+  // const loginToken = 'temporalToken';
+  const loginToken = null;
   // const [login, isLogin] = useState(false);
 
   // useEffect(() => {

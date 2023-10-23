@@ -43,7 +43,7 @@ const CustomFilter = () => {
         </FilterList>
       </FilterTypeContainer>
       <FilterButtonWrap>
-        <ButtonBase name="적용하기" />
+        <ButtonBase type="button" name="적용하기" />
       </FilterButtonWrap>
     </CustomFilterWrap>
   );
