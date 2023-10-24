@@ -35,6 +35,8 @@ const NavIcon = styled.div<{
   margin: 10px 0;
   width: 27px;
   height: 22px;
+  display: flex;
+  justify-content: center;
 
   svg {
     fill: ${props => (props.active ? '#19bb35' : '#606060')};
