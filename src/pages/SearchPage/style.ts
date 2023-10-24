@@ -20,7 +20,31 @@ const MenuListWrap = styled.div`
 `;
 
 const MenuWrap = styled(SearchPageWrap)`
+  position: relative;
+  z-index: 3;
   cursor: pointer;
+
+  @media screen and (min-width: 1200px) {
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+
+      width: 0;
+      height: 0;
+      border-radius: 100%;
+      background-color: #afddb7;
+      opacity: 20%;
+      transition:
+        width 0.4s,
+        height 0.4s;
+    }
+
+    &:hover::before {
+      width: 90px;
+      height: 90px;
+    }
+  }
 `;
 
 const MenuIcon = styled.img`
