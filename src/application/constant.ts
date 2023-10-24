@@ -9,7 +9,6 @@ import Edu from '@assets/edu.svg';
 import Shop from '@assets/shop.svg';
 import Event from '@assets/event.svg';
 import HotPlace from '@assets/hot-place.svg';
-import Personnel from '@assets/personnel.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
@@ -84,11 +83,6 @@ export const MENU = [
 ];
 
 export const CUSTOM_MENU = [
-  {
-    name: '인원별 추천',
-    svg: Personnel,
-    path: 'personnel',
-  },
   {
     name: '거리별 추천',
     svg: Map,
