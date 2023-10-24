@@ -30,7 +30,7 @@ const NavList = styled.ul`
 `;
 
 const NavIcon = styled.div<{
-  active: boolean;
+  $active: boolean;
 }>`
   margin: 10px 0;
   width: 27px;
@@ -39,7 +39,7 @@ const NavIcon = styled.div<{
   justify-content: center;
 
   svg {
-    fill: ${props => (props.active ? '#19bb35' : '#606060')};
+    fill: ${props => (props.$active ? '#19bb35' : '#606060')};
   }
 
   @media screen and (min-width: 1200px) {

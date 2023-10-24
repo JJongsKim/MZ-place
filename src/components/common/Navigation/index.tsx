@@ -12,7 +12,7 @@ const Navigation = () => {
           <li key={item.name}>
             <Link to={item.path}>
               <NavItem>
-                <NavIcon active={location.pathname === item.path}>
+                <NavIcon $active={location.pathname === item.path}>
                   <item.svg />
                 </NavIcon>
                 <NavName>{item.name}</NavName>
