@@ -17,8 +17,8 @@ const WarningIcon = styled.img`
   height: 50px;
 
   @media screen and (min-width: 1200px) {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -28,7 +28,7 @@ const WarningText = styled.p`
   ${({ theme }) => theme.font.B_16};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_22};
+    ${({ theme }) => theme.font.B_20};
   }
 `;
 

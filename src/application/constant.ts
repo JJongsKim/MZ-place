@@ -1,7 +1,7 @@
-import Home from '@assets/home.svg';
-import Search from '@assets/search.svg';
-import Like from '@assets/like-empty.svg';
-import MyPage from '@assets/my-page.svg';
+import { ReactComponent as Home } from '@assets/home.svg';
+import { ReactComponent as Search } from '@assets/search.svg';
+import { ReactComponent as Like } from '@assets/like-empty.svg';
+import { ReactComponent as MyPage } from '@assets/my-page.svg';
 import Cost from '@assets/cost.svg';
 import Healing from '@assets/healing.svg';
 import Art from '@assets/art.svg';
@@ -9,7 +9,6 @@ import Edu from '@assets/edu.svg';
 import Shop from '@assets/shop.svg';
 import Event from '@assets/event.svg';
 import HotPlace from '@assets/hot-place.svg';
-import Personnel from '@assets/personnel.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
@@ -85,11 +84,6 @@ export const MENU = [
 
 export const CUSTOM_MENU = [
   {
-    name: '인원별 추천',
-    svg: Personnel,
-    path: 'personnel',
-  },
-  {
     name: '거리별 추천',
     svg: Map,
     path: 'map',
@@ -97,7 +91,7 @@ export const CUSTOM_MENU = [
   {
     name: '찜 기반 추천',
     svg: LikeMenu,
-    path: 'like-menu',
+    path: 'like',
   },
   {
     name: '맞춤 필터',
@@ -110,10 +104,6 @@ export const MINI_FILTER = [
   {
     type: '유료/무료',
     filters: ['유료', '무료'],
-  },
-  {
-    type: '인원별 추천',
-    filters: ['1인', '2인', '3인', '4인', '5인 이상'],
   },
 ];
 
