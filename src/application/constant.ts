@@ -91,7 +91,7 @@ export const CUSTOM_MENU = [
   {
     name: '찜 기반 추천',
     svg: LikeMenu,
-    path: 'like-menu',
+    path: 'like',
   },
   {
     name: '맞춤 필터',
@@ -104,10 +104,6 @@ export const MINI_FILTER = [
   {
     type: '유료/무료',
     filters: ['유료', '무료'],
-  },
-  {
-    type: '인원별 추천',
-    filters: ['1인', '2인', '3인', '4인', '5인 이상'],
   },
 ];
 
