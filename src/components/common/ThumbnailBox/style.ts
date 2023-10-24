@@ -52,10 +52,13 @@ const LikeIcon = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-    width: 24px;
-    height: 22px;
     top: 15px;
     right: 20px;
+
+    svg {
+      width: 24px;
+      height: 22px;
+    }
   }
 `;
 
