@@ -29,7 +29,7 @@ const AutoSlide = () => {
           </li>
         ))}
       </SlideImageList>
-      <SlideText imgIdx={imgIdx}>🔍 취향에 맞는 장소를 찾아보세요!</SlideText>
+      <SlideText imgidx={imgIdx}>🔍 취향에 맞는 장소를 찾아보세요!</SlideText>
     </AutoSlideWrap>
   );
 };

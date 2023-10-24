@@ -1,6 +1,6 @@
 import { LabelText, LikeIcon, ThumbLabel, ThumbWrap } from './style';
-import LikeEmpty from '@assets/like-empty.svg';
-import LikeFull from '@assets/like-full.svg';
+import { ReactComponent as LikeEmpty } from '@assets/like-empty.svg';
+import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 import { useNavigate } from 'react-router-dom';
 
 interface ThumbnailProps {
@@ -20,7 +20,15 @@ const ThumbnailBox = ({ label, like, id }: ThumbnailProps) => {
       <ThumbLabel>
         <LabelText>{label}</LabelText>
       </ThumbLabel>
-      {like ? <LikeIcon src={LikeFull} /> : <LikeIcon src={LikeEmpty} />}
+      {like ? (
+        <LikeIcon>
+          <LikeFull />
+        </LikeIcon>
+      ) : (
+        <LikeIcon>
+          <LikeEmpty />
+        </LikeIcon>
+      )}
     </ThumbWrap>
   );
 };

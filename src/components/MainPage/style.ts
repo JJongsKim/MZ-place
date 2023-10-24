@@ -33,12 +33,12 @@ const SlideImage = styled.img`
 `;
 
 const SlideText = styled.p<{
-  imgIdx?: number;
+  imgidx: number;
 }>`
   position: absolute;
   left: 15px;
   bottom: 20px;
-  color: ${({ imgIdx }) => (imgIdx === 1 || imgIdx === 3 ? '#202020' : 'white')};
+  color: ${({ imgidx }) => (imgidx === 1 || imgidx === 3 ? '#202020' : 'white')};
   ${({ theme }) => theme.font.SB_18};
 
   transition: color 2s ease-in-out;

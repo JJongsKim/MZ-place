@@ -39,19 +39,26 @@ const LabelText = styled.p`
   }
 `;
 
-const LikeIcon = styled.img`
+const LikeIcon = styled.div`
   position: absolute;
   top: 10px;
   right: 12px;
-  width: 20px;
-  height: 18px;
   cursor: pointer;
 
+  svg {
+    width: 20px;
+    height: 18px;
+    fill: #606060;
+  }
+
   @media screen and (min-width: 1200px) {
-    width: 24px;
-    height: 22px;
     top: 15px;
     right: 20px;
+
+    svg {
+      width: 24px;
+      height: 22px;
+    }
   }
 `;
 

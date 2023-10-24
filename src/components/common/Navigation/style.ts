@@ -29,10 +29,18 @@ const NavList = styled.ul`
   }
 `;
 
-const NavIcon = styled.img`
+const NavIcon = styled.div<{
+  $active: boolean;
+}>`
   margin: 10px 0;
   width: 27px;
   height: 22px;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    fill: ${props => (props.$active ? '#19bb35' : '#606060')};
+  }
 
   @media screen and (min-width: 1200px) {
     width: 25px;
