@@ -3,14 +3,13 @@ import {
   SearchBarWrap,
   TitleText,
   BackIcon,
-  SearchIcon,
   SearchBarItemWrap,
   SearchBarTitleWrap,
 } from './style';
 
 import back from '@assets/back-icon.svg';
-import search from '@assets/search.svg';
 import { useNavigate } from 'react-router-dom';
+import SearchInput from './SearchInput';
 
 interface SearchBarProps {
   name: string;
@@ -31,9 +30,9 @@ const SearchBar = ({ name, backIcon, searchIcon }: SearchBarProps) => {
           {backIcon && <BackIcon src={back} alt="뒤로가기" onClick={handleGoBack} />}
           <TitleText>{name}</TitleText>
         </SearchBarTitleWrap>
-        {searchIcon && <SearchIcon src={search} alt="검색버튼" />}
-        <SearchBarLine />
+        <SearchInput searchIcon={searchIcon} />
       </SearchBarItemWrap>
+      <SearchBarLine />
     </SearchBarWrap>
   );
 };

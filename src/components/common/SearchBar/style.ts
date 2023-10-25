@@ -13,6 +13,8 @@ const SearchBarWrap = styled.div`
 
 const SearchBarItemWrap = styled.div`
   position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 375px;
 
   @media screen and (min-width: 1200px) {
@@ -23,7 +25,7 @@ const SearchBarItemWrap = styled.div`
 const SearchBarTitleWrap = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 0 6px 15px;
+  padding-left: 15px;
 `;
 
 const TitleText = styled.p`
