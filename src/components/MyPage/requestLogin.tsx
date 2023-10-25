@@ -12,10 +12,10 @@ const RequestLogin = () => {
       </TextSection>
       <LinkButtonSection>
         <Link to="/sign-in">
-          <ButtonBase name="로그인 하러가기" />
+          <ButtonBase type="button" name="로그인 하러가기" />
         </Link>
         <Link to="/sign-up">
-          <ButtonBase name="회원가입 하러가기" />
+          <ButtonBase type="button" name="회원가입 하러가기" />
         </Link>
       </LinkButtonSection>
     </RequestLoginWrap>

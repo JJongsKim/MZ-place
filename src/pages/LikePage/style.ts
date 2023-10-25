@@ -1,9 +1,4 @@
-import {
-  SearchBarItemWrap,
-  SearchBarLine,
-  SearchBarWrap,
-  TitleText,
-} from '@components/common/SearchBar/style';
+import { SearchBarLine, SearchBarWrap, TitleText } from '@components/common/SearchBar/style';
 
 import { styled } from 'styled-components';
 
@@ -15,9 +10,16 @@ const LikePageWrap = styled.div`
 
 const LikePageHeader = styled(SearchBarWrap)``;
 
-const HeaderItemWrap = styled(SearchBarItemWrap)`
+const HeaderItemWrap = styled.div`
   display: flex;
   align-items: center;
+  width: 375px;
+  margin-top: 4px;
+
+  @media screen and (min-width: 1200px) {
+    width: 850px;
+    margin-top: 2px;
+  }
 `;
 
 const HeaderNameText = styled(TitleText)`

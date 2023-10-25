@@ -16,8 +16,25 @@ import kakao from '@assets/icon-kakao.svg';
 import naver from '@assets/icon-naver.svg';
 
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const SignIn = () => {
+  const [signInForm, setSignInForm] = useState({
+    userId: '',
+    userPassword: '',
+  });
+
+  const handleChangeForm = (name: string, value: string) => {
+    setSignInForm(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log(signInForm);
+  };
+
   return (
     <DeskTopViewWrap>
       <SignFormWrap>
@@ -25,10 +42,20 @@ const SignIn = () => {
         <SignForm>
           <FormListWrap>
             <li>
-              <InputBase placeholder="아이디를 입력해주세요!" />
+              <InputBase
+                placeholder="아이디를 입력해주세요!"
+                name="userId"
+                value={signInForm.userId}
+                onChange={e => handleChangeForm('userId', e.target.value)}
+              />
             </li>
             <li>
-              <InputBase placeholder="비밀번호를 입력해주세요!" />
+              <InputBase
+                placeholder="비밀번호를 입력해주세요!"
+                name="userPassword"
+                value={signInForm.userPassword}
+                onChange={e => handleChangeForm('userPassword', e.target.value)}
+              />
             </li>
           </FormListWrap>
           <SocialWrap>
@@ -40,7 +67,7 @@ const SignIn = () => {
             <Link to="/sign-up">
               <SubmitText>아직 회원이 아니신가요?</SubmitText>
             </Link>
-            <ButtonBase name="로그인" />
+            <ButtonBase type="submit" name="로그인" onClick={handleSubmit} />
           </SubmitWrap>
         </SignForm>
       </SignFormWrap>

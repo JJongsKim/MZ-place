@@ -1,12 +1,14 @@
 import { ButtonText, ButtonWrap } from './style';
 
 interface ButtonProps {
+  type: 'submit' | 'button';
   name: string;
+  onClick?: () => void;
 }
 
-const ButtonBase = ({ name }: ButtonProps) => {
+const ButtonBase = ({ type, name }: ButtonProps) => {
   return (
-    <ButtonWrap>
+    <ButtonWrap type={type}>
       <ButtonText>{name}</ButtonText>
     </ButtonWrap>
   );
