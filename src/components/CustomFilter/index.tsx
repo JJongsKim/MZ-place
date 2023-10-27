@@ -36,8 +36,8 @@ const CustomFilter = () => {
         <FilterTitle>활동 지역</FilterTitle>
         <FilterList>
           {REGION_ARRAY.map(item => (
-            <li key={item}>
-              <Chip size="small" value={item} />
+            <li key={item.locationId}>
+              <Chip size="small" value={item.locationName} />
             </li>
           ))}
         </FilterList>
