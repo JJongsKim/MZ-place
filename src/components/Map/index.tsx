@@ -2,8 +2,10 @@
 import type { GeolocationAddress } from '@/types/index';
 import Loading from '@components/common/Loading';
 import useGeoLocation from '@hooks/useGeoLocation';
+import { setLocation } from '@store/reducers/LocationReducer';
 
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 
 declare global {
@@ -17,12 +19,17 @@ const geoLocationOptions = {
 };
 
 const Map = () => {
+  const dispatch = useDispatch();
   const { location } = useGeoLocation(geoLocationOptions);
 
   const mapScript = document.createElement('script');
   mapScript.async = true;
   mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
   document.head.appendChild(mapScript);
+
+  const handleChangeAddress = (address: string) => {
+    dispatch(setLocation(address));
+  };
 
   useEffect(() => {
     if (!location.isLoading) {
@@ -43,7 +50,7 @@ const Map = () => {
             if (status === window.kakao.maps.services.Status.OK) {
               const address = res[0].address.address_name;
               console.log('주소:', address);
-              console.log('자치구명:', res[0].address.region_2depth_name);
+              handleChangeAddress(res[0].address.region_2depth_name);
 
               return address;
             } else {
