@@ -22,8 +22,6 @@ const Dropdown = () => {
     isClicked(false);
   };
 
-  // console.log('클릭 확인', clicked);
-
   return (
     <DropdownWrap>
       <DropdownTextWrap>{selectedRegion}</DropdownTextWrap>
