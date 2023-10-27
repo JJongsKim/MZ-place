@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { GeolocationAddress } from '@/types/index';
 import Loading from '@components/common/Loading';
 import useGeoLocation from '@hooks/useGeoLocation';
 
@@ -17,6 +18,7 @@ const geoLocationOptions = {
 
 const Map = () => {
   const { location } = useGeoLocation(geoLocationOptions);
+
   const mapScript = document.createElement('script');
   mapScript.async = true;
   mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
@@ -33,6 +35,23 @@ const Map = () => {
           };
 
           const map = new window.kakao.maps.Map(mapContainer, mapOption);
+          const geocoder = new window.kakao.maps.services.Geocoder();
+
+          // TODO 바로 받아온 2depth 자치구 전역변수에 넣기
+          // TODO console부분은 다른 에러검증으로 대체하기
+          const reverseGeocoding = (res: GeolocationAddress[], status: boolean) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const address = res[0].address.address_name;
+              console.log('주소:', address);
+              console.log('자치구명:', res[0].address.region_2depth_name);
+
+              return address;
+            } else {
+              console.error('주소 변환 실패!');
+            }
+          };
+
+          geocoder.coord2Address(location.longitude, location.latitude, reverseGeocoding);
 
           return map;
         });
