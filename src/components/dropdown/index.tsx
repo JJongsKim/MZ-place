@@ -28,14 +28,14 @@ const Dropdown = () => {
     <DropdownWrap>
       <DropdownTextWrap>{selectedRegion}</DropdownTextWrap>
       <DropdownBtnWrap onClick={handleClickBtn}>
-        <DropdownBtn src={activeBtn} clicked={clicked} />
+        <DropdownBtn src={activeBtn} $clicked={clicked} />
       </DropdownBtnWrap>
       {clicked && (
         <DropdownListWrap>
           <DropdownList>
             {REGION_ARRAY.map(item => (
-              <li key={item} onClick={() => handleSelectRegion(item)}>
-                {item}
+              <li key={item.locationId} onClick={() => handleSelectRegion(item.locationName)}>
+                {item.locationName}
               </li>
             ))}
           </DropdownList>

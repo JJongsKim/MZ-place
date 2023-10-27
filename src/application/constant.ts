@@ -119,31 +119,106 @@ export const ACTIVE_TASTE = [
 ];
 
 export const REGION_ARRAY = [
-  '강동구',
-  '강남구',
-  '강북구',
-  '강서구',
-  '구로구',
-  '금천구',
-  '강동구',
-  '광진구',
-  '노원구',
-  '도봉구',
-  '동대문구',
-  '동작구',
-  '마포구',
-  '서대문구',
-  '서초구',
-  '성동구',
-  '성북구',
-  '송파구',
-  '양천구',
-  '영등포구',
-  '용산구',
-  '은평구',
-  '종로구',
-  '중구',
-  '중랑구',
+  {
+    locationId: 1,
+    locationName: '강남구',
+  },
+  {
+    locationId: 2,
+    locationName: '강동구',
+  },
+  {
+    locationId: 3,
+    locationName: '강북구',
+  },
+  {
+    locationId: 4,
+    locationName: '강서구',
+  },
+  {
+    locationId: 5,
+    locationName: '구로구',
+  },
+  {
+    locationId: 6,
+    locationName: '금천구',
+  },
+  {
+    locationId: 7,
+    locationName: '관악구',
+  },
+  {
+    locationId: 8,
+    locationName: '광진구',
+  },
+  {
+    locationId: 9,
+    locationName: '노원구',
+  },
+  {
+    locationId: 10,
+    locationName: '도봉구',
+  },
+  {
+    locationId: 11,
+    locationName: '동대문구',
+  },
+  {
+    locationId: 12,
+    locationName: '동작구',
+  },
+  {
+    locationId: 13,
+    locationName: '마포구',
+  },
+  {
+    locationId: 14,
+    locationName: '서대문구',
+  },
+  {
+    locationId: 15,
+    locationName: '서초구',
+  },
+  {
+    locationId: 16,
+    locationName: '성동구',
+  },
+  {
+    locationId: 17,
+    locationName: '성북구',
+  },
+  {
+    locationId: 18,
+    locationName: '송파구',
+  },
+  {
+    locationId: 19,
+    locationName: '양천구',
+  },
+  {
+    locationId: 20,
+    locationName: '영등포구',
+  },
+  {
+    locationId: 21,
+    locationName: '용산구',
+  },
+  {
+    locationId: 22,
+    locationName: '은평구',
+  },
+  {
+    locationId: 23,
+    locationName: '종로구',
+  },
+  {
+    locationId: 24,
+    locationName: '중구',
+  },
+  {
+    locationId: 25,
+    locationName: '중랑구',
+  },
 ];
 
 export const AutoSlideImgs = [

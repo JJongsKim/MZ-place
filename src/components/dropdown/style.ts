@@ -38,11 +38,11 @@ const DropdownBtnWrap = styled.div`
 `;
 
 const DropdownBtn = styled.img<{
-  clicked?: boolean;
+  $clicked?: boolean;
 }>`
   width: 15px;
   height: 8px;
-  transform: ${props => props.clicked && `rotate(180deg)`};
+  transform: ${props => props.$clicked && `rotate(180deg)`};
 
   @media screen and (min-width: 1200px) {
     width: 18px;
