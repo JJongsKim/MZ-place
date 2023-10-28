@@ -44,15 +44,13 @@ const Map = () => {
           const map = new window.kakao.maps.Map(mapContainer, mapOption);
           const geocoder = new window.kakao.maps.services.Geocoder();
 
-          // TODO 바로 받아온 2depth 자치구 전역변수에 넣기
           // TODO console부분은 다른 에러검증으로 대체하기
           const reverseGeocoding = (res: GeolocationAddress[], status: boolean) => {
             if (status === window.kakao.maps.services.Status.OK) {
-              const address = res[0].address.address_name;
-              console.log('주소:', address);
-              handleChangeAddress(res[0].address.region_2depth_name);
+              const addressName = res[0].address.region_2depth_name;
+              handleChangeAddress(addressName);
 
-              return address;
+              return addressName;
             } else {
               console.error('주소 변환 실패!');
             }
