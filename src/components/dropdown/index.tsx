@@ -9,22 +9,28 @@ import {
   DropdownTextWrap,
   DropdownWrap,
 } from './style';
+import { useDispatch } from 'react-redux';
+import { setLocation } from '@store/reducers/LocationReducer';
 
-const Dropdown = () => {
-  const [selectedRegion, setSelectedRegion] = useState('강남구');
+interface DropdownProps {
+  currentAddress: string;
+}
+
+const Dropdown = ({ currentAddress }: DropdownProps) => {
+  const dispatch = useDispatch();
   const [clicked, isClicked] = useState(false);
 
   const handleClickBtn = () => {
     isClicked(!clicked);
   };
   const handleSelectRegion = (region: string) => {
-    setSelectedRegion(region);
+    dispatch(setLocation(region));
     isClicked(false);
   };
 
   return (
     <DropdownWrap>
-      <DropdownTextWrap>{selectedRegion}</DropdownTextWrap>
+      <DropdownTextWrap>{currentAddress}</DropdownTextWrap>
       <DropdownBtnWrap onClick={handleClickBtn}>
         <DropdownBtn src={activeBtn} $clicked={clicked} />
       </DropdownBtnWrap>

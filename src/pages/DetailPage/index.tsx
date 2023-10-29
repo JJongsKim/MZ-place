@@ -16,10 +16,13 @@ import Dropdown from '@components/Dropdown';
 import Map from '@components/Map';
 import CustomFilter from '@components/CustomFilter';
 import WarningMention from '@components/common/warning';
+import { useSelector } from 'react-redux';
+import type { StoreType } from '@/types/index';
 
 const DetailPage = () => {
   const location = useLocation();
   const typeArray = MINI_FILTER.find(filter => filter.type === location.state);
+  const store = useSelector((state: StoreType) => state);
 
   return (
     <DetailPageWrap>
@@ -35,9 +38,9 @@ const DetailPage = () => {
         {location.state === '거리별 추천' ? (
           <MapPageWrap>
             <MapPageDropdownWrap>
-              <Dropdown />
+              <Dropdown currentAddress={store.LocationReducer.currentAddress} />
             </MapPageDropdownWrap>
-            <Map />
+            <Map currentAddress={store.LocationReducer.currentAddress} />
             <BottomSheet>
               <ThumbnailList />
             </BottomSheet>

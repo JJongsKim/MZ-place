@@ -22,3 +22,10 @@ export interface GeolocationAddress {
     zip_code: string;
   };
 }
+
+// redux store 타입
+export interface StoreType {
+  LocationReducer: {
+    currentAddress: string;
+  };
+}

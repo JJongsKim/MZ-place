@@ -120,104 +120,158 @@ export const ACTIVE_TASTE = [
 
 export const REGION_ARRAY = [
   {
+    locationId: 0,
+    locationName: '현 위치',
+  },
+  {
     locationId: 1,
     locationName: '강남구',
+    latitude: 37.5172,
+    longitude: 127.0473,
   },
   {
     locationId: 2,
     locationName: '강동구',
+    latitude: 37.5304,
+    longitude: 127.1237,
   },
   {
     locationId: 3,
     locationName: '강북구',
+    latitude: 37.6395,
+    longitude: 127.0255,
   },
   {
     locationId: 4,
     locationName: '강서구',
+    latitude: 37.5658,
+    longitude: 126.8225,
   },
   {
     locationId: 5,
     locationName: '구로구',
+    latitude: 37.4954,
+    longitude: 126.8581,
   },
   {
     locationId: 6,
     locationName: '금천구',
+    latitude: 37.4565,
+    longitude: 126.8954,
   },
   {
     locationId: 7,
     locationName: '관악구',
+    latitude: 37.4654,
+    longitude: 126.9436,
   },
   {
     locationId: 8,
     locationName: '광진구',
+    latitude: 37.5381,
+    longitude: 127.0835,
   },
   {
     locationId: 9,
     locationName: '노원구',
+    latitude: 37.6542,
+    longitude: 127.0568,
   },
   {
     locationId: 10,
     locationName: '도봉구',
+    latitude: 37.6688,
+    longitude: 127.0472,
   },
   {
     locationId: 11,
     locationName: '동대문구',
+    latitude: 37.5744,
+    longitude: 127.04,
   },
   {
     locationId: 12,
     locationName: '동작구',
+    latitude: 37.512,
+    longitude: 126.9397,
   },
   {
     locationId: 13,
     locationName: '마포구',
+    latitude: 37.5636,
+    longitude: 126.9086,
   },
   {
     locationId: 14,
     locationName: '서대문구',
+    latitude: 37.5791,
+    longitude: 126.9368,
   },
   {
     locationId: 15,
     locationName: '서초구',
+    latitude: 37.4837,
+    longitude: 127.0324,
   },
   {
     locationId: 16,
     locationName: '성동구',
+    latitude: 37.55,
+    longitude: 127.0414,
   },
   {
     locationId: 17,
     locationName: '성북구',
+    latitude: 37.6065,
+    longitude: 127.0276,
   },
   {
     locationId: 18,
     locationName: '송파구',
+    latitude: 37.5145,
+    longitude: 127.1058,
   },
   {
     locationId: 19,
     locationName: '양천구',
+    latitude: 37.527,
+    longitude: 126.856,
   },
   {
     locationId: 20,
     locationName: '영등포구',
+    latitude: 37.5208,
+    longitude: 126.9139,
   },
   {
     locationId: 21,
     locationName: '용산구',
+    latitude: 37.5311,
+    longitude: 126.9795,
   },
   {
     locationId: 22,
     locationName: '은평구',
+    latitude: 37.6035,
+    longitude: 126.9293,
   },
   {
     locationId: 23,
     locationName: '종로구',
+    latitude: 37.5729,
+    longitude: 126.9796,
   },
   {
     locationId: 24,
     locationName: '중구',
+    latitude: 37.5641,
+    longitude: 126.9978,
   },
   {
     locationId: 25,
     locationName: '중랑구',
+    latitude: 37.6065,
+    longitude: 127.0924,
   },
 ];
 
