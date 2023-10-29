@@ -5,7 +5,7 @@ interface RootState {
 }
 
 const initialState: RootState = {
-  currentAddress: '강남구',
+  currentAddress: '현 위치',
 };
 
 const LocationSlice = createSlice({

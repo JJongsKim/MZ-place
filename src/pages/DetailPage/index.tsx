@@ -40,7 +40,7 @@ const DetailPage = () => {
             <MapPageDropdownWrap>
               <Dropdown currentAddress={store.LocationReducer.currentAddress} />
             </MapPageDropdownWrap>
-            <Map />
+            <Map currentAddress={store.LocationReducer.currentAddress} />
             <BottomSheet>
               <ThumbnailList />
             </BottomSheet>
