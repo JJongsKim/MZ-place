@@ -1,0 +1,56 @@
+import { keyframes, styled } from 'styled-components';
+
+const ToastAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
+const ToastContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  position: fixed;
+  width: 100%;
+`;
+
+const ToastWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 100px;
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background-color: white;
+
+  z-index: 2;
+  animation: ${ToastAnimation};
+  animation-duration: 2.2s;
+
+  @media screen and (min-width: 1200px) {
+    width: 550px;
+    height: 65px;
+  }
+`;
+
+const ToastContent = styled.div`
+  ${({ theme }) => theme.font.SB_14};
+
+  @media screen and (min-width: 1200px) {
+    ${({ theme }) => theme.font.SB_16};
+  }
+`;
+
+export { ToastContainer, ToastWrap, ToastContent };
