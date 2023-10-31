@@ -9,10 +9,14 @@ import {
 } from './style';
 import InputBase from '@components/common/InputBase';
 import ButtonBase from '@components/common/ButtonBase';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import useToast from '@hooks/useToast';
+import Toast from '@components/common/Toast';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { toast, handleFloatingToast } = useToast();
   const [signUpForm, setSignUpForm] = useState({
     userName: '',
     userId: '',
@@ -27,15 +31,21 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log(signUpForm);
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+
+    handleFloatingToast();
+
+    setTimeout(() => {
+      navigate('/sign-in');
+    }, 2200);
   };
 
   return (
     <DeskTopViewWrap>
       <SignFormWrap>
         <AuthLogo title="회원가입" />
-        <SignForm>
+        <SignForm onSubmit={handleSubmit}>
           <FormListWrap>
             <li>
               <InputBase
@@ -78,10 +88,11 @@ const SignUp = () => {
             <Link to="/sign-in">
               <SubmitText>이미 가입하셨나요?</SubmitText>
             </Link>
-            <ButtonBase type="submit" name="회원가입" onClick={handleSubmit} />
+            <ButtonBase name="회원가입" />
           </SubmitWrap>
         </SignForm>
       </SignFormWrap>
+      {toast && <Toast>회원가입이 완료되었어요!</Toast>}
     </DeskTopViewWrap>
   );
 };

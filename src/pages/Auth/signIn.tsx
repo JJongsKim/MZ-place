@@ -35,7 +35,9 @@ const SignIn = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     handleFloatingToast();
 
     setTimeout(() => {
@@ -47,7 +49,7 @@ const SignIn = () => {
     <DeskTopViewWrap>
       <SignFormWrap>
         <AuthLogo title="로그인" />
-        <SignForm>
+        <SignForm onSubmit={handleSubmit}>
           <FormListWrap>
             <li>
               <InputBase
@@ -77,7 +79,7 @@ const SignIn = () => {
             <Link to="/sign-up">
               <SubmitText>아직 회원이 아니신가요?</SubmitText>
             </Link>
-            <ButtonBase type="button" name="로그인" onClick={handleSubmit} />
+            <ButtonBase name="로그인" />
           </SubmitWrap>
         </SignForm>
       </SignFormWrap>

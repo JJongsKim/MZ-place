@@ -1,7 +1,7 @@
 import { ButtonText, ButtonWrap } from './style';
 
 interface ButtonProps {
-  type: 'submit' | 'button';
+  type?: 'button';
   name: string;
   onClick?: () => void;
 }
