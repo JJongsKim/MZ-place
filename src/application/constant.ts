@@ -2,13 +2,14 @@ import { ReactComponent as Home } from '@assets/home.svg';
 import { ReactComponent as Search } from '@assets/search.svg';
 import { ReactComponent as Like } from '@assets/like-empty.svg';
 import { ReactComponent as MyPage } from '@assets/my-page.svg';
-import Cost from '@assets/cost.svg';
+
 import Healing from '@assets/healing.svg';
+import Show from '@assets/show.svg';
 import Art from '@assets/art.svg';
-import Edu from '@assets/edu.svg';
-import Shop from '@assets/shop.svg';
+import Book from '@assets/book.svg';
 import Event from '@assets/event.svg';
-import HotPlace from '@assets/hot-place.svg';
+import Eating from '@assets/eating.svg';
+import Etc from '@assets/etc.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
@@ -46,39 +47,52 @@ export const NAV_ARRAY: NavType[] = [
 
 export const MENU = [
   {
-    name: '유료/무료',
-    svg: Cost,
-    path: 'cost',
-  },
-  {
-    name: '힐링',
+    id: 1,
+    name: '건강',
     svg: Healing,
-    path: 'healing',
+    path: 'health',
   },
   {
-    name: '예술',
+    id: 2,
+    name: '공연장',
+    svg: Show,
+    path: 'show',
+  },
+  {
+    id: 3,
+    name: '전시',
     svg: Art,
     path: 'art',
   },
   {
-    name: '교육',
-    svg: Edu,
-    path: 'edu',
+    id: 4,
+    name: '도서',
+    svg: Book,
+    path: 'book',
   },
   {
-    name: '쇼핑',
-    svg: Shop,
-    path: 'shop',
-  },
-  {
-    name: '행사',
+    id: 5,
+    name: '체험',
     svg: Event,
     path: 'event',
   },
   {
-    name: '핫플레이스',
-    svg: HotPlace,
-    path: 'hot-place',
+    id: 6,
+    name: '맛집/카페',
+    svg: Eating,
+    path: 'eating',
+  },
+  {
+    id: 7,
+    name: '문화공간',
+    svg: Art,
+    path: 'art',
+  },
+  {
+    id: 8,
+    name: '기타',
+    svg: Etc,
+    path: 'etc',
   },
 ];
 

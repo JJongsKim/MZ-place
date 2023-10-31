@@ -48,17 +48,17 @@ const MenuWrap = styled(SearchPageWrap)`
 `;
 
 const MenuIcon = styled.img`
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
 
   @media screen and (min-width: 1200px) {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 `;
 
 const MenuName = styled.p`
-  ${({ theme }) => theme.font.B_14};
+  ${({ theme }) => theme.font.B_13};
   padding: 14px 0;
 
   @media screen and (min-width: 1200px) {
