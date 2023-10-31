@@ -20,6 +20,10 @@ const ToastContainer = styled.div`
 
   position: fixed;
   width: 100%;
+
+  @media screen and (min-width: 1200px) {
+    height: 100%;
+  }
 `;
 
 const ToastWrap = styled.div`

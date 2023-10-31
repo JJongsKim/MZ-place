@@ -6,9 +6,9 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const ButtonBase = ({ type, name }: ButtonProps) => {
+const ButtonBase = ({ type, name, onClick }: ButtonProps) => {
   return (
-    <ButtonWrap type={type}>
+    <ButtonWrap type={type} onClick={onClick}>
       <ButtonText>{name}</ButtonText>
     </ButtonWrap>
   );

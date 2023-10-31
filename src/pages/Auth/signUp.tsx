@@ -40,6 +40,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="이름을 입력해주세요!"
+                type="text"
                 name="userName"
                 value={signUpForm.userName}
                 onChange={e => handleChangeForm('userName', e.target.value)}
@@ -48,6 +49,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="아이디를 입력해주세요!"
+                type="text"
                 name="userId"
                 value={signUpForm.userId}
                 onChange={e => handleChangeForm('userId', e.target.value)}
@@ -56,6 +58,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="비밀번호를 입력해주세요!"
+                type="password"
                 name="userPassword"
                 value={signUpForm.userPassword}
                 onChange={e => handleChangeForm('userPassword', e.target.value)}
@@ -64,6 +67,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="비밀번호를 한 번 더 입력해주세요!"
+                type="password"
                 name="checkPassword"
                 value={signUpForm.checkPassword}
                 onChange={e => handleChangeForm('checkPassword', e.target.value)}

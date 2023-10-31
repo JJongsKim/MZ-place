@@ -15,10 +15,14 @@ import ButtonBase from '@components/common/ButtonBase';
 import kakao from '@assets/icon-kakao.svg';
 import naver from '@assets/icon-naver.svg';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import useToast from '@hooks/useToast';
+import Toast from '@components/common/Toast';
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const { toast, handleFloatingToast } = useToast();
   const [signInForm, setSignInForm] = useState({
     userId: '',
     userPassword: '',
@@ -32,7 +36,11 @@ const SignIn = () => {
   };
 
   const handleSubmit = () => {
-    console.log(signInForm);
+    handleFloatingToast();
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2200);
   };
 
   return (
@@ -44,6 +52,7 @@ const SignIn = () => {
             <li>
               <InputBase
                 placeholder="아이디를 입력해주세요!"
+                type="text"
                 name="userId"
                 value={signInForm.userId}
                 onChange={e => handleChangeForm('userId', e.target.value)}
@@ -52,6 +61,7 @@ const SignIn = () => {
             <li>
               <InputBase
                 placeholder="비밀번호를 입력해주세요!"
+                type="password"
                 name="userPassword"
                 value={signInForm.userPassword}
                 onChange={e => handleChangeForm('userPassword', e.target.value)}
@@ -67,10 +77,11 @@ const SignIn = () => {
             <Link to="/sign-up">
               <SubmitText>아직 회원이 아니신가요?</SubmitText>
             </Link>
-            <ButtonBase type="submit" name="로그인" onClick={handleSubmit} />
+            <ButtonBase type="button" name="로그인" onClick={handleSubmit} />
           </SubmitWrap>
         </SignForm>
       </SignFormWrap>
+      {toast && <Toast>로그인 되었어요!</Toast>}
     </DeskTopViewWrap>
   );
 };
