@@ -9,10 +9,14 @@ import {
 } from './style';
 import InputBase from '@components/common/InputBase';
 import ButtonBase from '@components/common/ButtonBase';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import useToast from '@hooks/useToast';
+import Toast from '@components/common/Toast';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { toast, handleFloatingToast } = useToast();
   const [signUpForm, setSignUpForm] = useState({
     userName: '',
     userId: '',
@@ -27,19 +31,26 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log(signUpForm);
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+
+    handleFloatingToast();
+
+    setTimeout(() => {
+      navigate('/sign-in');
+    }, 2200);
   };
 
   return (
     <DeskTopViewWrap>
       <SignFormWrap>
         <AuthLogo title="회원가입" />
-        <SignForm>
+        <SignForm onSubmit={handleSubmit}>
           <FormListWrap>
             <li>
               <InputBase
                 placeholder="이름을 입력해주세요!"
+                type="text"
                 name="userName"
                 value={signUpForm.userName}
                 onChange={e => handleChangeForm('userName', e.target.value)}
@@ -48,6 +59,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="아이디를 입력해주세요!"
+                type="text"
                 name="userId"
                 value={signUpForm.userId}
                 onChange={e => handleChangeForm('userId', e.target.value)}
@@ -56,6 +68,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="비밀번호를 입력해주세요!"
+                type="password"
                 name="userPassword"
                 value={signUpForm.userPassword}
                 onChange={e => handleChangeForm('userPassword', e.target.value)}
@@ -64,6 +77,7 @@ const SignUp = () => {
             <li>
               <InputBase
                 placeholder="비밀번호를 한 번 더 입력해주세요!"
+                type="password"
                 name="checkPassword"
                 value={signUpForm.checkPassword}
                 onChange={e => handleChangeForm('checkPassword', e.target.value)}
@@ -74,10 +88,11 @@ const SignUp = () => {
             <Link to="/sign-in">
               <SubmitText>이미 가입하셨나요?</SubmitText>
             </Link>
-            <ButtonBase type="submit" name="회원가입" onClick={handleSubmit} />
+            <ButtonBase name="회원가입" />
           </SubmitWrap>
         </SignForm>
       </SignFormWrap>
+      {toast && <Toast>회원가입이 완료되었어요!</Toast>}
     </DeskTopViewWrap>
   );
 };
