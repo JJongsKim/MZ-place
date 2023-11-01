@@ -8,7 +8,7 @@ interface ChipProps {
 
 const Chip = ({ value, size, isClicked }: ChipProps) => {
   return (
-    <ChipWrap size={size} clicked={isClicked}>
+    <ChipWrap size={size} $clicked={isClicked}>
       <p>{value}</p>
     </ChipWrap>
   );

@@ -2,7 +2,7 @@ import { theme } from '@styles/theme';
 import { styled } from 'styled-components';
 
 const ChipWrap = styled.div<{
-  clicked?: boolean;
+  $clicked?: boolean;
   size?: 'small';
 }>`
   display: flex;
@@ -11,11 +11,11 @@ const ChipWrap = styled.div<{
   width: ${props => (props.size === 'small' ? `65px` : `80px`)};
   height: ${props => (props.size === 'small' ? `30px` : `32px`)};
   border-radius: 10px;
-  background-color: ${props => (props.clicked ? `${theme.colors.olive_green}` : `#eeeeee`)};
+  background-color: ${props => (props.$clicked ? `${theme.colors.olive_green}` : `#eeeeee`)};
   cursor: pointer;
 
   p {
-    color: ${props => props.clicked && `white`};
+    color: ${props => props.$clicked && `white`};
     ${theme.font.M_12};
   }
 

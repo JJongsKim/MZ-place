@@ -35,11 +35,14 @@ const CustomFilter = () => {
       <FilterTypeContainer>
         <FilterTitle>활동 지역</FilterTitle>
         <FilterList>
-          {REGION_ARRAY.map(item => (
-            <li key={item.locationId}>
-              <Chip size="small" value={item.locationName} />
-            </li>
-          ))}
+          {REGION_ARRAY.map(
+            item =>
+              item.locationName !== '현 위치' && (
+                <li key={item.locationId}>
+                  <Chip size="small" value={item.locationName} />
+                </li>
+              ),
+          )}
         </FilterList>
       </FilterTypeContainer>
       <FilterButtonWrap>

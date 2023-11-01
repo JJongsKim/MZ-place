@@ -20,7 +20,7 @@ const SearchPage = () => {
       <MenuListWrap>
         {MENU.map(menu => (
           <MenuWrap
-            key={menu.name}
+            key={menu.id}
             onClick={() => navigate(`${menu.path}`, { state: `${menu.name}` })}
           >
             <MenuIcon src={menu.svg} />
