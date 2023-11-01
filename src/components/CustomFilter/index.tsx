@@ -13,42 +13,36 @@ import { useCallback, useState } from 'react';
 const CustomFilter = () => {
   // TODO 임시로 종류별로 따로받는 코드로 작성
   // TODO 백엔드 나오는대로 변경하기
+  const [selectedCost, setSelectedCost] = useState<string[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<string[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-  // TODO 코드 중복이 심해서 줄일 수 있는 방법 생각하기 -> hook으로 만들기?
-  const [selectedCost, setSelectedCost] = useState(new Set());
-  const [selectedActivity, setSelectedActivity] = useState(new Set());
-  const [selectedLocation, setSelectedLocation] = useState(new Set());
+  const handleSelectedFilter = useCallback(
+    (arrayName: string, selectedItem: string) => {
+      if (arrayName === 'cost') {
+        const newFilter = new Set<string>(selectedCost);
 
-  const handleSelectCost = useCallback(
-    (selectedItem: string) => {
-      const newFilter = new Set(selectedCost);
-      newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
-      setSelectedCost(newFilter);
+        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+        const returnFilter = Array.from(newFilter);
+        setSelectedCost(returnFilter);
+      }
+      if (arrayName === 'activity') {
+        const newFilter = new Set<string>(selectedActivity);
+
+        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+        const returnFilter = Array.from(newFilter);
+        setSelectedActivity(returnFilter);
+      }
+      if (arrayName === 'location') {
+        const newFilter = new Set<string>(selectedLocation);
+
+        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+        const returnFilter = Array.from(newFilter);
+        setSelectedLocation(returnFilter);
+      }
     },
-    [selectedCost],
+    [selectedCost, selectedActivity, selectedLocation],
   );
-
-  const handleSelectActivity = useCallback(
-    (selectedItem: string) => {
-      const newFilter = new Set(selectedActivity);
-      newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
-      setSelectedActivity(newFilter);
-    },
-    [selectedActivity],
-  );
-
-  const handleSelectLocation = useCallback(
-    (selectedItem: string) => {
-      const newFilter = new Set(selectedLocation);
-      newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
-      setSelectedLocation(newFilter);
-    },
-    [selectedLocation],
-  );
-
-  console.log('[유료/무료]:', selectedCost);
-  console.log('[활동취향]:', selectedActivity);
-  console.log('[활동지역]:', selectedLocation);
 
   return (
     <CustomFilterWrap>
@@ -56,8 +50,8 @@ const CustomFilter = () => {
         <FilterTitle>유료/무료 여부</FilterTitle>
         <FilterList>
           {MINI_FILTER[0].filters.map(item => (
-            <li key={item} onClick={() => handleSelectCost(item)}>
-              <Chip size="small" value={item} isClicked={selectedCost.has(item)} />
+            <li key={item} onClick={() => handleSelectedFilter('cost', item)}>
+              <Chip size="small" value={item} isClicked={selectedCost?.includes(item)} />
             </li>
           ))}
         </FilterList>
@@ -66,8 +60,8 @@ const CustomFilter = () => {
         <FilterTitle>활동 취향</FilterTitle>
         <FilterList>
           {ACTIVE_TASTE.map(item => (
-            <li key={item} onClick={() => handleSelectActivity(item)}>
-              <Chip size="small" value={item} isClicked={selectedActivity.has(item)} />
+            <li key={item} onClick={() => handleSelectedFilter('activity', item)}>
+              <Chip size="small" value={item} isClicked={selectedActivity?.includes(item)} />
             </li>
           ))}
         </FilterList>
@@ -78,11 +72,14 @@ const CustomFilter = () => {
           {REGION_ARRAY.map(
             item =>
               item.locationName !== '현 위치' && (
-                <li key={item.locationId} onClick={() => handleSelectLocation(item.locationName)}>
+                <li
+                  key={item.locationId}
+                  onClick={() => handleSelectedFilter('location', item.locationName)}
+                >
                   <Chip
                     size="small"
                     value={item.locationName}
-                    isClicked={selectedLocation.has(item.locationName)}
+                    isClicked={selectedLocation?.includes(item.locationName)}
                   />
                 </li>
               ),
