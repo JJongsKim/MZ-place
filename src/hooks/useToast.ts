@@ -11,7 +11,7 @@ const useToast = () => {
     if (toast) {
       setTimeout(() => {
         isToast(false);
-      }, 2200);
+      }, 2000);
     }
   }, [toast]);
 

@@ -50,4 +50,16 @@ const MapPageDropdownWrap = styled.div`
   }
 `;
 
-export { DetailPageWrap, FilterList, DetailPageContentList, MapPageWrap, MapPageDropdownWrap };
+// 맞춤 필터 추천 페이지용
+const CustomFilterPageWrap = styled.div`
+  width: 100%;
+`;
+
+export {
+  DetailPageWrap,
+  FilterList,
+  DetailPageContentList,
+  MapPageWrap,
+  MapPageDropdownWrap,
+  CustomFilterPageWrap,
+};
