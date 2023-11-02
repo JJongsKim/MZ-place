@@ -93,15 +93,30 @@ const InfoText = styled.p`
   }
 `;
 
-const ChipsWrap = styled.div`
+const CopyButtonWrap = styled.div`
   position: absolute;
 
   display: flex;
   top: 42px;
   left: 35px;
+`;
 
-  span {
-    margin-right: 10px;
+const CopyButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+  ${({ theme }) => theme.font.M_12};
+  cursor: pointer;
+
+  @media screen and (min-width: 1200px) {
+    width: 80px;
+    height: 33px;
+    ${({ theme }) => theme.font.M_14};
   }
 `;
 
@@ -116,5 +131,6 @@ export {
   InfoIconWrap,
   InfoIcon,
   InfoText,
-  ChipsWrap,
+  CopyButtonWrap,
+  CopyButton,
 };
