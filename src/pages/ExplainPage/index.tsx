@@ -1,5 +1,7 @@
 import SearchBar from '@components/common/SearchBar';
 import {
+  CopyButton,
+  CopyButtonWrap,
   ExplainPageWrap,
   InfoIcon,
   InfoIconWrap,
@@ -14,20 +16,26 @@ import {
 
 import test from '../../images/IMG_9904.jpg';
 
-import LikeEmpty from '@assets/like-empty.svg';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { ReactComponent as LikeEmpty } from '@assets/like-empty.svg';
 // import LikeFull from '@assets/like-full.svg';
 import { MOCKUP2 } from '@application/mock';
 import { useLocation } from 'react-router-dom';
+import useToast from '@hooks/useToast';
+import Toast from '@components/common/Toast';
 
 const ExplainPage = () => {
   const location = useLocation();
+  const { toast, handleFloatingToast } = useToast();
 
   return (
     <ExplainPageWrap>
       <SearchBar name={location.state} backIcon={true} />
       <ThumbnailBoxWrap>
         <ThumbnailBox src={test} alt="장소썸네일" />
-        <LikeIcon src={LikeEmpty} alt="찜버튼" />
+        <LikeIcon>
+          <LikeEmpty />
+        </LikeIcon>
       </ThumbnailBoxWrap>
       <LocationTitle>{location.state}</LocationTitle>
       <InfoList>
@@ -38,10 +46,26 @@ const ExplainPage = () => {
                 <InfoIcon src={item.svg} />
               </InfoIconWrap>
               <InfoText>{item.content}</InfoText>
+              {item.type === 'location' && (
+                <CopyButtonWrap>
+                  <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
+                    <CopyButton type="button">복사하기</CopyButton>
+                  </CopyToClipboard>
+                  <CopyButton type="button">길 찾기</CopyButton>
+                </CopyButtonWrap>
+              )}
+              {item.type === 'phone' && (
+                <CopyButtonWrap>
+                  <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
+                    <CopyButton type="button">복사하기</CopyButton>
+                  </CopyToClipboard>
+                </CopyButtonWrap>
+              )}
             </InfoTextWrap>
           </li>
         ))}
       </InfoList>
+      {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </ExplainPageWrap>
   );
 };

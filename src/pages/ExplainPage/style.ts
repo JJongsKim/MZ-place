@@ -24,13 +24,17 @@ const ThumbnailBox = styled.img`
   object-fit: contain;
 `;
 
-const LikeIcon = styled.img`
+const LikeIcon = styled.div`
   position: absolute;
   right: 15px;
   bottom: 15px;
   width: 20px;
   height: 20px;
   cursor: pointer;
+
+  svg {
+    fill: #606060;
+  }
 
   @media screen and (min-width: 1200px) {
     width: 26px;
@@ -65,6 +69,7 @@ const InfoList = styled.ul`
 `;
 
 const InfoTextWrap = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -88,6 +93,33 @@ const InfoText = styled.p`
   }
 `;
 
+const CopyButtonWrap = styled.div`
+  position: absolute;
+
+  display: flex;
+  top: 42px;
+  left: 35px;
+`;
+
+const CopyButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+  ${({ theme }) => theme.font.M_12};
+  cursor: pointer;
+
+  @media screen and (min-width: 1200px) {
+    width: 80px;
+    height: 33px;
+    ${({ theme }) => theme.font.M_14};
+  }
+`;
+
 export {
   ExplainPageWrap,
   ThumbnailBoxWrap,
@@ -99,4 +131,6 @@ export {
   InfoIconWrap,
   InfoIcon,
   InfoText,
+  CopyButtonWrap,
+  CopyButton,
 };
