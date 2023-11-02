@@ -24,13 +24,17 @@ const ThumbnailBox = styled.img`
   object-fit: contain;
 `;
 
-const LikeIcon = styled.img`
+const LikeIcon = styled.div`
   position: absolute;
   right: 15px;
   bottom: 15px;
   width: 20px;
   height: 20px;
   cursor: pointer;
+
+  svg {
+    fill: #606060;
+  }
 
   @media screen and (min-width: 1200px) {
     width: 26px;
@@ -65,6 +69,7 @@ const InfoList = styled.ul`
 `;
 
 const InfoTextWrap = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -88,6 +93,18 @@ const InfoText = styled.p`
   }
 `;
 
+const ChipsWrap = styled.div`
+  position: absolute;
+
+  display: flex;
+  top: 42px;
+  left: 35px;
+
+  span {
+    margin-right: 10px;
+  }
+`;
+
 export {
   ExplainPageWrap,
   ThumbnailBoxWrap,
@@ -99,4 +116,5 @@ export {
   InfoIconWrap,
   InfoIcon,
   InfoText,
+  ChipsWrap,
 };

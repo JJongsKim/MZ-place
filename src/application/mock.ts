@@ -89,7 +89,7 @@ export const MOCKUP2 = [
   {
     type: 'location',
     svg: Pin,
-    content: '서울특별시 성북구 어쩌구저쩌구',
+    content: '서울특별시 성북구 동소문로29길',
   },
   {
     type: 'phone',
