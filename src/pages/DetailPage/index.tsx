@@ -3,6 +3,7 @@ import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 
 import {
+  CustomFilterPageWrap,
   DetailPageContentList,
   DetailPageWrap,
   FilterList,
@@ -46,13 +47,13 @@ const DetailPage = () => {
             </BottomSheet>
           </MapPageWrap>
         ) : location.state === '맞춤 필터' ? (
-          <>
+          <CustomFilterPageWrap>
             {/* TODO API 연결할 때, 필터가 선택되어 있지 않을 시에 대한 조건 제대로 설정하기*/}
             <WarningMention text="필터를 선택해주세요!" />
             <BottomSheet>
               <CustomFilter />
             </BottomSheet>
-          </>
+          </CustomFilterPageWrap>
         ) : (
           <ThumbnailList />
         )}

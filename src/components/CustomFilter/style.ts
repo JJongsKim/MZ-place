@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-const CustomFilterWrap = styled.div`
+const CustomFilterForm = styled.form`
   display: flex;
   flex-direction: column;
   padding: 0 25px;
@@ -32,4 +32,4 @@ const FilterButtonWrap = styled.div`
   margin-bottom: 10px;
 `;
 
-export { CustomFilterWrap, FilterTypeContainer, FilterTitle, FilterList, FilterButtonWrap };
+export { CustomFilterForm, FilterTypeContainer, FilterTitle, FilterList, FilterButtonWrap };

@@ -19,11 +19,11 @@ const ToastContainer = styled.div`
   justify-content: center;
 
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-
-  @media screen and (min-width: 1200px) {
-    height: 100%;
-  }
+  height: 100%;
 `;
 
 const ToastWrap = styled.div`
@@ -32,14 +32,14 @@ const ToastWrap = styled.div`
   align-items: center;
 
   position: absolute;
-  bottom: 100px;
+  bottom: 150px;
   width: 300px;
   height: 60px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   background-color: white;
 
-  z-index: 2;
+  z-index: 5;
   animation: ${ToastAnimation};
   animation-duration: 2.2s;
 
