@@ -36,6 +36,8 @@ const SignForm = styled.form`
 `;
 
 const FormListWrap = styled.ul`
+  position: relative;
+
   li {
     margin-bottom: 10px;
   }
@@ -94,6 +96,16 @@ const SocialIcon = styled.img`
 
 const SocialText = styled(SubmitText)``;
 
+const CheckText = styled.p`
+  position: absolute;
+  color: #ee7676;
+  ${({ theme }) => theme.font.SB_12};
+
+  @media screen and (min-width: 1200px) {
+    ${({ theme }) => theme.font.SB_14};
+  }
+`;
+
 export {
   DeskTopViewWrap,
   SignFormWrap,
@@ -104,4 +116,5 @@ export {
   SocialWrap,
   SocialIcon,
   SocialText,
+  CheckText,
 };

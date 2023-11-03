@@ -1,5 +1,6 @@
 import AuthLogo from '@components/auth/authLogo';
 import {
+  CheckText,
   DeskTopViewWrap,
   FormListWrap,
   SignForm,
@@ -23,6 +24,7 @@ const SignUp = () => {
     userPassword: '',
     checkPassword: '',
   });
+  const [checkPassword, isCheckPassword] = useState(true);
 
   const handleChangeForm = (name: string, value: string) => {
     setSignUpForm(prev => ({
@@ -34,11 +36,15 @@ const SignUp = () => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e?.preventDefault();
 
-    handleFloatingToast();
+    if (signUpForm.userPassword === signUpForm.checkPassword && signUpForm.checkPassword !== '') {
+      handleFloatingToast();
 
-    setTimeout(() => {
-      navigate('/sign-in');
-    }, 2200);
+      setTimeout(() => {
+        navigate('/sign-in');
+      }, 2200);
+    } else {
+      isCheckPassword(false);
+    }
   };
 
   return (
@@ -83,6 +89,7 @@ const SignUp = () => {
                 onChange={e => handleChangeForm('checkPassword', e.target.value)}
               />
             </li>
+            {!checkPassword && <CheckText>비밀번호를 다시 확인해주세요!</CheckText>}
           </FormListWrap>
           <SubmitWrap>
             <Link to="/sign-in">
