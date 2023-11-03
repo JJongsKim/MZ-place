@@ -20,50 +20,39 @@ const Map = ({ currentAddress }: MapProps) => {
     longitude: location.longitude,
   };
 
-  const mapScript = document.createElement('script');
-  mapScript.async = true;
-  mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
-  document.head.appendChild(mapScript);
-
   useEffect(() => {
     if (!location.isLoading) {
-      const onLoadKakaoMap = () => {
-        window.kakao.maps.load(() => {
-          const mapContainer = document.getElementById('map');
-          let mapOption;
+      window.kakao.maps.load(() => {
+        const mapContainer = document.getElementById('map');
+        let mapOption;
 
-          if (currentAddress === '현 위치') {
+        if (currentAddress === '현 위치') {
+          mapOption = {
+            center: new window.kakao.maps.LatLng(
+              currentLocation.latitude,
+              currentLocation.longitude,
+            ),
+            level: 3,
+          };
+        } else {
+          const selectedRegion = REGION_ARRAY.find(
+            region => region.locationName === currentAddress,
+          );
+          if (selectedRegion) {
             mapOption = {
               center: new window.kakao.maps.LatLng(
-                currentLocation.latitude,
-                currentLocation.longitude,
+                selectedRegion.latitude,
+                selectedRegion.longitude,
               ),
-              level: 3,
+              level: 5,
             };
-          } else {
-            const selectedRegion = REGION_ARRAY.find(
-              region => region.locationName === currentAddress,
-            );
-            if (selectedRegion) {
-              mapOption = {
-                center: new window.kakao.maps.LatLng(
-                  selectedRegion.latitude,
-                  selectedRegion.longitude,
-                ),
-                level: 5,
-              };
-            }
           }
+        }
 
-          const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-          return map;
-        });
-      };
-
-      mapScript.addEventListener('load', onLoadKakaoMap);
-
-      return () => mapScript.removeEventListener('load', onLoadKakaoMap);
+        return map;
+      });
     }
   }, [location, currentAddress]);
 
