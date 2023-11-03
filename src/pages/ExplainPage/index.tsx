@@ -10,6 +10,7 @@ import {
   InfoTextWrap,
   LikeIcon,
   LocationTitle,
+  MapWrap,
   ThumbnailBox,
   ThumbnailBoxWrap,
 } from './style';
@@ -23,10 +24,16 @@ import { MOCKUP2 } from '@application/mock';
 import { useLocation } from 'react-router-dom';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
+import { useState } from 'react';
 
 const ExplainPage = () => {
   const location = useLocation();
   const { toast, handleFloatingToast } = useToast();
+
+  const [findAddress, setFindAddress] = useState(false);
+  const handleFindAddress = () => {
+    setFindAddress(!findAddress);
+  };
 
   return (
     <ExplainPageWrap>
@@ -46,22 +53,25 @@ const ExplainPage = () => {
                 <InfoIcon src={item.svg} />
               </InfoIconWrap>
               <InfoText>{item.content}</InfoText>
-              {item.type === 'location' && (
-                <CopyButtonWrap>
-                  <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
-                    <CopyButton type="button">복사하기</CopyButton>
-                  </CopyToClipboard>
-                  <CopyButton type="button">길 찾기</CopyButton>
-                </CopyButtonWrap>
-              )}
-              {item.type === 'phone' && (
-                <CopyButtonWrap>
-                  <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
-                    <CopyButton type="button">복사하기</CopyButton>
-                  </CopyToClipboard>
-                </CopyButtonWrap>
-              )}
             </InfoTextWrap>
+            {item.type === 'location' && (
+              <CopyButtonWrap>
+                <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
+                  <CopyButton type="button">복사하기</CopyButton>
+                </CopyToClipboard>
+                <CopyButton type="button" onClick={handleFindAddress}>
+                  {findAddress ? '지도 닫기' : '길 찾기'}
+                </CopyButton>
+              </CopyButtonWrap>
+            )}
+            {item.type === 'location' && findAddress && <MapWrap />}
+            {item.type === 'phone' && (
+              <CopyButtonWrap>
+                <CopyToClipboard text={item.content} onCopy={handleFloatingToast}>
+                  <CopyButton type="button">복사하기</CopyButton>
+                </CopyToClipboard>
+              </CopyButtonWrap>
+            )}
           </li>
         ))}
       </InfoList>
