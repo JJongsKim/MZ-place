@@ -21,6 +21,8 @@ export interface GeolocationAddress {
     sub_address_no: string;
     zip_code: string;
   };
+  x: number;
+  y: number;
 }
 
 // redux store 타입

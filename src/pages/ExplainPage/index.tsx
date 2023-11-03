@@ -25,6 +25,7 @@ import { MOCKUP2 } from '@application/mock';
 import useToast from '@hooks/useToast';
 import SearchBar from '@components/common/SearchBar';
 import Toast from '@components/common/Toast';
+import type { GeolocationAddress } from '@/types/index';
 
 declare global {
   interface Window {
@@ -56,7 +57,7 @@ const ExplainPage = () => {
           let map;
 
           const geocoder = new window.kakao.maps.services.Geocoder();
-          geocoder.addressSearch(address, function (res: any, status: boolean) {
+          geocoder.addressSearch(address, function (res: GeolocationAddress[], status: boolean) {
             if (status === window.kakao.maps.services.Status.OK) {
               const coords = new window.kakao.maps.LatLng(res[0].y, res[0].x);
               const mapOption = {
