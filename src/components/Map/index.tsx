@@ -1,16 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { REGION_ARRAY } from '@application/constant';
 import Loading from '@components/common/Loading';
 import useGeoLocation from '@hooks/useGeoLocation';
 
 import { useEffect } from 'react';
 import { styled } from 'styled-components';
-
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
 
 interface MapProps {
   currentAddress: string;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CopyButton,
   CopyButtonWrap,
@@ -26,12 +25,6 @@ import useToast from '@hooks/useToast';
 import SearchBar from '@components/common/SearchBar';
 import Toast from '@components/common/Toast';
 import type { GeolocationAddress } from '@/types/index';
-
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
 
 const ExplainPage = () => {
   const location = useLocation();
