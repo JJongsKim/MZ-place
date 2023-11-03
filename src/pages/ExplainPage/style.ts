@@ -57,9 +57,16 @@ const InfoList = styled.ul`
   flex-direction: column;
   width: 375px;
   padding: 0 25px;
+  margin-bottom: 80px;
 
   li {
     margin-bottom: 60px;
+  }
+  li:nth-child(1) {
+    margin-bottom: 40px;
+  }
+  li:nth-child(2) {
+    margin-bottom: 40px;
   }
 
   @media screen and (min-width: 1200px) {
@@ -94,11 +101,8 @@ const InfoText = styled.p`
 `;
 
 const CopyButtonWrap = styled.div`
-  position: absolute;
-
   display: flex;
-  top: 42px;
-  left: 35px;
+  padding: 10px 0 0 35px;
 `;
 
 const CopyButton = styled.button`
@@ -120,6 +124,19 @@ const CopyButton = styled.button`
   }
 `;
 
+const MapWrap = styled.div`
+  width: 280px;
+  height: 180px;
+  margin: 10px 20px 0;
+  border: 1px solid ${({ theme }) => theme.colors.text_gray};
+
+  @media screen and (min-width: 1200px) {
+    width: 400px;
+    height: 220px;
+    margin: 15px 36px 0;
+  }
+`;
+
 export {
   ExplainPageWrap,
   ThumbnailBoxWrap,
@@ -133,4 +150,5 @@ export {
   InfoText,
   CopyButtonWrap,
   CopyButton,
+  MapWrap,
 };
