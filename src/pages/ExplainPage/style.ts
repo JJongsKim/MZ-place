@@ -128,7 +128,7 @@ const MapWrap = styled.div`
   width: 280px;
   height: 180px;
   margin: 10px 20px 0;
-  background-color: pink;
+  border: 1px solid ${({ theme }) => theme.colors.text_gray};
 
   @media screen and (min-width: 1200px) {
     width: 400px;
