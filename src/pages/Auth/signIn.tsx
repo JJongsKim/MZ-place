@@ -1,5 +1,6 @@
 import AuthLogo from '@components/auth/authLogo';
 import {
+  CheckText,
   DeskTopViewWrap,
   FormListWrap,
   SignForm,
@@ -27,6 +28,7 @@ const SignIn = () => {
     userId: '',
     userPassword: '',
   });
+  const [checkForm, isCheckForm] = useState(true);
 
   const handleChangeForm = (name: string, value: string) => {
     setSignInForm(prev => ({
@@ -35,14 +37,19 @@ const SignIn = () => {
     }));
   };
 
+  // TODO 백엔드에서 보내주는 status로도 isCheckForm() 관리하기
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    handleFloatingToast();
+    if (signInForm.userId !== '' || signInForm.userPassword !== '') {
+      handleFloatingToast();
 
-    setTimeout(() => {
-      navigate('/');
-    }, 2200);
+      setTimeout(() => {
+        navigate('/');
+      }, 2200);
+    } else {
+      isCheckForm(false);
+    }
   };
 
   return (
@@ -69,6 +76,7 @@ const SignIn = () => {
                 onChange={e => handleChangeForm('userPassword', e.target.value)}
               />
             </li>
+            {!checkForm && <CheckText>아이디와 비밀번호를 다시 확인해주세요!</CheckText>}
           </FormListWrap>
           <SocialWrap>
             <SocialText>SNS로 간편 로그인하기</SocialText>
