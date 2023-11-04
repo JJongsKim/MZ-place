@@ -115,6 +115,34 @@ const WithdrawTextBox = styled.div`
   }
 `;
 
+const ModalBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const WithdrawText = styled.p`
+  padding: 35px 0 40px;
+  ${({ theme }) => theme.font.SB_20};
+`;
+
+const SelectBoxWrap = styled.div`
+  display: flex;
+`;
+
+const SelectBox = styled.button`
+  width: 80px;
+  height: 35px;
+  margin: 0 10px;
+  border-radius: 8px;
+  ${({ theme }) => theme.font.SB_14};
+
+  &:nth-child(2) {
+    color: white;
+    background-color: #ee7676;
+  }
+`;
+
 export {
   MyPageWrap,
   FirstSection,
@@ -124,4 +152,8 @@ export {
   DivideLine,
   MyPageJobList,
   WithdrawTextBox,
+  ModalBox,
+  WithdrawText,
+  SelectBoxWrap,
+  SelectBox,
 };

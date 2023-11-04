@@ -18,9 +18,9 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  padding: 0 30px;
+  padding: 20px 30px;
   width: 320px;
-  height: 280px;
+  height: 200px;
   border-radius: 10px;
   background-color: white;
 `;
