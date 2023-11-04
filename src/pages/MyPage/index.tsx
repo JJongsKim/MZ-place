@@ -8,8 +8,10 @@ import {
   MyPageWrap,
   UserNameBox,
   WelcomeText,
+  WithdrawTextBox,
 } from './style';
 
+// TODO 최근 조회 장소, 로컬스토리지 이용하여 구현하기
 const MyPage = () => {
   return (
     <MyPageWrap>
@@ -24,8 +26,8 @@ const MyPage = () => {
       <DivideLine />
       <MyPageJobList>
         <li>로그아웃</li>
-        <li>최근 조회 장소 보러가기</li>
-        <li>회원탈퇴</li>
+        <li>최근 조회한 장소 20곳</li>
+        <WithdrawTextBox>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
     </MyPageWrap>
   );
