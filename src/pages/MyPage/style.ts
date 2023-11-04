@@ -69,17 +69,18 @@ const InfoText = styled.p`
 const DivideLine = styled(SearchBarLine)``;
 
 const MyPageJobList = styled.ul`
+  position: relative;
+
   width: 375px;
-  padding: 0 26px;
+  padding-left: 26px;
 
   li {
     margin: 70px 0;
     ${({ theme }) => theme.font.B_18};
     cursor: pointer;
   }
-  li:nth-child(3) {
-    color: ${({ theme }) => theme.colors.gray};
-    ${({ theme }) => theme.font.B_15};
+  li:nth-child(2) {
+    margin-bottom: 15px;
   }
 
   // 데스크탑 스타일
@@ -90,10 +91,69 @@ const MyPageJobList = styled.ul`
       margin: 80px 0;
       ${({ theme }) => theme.font.B_20};
     }
-    li:nth-child(3) {
-      ${({ theme }) => theme.font.B_16};
-    }
   }
 `;
 
-export { MyPageWrap, FirstSection, WelcomeText, UserNameBox, InfoText, DivideLine, MyPageJobList };
+const WithdrawTextBox = styled.div`
+  position: absolute;
+  top: 62px;
+  right: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: #e8e8e8;
+  ${({ theme }) => theme.font.B_13};
+
+  cursor: pointer;
+
+  @media screen and (min-width: 1200px) {
+    top: 75px;
+  }
+`;
+
+const ModalBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const WithdrawText = styled.p`
+  padding: 35px 0 40px;
+  ${({ theme }) => theme.font.SB_20};
+`;
+
+const SelectBoxWrap = styled.div`
+  display: flex;
+`;
+
+const SelectBox = styled.button`
+  width: 80px;
+  height: 35px;
+  margin: 0 10px;
+  border-radius: 8px;
+  ${({ theme }) => theme.font.SB_14};
+
+  &:nth-child(2) {
+    color: white;
+    background-color: #ee7676;
+  }
+`;
+
+export {
+  MyPageWrap,
+  FirstSection,
+  WelcomeText,
+  UserNameBox,
+  InfoText,
+  DivideLine,
+  MyPageJobList,
+  WithdrawTextBox,
+  ModalBox,
+  WithdrawText,
+  SelectBoxWrap,
+  SelectBox,
+};
