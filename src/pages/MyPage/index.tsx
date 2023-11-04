@@ -10,9 +10,13 @@ import {
   WelcomeText,
   WithdrawTextBox,
 } from './style';
+import Modal from '@components/common/Modal';
+import useModal from '@hooks/useModal';
 
 // TODO 최근 조회 장소, 로컬스토리지 이용하여 구현하기
 const MyPage = () => {
+  const { modal, handleViewModal, handleCloseModal } = useModal();
+
   return (
     <MyPageWrap>
       <FirstSection>
@@ -27,8 +31,9 @@ const MyPage = () => {
       <MyPageJobList>
         <li>로그아웃</li>
         <li>최근 조회한 장소 20곳</li>
-        <WithdrawTextBox>회원탈퇴</WithdrawTextBox>
+        <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
+      {modal && <Modal onClose={handleCloseModal}>안뇽!</Modal>}
     </MyPageWrap>
   );
 };
