@@ -18,6 +18,7 @@ import CustomFilter from '@components/CustomFilter';
 import WarningMention from '@components/common/warning';
 import { useSelector } from 'react-redux';
 import type { StoreType } from '@/types/index';
+import DropDown from '@components/common/DropDown';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const DetailPage = () => {
         {location.state === '거리별 추천' ? (
           <MapPageWrap>
             <MapPageDropdownWrap>
-              {/* <DropDown currentAddress={store.LocationReducer.currentAddress} /> */}
+              <DropDown currentAddress={store.LocationReducer.currentAddress} />
             </MapPageDropdownWrap>
             <Map currentAddress={store.LocationReducer.currentAddress} />
             <BottomSheet>
