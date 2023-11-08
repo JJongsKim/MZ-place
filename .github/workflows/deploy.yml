@@ -27,10 +27,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Upload to S3
         run: |
-          aws s3 cp --region ap-northeast-2 ./build.zip s3://seoul-walk-bucket/build.zip
+          aws s3 cp --region ap-northeast-2 ./build.zip s3://seoulwalk-bucket/build.zip
       - name: Deploy
         run: aws deploy create-deployment
-          --application-name seoul-walk-codeDeploy
+          --application-name seoulWalk-codeDeploy
           --deployment-config-name CodeDeployDefault.AllAtOnce
-          --deployment-group-name seoul-walk-codeDeploy-group
-          --s3-location bucket=seoul-walk-bucket,bundleType=zip,key=build.zip
+          --deployment-group-name seoulWalk-codeDeploy-group
+          --s3-location bucket=seoulwalk-bucket,bundleType=zip,key=build.zip
