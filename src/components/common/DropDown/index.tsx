@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import activeBtn from '@assets/dropdown.svg';
 import { REGION_ARRAY } from '@application/constant';
+
+import { useDispatch } from 'react-redux';
+import { setLocation } from '@store/reducers/LocationReducer';
 import {
   DropdownBtn,
   DropdownBtnWrap,
@@ -9,8 +12,6 @@ import {
   DropdownTextWrap,
   DropdownWrap,
 } from './style';
-import { useDispatch } from 'react-redux';
-import { setLocation } from '@store/reducers/LocationReducer';
 
 interface DropdownProps {
   currentAddress: string;

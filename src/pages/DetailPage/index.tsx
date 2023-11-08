@@ -13,12 +13,12 @@ import {
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
 import BottomSheet from '@components/common/BottomSheet';
-import DropDown from '@components/dropdown';
 import Map from '@components/Map';
 import CustomFilter from '@components/CustomFilter';
 import WarningMention from '@components/common/warning';
 import { useSelector } from 'react-redux';
 import type { StoreType } from '@/types/index';
+import DropDown from '@components/common/DropDown';
 
 const DetailPage = () => {
   const location = useLocation();
