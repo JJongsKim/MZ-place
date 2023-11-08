@@ -13,7 +13,6 @@ import {
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
 import BottomSheet from '@components/common/BottomSheet';
-import DropDown from '@components/dropdown';
 import Map from '@components/Map';
 import CustomFilter from '@components/CustomFilter';
 import WarningMention from '@components/common/warning';
@@ -39,7 +38,7 @@ const DetailPage = () => {
         {location.state === '거리별 추천' ? (
           <MapPageWrap>
             <MapPageDropdownWrap>
-              <DropDown currentAddress={store.LocationReducer.currentAddress} />
+              {/* <DropDown currentAddress={store.LocationReducer.currentAddress} /> */}
             </MapPageDropdownWrap>
             <Map currentAddress={store.LocationReducer.currentAddress} />
             <BottomSheet>
