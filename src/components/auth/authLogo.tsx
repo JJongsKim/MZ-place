@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import BigLogo from '@assets/mz-big-logo.svg';
+import SeoulWalkLogo from '../../images/seoul-walk-logo.png';
 import { Link } from 'react-router-dom';
 
 interface AuthLogoProps {
@@ -11,7 +11,7 @@ const AuthLogo = ({ title }: AuthLogoProps) => {
   return (
     <LogoWrap>
       <Link to="/">
-        <LogoIcon src={BigLogo} />
+        <LogoIcon src={SeoulWalkLogo} />
       </Link>
       <LogoTitle>{title}</LogoTitle>
     </LogoWrap>
@@ -31,11 +31,11 @@ const LogoWrap = styled.div`
 
 const LogoIcon = styled.img`
   width: 75px;
-  height: 70px;
+  height: 75px;
 
   @media screen and (min-width: 1200px) {
     width: 100px;
-    height: 92px;
+    height: 100px;
   }
 `;
 
