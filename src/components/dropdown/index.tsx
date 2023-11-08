@@ -16,7 +16,7 @@ interface DropdownProps {
   currentAddress: string;
 }
 
-const Dropdown = ({ currentAddress }: DropdownProps) => {
+const DropDown = ({ currentAddress }: DropdownProps) => {
   const dispatch = useDispatch();
   const [clicked, isClicked] = useState(false);
 
@@ -49,4 +49,4 @@ const Dropdown = ({ currentAddress }: DropdownProps) => {
   );
 };
 
-export default Dropdown;
+export default DropDown;

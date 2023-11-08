@@ -19,7 +19,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-svg.d.ts
 kakao.d.ts
 
 npm-debug.log*
