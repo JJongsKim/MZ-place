@@ -77,8 +77,12 @@ const CustomFilter = () => {
         <FilterTitle>활동 취향</FilterTitle>
         <FilterList>
           {ACTIVE_TASTE.map(item => (
-            <li key={item} onClick={() => handleSelectedFilter('activity', item)}>
-              <Chip size="small" value={item} isClicked={selectedActivity?.includes(item)} />
+            <li key={item.id} onClick={() => handleSelectedFilter('activity', item.name)}>
+              <Chip
+                size="small"
+                value={item.name}
+                isClicked={selectedActivity?.includes(item.name)}
+              />
             </li>
           ))}
         </FilterList>

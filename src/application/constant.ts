@@ -122,14 +122,38 @@ export const MINI_FILTER = [
 ];
 
 export const ACTIVE_TASTE = [
-  '취향1',
-  '취향2',
-  '취향3',
-  '취향4',
-  '취향5',
-  '취향6',
-  '취향7',
-  '취향8',
+  {
+    id: 1,
+    name: '건강한',
+  },
+  {
+    id: 2,
+    name: '신나는',
+  },
+  {
+    id: 3,
+    name: '차분한',
+  },
+  {
+    id: 4,
+    name: '교육적인',
+  },
+  {
+    id: 5,
+    name: '전통적인',
+  },
+  {
+    id: 6,
+    name: '트렌디한',
+  },
+  {
+    id: 7,
+    name: '감성적인',
+  },
+  {
+    id: 8,
+    name: '맛있는',
+  },
 ];
 
 export const REGION_ARRAY = [
