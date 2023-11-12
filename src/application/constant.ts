@@ -13,6 +13,7 @@ import Etc from '@assets/etc.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
+import Course from '@assets/course.svg';
 
 import HealingImg1 from '../images/healing1-picture.jpg';
 import HealingImg2 from '../images/healing2-picture.jpg';
@@ -97,6 +98,11 @@ export const MENU = [
 ];
 
 export const CUSTOM_MENU = [
+  {
+    name: '코스 추천',
+    svg: Course,
+    path: 'course',
+  },
   {
     name: '거리별 추천',
     svg: Map,
