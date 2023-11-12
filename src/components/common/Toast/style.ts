@@ -50,10 +50,10 @@ const ToastWrap = styled.div`
 `;
 
 const ToastContent = styled.div`
-  ${({ theme }) => theme.font.SB_14};
+  ${({ theme }) => theme.font.B_14};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.SB_16};
+    ${({ theme }) => theme.font.B_16};
   }
 `;
 

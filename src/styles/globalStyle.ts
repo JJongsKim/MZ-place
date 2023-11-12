@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   
   html,
   body {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     width: 100%;
     height: 100%;
     margin: 0 auto;

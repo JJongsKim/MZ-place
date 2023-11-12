@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 const NavWrap = styled.nav`
   position: fixed;
   display: flex;
-  align-items: center;
   bottom: 0;
   left: 0;
   right: 0;
@@ -34,11 +33,13 @@ const NavIcon = styled.div<{
 }>`
   margin: 10px 0;
   width: 27px;
-  height: 22px;
+  height: 20px;
   display: flex;
   justify-content: center;
 
   svg {
+    width: 24px;
+    height: 20px;
     fill: ${props => (props.$active ? '#19bb35' : '#606060')};
   }
 

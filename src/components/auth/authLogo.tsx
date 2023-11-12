@@ -41,11 +41,11 @@ const LogoIcon = styled.img`
 
 const LogoTitle = styled.p`
   margin: 36px 0 25px 0;
-  ${({ theme }) => theme.font.SB_22};
+  ${({ theme }) => theme.font.B_18};
 
   @media screen and (min-width: 1200px) {
     margin: 25px 0 40px;
-    ${({ theme }) => theme.font.SB_28};
+    ${({ theme }) => theme.font.B_20};
   }
 `;
 

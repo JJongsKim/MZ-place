@@ -13,10 +13,10 @@ const ButtonWrap = styled.button`
 
 const ButtonText = styled.p`
   color: white;
-  ${({ theme }) => theme.font.SB_16};
+  ${({ theme }) => theme.font.B_15};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.SB_18};
+    ${({ theme }) => theme.font.B_18};
   }
 `;
 

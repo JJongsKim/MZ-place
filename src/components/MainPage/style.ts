@@ -39,13 +39,13 @@ const SlideText = styled.p<{
   left: 15px;
   bottom: 20px;
   color: ${({ imgidx }) => (imgidx === 1 || imgidx === 3 ? '#202020' : 'white')};
-  ${({ theme }) => theme.font.SB_18};
+  ${({ theme }) => theme.font.B_16};
 
   transition: color 2s ease-in-out;
 
   @media screen and (min-width: 1200px) {
     left: 20px;
-    ${({ theme }) => theme.font.SB_22};
+    ${({ theme }) => theme.font.B_20};
   }
 `;
 
