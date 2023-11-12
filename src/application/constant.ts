@@ -13,6 +13,7 @@ import Etc from '@assets/etc.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
+import Course from '@assets/course.svg';
 
 import HealingImg1 from '../images/healing1-picture.jpg';
 import HealingImg2 from '../images/healing2-picture.jpg';
@@ -98,6 +99,11 @@ export const MENU = [
 
 export const CUSTOM_MENU = [
   {
+    name: '코스 추천',
+    svg: Course,
+    path: 'course',
+  },
+  {
     name: '거리별 추천',
     svg: Map,
     path: 'map',
@@ -122,14 +128,38 @@ export const MINI_FILTER = [
 ];
 
 export const ACTIVE_TASTE = [
-  '취향1',
-  '취향2',
-  '취향3',
-  '취향4',
-  '취향5',
-  '취향6',
-  '취향7',
-  '취향8',
+  {
+    id: 1,
+    name: '건강한',
+  },
+  {
+    id: 2,
+    name: '신나는',
+  },
+  {
+    id: 3,
+    name: '차분한',
+  },
+  {
+    id: 4,
+    name: '교육적인',
+  },
+  {
+    id: 5,
+    name: '전통적인',
+  },
+  {
+    id: 6,
+    name: '트렌디한',
+  },
+  {
+    id: 7,
+    name: '감성적인',
+  },
+  {
+    id: 8,
+    name: '맛있는',
+  },
 ];
 
 export const REGION_ARRAY = [
