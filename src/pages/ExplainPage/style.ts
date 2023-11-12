@@ -93,10 +93,10 @@ const InfoIconWrap = styled.div`
 const InfoIcon = styled.img``;
 
 const InfoText = styled.p`
-  ${({ theme }) => theme.font.B_16}
+  ${({ theme }) => theme.font.M_14}
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_18}
+    ${({ theme }) => theme.font.M_16}
   }
 `;
 
@@ -120,7 +120,7 @@ const CopyButton = styled.button`
   @media screen and (min-width: 1200px) {
     width: 80px;
     height: 33px;
-    ${({ theme }) => theme.font.M_14};
+    ${({ theme }) => theme.font.M_13};
   }
 `;
 

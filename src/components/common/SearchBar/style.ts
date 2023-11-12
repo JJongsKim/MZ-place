@@ -29,11 +29,11 @@ const SearchBarTitleWrap = styled.div`
 `;
 
 const TitleText = styled.p`
-  ${({ theme }) => theme.font.B_22};
+  ${({ theme }) => theme.font.B_20};
   padding-left: 6px;
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_24};
+    ${({ theme }) => theme.font.B_22};
     padding-left: 8px;
   }
 `;

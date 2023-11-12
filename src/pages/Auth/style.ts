@@ -53,12 +53,12 @@ const SubmitWrap = styled.div`
 
 const SubmitText = styled.p`
   margin: 10px 0;
-  ${({ theme }) => theme.font.SB_12};
+  ${({ theme }) => theme.font.B_12};
   color: ${({ theme }) => theme.colors.gray};
 
   @media screen and (min-width: 1200px) {
     margin: 15px 0;
-    ${({ theme }) => theme.font.SB_14};
+    ${({ theme }) => theme.font.B_14};
   }
 `;
 
@@ -99,10 +99,10 @@ const SocialText = styled(SubmitText)``;
 const CheckText = styled.p`
   position: absolute;
   color: #ee7676;
-  ${({ theme }) => theme.font.SB_12};
+  ${({ theme }) => theme.font.B_12};
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.SB_14};
+    ${({ theme }) => theme.font.B_13};
   }
 `;
 

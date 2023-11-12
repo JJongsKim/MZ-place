@@ -44,16 +44,16 @@ const TextSection = styled.section`
 
   p:nth-child(1) {
     margin-bottom: 40px;
-    ${({ theme }) => theme.font.B_24};
+    ${({ theme }) => theme.font.B_22};
   }
   p:nth-child(2) {
     margin-bottom: 20px;
     color: ${({ theme }) => theme.colors.gray};
-    ${({ theme }) => theme.font.M_18};
+    ${({ theme }) => theme.font.M_16};
   }
   p:nth-child(3) {
     color: ${({ theme }) => theme.colors.gray};
-    ${({ theme }) => theme.font.M_18};
+    ${({ theme }) => theme.font.M_16};
   }
 
   @media screen and (min-width: 1200px) {
@@ -62,16 +62,16 @@ const TextSection = styled.section`
 
     p:nth-child(1) {
       margin-bottom: 40px;
-      ${({ theme }) => theme.font.B_28};
+      ${({ theme }) => theme.font.B_24};
     }
     p:nth-child(2) {
       margin-bottom: 25px;
       color: ${({ theme }) => theme.colors.gray};
-      ${({ theme }) => theme.font.M_20};
+      ${({ theme }) => theme.font.M_18};
     }
     p:nth-child(3) {
       color: ${({ theme }) => theme.colors.gray};
-      ${({ theme }) => theme.font.M_20};
+      ${({ theme }) => theme.font.M_18};
     }
   }
 `;

@@ -25,21 +25,21 @@ const RecommendTextWrap = styled.div`
 
 const RecommendText = styled.p`
   margin-bottom: 8px;
-  ${({ theme }) => theme.font.M_18};
+  ${({ theme }) => theme.font.M_16};
 
   @media screen and (min-width: 1200px) {
     margin: 0 5px 0;
-    ${({ theme }) => theme.font.M_20};
+    ${({ theme }) => theme.font.M_18};
   }
 `;
 
 const RecommendTop20 = styled.p`
   margin-bottom: 20px;
-  ${({ theme }) => theme.font.B_24};
+  ${({ theme }) => theme.font.B_22};
 
   @media screen and (min-width: 1200px) {
     margin-bottom: 0;
-    ${({ theme }) => theme.font.B_26};
+    ${({ theme }) => theme.font.B_25};
   }
 `;
 

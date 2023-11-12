@@ -21,11 +21,11 @@ const FirstSection = styled.section`
 
 const WelcomeText = styled.p`
   margin-bottom: 20px;
-  ${({ theme }) => theme.font.B_24};
+  ${({ theme }) => theme.font.B_22};
 
   @media screen and (min-width: 1200px) {
     margin-bottom: 25px;
-    ${({ theme }) => theme.font.B_28};
+    ${({ theme }) => theme.font.B_24};
   }
 `;
 
@@ -48,7 +48,7 @@ const UserNameBox = styled.div`
     margin-bottom: 80px;
 
     p:nth-child(1) {
-      ${({ theme }) => theme.font.B_26};
+      ${({ theme }) => theme.font.B_22};
     }
     p:nth-child(2) {
       ${({ theme }) => theme.font.B_18};
@@ -58,11 +58,11 @@ const UserNameBox = styled.div`
 
 const InfoText = styled.p`
   margin-bottom: 10px;
-  ${({ theme }) => theme.font.B_18};
+  ${({ theme }) => theme.font.M_18};
 
   @media screen and (min-width: 1200px) {
     margin-bottom: 20px;
-    ${({ theme }) => theme.font.B_22};
+    ${({ theme }) => theme.font.M_20};
   }
 `;
 
@@ -76,7 +76,7 @@ const MyPageJobList = styled.ul`
 
   li {
     margin: 70px 0;
-    ${({ theme }) => theme.font.B_18};
+    ${({ theme }) => theme.font.M_16};
     cursor: pointer;
   }
   li:nth-child(2) {
@@ -89,14 +89,14 @@ const MyPageJobList = styled.ul`
 
     li {
       margin: 80px 0;
-      ${({ theme }) => theme.font.B_20};
+      ${({ theme }) => theme.font.M_18};
     }
   }
 `;
 
 const WithdrawTextBox = styled.div`
   position: absolute;
-  top: 62px;
+  top: 60px;
   right: 25px;
 
   display: flex;
@@ -111,7 +111,7 @@ const WithdrawTextBox = styled.div`
   cursor: pointer;
 
   @media screen and (min-width: 1200px) {
-    top: 75px;
+    top: 70px;
   }
 `;
 
@@ -123,7 +123,7 @@ const ModalBox = styled.div`
 
 const WithdrawText = styled.p`
   padding: 35px 0 40px;
-  ${({ theme }) => theme.font.SB_20};
+  ${({ theme }) => theme.font.B_20};
 `;
 
 const SelectBoxWrap = styled.div`
@@ -135,7 +135,7 @@ const SelectBox = styled.button`
   height: 35px;
   margin: 0 10px;
   border-radius: 8px;
-  ${({ theme }) => theme.font.SB_14};
+  ${({ theme }) => theme.font.B_14};
 
   &:nth-child(2) {
     color: white;

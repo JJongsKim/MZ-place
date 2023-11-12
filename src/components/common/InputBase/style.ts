@@ -6,13 +6,13 @@ const InputWrap = styled.input`
   color: ${({ theme }) => theme.colors.text};
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
   padding: 0 20px;
-  ${({ theme }) => theme.font.SB_12};
+  ${({ theme }) => theme.font.M_12};
 
   @media screen and (min-width: 1200px) {
     width: 400px;
     height: 62px;
     padding: 0 30px;
-    ${({ theme }) => theme.font.SB_14};
+    ${({ theme }) => theme.font.M_14};
   }
 
   &::placeholder {

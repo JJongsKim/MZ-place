@@ -48,8 +48,8 @@ const MenuWrap = styled(SearchPageWrap)`
 `;
 
 const MenuIcon = styled.img`
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
 
   @media screen and (min-width: 1200px) {
     width: 42px;
