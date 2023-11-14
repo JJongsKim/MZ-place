@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.6",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
@@ -23,9 +22,9 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "yarn start",
+    "build": "yarn build",
+    "test": "yarn test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -56,7 +55,6 @@
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "^3.0.3",
-    "react-app-alias": "^2.2.2"
+    "prettier": "^3.0.3"
   }
 }
