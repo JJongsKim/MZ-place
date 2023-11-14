@@ -8,13 +8,6 @@ const InputWrap = styled.input`
   padding: 0 20px;
   ${({ theme }) => theme.font.M_12};
 
-  @media screen and (min-width: 1200px) {
-    width: 400px;
-    height: 62px;
-    padding: 0 30px;
-    ${({ theme }) => theme.font.M_14};
-  }
-
   &::placeholder {
     color: ${({ theme }) => theme.colors.text_gray};
   }

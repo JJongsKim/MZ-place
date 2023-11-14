@@ -1,4 +1,4 @@
-import Layout from '@components/layout';
+import Layout from '@components/Layout';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import DetailPage from '@pages/DetailPage';

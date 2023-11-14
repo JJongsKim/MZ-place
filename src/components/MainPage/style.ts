@@ -11,8 +11,8 @@ const AutoSlideWrap = styled.div`
 
   @media screen and (min-width: 1200px) {
     margin: 15px 0 25px;
-    width: 520px;
-    height: 230px;
+    width: 340px;
+    height: 200px;
   }
 `;
 
@@ -27,8 +27,8 @@ const SlideImage = styled.img`
   object-fit: cover;
 
   @media screen and (min-width: 1200px) {
-    width: 520px;
-    height: 230px;
+    width: 340px;
+    height: 200px;
   }
 `;
 
@@ -42,11 +42,6 @@ const SlideText = styled.p<{
   ${({ theme }) => theme.font.B_16};
 
   transition: color 2s ease-in-out;
-
-  @media screen and (min-width: 1200px) {
-    left: 20px;
-    ${({ theme }) => theme.font.B_20};
-  }
 `;
 
 export { AutoSlideWrap, SlideImageList, SlideImage, SlideText };

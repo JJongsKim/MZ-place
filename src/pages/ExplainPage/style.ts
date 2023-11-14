@@ -11,11 +11,6 @@ const ThumbnailBoxWrap = styled.div`
   width: 330px;
   height: 200px;
   background-color: ${({ theme }) => theme.colors.text_gray};
-
-  @media screen and (min-width: 1200px) {
-    width: 500px;
-    height: 260px;
-  }
 `;
 
 const ThumbnailBox = styled.img`
@@ -34,11 +29,6 @@ const LikeIcon = styled.div`
 
   svg {
     fill: #606060;
-  }
-
-  @media screen and (min-width: 1200px) {
-    width: 26px;
-    height: 22px;
   }
 `;
 
@@ -68,11 +58,6 @@ const InfoList = styled.ul`
   li:nth-child(2) {
     margin-bottom: 40px;
   }
-
-  @media screen and (min-width: 1200px) {
-    width: 500px;
-    margin-bottom: 50px;
-  }
 `;
 
 const InfoTextWrap = styled.div`
@@ -90,7 +75,10 @@ const InfoIconWrap = styled.div`
   padding: 0 26px 0 15px;
 `;
 
-const InfoIcon = styled.img``;
+const InfoIcon = styled.img`
+  width: 20px;
+  height: 24px;
+`;
 
 const InfoText = styled.p`
   ${({ theme }) => theme.font.M_14}
@@ -116,24 +104,18 @@ const CopyButton = styled.button`
   background-color: #eee;
   ${({ theme }) => theme.font.M_12};
   cursor: pointer;
-
-  @media screen and (min-width: 1200px) {
-    width: 80px;
-    height: 33px;
-    ${({ theme }) => theme.font.M_13};
-  }
 `;
 
 const MapWrap = styled.div`
   width: 280px;
   height: 180px;
-  margin: 10px 20px 0;
+  margin: 10px 24px 0;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
 
   @media screen and (min-width: 1200px) {
-    width: 400px;
+    width: 320px;
     height: 220px;
-    margin: 15px 36px 0;
+    margin: 15px 4px 0;
   }
 `;
 

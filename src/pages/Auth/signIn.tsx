@@ -1,4 +1,4 @@
-import AuthLogo from '@components/auth/authLogo';
+import AuthLogo from '@components/Auth/authLogo';
 import {
   CheckText,
   DeskTopViewWrap,

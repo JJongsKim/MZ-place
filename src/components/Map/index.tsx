@@ -63,11 +63,6 @@ const MapWrap = styled.div`
   width: 375px;
   height: 500px;
   margin: 0 auto;
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-    height: 600px;
-  }
 `;
 
 export default Map;

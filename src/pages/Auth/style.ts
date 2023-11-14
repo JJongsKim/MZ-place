@@ -58,7 +58,7 @@ const SubmitText = styled.p`
 
   @media screen and (min-width: 1200px) {
     margin: 15px 0;
-    ${({ theme }) => theme.font.B_14};
+    ${({ theme }) => theme.font.B_13};
   }
 `;
 
@@ -75,23 +75,12 @@ const SocialWrap = styled.div`
   :nth-child(1) {
     grid-column: 1/3;
   }
-
-  @media screen and (min-width: 1200px) {
-    width: 170px;
-    height: 100px;
-    margin-top: 70px;
-  }
 `;
 
 const SocialIcon = styled.img`
   width: 55px;
   height: 55px;
   cursor: pointer;
-
-  @media screen and (min-width: 1200px) {
-    width: 60px;
-    height: 60px;
-  }
 `;
 
 const SocialText = styled(SubmitText)``;
