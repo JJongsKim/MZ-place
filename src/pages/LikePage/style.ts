@@ -15,11 +15,6 @@ const HeaderItemWrap = styled.div`
   align-items: center;
   width: 375px;
   margin-top: 4px;
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-    margin-top: 2px;
-  }
 `;
 
 const HeaderNameText = styled(TitleText)`
@@ -30,11 +25,6 @@ const HeaderNameText = styled(TitleText)`
 const HeaderText = styled.p`
   padding-top: 3px;
   ${({ theme }) => theme.font.B_15};
-
-  @media screen and (min-width: 1200px) {
-    padding-top: 5px;
-    ${({ theme }) => theme.font.B_18}
-  }
 `;
 
 const HeaderLine = styled(SearchBarLine)``;

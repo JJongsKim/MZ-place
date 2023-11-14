@@ -99,7 +99,7 @@ export const MENU = [
 
 export const CUSTOM_MENU = [
   {
-    name: '코스 추천',
+    name: '미래유산코스',
     svg: Course,
     path: 'course',
   },

@@ -13,20 +13,11 @@ const FirstSection = styled.section`
   width: 375px;
   margin-top: 50px;
   padding: 0 26px;
-
-  @media screen and (min-width: 1200px) {
-    width: 800px;
-  }
 `;
 
 const WelcomeText = styled.p`
   margin-bottom: 20px;
   ${({ theme }) => theme.font.B_22};
-
-  @media screen and (min-width: 1200px) {
-    margin-bottom: 25px;
-    ${({ theme }) => theme.font.B_24};
-  }
 `;
 
 const UserNameBox = styled.div`
@@ -42,28 +33,11 @@ const UserNameBox = styled.div`
     padding: 0 6px;
     ${({ theme }) => theme.font.B_16};
   }
-
-  // 데스크탑 스타일
-  @media screen and (min-width: 1200px) {
-    margin-bottom: 80px;
-
-    p:nth-child(1) {
-      ${({ theme }) => theme.font.B_22};
-    }
-    p:nth-child(2) {
-      ${({ theme }) => theme.font.B_18};
-    }
-  }
 `;
 
 const InfoText = styled.p`
   margin-bottom: 10px;
   ${({ theme }) => theme.font.M_18};
-
-  @media screen and (min-width: 1200px) {
-    margin-bottom: 20px;
-    ${({ theme }) => theme.font.M_20};
-  }
 `;
 
 const DivideLine = styled(SearchBarLine)``;
@@ -77,20 +51,13 @@ const MyPageJobList = styled.ul`
   li {
     margin: 70px 0;
     ${({ theme }) => theme.font.M_16};
+  }
+  li:nth-child(1) {
     cursor: pointer;
   }
   li:nth-child(2) {
     margin-bottom: 15px;
-  }
-
-  // 데스크탑 스타일
-  @media screen and (min-width: 1200px) {
-    width: 800px;
-
-    li {
-      margin: 80px 0;
-      ${({ theme }) => theme.font.M_18};
-    }
+    user-select: none;
   }
 `;
 
@@ -107,12 +74,6 @@ const WithdrawTextBox = styled.div`
   border-radius: 10px;
   background-color: #e8e8e8;
   ${({ theme }) => theme.font.B_13};
-
-  cursor: pointer;
-
-  @media screen and (min-width: 1200px) {
-    top: 70px;
-  }
 `;
 
 const ModalBox = styled.div`

@@ -22,9 +22,9 @@ const NavList = styled.ul`
   grid-template-columns: repeat(4, 1fr);
   place-items: center;
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 750px) {
     margin: 0 auto;
-    width: 1188px;
+    width: 750px;
   }
 `;
 

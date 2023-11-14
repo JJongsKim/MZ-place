@@ -43,16 +43,11 @@ const MapPageDropdownWrap = styled.div`
   justify-content: flex-start;
   padding: 0 25px;
   margin-bottom: 25px;
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-    margin-bottom: 28px;
-  }
 `;
 
 // 맞춤 필터 추천 페이지용
 const CustomFilterPageWrap = styled.div`
-  width: 100%;
+  width: 375px;
 `;
 
 export {

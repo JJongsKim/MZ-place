@@ -16,10 +16,6 @@ const SearchBarItemWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 375px;
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-  }
 `;
 
 const SearchBarTitleWrap = styled.div`
@@ -31,20 +27,11 @@ const SearchBarTitleWrap = styled.div`
 const TitleText = styled.p`
   ${({ theme }) => theme.font.B_20};
   padding-left: 6px;
-
-  @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_22};
-    padding-left: 8px;
-  }
 `;
 
 const SearchBarLine = styled.hr`
   width: 350px;
   color: ${({ theme }) => theme.colors.text_gray};
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-  }
 `;
 
 const BackIcon = styled.img`
@@ -65,11 +52,6 @@ const SearchIcon = styled.img`
   top: 3px;
   right: 22px;
   cursor: pointer;
-
-  @media screen and (min-width: 1200px) {
-    width: 22px;
-    height: 22px;
-  }
 `;
 
 export {

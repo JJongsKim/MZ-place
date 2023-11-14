@@ -43,8 +43,7 @@ const BottomSheetWrap = styled(motion.div)`
 
   @media screen and (min-width: 1200px) {
     top: calc(100% - 135px);
-    width: 980px;
-    padding: 80px 25px;
+    padding-bottom: 40px;
   }
 `;
 

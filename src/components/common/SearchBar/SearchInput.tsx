@@ -51,10 +51,6 @@ const InputBase = styled.input`
   &:focus {
     width: 165px;
     cursor: text;
-
-    @media screen and (min-width: 1200px) {
-      width: 250px;
-    }
   }
 `;
 

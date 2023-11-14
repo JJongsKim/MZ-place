@@ -18,15 +18,6 @@ const ChipWrap = styled.div<{
     color: ${props => props.$clicked && `white`};
     ${theme.font.M_12};
   }
-
-  @media screen and (min-width: 1200px) {
-    width: ${props => (props.size === 'small' ? `80px` : `110px`)};
-    height: ${props => (props.size === 'small' ? `33px` : `45px`)};
-
-    p {
-      ${theme.font.M_14};
-    }
-  }
 `;
 
 export { ChipWrap };

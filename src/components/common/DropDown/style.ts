@@ -10,8 +10,8 @@ const DropdownWrap = styled.div`
   background-color: white;
 
   @media screen and (min-width: 1200px) {
-    width: 100px;
-    height: 38px;
+    width: 90px;
+    height: 34px;
   }
 `;
 
@@ -22,10 +22,6 @@ const DropdownTextWrap = styled.p`
   width: 70%;
   height: 100%;
   ${({ theme }) => theme.font.B_14};
-
-  @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_16};
-  }
 `;
 
 const DropdownBtnWrap = styled.div`
@@ -60,9 +56,8 @@ const DropdownListWrap = styled.div`
   background-color: white;
 
   @media screen and (min-width: 1200px) {
-    top: 36px;
-    width: 100px;
-    height: 240px;
+    top: 32px;
+    width: 90px;
   }
 `;
 
@@ -77,11 +72,8 @@ const DropdownList = styled.ul`
   }
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.M_16};
-
     li {
-      padding: 0 10px;
-      margin: 22px 0;
+      padding: 0 8px;
     }
   }
 `;
