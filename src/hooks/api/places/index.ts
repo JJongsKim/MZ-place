@@ -7,6 +7,5 @@ export const useGetPlacesOfFilter = (queryParams: Record<string, string | number
     queryKey: ['getPlacesOfFilter'],
     queryFn: () => api.places.getPlacesOfFilter(queryParams),
   });
-  console.log(data);
   return data;
 };

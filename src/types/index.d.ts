@@ -25,6 +25,12 @@ interface GeolocationAddress {
   y: number;
 }
 
+interface PlacesType {
+  id: number;
+  image_url: string;
+  name: string;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {
