@@ -154,14 +154,10 @@ export const ACTIVE_TASTE = [
   },
   {
     id: 6,
-    name: '트렌디한',
-  },
-  {
-    id: 7,
     name: '감성적인',
   },
   {
-    id: 8,
+    id: 7,
     name: '맛있는',
   },
 ];
