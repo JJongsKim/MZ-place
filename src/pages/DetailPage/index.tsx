@@ -1,4 +1,4 @@
-import { MINI_FILTER } from '@application/constant';
+import { COST_FILTER, MENU } from '@application/constant';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 
@@ -22,19 +22,20 @@ import DropDown from '@components/common/DropDown';
 
 const DetailPage = () => {
   const location = useLocation();
-  const typeArray = MINI_FILTER.find(filter => filter.type === location.state);
   const store = useSelector((state: StoreType) => state);
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state}`} backIcon={true} searchIcon={true} />
-      <FilterList>
-        {typeArray?.filters.map(filter => (
-          <li key={filter}>
-            <Chip value={filter} size="small" />
-          </li>
-        ))}
-      </FilterList>
+      {MENU.some(item => item.name === location.state) && (
+        <FilterList>
+          {COST_FILTER.map(item => (
+            <li key={item.id}>
+              <Chip value={item.type} size="small" />
+            </li>
+          ))}
+        </FilterList>
+      )}
       <DetailPageContentList>
         {location.state === '거리별 추천' ? (
           <MapPageWrap>

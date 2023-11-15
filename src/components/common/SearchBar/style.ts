@@ -4,7 +4,7 @@ const SearchBarWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px 0 14px;
 
   @media screen and (min-width: 1200px) {
     margin: 24px 0 20px;
