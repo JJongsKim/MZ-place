@@ -21,6 +21,8 @@ import MapImg from '../images/map-picture.jpg';
 import MuseumImg from '../images/museum-picture.jpg';
 import PaintImg from '../images/paint-picture.jpg';
 
+export const API = process.env.REACT_APP_SERVER_API;
+
 export const NAV_ARRAY: NavType[] = [
   {
     name: '홈',
