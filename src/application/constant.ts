@@ -21,8 +21,6 @@ import MapImg from '../images/map-picture.jpg';
 import MuseumImg from '../images/museum-picture.jpg';
 import PaintImg from '../images/paint-picture.jpg';
 
-import type { NavType } from '../types';
-
 export const NAV_ARRAY: NavType[] = [
   {
     name: '홈',

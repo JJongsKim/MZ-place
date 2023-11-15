@@ -1,16 +1,16 @@
-export interface NavType {
+interface NavType {
   name: string;
   svg: string;
   path: string;
 }
 
-export interface GeolocationType {
+interface GeolocationType {
   latitude: number | null;
   longitude: number | null;
   isLoading: boolean;
 }
 
-export interface GeolocationAddress {
+interface GeolocationAddress {
   address: {
     address_name: string;
     main_address_no: string;
@@ -26,7 +26,7 @@ export interface GeolocationAddress {
 }
 
 // redux store 타입
-export interface StoreType {
+interface StoreType {
   LocationReducer: {
     currentAddress: string;
   };
