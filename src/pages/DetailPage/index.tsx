@@ -48,8 +48,11 @@ const DetailPage = () => {
           </MapPageWrap>
         ) : location.state === '맞춤 필터' ? (
           <CustomFilterPageWrap>
-            {/* TODO API 연결할 때, 필터가 선택되어 있지 않을 시에 대한 조건 제대로 설정하기*/}
-            <WarningMention text="필터를 선택해주세요!" />
+            {store.PlacesReducer.placesResult === undefined ? (
+              <WarningMention text="필터를 선택해주세요!" />
+            ) : (
+              <ThumbnailList places={store.PlacesReducer.placesResult} />
+            )}
             <BottomSheet>
               <CustomFilter />
             </BottomSheet>
