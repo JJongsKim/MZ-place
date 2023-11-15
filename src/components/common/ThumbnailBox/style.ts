@@ -1,11 +1,15 @@
 import { styled } from 'styled-components';
 
-const ThumbWrap = styled.div`
+const ThumbWrap = styled.div<{
+  $imageSrc?: string;
+}>`
   position: relative;
   width: 150px;
   height: 100px;
   border-radius: 20px;
-  background-color: #c4c4c4;
+  background: ${({ $imageSrc }) => ($imageSrc ? `url(${$imageSrc})` : '#c4c4c4')};
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
 `;
 
@@ -22,6 +26,10 @@ const ThumbLabel = styled.div`
 `;
 
 const LabelText = styled.p`
+  width: 130px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   ${({ theme }) => theme.font.M_12};
 `;
 
