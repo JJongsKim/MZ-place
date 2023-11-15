@@ -12,9 +12,9 @@ import axios from 'axios';
 import { API } from '@application/constant';
 
 interface APIResponse<T = any> {
-  code: number;
-  data: T;
+  result: T;
   message: string;
+  totalItems: number;
 }
 
 interface CustomInstance extends AxiosInstance {

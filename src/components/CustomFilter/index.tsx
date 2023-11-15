@@ -8,18 +8,27 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
+import { useGetPlacesOfFilter } from '@hooks/api/places';
+import { useDispatch } from 'react-redux';
+import { setPlacesResult } from '@store/reducers/PlacesReducer';
 
 const CustomFilter = () => {
+  const dispatch = useDispatch();
   const { toast, handleFloatingToast } = useToast();
 
-  // TODO 임시로 종류별로 따로받는 코드로 작성
-  // TODO 백엔드 나오는대로 변경하기
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
+
+  const { data, refetch } = useGetPlacesOfFilter({
+    price: selectedCost[0],
+    filters: selectedActivity.join(','),
+    page: 1,
+    district: selectedLocation.join(','),
+  });
 
   const handleSelectedFilter = useCallback(
     (arrayName: string, selectedItem: string) => {
@@ -61,7 +70,7 @@ const CustomFilter = () => {
     [selectedActivity],
   );
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // 아무 조건을 걸지 않고 적용하기를 누를 시
@@ -72,7 +81,17 @@ const CustomFilter = () => {
     ) {
       handleFloatingToast();
     }
+    // 조건 걸고 난 후 refetch,
+    else {
+      await refetch();
+    }
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setPlacesResult(data.data.result));
+    }
+  }, [data, dispatch]);
 
   return (
     <CustomFilterForm onSubmit={handleSubmit}>
@@ -121,7 +140,7 @@ const CustomFilter = () => {
         </FilterList>
       </FilterTypeContainer>
       <FilterButtonWrap>
-        <ButtonBase name="적용하기" />
+        <ButtonBase name="적용하기" onClick={() => handleSubmit} />
       </FilterButtonWrap>
       {toast && <Toast>필터를 선택해주세요!</Toast>}
     </CustomFilterForm>
