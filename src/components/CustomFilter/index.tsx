@@ -26,7 +26,6 @@ const CustomFilter = () => {
   const { data, refetch } = useGetPlacesOfFilter({
     price: selectedCost[0],
     filters: selectedActivity.join(','),
-    page: 1,
     district: selectedLocation.join(','),
   });
 
