@@ -120,10 +120,14 @@ export const CUSTOM_MENU = [
   },
 ];
 
-export const MINI_FILTER = [
+export const COST_FILTER = [
   {
-    type: '유료/무료',
-    filters: ['유료', '무료'],
+    id: 'pay',
+    type: '유료',
+  },
+  {
+    id: 'free',
+    type: '무료',
   },
 ];
 

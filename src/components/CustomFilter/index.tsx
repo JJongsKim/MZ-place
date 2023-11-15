@@ -1,4 +1,4 @@
-import { ACTIVE_TASTE, MINI_FILTER, REGION_ARRAY } from '@application/constant';
+import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
 import {
   CustomFilterForm,
   FilterButtonWrap,
@@ -18,7 +18,7 @@ const CustomFilter = () => {
   // TODO 임시로 종류별로 따로받는 코드로 작성
   // TODO 백엔드 나오는대로 변경하기
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<string[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
   const handleSelectedFilter = useCallback(
@@ -32,25 +32,33 @@ const CustomFilter = () => {
           newFilter.clear();
           newFilter.add(selectedItem);
         }
+
         const returnFilter = Array.from(newFilter);
         setSelectedCost(returnFilter);
       }
-      if (arrayName === 'activity') {
-        const newFilter = new Set<string>(selectedActivity);
 
-        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
-        const returnFilter = Array.from(newFilter);
-        setSelectedActivity(returnFilter);
-      }
       if (arrayName === 'location') {
         const newFilter = new Set<string>(selectedLocation);
 
         newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+
         const returnFilter = Array.from(newFilter);
         setSelectedLocation(returnFilter);
       }
     },
-    [selectedCost, selectedActivity, selectedLocation],
+    [selectedCost, selectedLocation],
+  );
+
+  const handleSelectedActivity = useCallback(
+    (activityId: number) => {
+      const newFilter = new Set<number>(selectedActivity);
+
+      newFilter.has(activityId) ? newFilter.delete(activityId) : newFilter.add(activityId);
+
+      const returnFilter = Array.from(newFilter);
+      setSelectedActivity(returnFilter);
+    },
+    [selectedActivity],
   );
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -71,9 +79,9 @@ const CustomFilter = () => {
       <FilterTypeContainer>
         <FilterTitle>유료/무료 여부</FilterTitle>
         <FilterList>
-          {MINI_FILTER[0].filters.map(item => (
-            <li key={item} onClick={() => handleSelectedFilter('cost', item)}>
-              <Chip size="small" value={item} isClicked={selectedCost?.includes(item)} />
+          {COST_FILTER.map(item => (
+            <li key={item.id} onClick={() => handleSelectedFilter('cost', item.id)}>
+              <Chip size="small" value={item.type} isClicked={selectedCost?.includes(item.id)} />
             </li>
           ))}
         </FilterList>
@@ -82,11 +90,11 @@ const CustomFilter = () => {
         <FilterTitle>활동 취향</FilterTitle>
         <FilterList>
           {ACTIVE_TASTE.map(item => (
-            <li key={item.id} onClick={() => handleSelectedFilter('activity', item.name)}>
+            <li key={item.id} onClick={() => handleSelectedActivity(item.id)}>
               <Chip
                 size="small"
                 value={item.name}
-                isClicked={selectedActivity?.includes(item.name)}
+                isClicked={selectedActivity?.includes(item.id)}
               />
             </li>
           ))}
