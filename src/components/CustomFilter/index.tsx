@@ -26,7 +26,12 @@ const CustomFilter = () => {
       if (arrayName === 'cost') {
         const newFilter = new Set<string>(selectedCost);
 
-        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+        if (newFilter.has(selectedItem)) {
+          newFilter.delete(selectedItem);
+        } else {
+          newFilter.clear();
+          newFilter.add(selectedItem);
+        }
         const returnFilter = Array.from(newFilter);
         setSelectedCost(returnFilter);
       }
