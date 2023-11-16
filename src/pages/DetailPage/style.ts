@@ -9,23 +9,16 @@ const DetailPageWrap = styled.div`
 const FilterList = styled.ul`
   display: flex;
   width: 375px;
-  padding: 0 14px;
+  padding: 0 30px;
 
   li {
     margin-right: 6px;
   }
-
-  @media screen and (min-width: 1200px) {
-    width: 850px;
-
-    li {
-      margin-right: 20px;
-    }
-  }
 `;
 
 const DetailPageContentList = styled.section`
-  margin-top: 10px;
+  margin: 10px 0 55px;
+  height: 100vh;
 
   @media screen and (min-width: 1200px) {
     margin-top: 12px;

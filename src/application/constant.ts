@@ -21,7 +21,7 @@ import MapImg from '../images/map-picture.jpg';
 import MuseumImg from '../images/museum-picture.jpg';
 import PaintImg from '../images/paint-picture.jpg';
 
-import type { NavType } from '../types';
+export const API = process.env.REACT_APP_SERVER_API;
 
 export const NAV_ARRAY: NavType[] = [
   {
@@ -111,7 +111,7 @@ export const CUSTOM_MENU = [
   {
     name: '찜 기반 추천',
     svg: LikeMenu,
-    path: 'like',
+    path: 'like-recommend',
   },
   {
     name: '맞춤 필터',
@@ -120,10 +120,14 @@ export const CUSTOM_MENU = [
   },
 ];
 
-export const MINI_FILTER = [
+export const COST_FILTER = [
   {
-    type: '유료/무료',
-    filters: ['유료', '무료'],
+    id: 'pay',
+    type: '유료',
+  },
+  {
+    id: 'free',
+    type: '무료',
   },
 ];
 
@@ -150,14 +154,10 @@ export const ACTIVE_TASTE = [
   },
   {
     id: 6,
-    name: '트렌디한',
-  },
-  {
-    id: 7,
     name: '감성적인',
   },
   {
-    id: 8,
+    id: 7,
     name: '맛있는',
   },
 ];

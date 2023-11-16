@@ -19,10 +19,7 @@ const SearchPage = () => {
       <SearchBar name="실외활동 탐색" searchIcon={true} />
       <MenuListWrap>
         {MENU.map(menu => (
-          <MenuWrap
-            key={menu.id}
-            onClick={() => navigate(`${menu.path}`, { state: `${menu.name}` })}
-          >
+          <MenuWrap key={menu.id} onClick={() => navigate(`${menu.path}`, { state: menu })}>
             <MenuIcon src={menu.svg} />
             <MenuName>{menu.name}</MenuName>
           </MenuWrap>
@@ -31,10 +28,7 @@ const SearchPage = () => {
       <MenuDivideLine />
       <MenuListWrap>
         {CUSTOM_MENU.map(custom => (
-          <MenuWrap
-            key={custom.name}
-            onClick={() => navigate(`${custom.path}`, { state: `${custom.name}` })}
-          >
+          <MenuWrap key={custom.name} onClick={() => navigate(`${custom.path}`, { state: custom })}>
             <MenuIcon src={custom.svg} />
             <MenuName>{custom.name}</MenuName>
           </MenuWrap>

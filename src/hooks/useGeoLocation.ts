@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import type { GeolocationType } from '../types';
 
 export default function useGeoLocation(options: { timeout: number }) {
   const [location, setLocation] = useState<GeolocationType>({

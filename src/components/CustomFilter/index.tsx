@@ -1,4 +1,4 @@
-import { ACTIVE_TASTE, MINI_FILTER, REGION_ARRAY } from '@application/constant';
+import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
 import {
   CustomFilterForm,
   FilterButtonWrap,
@@ -8,47 +8,68 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
+import { useGetPlacesOfFilter } from '@hooks/api/places';
+import { useDispatch } from 'react-redux';
+import { setPlacesResult } from '@store/reducers/PlacesReducer';
 
 const CustomFilter = () => {
+  const dispatch = useDispatch();
   const { toast, handleFloatingToast } = useToast();
 
-  // TODO 임시로 종류별로 따로받는 코드로 작성
-  // TODO 백엔드 나오는대로 변경하기
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<string[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
+
+  const { data, refetch } = useGetPlacesOfFilter({
+    price: selectedCost[0],
+    filters: selectedActivity.join(','),
+    districts: selectedLocation.join(','),
+  });
 
   const handleSelectedFilter = useCallback(
     (arrayName: string, selectedItem: string) => {
       if (arrayName === 'cost') {
         const newFilter = new Set<string>(selectedCost);
 
-        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+        if (newFilter.has(selectedItem)) {
+          newFilter.delete(selectedItem);
+        } else {
+          newFilter.clear();
+          newFilter.add(selectedItem);
+        }
+
         const returnFilter = Array.from(newFilter);
         setSelectedCost(returnFilter);
       }
-      if (arrayName === 'activity') {
-        const newFilter = new Set<string>(selectedActivity);
 
-        newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
-        const returnFilter = Array.from(newFilter);
-        setSelectedActivity(returnFilter);
-      }
       if (arrayName === 'location') {
         const newFilter = new Set<string>(selectedLocation);
 
         newFilter.has(selectedItem) ? newFilter.delete(selectedItem) : newFilter.add(selectedItem);
+
         const returnFilter = Array.from(newFilter);
         setSelectedLocation(returnFilter);
       }
     },
-    [selectedCost, selectedActivity, selectedLocation],
+    [selectedCost, selectedLocation],
   );
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSelectedActivity = useCallback(
+    (activityId: number) => {
+      const newFilter = new Set<number>(selectedActivity);
+
+      newFilter.has(activityId) ? newFilter.delete(activityId) : newFilter.add(activityId);
+
+      const returnFilter = Array.from(newFilter);
+      setSelectedActivity(returnFilter);
+    },
+    [selectedActivity],
+  );
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // 아무 조건을 걸지 않고 적용하기를 누를 시
@@ -59,16 +80,26 @@ const CustomFilter = () => {
     ) {
       handleFloatingToast();
     }
+    // 조건 걸고 난 후 refetch,
+    else {
+      await refetch();
+    }
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setPlacesResult(data.data.result));
+    }
+  }, [data, dispatch]);
 
   return (
     <CustomFilterForm onSubmit={handleSubmit}>
       <FilterTypeContainer>
         <FilterTitle>유료/무료 여부</FilterTitle>
         <FilterList>
-          {MINI_FILTER[0].filters.map(item => (
-            <li key={item} onClick={() => handleSelectedFilter('cost', item)}>
-              <Chip size="small" value={item} isClicked={selectedCost?.includes(item)} />
+          {COST_FILTER.map(item => (
+            <li key={item.id} onClick={() => handleSelectedFilter('cost', item.id)}>
+              <Chip size="small" value={item.type} isClicked={selectedCost?.includes(item.id)} />
             </li>
           ))}
         </FilterList>
@@ -77,11 +108,11 @@ const CustomFilter = () => {
         <FilterTitle>활동 취향</FilterTitle>
         <FilterList>
           {ACTIVE_TASTE.map(item => (
-            <li key={item.id} onClick={() => handleSelectedFilter('activity', item.name)}>
+            <li key={item.id} onClick={() => handleSelectedActivity(item.id)}>
               <Chip
                 size="small"
                 value={item.name}
-                isClicked={selectedActivity?.includes(item.name)}
+                isClicked={selectedActivity?.includes(item.id)}
               />
             </li>
           ))}
@@ -108,7 +139,7 @@ const CustomFilter = () => {
         </FilterList>
       </FilterTypeContainer>
       <FilterButtonWrap>
-        <ButtonBase name="적용하기" />
+        <ButtonBase name="적용하기" onClick={() => handleSubmit} />
       </FilterButtonWrap>
       {toast && <Toast>필터를 선택해주세요!</Toast>}
     </CustomFilterForm>

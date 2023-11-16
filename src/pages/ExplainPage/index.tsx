@@ -24,7 +24,6 @@ import { MOCKUP2 } from '@application/mock';
 import useToast from '@hooks/useToast';
 import SearchBar from '@components/common/SearchBar';
 import Toast from '@components/common/Toast';
-import type { GeolocationAddress } from '@/types/index';
 
 const ExplainPage = () => {
   const location = useLocation();

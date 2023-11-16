@@ -4,19 +4,20 @@ import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 import { useNavigate } from 'react-router-dom';
 
 interface ThumbnailProps {
+  id: number;
   label: string;
   like: boolean;
-  id: number;
+  imageSrc?: string;
 }
 
-const ThumbnailBox = ({ label, like, id }: ThumbnailProps) => {
+const ThumbnailBox = ({ label, like, id, imageSrc }: ThumbnailProps) => {
   const naviagate = useNavigate();
   const handleGoExplainPage = (title: string, id: number) => {
     naviagate(`/content/${id}`, { state: `${title}` });
   };
 
   return (
-    <ThumbWrap onClick={() => handleGoExplainPage(label, id)}>
+    <ThumbWrap onClick={() => handleGoExplainPage(label, id)} $imageSrc={imageSrc}>
       <ThumbLabel>
         <LabelText>{label}</LabelText>
       </ThumbLabel>
