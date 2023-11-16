@@ -7,23 +7,20 @@ import WarningMention from '@components/common/warning';
 import { DetailPageWrap } from '../style';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
-
-// interface CustomFilterPlacesType {
-//   places: PlacesType[];
-// }
+import { useSelector } from 'react-redux';
 
 const CustomFilterPage = () => {
   const location = useLocation();
-  const mock = [1, 2, 3];
+  const places = useSelector((state: StoreType) => state.PlacesReducer.placesResult);
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
       <CustomFilterPageWrap>
-        {mock === undefined ? (
+        {places === undefined ? (
           <WarningMention text="필터를 선택해주세요!" />
         ) : (
-          <ThumbnailList places={[]} />
+          <ThumbnailList places={places} />
         )}
         <BottomSheet>
           <CustomFilter />

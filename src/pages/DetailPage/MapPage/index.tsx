@@ -7,18 +7,20 @@ import ThumbnailList from '@components/common/ThumbnailList';
 import { DetailPageWrap } from '../style';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MapPage = () => {
   const location = useLocation();
+  const currentAddress = useSelector((state: StoreType) => state.LocationReducer.currentAddress);
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
       <MapPageWrap>
         <MapPageDropdownWrap>
-          <DropDown currentAddress={'현 위치'} />
+          <DropDown currentAddress={currentAddress} />
         </MapPageDropdownWrap>
-        <Map currentAddress={'현 위치'} />
+        <Map currentAddress={currentAddress} />
         <BottomSheet>
           <ThumbnailList />
         </BottomSheet>
