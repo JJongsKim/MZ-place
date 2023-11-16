@@ -14,11 +14,11 @@ export const useGetPlacesOfFilter = (queryParams?: Record<string, string | numbe
 };
 
 export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, string>) => {
-  const { data, ...rest } = useQuery({
+  const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getPlacesOfCategory'],
     queryFn: () => api.places.getPlacesOfCategory(id, 1, queryParams),
     enabled: false,
   });
 
-  return { data, ...rest };
+  return { data, isLoading, ...rest };
 };

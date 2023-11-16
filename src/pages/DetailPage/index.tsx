@@ -19,6 +19,7 @@ import WarningMention from '@components/common/warning';
 import { useSelector } from 'react-redux';
 import DropDown from '@components/common/DropDown';
 import { useCallback, useState } from 'react';
+import { useGetPlacesOfCategory } from '@hooks/api/places';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -42,10 +43,13 @@ const DetailPage = () => {
     [selectedCost],
   );
 
+  const { data, isLoading } = useGetPlacesOfCategory(location.state.id, { price: selectedCost[0] });
+  const places = data?.data.result as PlacesType[];
+
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state}`} backIcon={true} searchIcon={true} />
-      {MENU.some(item => item.name === location.state) && (
+      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      {MENU.some(item => item.name === location.state.name) && (
         <FilterList>
           {COST_FILTER.map(item => (
             <li key={item.id} onClick={() => handleSelectedCost(item.id)}>
@@ -55,7 +59,7 @@ const DetailPage = () => {
         </FilterList>
       )}
       <DetailPageContentList>
-        {location.state === '거리별 추천' ? (
+        {location.state.name === '거리별 추천' ? (
           <MapPageWrap>
             <MapPageDropdownWrap>
               <DropDown currentAddress={store.LocationReducer.currentAddress} />
@@ -65,7 +69,7 @@ const DetailPage = () => {
               <ThumbnailList />
             </BottomSheet>
           </MapPageWrap>
-        ) : location.state === '맞춤 필터' ? (
+        ) : location.state.name === '맞춤 필터' ? (
           <CustomFilterPageWrap>
             {store.PlacesReducer.placesResult === undefined ? (
               <WarningMention text="필터를 선택해주세요!" />
@@ -77,7 +81,7 @@ const DetailPage = () => {
             </BottomSheet>
           </CustomFilterPageWrap>
         ) : (
-          <ThumbnailList places={store.CategoryReducer.categoryPlaces} />
+          <ThumbnailList places={places} isLoading={isLoading} />
         )}
       </DetailPageContentList>
     </DetailPageWrap>
