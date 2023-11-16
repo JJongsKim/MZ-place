@@ -39,4 +39,7 @@ interface StoreType {
   PlacesReducer: {
     placesResult: PlacesType[];
   };
+  CategoryReducer: {
+    categoryPlaces: PlacesType[];
+  };
 }

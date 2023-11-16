@@ -18,10 +18,29 @@ import CustomFilter from '@components/CustomFilter';
 import WarningMention from '@components/common/warning';
 import { useSelector } from 'react-redux';
 import DropDown from '@components/common/DropDown';
+import { useCallback, useState } from 'react';
 
 const DetailPage = () => {
   const location = useLocation();
   const store = useSelector((state: StoreType) => state);
+
+  const [selectedCost, setSelectedCost] = useState<string[]>([]);
+  const handleSelectedCost = useCallback(
+    (selectedItem: string) => {
+      const newFilter = new Set<string>(selectedCost);
+
+      if (newFilter.has(selectedItem)) {
+        newFilter.delete(selectedItem);
+      } else {
+        newFilter.clear();
+        newFilter.add(selectedItem);
+      }
+
+      const returnFilter = Array.from(newFilter);
+      setSelectedCost(returnFilter);
+    },
+    [selectedCost],
+  );
 
   return (
     <DetailPageWrap>
@@ -29,8 +48,8 @@ const DetailPage = () => {
       {MENU.some(item => item.name === location.state) && (
         <FilterList>
           {COST_FILTER.map(item => (
-            <li key={item.id}>
-              <Chip value={item.type} size="small" />
+            <li key={item.id} onClick={() => handleSelectedCost(item.id)}>
+              <Chip value={item.type} size="small" isClicked={selectedCost?.includes(item.id)} />
             </li>
           ))}
         </FilterList>
@@ -58,7 +77,7 @@ const DetailPage = () => {
             </BottomSheet>
           </CustomFilterPageWrap>
         ) : (
-          <ThumbnailList />
+          <ThumbnailList places={store.CategoryReducer.categoryPlaces} />
         )}
       </DetailPageContentList>
     </DetailPageWrap>
