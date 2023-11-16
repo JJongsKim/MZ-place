@@ -1,20 +1,15 @@
 import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 
-import { COST_FILTER, MENU } from '@application/constant';
 import SearchBar from '@components/common/SearchBar';
-
-import { DetailPageContentList, DetailPageWrap, FilterList } from './style';
-import Chip from '@components/common/Chip';
+import { DetailPageContentList, DetailPageWrap, FilterList } from '../style';
+import { COST_FILTER, MENU } from '@application/constant';
 import ThumbnailList from '@components/common/ThumbnailList';
 import { useGetPlacesOfCategory } from '@hooks/api/places';
-import CustomFilterPage from './CustomFilterPage';
-import MapPage from './MapPage';
+import Chip from '@components/common/Chip';
+import { useLocation } from 'react-router-dom';
 
-const DetailPage = () => {
+const CategoryPage = () => {
   const location = useLocation();
-  const store = useSelector((state: StoreType) => state);
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const handleSelectedCost = useCallback(
@@ -50,16 +45,10 @@ const DetailPage = () => {
         </FilterList>
       )}
       <DetailPageContentList>
-        {location.state.name === '거리별 추천' ? (
-          <MapPage address={store.LocationReducer.currentAddress} />
-        ) : location.state.name === '맞춤 필터' ? (
-          <CustomFilterPage places={store.PlacesReducer.placesResult} />
-        ) : (
-          <ThumbnailList places={places} isLoading={isLoading} />
-        )}
+        <ThumbnailList places={places} isLoading={isLoading} />
       </DetailPageContentList>
     </DetailPageWrap>
   );
 };
 
-export default DetailPage;
+export default CategoryPage;

@@ -4,22 +4,26 @@ import Map from '@components/Map';
 import BottomSheet from '@components/common/BottomSheet';
 import DropDown from '@components/common/DropDown';
 import ThumbnailList from '@components/common/ThumbnailList';
+import { DetailPageWrap } from '../style';
+import SearchBar from '@components/common/SearchBar';
+import { useLocation } from 'react-router-dom';
 
-interface MapPageProps {
-  address: string;
-}
+const MapPage = () => {
+  const location = useLocation();
 
-const MapPage = ({ address }: MapPageProps) => {
   return (
-    <MapPageWrap>
-      <MapPageDropdownWrap>
-        <DropDown currentAddress={address} />
-      </MapPageDropdownWrap>
-      <Map currentAddress={address} />
-      <BottomSheet>
-        <ThumbnailList />
-      </BottomSheet>
-    </MapPageWrap>
+    <DetailPageWrap>
+      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <MapPageWrap>
+        <MapPageDropdownWrap>
+          <DropDown currentAddress={'현 위치'} />
+        </MapPageDropdownWrap>
+        <Map currentAddress={'현 위치'} />
+        <BottomSheet>
+          <ThumbnailList />
+        </BottomSheet>
+      </MapPageWrap>
+    </DetailPageWrap>
   );
 };
 

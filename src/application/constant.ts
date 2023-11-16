@@ -111,7 +111,7 @@ export const CUSTOM_MENU = [
   {
     name: '찜 기반 추천',
     svg: LikeMenu,
-    path: 'like',
+    path: 'like-recommend',
   },
   {
     name: '맞춤 필터',
