@@ -1,25 +1,16 @@
-import { COST_FILTER, MENU } from '@application/constant';
-import SearchBar from '@components/common/SearchBar';
+import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import {
-  CustomFilterPageWrap,
-  DetailPageContentList,
-  DetailPageWrap,
-  FilterList,
-  MapPageDropdownWrap,
-  MapPageWrap,
-} from './style';
+import { COST_FILTER, MENU } from '@application/constant';
+import SearchBar from '@components/common/SearchBar';
+
+import { DetailPageContentList, DetailPageWrap, FilterList } from './style';
 import Chip from '@components/common/Chip';
 import ThumbnailList from '@components/common/ThumbnailList';
-import BottomSheet from '@components/common/BottomSheet';
-import Map from '@components/Map';
-import CustomFilter from '@components/CustomFilter';
-import WarningMention from '@components/common/warning';
-import { useSelector } from 'react-redux';
-import DropDown from '@components/common/DropDown';
-import { useCallback, useState } from 'react';
 import { useGetPlacesOfCategory } from '@hooks/api/places';
+import CustomFilterPage from './CustomFilterPage';
+import MapPage from './MapPage';
 
 const DetailPage = () => {
   const location = useLocation();
@@ -60,26 +51,9 @@ const DetailPage = () => {
       )}
       <DetailPageContentList>
         {location.state.name === '거리별 추천' ? (
-          <MapPageWrap>
-            <MapPageDropdownWrap>
-              <DropDown currentAddress={store.LocationReducer.currentAddress} />
-            </MapPageDropdownWrap>
-            <Map currentAddress={store.LocationReducer.currentAddress} />
-            <BottomSheet>
-              <ThumbnailList />
-            </BottomSheet>
-          </MapPageWrap>
+          <MapPage address={store.LocationReducer.currentAddress} />
         ) : location.state.name === '맞춤 필터' ? (
-          <CustomFilterPageWrap>
-            {store.PlacesReducer.placesResult === undefined ? (
-              <WarningMention text="필터를 선택해주세요!" />
-            ) : (
-              <ThumbnailList places={store.PlacesReducer.placesResult} />
-            )}
-            <BottomSheet>
-              <CustomFilter />
-            </BottomSheet>
-          </CustomFilterPageWrap>
+          <CustomFilterPage places={store.PlacesReducer.placesResult} />
         ) : (
           <ThumbnailList places={places} isLoading={isLoading} />
         )}
