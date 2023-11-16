@@ -33,7 +33,7 @@ function App() {
               <Route path="/search/like-recommend" element={<LikeRecommendPage />} />
               <Route path="/search/custom" element={<CustomFilterPage />} />
               {/* TODO 다시 생각해보기. 게시글 라우터를 이렇게 가져가도 맞는건가? */}
-              <Route path="/content/:id" element={<ExplainPage />} />
+              <Route path="/place/:id" element={<ExplainPage />} />
               <Route
                 path="/like"
                 element={<LikePage key={null} type={undefined} props={undefined} />}

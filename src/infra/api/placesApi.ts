@@ -13,6 +13,11 @@ class PlacesApi {
   getPlacesOfCategory = (id: number, page: number, queryParams?: Record<string, string>) => {
     return this.api.get(`/places/category${id}`, { params: { page: page, ...queryParams } });
   };
+
+  // - id별 장소 상세조회 API
+  getInfoByPlaceId = (placeId: number) => {
+    return this.api.get(`/places/place${placeId}`);
+  };
 }
 
 export default new PlacesApi(instance);

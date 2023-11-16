@@ -24,10 +24,14 @@ import { MOCKUP2 } from '@application/mock';
 import useToast from '@hooks/useToast';
 import SearchBar from '@components/common/SearchBar';
 import Toast from '@components/common/Toast';
+import { useGetInfoByPlaceId } from '@hooks/api/places';
 
 const ExplainPage = () => {
   const location = useLocation();
   const { toast, handleFloatingToast } = useToast();
+  const placeInfo = useGetInfoByPlaceId(Number(location.pathname.match(/\/place\/(\d+)/)?.[1]));
+
+  console.log(placeInfo);
 
   const [findAddress, isFindAddress] = useState(false);
   const [address, setCurrentAddress] = useState('');
@@ -76,7 +80,7 @@ const ExplainPage = () => {
 
   return (
     <ExplainPageWrap>
-      <SearchBar name={location.state} backIcon={true} />
+      <SearchBar name={location.state} backIcon={true} searchIcon={false} />
       <ThumbnailBoxWrap>
         <ThumbnailBox src={test} alt="장소썸네일" />
         <LikeIcon>
