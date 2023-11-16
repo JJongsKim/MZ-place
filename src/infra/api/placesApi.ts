@@ -8,6 +8,11 @@ class PlacesApi {
   getPlacesOfFilter = (queryParams: Record<string, string | number>, page: number) => {
     return this.api.get('/places/filtering', { params: { ...queryParams, page: page } });
   };
+
+  // - 카테고리 API
+  getPlacesOfCategory = (id: number, page: number, queryParams?: Record<string, string>) => {
+    return this.api.get(`/places/category${id}`, { params: { page: page, ...queryParams } });
+  };
 }
 
 export default new PlacesApi(instance);

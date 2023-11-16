@@ -12,3 +12,13 @@ export const useGetPlacesOfFilter = (queryParams?: Record<string, string | numbe
   });
   return { data, ...rest };
 };
+
+export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, string>) => {
+  const { data, ...rest } = useQuery({
+    queryKey: ['getPlacesOfCategory'],
+    queryFn: () => api.places.getPlacesOfCategory(id, 1, queryParams),
+    enabled: false,
+  });
+
+  return { data, ...rest };
+};
