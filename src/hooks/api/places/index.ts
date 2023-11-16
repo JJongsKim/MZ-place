@@ -17,8 +17,7 @@ export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, 
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getPlacesOfCategory'],
     queryFn: () => api.places.getPlacesOfCategory(id, 1, queryParams),
-    // enabled: false,
-    retry: 0,
+    retry: 2,
   });
 
   return { data, isLoading, ...rest };
