@@ -30,6 +30,9 @@ const SearchInput = ({ searchIcon }: SearchInputProps) => {
 };
 
 const SearchInputWrap = styled.form`
+  position: absolute;
+  right: 0;
+
   display: flex;
   align-items: center;
   margin-right: 15px;

@@ -1,7 +1,6 @@
 import Pin from '@assets/pin.svg';
 import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
-import InfoCost from '@assets/info-cost.svg';
 
 export const MOCKUP1 = [
   {
@@ -25,7 +24,6 @@ export const MOCKUP1 = [
       },
       {
         type: 'cost',
-        svg: InfoCost,
         content: '1,000 원',
       },
     ],
@@ -81,28 +79,5 @@ export const MOCKUP1 = [
     title: '목업데이터9',
     like: true,
     id: 9,
-  },
-];
-
-export const MOCKUP2 = [
-  {
-    type: 'location',
-    svg: Pin,
-    content: '서울특별시 중구 청계천로 100',
-  },
-  {
-    type: 'phone',
-    svg: Phone,
-    content: '010-1111-1111',
-  },
-  {
-    type: 'time',
-    svg: Time,
-    content: '오후 3시',
-  },
-  {
-    type: 'cost',
-    svg: InfoCost,
-    content: '1,000 원',
   },
 ];

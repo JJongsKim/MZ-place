@@ -22,3 +22,13 @@ export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, 
 
   return { data, isLoading, ...rest };
 };
+
+export const useGetInfoByPlaceId = (placeId: number) => {
+  const { data, isLoading, ...rest } = useQuery({
+    queryKey: ['getInfoByPlaceId'],
+    queryFn: () => api.places.getInfoByPlaceId(placeId),
+    retry: 2,
+  });
+
+  return { data, isLoading, ...rest };
+};

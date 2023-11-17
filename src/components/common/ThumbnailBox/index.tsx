@@ -1,7 +1,9 @@
 import { LabelText, LikeIcon, ThumbLabel, ThumbWrap } from './style';
-import { ReactComponent as LikeEmpty } from '@assets/like-empty.svg';
+import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
 import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 import { useNavigate } from 'react-router-dom';
+
+import defaultImage from '../../../images/default.png';
 
 interface ThumbnailProps {
   id: number;
@@ -13,11 +15,15 @@ interface ThumbnailProps {
 const ThumbnailBox = ({ label, like, id, imageSrc }: ThumbnailProps) => {
   const naviagate = useNavigate();
   const handleGoExplainPage = (title: string, id: number) => {
-    naviagate(`/content/${id}`, { state: `${title}` });
+    naviagate(`/place/${id}`, { state: title });
   };
 
   return (
-    <ThumbWrap onClick={() => handleGoExplainPage(label, id)} $imageSrc={imageSrc}>
+    <ThumbWrap
+      onClick={() => handleGoExplainPage(label, id)}
+      $imageSrc={imageSrc}
+      $defaultImageSrc={defaultImage}
+    >
       <ThumbLabel>
         <LabelText>{label}</LabelText>
       </ThumbLabel>

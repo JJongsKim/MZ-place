@@ -30,7 +30,7 @@ const SearchBar = ({ name, backIcon, searchIcon }: SearchBarProps) => {
           {backIcon && <BackIcon src={back} alt="뒤로가기" onClick={handleGoBack} />}
           <TitleText>{name}</TitleText>
         </SearchBarTitleWrap>
-        <SearchInput searchIcon={searchIcon} />
+        {searchIcon ? <SearchInput searchIcon={searchIcon} /> : null}
       </SearchBarItemWrap>
       <SearchBarLine />
     </SearchBarWrap>

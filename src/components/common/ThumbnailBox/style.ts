@@ -2,12 +2,14 @@ import { styled } from 'styled-components';
 
 const ThumbWrap = styled.div<{
   $imageSrc?: string;
+  $defaultImageSrc: string;
 }>`
   position: relative;
   width: 150px;
   height: 100px;
   border-radius: 20px;
-  background: ${({ $imageSrc }) => ($imageSrc ? `url(${$imageSrc})` : '#c4c4c4')};
+  background: ${({ $imageSrc, $defaultImageSrc }) =>
+    $imageSrc ? `url(${$imageSrc})` : `url(${$defaultImageSrc})`};
   background-size: cover;
   background-position: center;
   cursor: pointer;
