@@ -17,7 +17,9 @@ import Pin from '@assets/pin.svg';
 import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
+import LinkIcon from '@assets/link.svg';
 import Toast from '@components/common/Toast';
+import { Link } from 'react-router-dom';
 
 interface DefaultExplainProps {
   placeInfo: PlaceType;
@@ -89,7 +91,7 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
         {findAddress && <MapWrap id="map" />}
       </li>
       {/* - 전화번호 - */}
-      {placeInfo.phone_number ? (
+      {placeInfo.phone_number && (
         <li>
           <InfoTextWrap>
             <InfoIconWrap>
@@ -103,9 +105,9 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
             </CopyToClipboard>
           </CopyButtonWrap>
         </li>
-      ) : null}
+      )}
       {/* - 운영시간 - */}
-      {placeInfo.work_time ? (
+      {placeInfo.work_time && (
         <li>
           <InfoTextWrap>
             <InfoIconWrap>
@@ -114,7 +116,7 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
             <InfoText>{placeInfo.work_time}</InfoText>
           </InfoTextWrap>
         </li>
-      ) : null}
+      )}
       {/* - 가격 | 이외 정보 - */}
       <li>
         <InfoTextWrap>
@@ -124,6 +126,21 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
           <InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</InfoText>
         </InfoTextWrap>
       </li>
+      {/* - 홈페이지 링크 - */}
+      {placeInfo.page_url && (
+        <li>
+          <InfoTextWrap>
+            <InfoIconWrap>
+              <InfoIcon src={LinkIcon} />
+            </InfoIconWrap>
+            <InfoText>
+              <Link to={placeInfo.page_url}>
+                <u>홈페이지 주소</u>
+              </Link>
+            </InfoText>
+          </InfoTextWrap>
+        </li>
+      )}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </InfoList>
   );

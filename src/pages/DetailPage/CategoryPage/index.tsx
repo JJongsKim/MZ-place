@@ -7,6 +7,7 @@ import ThumbnailList from '@components/common/ThumbnailList';
 import { useGetPlacesOfCategory } from '@hooks/api/places';
 import Chip from '@components/common/Chip';
 import { useLocation } from 'react-router-dom';
+import Loading from '@components/common/Loading';
 
 const CategoryPage = () => {
   const location = useLocation();
@@ -45,7 +46,7 @@ const CategoryPage = () => {
         </FilterList>
       )}
       <DetailPageContentList>
-        <ThumbnailList places={places} isLoading={isLoading} />
+        {isLoading ? <Loading /> : <ThumbnailList places={places} />}
       </DetailPageContentList>
     </DetailPageWrap>
   );

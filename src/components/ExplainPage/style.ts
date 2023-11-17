@@ -8,14 +8,8 @@ const InfoList = styled.ul`
   margin-bottom: 80px;
 
   li {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     line-height: 25px;
-  }
-  li:nth-child(1) {
-    margin-bottom: 40px;
-  }
-  li:nth-child(2) {
-    margin-bottom: 40px;
   }
 `;
 
