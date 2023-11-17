@@ -30,5 +30,5 @@ export const useGetInfoByPlaceId = (placeId: number) => {
     retry: 2,
   });
 
-  return { isLoading, ...rest, place: data?.data.result };
+  return { data, isLoading, ...rest };
 };

@@ -21,14 +21,16 @@ import InfoEtc from '@assets/info-etc.svg';
 import Toast from '@components/common/Toast';
 import useReverseGeoCoding from '@hooks/useReverseGeoCoding';
 
-const DefaultExplain = (props: { placeInfo: PlaceType }) => {
-  const { id, latitude, longitude, description } = props.placeInfo;
+interface DefaultExplainProps {
+  placeInfo: PlaceType;
+  address: string;
+}
+
+const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
+  const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
-  const placeAddress = useReverseGeoCoding({ latitude, longitude, placeId: id });
 
   const [findAddress, isFindAddress] = useState(false);
-
-  console.log(id, placeAddress);
 
   useEffect(() => {
     if (findAddress) {
@@ -37,7 +39,7 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
         let map;
 
         const geocoder = new window.kakao.maps.services.Geocoder();
-        geocoder.addressSearch(placeAddress, function (res: GeolocationAddress[], status: boolean) {
+        geocoder.addressSearch(address, function (res: GeolocationAddress[], status: boolean) {
           if (status === window.kakao.maps.services.Status.OK) {
             const coords = new window.kakao.maps.LatLng(res[0].y, res[0].x);
             const mapOption = {
@@ -86,10 +88,10 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
           <InfoIconWrap>
             <InfoIcon src={Pin} />
           </InfoIconWrap>
-          <InfoText>{placeAddress}</InfoText>
+          <InfoText>{address}</InfoText>
         </InfoTextWrap>
         <CopyButtonWrap>
-          <CopyToClipboard text={placeAddress} onCopy={handleFloatingToast}>
+          <CopyToClipboard text={address} onCopy={handleFloatingToast}>
             <CopyButton>복사하기</CopyButton>
           </CopyToClipboard>
           <CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
@@ -99,22 +101,33 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
         {findAddress && <MapWrap id="map" />}
       </li>
       {/* - 전화번호 - */}
-      {props.placeInfo.phone_number ? (
+      {placeInfo.phone_number ? (
         <li>
           <InfoTextWrap>
             <InfoIconWrap>
               <InfoIcon src={Phone} />
             </InfoIconWrap>
-            <InfoText>{props.placeInfo.phone_number}</InfoText>
+            <InfoText>{placeInfo.phone_number}</InfoText>
           </InfoTextWrap>
           <CopyButtonWrap>
-            <CopyToClipboard text={props.placeInfo.phone_number} onCopy={handleFloatingToast}>
+            <CopyToClipboard text={placeInfo.phone_number} onCopy={handleFloatingToast}>
               <CopyButton>복사하기</CopyButton>
             </CopyToClipboard>
           </CopyButtonWrap>
         </li>
       ) : null}
-      {/* 가격 */}
+      {/* - 운영시간 - */}
+      {placeInfo.work_time ? (
+        <li>
+          <InfoTextWrap>
+            <InfoIconWrap>
+              <InfoIcon src={Time} />
+            </InfoIconWrap>
+            <InfoText>{placeInfo.work_time}</InfoText>
+          </InfoTextWrap>
+        </li>
+      ) : null}
+      {/* - 가격 | 이외 정보 - */}
       <li>
         <InfoTextWrap>
           <InfoIconWrap>
@@ -123,17 +136,6 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
           <InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</InfoText>
         </InfoTextWrap>
       </li>
-      {/* - 운영시간 - */}
-      {props.placeInfo.work_time ? (
-        <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={Time} />
-            </InfoIconWrap>
-            <InfoText>{props.placeInfo.work_time}</InfoText>
-          </InfoTextWrap>
-        </li>
-      ) : null}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </InfoList>
   );
