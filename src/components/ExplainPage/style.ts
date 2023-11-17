@@ -9,6 +9,7 @@ const InfoList = styled.ul`
 
   li {
     margin-bottom: 60px;
+    line-height: 25px;
   }
   li:nth-child(1) {
     margin-bottom: 40px;
@@ -39,10 +40,10 @@ const InfoIcon = styled.img`
 `;
 
 const InfoText = styled.p`
-  ${({ theme }) => theme.font.M_14}
+  ${({ theme }) => theme.font.M_13}
 
   @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.M_16}
+    ${({ theme }) => theme.font.M_14}
   }
 `;
 

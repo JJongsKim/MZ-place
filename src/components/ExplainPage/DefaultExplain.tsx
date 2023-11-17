@@ -8,6 +8,7 @@ import {
   InfoList,
   InfoText,
   InfoTextWrap,
+  MapWrap,
 } from './style';
 import useToast from '@hooks/useToast';
 import { useEffect, useState } from 'react';
@@ -18,17 +19,16 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import Toast from '@components/common/Toast';
+import useReverseGeoCoding from '@hooks/useReverseGeoCoding';
 
 const DefaultExplain = (props: { placeInfo: PlaceType }) => {
-  const { latitude, longitude, description } = props.placeInfo;
+  const { id, latitude, longitude, description } = props.placeInfo;
   const { toast, handleFloatingToast } = useToast();
+  const placeAddress = useReverseGeoCoding({ latitude, longitude, placeId: id });
 
   const [findAddress, isFindAddress] = useState(false);
-  const [address, setCurrentAddress] = useState('');
-  const handleFindAddress = (address: string) => {
-    isFindAddress(!findAddress);
-    setCurrentAddress(address);
-  };
+
+  console.log(id, placeAddress);
 
   useEffect(() => {
     if (findAddress) {
@@ -37,7 +37,7 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
         let map;
 
         const geocoder = new window.kakao.maps.services.Geocoder();
-        geocoder.addressSearch(address, function (res: GeolocationAddress[], status: boolean) {
+        geocoder.addressSearch(placeAddress, function (res: GeolocationAddress[], status: boolean) {
           if (status === window.kakao.maps.services.Status.OK) {
             const coords = new window.kakao.maps.LatLng(res[0].y, res[0].x);
             const mapOption = {
@@ -86,18 +86,17 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
           <InfoIconWrap>
             <InfoIcon src={Pin} />
           </InfoIconWrap>
-          <InfoText>
-            {latitude}, {longitude}
-          </InfoText>
+          <InfoText>{placeAddress}</InfoText>
         </InfoTextWrap>
         <CopyButtonWrap>
-          <CopyToClipboard text={latitude} onCopy={handleFloatingToast}>
+          <CopyToClipboard text={placeAddress} onCopy={handleFloatingToast}>
             <CopyButton>복사하기</CopyButton>
           </CopyToClipboard>
-          <CopyButton type="button" onClick={() => handleFindAddress('서울특별시 종로구')}>
+          <CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
             {findAddress ? '지도 닫기' : '길 찾기'}
           </CopyButton>
         </CopyButtonWrap>
+        {findAddress && <MapWrap id="map" />}
       </li>
       {/* - 전화번호 - */}
       {props.placeInfo.phone_number ? (
