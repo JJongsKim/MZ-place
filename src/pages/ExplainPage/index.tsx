@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ExplainPageWrap, LikeIcon, LocationTitle, ThumbnailBox, ThumbnailBoxWrap } from './style';
-import test from '../../images/IMG_9904.jpg';
+import LikeEmpty from '@assets/like-gray.svg';
 
 import { useLocation } from 'react-router-dom';
-import { ReactComponent as LikeEmpty } from '@assets/like-empty.svg';
 import useToast from '@hooks/useToast';
 import SearchBar from '@components/common/SearchBar';
 import Toast from '@components/common/Toast';
@@ -16,22 +15,24 @@ const ExplainPage = () => {
   const { toast, handleFloatingToast } = useToast();
 
   const placeState = useGetInfoByPlaceId(Number(location.pathname.match(/\/place\/(\d+)/)?.[1]));
-  const placeInfo = placeState.place as PlaceType;
+  const placeInfo = placeState.place as PlaceType | undefined;
 
   return (
     <ExplainPageWrap>
       <SearchBar name={location.state} backIcon={true} searchIcon={false} />
       <ThumbnailBoxWrap>
-        <ThumbnailBox src={test} alt="장소썸네일" />
-        <LikeIcon>
-          <LikeEmpty />
-        </LikeIcon>
+        <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" />
+        <LikeIcon src={LikeEmpty} />
       </ThumbnailBoxWrap>
       <LocationTitle>{location.state}</LocationTitle>
-      {placeInfo.related_course?.length === 0 ? (
-        <DefaultExplain placeInfo={placeInfo} />
-      ) : (
-        <CourseExplain />
+      {placeInfo?.related_course && (
+        <>
+          {placeInfo.related_course.length === 0 ? (
+            <DefaultExplain placeInfo={placeInfo} />
+          ) : (
+            <CourseExplain />
+          )}
+        </>
       )}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </ExplainPageWrap>

@@ -10,7 +10,8 @@ const ThumbnailBoxWrap = styled.div`
   position: relative;
   width: 330px;
   height: 200px;
-  background-color: ${({ theme }) => theme.colors.text_gray};
+  border: 1px solid #efefef;
+  background-color: #efefef;
 `;
 
 const ThumbnailBox = styled.img`
@@ -19,7 +20,7 @@ const ThumbnailBox = styled.img`
   object-fit: contain;
 `;
 
-const LikeIcon = styled.div`
+const LikeIcon = styled.img`
   position: absolute;
   right: 15px;
   bottom: 15px;

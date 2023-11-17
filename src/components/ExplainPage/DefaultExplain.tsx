@@ -16,7 +16,7 @@ import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
 import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
-import InfoCost from '@assets/info-cost.svg';
+import InfoEtc from '@assets/info-etc.svg';
 
 const DefaultExplain = (props: { placeInfo: PlaceType }) => {
   const { latitude, longitude, description } = props.placeInfo;
@@ -79,7 +79,7 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
 
   return (
     <InfoList>
-      {/* 주소 */}
+      {/* - 주소 - */}
       <li>
         <InfoTextWrap>
           <InfoIconWrap>
@@ -98,15 +98,42 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
           </CopyButton>
         </CopyButtonWrap>
       </li>
+      {/* - 전화번호 - */}
+      {props.placeInfo.phone_number ? (
+        <li>
+          <InfoTextWrap>
+            <InfoIconWrap>
+              <InfoIcon src={Phone} />
+            </InfoIconWrap>
+            <InfoText>{props.placeInfo.phone_number}</InfoText>
+          </InfoTextWrap>
+          <CopyButtonWrap>
+            <CopyToClipboard text={props.placeInfo.phone_number} onCopy={handleFloatingToast}>
+              <CopyButton>복사하기</CopyButton>
+            </CopyToClipboard>
+          </CopyButtonWrap>
+        </li>
+      ) : null}
       {/* 가격 */}
       <li>
         <InfoTextWrap>
           <InfoIconWrap>
-            <InfoIcon />
+            <InfoIcon src={InfoEtc} />
           </InfoIconWrap>
-          <InfoText>{description === '' ? '편하게 산책다녀오세요!' : description}</InfoText>
+          <InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</InfoText>
         </InfoTextWrap>
       </li>
+      {/* - 운영시간 - */}
+      {props.placeInfo.work_time ? (
+        <li>
+          <InfoTextWrap>
+            <InfoIconWrap>
+              <InfoIcon src={Time} />
+            </InfoIconWrap>
+            <InfoText>{props.placeInfo.work_time}</InfoText>
+          </InfoTextWrap>
+        </li>
+      ) : null}
     </InfoList>
   );
 };
