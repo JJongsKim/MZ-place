@@ -17,10 +17,11 @@ import Pin from '@assets/pin.svg';
 import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
+import Toast from '@components/common/Toast';
 
 const DefaultExplain = (props: { placeInfo: PlaceType }) => {
   const { latitude, longitude, description } = props.placeInfo;
-  const { handleFloatingToast } = useToast();
+  const { toast, handleFloatingToast } = useToast();
 
   const [findAddress, isFindAddress] = useState(false);
   const [address, setCurrentAddress] = useState('');
@@ -134,6 +135,7 @@ const DefaultExplain = (props: { placeInfo: PlaceType }) => {
           </InfoTextWrap>
         </li>
       ) : null}
+      {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </InfoList>
   );
 };

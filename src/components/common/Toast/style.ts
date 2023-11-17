@@ -42,19 +42,10 @@ const ToastWrap = styled.div`
   z-index: 5;
   animation: ${ToastAnimation};
   animation-duration: 2.2s;
-
-  @media screen and (min-width: 1200px) {
-    width: 550px;
-    height: 65px;
-  }
 `;
 
 const ToastContent = styled.div`
   ${({ theme }) => theme.font.B_14};
-
-  @media screen and (min-width: 1200px) {
-    ${({ theme }) => theme.font.B_16};
-  }
 `;
 
 export { ToastContainer, ToastWrap, ToastContent };
