@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import CopyToClipboard from 'react-copy-to-clipboard';
 import {
   CopyButton,
@@ -19,7 +18,6 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import Toast from '@components/common/Toast';
-import useReverseGeoCoding from '@hooks/useReverseGeoCoding';
 
 interface DefaultExplainProps {
   placeInfo: PlaceType;
@@ -69,16 +67,6 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
       });
     }
   }, [findAddress]);
-
-  /*
-    있을수도, 없을수도 있는 값
-    description (코스의 경우 거의 "" 처리)
-    phone_number ""
-    work_time ""
-    page_url ""
-
-    description svg 파일 변경하기..
-  */
 
   return (
     <InfoList>
