@@ -31,6 +31,30 @@ interface PlacesType {
   name: string;
 }
 
+interface PlaceType {
+  category_id: number;
+  description: string;
+  destrict: string;
+  id: number;
+  latitude: string;
+  longitude: string;
+  name: string;
+  price: string;
+  related_course?: CourseType[];
+  image_url?: string;
+  page_url?: string;
+  phone_number?: string;
+  work_time?: string;
+}
+
+interface CourseType {
+  id: number;
+  name: string;
+  duration_time: string;
+  price: string;
+  image_url?: string;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {
