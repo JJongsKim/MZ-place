@@ -16,6 +16,7 @@ const SearchBarItemWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 375px;
+  margin-bottom: 10px;
 `;
 
 const SearchBarTitleWrap = styled.div`
@@ -25,8 +26,10 @@ const SearchBarTitleWrap = styled.div`
 `;
 
 const TitleText = styled.p`
+  width: 320px;
+  padding-left: 10px;
+  line-height: 24px;
   ${({ theme }) => theme.font.B_20};
-  padding-left: 6px;
 `;
 
 const SearchBarLine = styled.hr`
