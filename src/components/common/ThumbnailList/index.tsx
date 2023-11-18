@@ -1,36 +1,51 @@
 import { ThumbnailListWrap } from './style';
 import ThumbnailBox from '../ThumbnailBox';
-// import Loading from '../Loading';
-// import WarningMention from '../warning';
-import { MOCKUP1 } from '@application/mock';
+import { useNavigate } from 'react-router-dom';
+import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 
 interface ThumbnailListProps {
   places?: PlacesType[];
   isLoading?: boolean;
 }
 
+const MAX_RECENT_PLACES = 20;
+
 // TODO API 모두 입히면 수정하기
 const ThumbnailList = ({ places }: ThumbnailListProps) => {
+  const naviagate = useNavigate();
+  const { handleGetRecentPlaces, handleSaveRecentPlace } = RecentViewPlaces();
+
+  const handleClickThumb = (data: PlacesType) => {
+    naviagate(`/place/${data.id}`, { state: data.name });
+
+    const recentPlaces: PlacesType[] = handleGetRecentPlaces();
+    const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);
+
+    updatedRecentPlaces.push({
+      id: data.id,
+      image_url: data.image_url,
+      name: data.name,
+    });
+
+    if (updatedRecentPlaces.length > MAX_RECENT_PLACES) {
+      updatedRecentPlaces.shift();
+    }
+
+    handleSaveRecentPlace(updatedRecentPlaces);
+  };
+
   return places ? (
     <ThumbnailListWrap>
       {places.map(data => (
         <ThumbnailBox
           key={data.id}
-          label={data.name}
+          data={data}
           like={false}
-          id={data.id}
-          imageSrc={data.image_url}
+          onClick={() => handleClickThumb(data)}
         />
       ))}
     </ThumbnailListWrap>
-  ) : (
-    // <WarningMention text="다시 한 번 새로고침 해주세요!" />
-    <ThumbnailListWrap>
-      {MOCKUP1.map(data => (
-        <ThumbnailBox key={data.id} label={data.title} like={false} id={data.id} />
-      ))}
-    </ThumbnailListWrap>
-  );
+  ) : null;
 };
 
 export default ThumbnailList;
