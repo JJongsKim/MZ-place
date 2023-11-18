@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 
 interface ThumbnailListProps {
-  places?: PlacesType[];
+  places?: PlacesType[] | PlacesOfMap[];
   isLoading?: boolean;
 }
 
@@ -34,7 +34,7 @@ const ThumbnailList = ({ places }: ThumbnailListProps) => {
     handleSaveRecentPlace(updatedRecentPlaces);
   };
 
-  return places ? (
+  return places && places.length !== 0 ? (
     <ThumbnailListWrap>
       {places.map(data => (
         <ThumbnailBox
