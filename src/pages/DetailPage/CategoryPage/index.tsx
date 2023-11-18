@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import SearchBar from '@components/common/SearchBar';
 import { DetailPageContentList, DetailPageWrap, FilterList } from '../style';
@@ -30,8 +30,14 @@ const CategoryPage = () => {
     [selectedCost],
   );
 
-  const { data, isLoading } = useGetPlacesOfCategory(location.state.id, { price: selectedCost[0] });
+  const { data, refetch, isLoading } = useGetPlacesOfCategory(location.state.id, {
+    price: selectedCost[0],
+  });
   const places = data?.data.result as PlacesType[];
+
+  useEffect(() => {
+    refetch();
+  }, [selectedCost]);
 
   return (
     <DetailPageWrap>
