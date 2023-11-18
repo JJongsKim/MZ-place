@@ -1,31 +1,20 @@
 import { LabelText, LikeIcon, ThumbLabel, ThumbWrap } from './style';
 import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
 import { ReactComponent as LikeFull } from '@assets/like-full.svg';
-import { useNavigate } from 'react-router-dom';
 
 import defaultImage from '../../../images/default.png';
 
 interface ThumbnailProps {
-  id: number;
-  label: string;
-  like: boolean;
-  imageSrc?: string;
+  data: PlacesType;
+  like?: boolean;
+  onClick?: () => void;
 }
 
-const ThumbnailBox = ({ label, like, id, imageSrc }: ThumbnailProps) => {
-  const naviagate = useNavigate();
-  const handleGoExplainPage = (title: string, id: number) => {
-    naviagate(`/place/${id}`, { state: title });
-  };
-
+const ThumbnailBox = ({ data, like, onClick }: ThumbnailProps) => {
   return (
-    <ThumbWrap
-      onClick={() => handleGoExplainPage(label, id)}
-      $imageSrc={imageSrc}
-      $defaultImageSrc={defaultImage}
-    >
+    <ThumbWrap onClick={onClick} $imageSrc={data.image_url} $defaultImageSrc={defaultImage}>
       <ThumbLabel>
-        <LabelText>{label}</LabelText>
+        <LabelText>{data.name}</LabelText>
       </ThumbLabel>
       {like ? (
         <LikeIcon>

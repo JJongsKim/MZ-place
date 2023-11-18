@@ -19,12 +19,14 @@ import useModal from '@hooks/useModal';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useNavigate } from 'react-router-dom';
+import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
+import ThumbnailList from '@components/common/ThumbnailList';
 
-// TODO 최근 조회 장소, 로컬스토리지 이용하여 구현하기
 const MyPage = () => {
   const naviagte = useNavigate();
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
+  const { handleGetRecentPlaces } = RecentViewPlaces();
 
   const handleDeleteAccount = () => {
     handleCloseModal();
@@ -34,6 +36,8 @@ const MyPage = () => {
       naviagte('/');
     }, 2200);
   };
+
+  const storedData = handleGetRecentPlaces().reverse();
 
   return (
     <MyPageWrap>
@@ -51,6 +55,7 @@ const MyPage = () => {
         <li>최근 조회한 장소 20곳</li>
         <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
+      <ThumbnailList places={storedData} />
       {modal && (
         <Modal onClose={handleCloseModal}>
           <ModalBox>
