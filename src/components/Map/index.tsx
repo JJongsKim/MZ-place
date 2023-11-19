@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import { REGION_ARRAY } from '@application/constant';
 import Loading from '@components/common/Loading';
@@ -10,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 
 import Marker from '@assets/marker.svg';
+import MyLocation from '@assets/my-location.svg';
 
 interface MapProps {
   currentAddress: string;
@@ -75,7 +77,30 @@ const Map = ({ currentAddress }: MapProps) => {
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
         mapRef.current = map; // 지도 객체 저장해놓기
 
-        // 지도 레벨 6이하일때만 API 호출
+        // 현 위치 전용 마커 표시
+        if (currentAddress === '현 위치') {
+          const coords = new window.kakao.maps.LatLng(
+            currentLocation.latitude,
+            currentLocation.longitude,
+          );
+          const myLocationImageInfo = {
+            imageSrc: MyLocation,
+            imageSize: new window.kakao.maps.Size(26, 26),
+          };
+          const myLocationImage = new window.kakao.maps.MarkerImage(
+            myLocationImageInfo.imageSrc,
+            myLocationImageInfo.imageSize,
+            null,
+          );
+
+          const marker = new window.kakao.maps.Marker({
+            position: coords,
+            image: myLocationImage,
+          });
+          marker.setMap(map);
+        }
+
+        // TODO 이 부분 예외가 많아서 에러가 일어남 해결필요 - 지도 레벨 6이하일때만 API 호출
         window.kakao.maps.event.addListener(map, 'dragend', function () {
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
             const level = map.getLevel();
@@ -119,7 +144,7 @@ const Map = ({ currentAddress }: MapProps) => {
 
         if (mapRef.current) {
           // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
-          let marker = null;
+          let marker: any = null;
           const places = data?.data.result || [];
 
           const markerImageInfo = {
@@ -138,6 +163,7 @@ const Map = ({ currentAddress }: MapProps) => {
               marker = new window.kakao.maps.Marker({ position, image: markerImage });
 
               marker.setMap(mapRef.current);
+
               return marker;
             });
           }
