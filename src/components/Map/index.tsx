@@ -80,7 +80,7 @@ const Map = ({ currentAddress }: MapProps) => {
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
             const level = map.getLevel();
 
-            if (level <= 6) {
+            if (level <= 5) {
               const zoomBounds = map.getBounds();
               setLatLngRange({
                 wsLat: zoomBounds.getSouthWest().Ma,
@@ -118,6 +118,8 @@ const Map = ({ currentAddress }: MapProps) => {
         dispatch(setPlacesOfMap(data?.data.result));
 
         if (mapRef.current) {
+          // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
+          let marker = null;
           const places = data?.data.result || [];
 
           const markerImageInfo = {
@@ -133,7 +135,7 @@ const Map = ({ currentAddress }: MapProps) => {
           if (Array.isArray(places)) {
             places.map(place => {
               const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
-              const marker = new window.kakao.maps.Marker({ position, image: markerImage });
+              marker = new window.kakao.maps.Marker({ position, image: markerImage });
 
               marker.setMap(mapRef.current);
               return marker;
