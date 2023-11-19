@@ -24,6 +24,7 @@ const geoLocationOptions = {
 const Map = ({ currentAddress }: MapProps) => {
   const dispatch = useDispatch();
   const mapRef = useRef(null);
+  const [markers, setMarkers] = useState<(typeof window.kakao.maps.Marker)[]>([]); // 마커 초기화를 위한 상태값
 
   const { location } = useGeoLocation(geoLocationOptions);
   const currentLocation = {
@@ -109,7 +110,6 @@ const Map = ({ currentAddress }: MapProps) => {
           marker.setMap(map);
         }
 
-        // TODO 이 부분 예외가 많아서 에러가 일어남 해결필요 - 지도 레벨 5이하일때만 API 호출
         window.kakao.maps.event.addListener(map, 'dragend', function () {
           let level = map.getLevel();
           if (level <= 4) {
@@ -144,8 +144,6 @@ const Map = ({ currentAddress }: MapProps) => {
         dispatch(setPlacesOfMap(data?.data.result));
 
         if (mapRef.current) {
-          // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
-          let marker: any = null;
           const places = data?.data.result || [];
 
           const markerImageInfo = {
@@ -159,14 +157,16 @@ const Map = ({ currentAddress }: MapProps) => {
           );
 
           if (Array.isArray(places)) {
-            places.map(place => {
+            // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
+            markers.map(existingMarker => existingMarker.setMap(null));
+
+            const newMarkers = places.map(place => {
               const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
-              marker = new window.kakao.maps.Marker({ position, image: markerImage });
-
-              marker.setMap(mapRef.current);
-
-              return marker;
+              return new window.kakao.maps.Marker({ position, image: markerImage });
             });
+
+            newMarkers.map(item => item.setMap(mapRef.current));
+            setMarkers(newMarkers);
           }
         }
       } catch (error) {
