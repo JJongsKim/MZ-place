@@ -162,7 +162,23 @@ const Map = ({ currentAddress }: MapProps) => {
 
             const newMarkers = places.map(place => {
               const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
-              return new window.kakao.maps.Marker({ position, image: markerImage });
+              const marker = new window.kakao.maps.Marker({ position, image: markerImage });
+
+              // 장소 이름 - 인포윈도우로 띄우기
+              window.kakao.maps.event.addListener(marker, 'click', function () {
+                const infowindow = new window.kakao.maps.InfoWindow({
+                  content: `
+                    <div style="display: flex; align-items: center; margin: 8px 5px 10px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                      <p style="font-size: 13px; font-weight: bold;">${place.name}</p>
+                    </div>
+                  `,
+                  removable: true,
+                });
+
+                infowindow.open(mapRef.current, marker);
+              });
+
+              return marker;
             });
 
             newMarkers.map(item => item.setMap(mapRef.current));
