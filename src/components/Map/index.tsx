@@ -45,6 +45,15 @@ const Map = ({ currentAddress }: MapProps) => {
     ne_longitude: neLng,
   });
 
+  const handleChangeLatLng = (bounds: any) => {
+    setLatLngRange({
+      wsLat: bounds.getSouthWest().Ma,
+      wsLng: bounds.getSouthWest().La,
+      neLat: bounds.getNorthEast().Ma,
+      neLng: bounds.getNorthEast().La,
+    });
+  };
+
   useEffect(() => {
     if (!location.isLoading) {
       window.kakao.maps.load(() => {
@@ -69,7 +78,7 @@ const Map = ({ currentAddress }: MapProps) => {
                 selectedRegion.latitude,
                 selectedRegion.longitude,
               ),
-              level: 5,
+              level: 4,
             };
           }
         }
@@ -100,28 +109,20 @@ const Map = ({ currentAddress }: MapProps) => {
           marker.setMap(map);
         }
 
-        // TODO 이 부분 예외가 많아서 에러가 일어남 해결필요 - 지도 레벨 6이하일때만 API 호출
+        // TODO 이 부분 예외가 많아서 에러가 일어남 해결필요 - 지도 레벨 5이하일때만 API 호출
         window.kakao.maps.event.addListener(map, 'dragend', function () {
+          let level = map.getLevel();
+          if (level <= 4) {
+            const bounds = map.getBounds();
+            handleChangeLatLng(bounds);
+          }
+
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
-            const level = map.getLevel();
-
-            if (level <= 5) {
+            level = map.getLevel();
+            if (level <= 4) {
               const zoomBounds = map.getBounds();
-              setLatLngRange({
-                wsLat: zoomBounds.getSouthWest().Ma,
-                wsLng: zoomBounds.getSouthWest().La,
-                neLat: zoomBounds.getNorthEast().Ma,
-                neLng: zoomBounds.getNorthEast().La,
-              });
+              handleChangeLatLng(zoomBounds);
             }
-          });
-
-          const bounds = map.getBounds();
-          setLatLngRange({
-            wsLat: bounds.getSouthWest().Ma,
-            wsLng: bounds.getSouthWest().La,
-            neLat: bounds.getNorthEast().Ma,
-            neLng: bounds.getNorthEast().La,
           });
         });
 
