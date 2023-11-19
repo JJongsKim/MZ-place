@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 
+import Marker from '@assets/marker.svg';
+
 interface MapProps {
   currentAddress: string;
 }
@@ -114,6 +116,30 @@ const Map = ({ currentAddress }: MapProps) => {
       try {
         const { data } = await refetch();
         dispatch(setPlacesOfMap(data?.data.result));
+
+        if (mapRef.current) {
+          const places = data?.data.result || [];
+
+          const markerImageInfo = {
+            imageSrc: Marker,
+            imageSize: new window.kakao.maps.Size(28, 40),
+          };
+          const markerImage = new window.kakao.maps.MarkerImage(
+            markerImageInfo.imageSrc,
+            markerImageInfo.imageSize,
+            null,
+          );
+
+          if (Array.isArray(places)) {
+            places.map(place => {
+              const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
+              const marker = new window.kakao.maps.Marker({ position, image: markerImage });
+
+              marker.setMap(mapRef.current);
+              return marker;
+            });
+          }
+        }
       } catch (error) {
         console.error('!!!refetch 에러!!!', error);
       }
