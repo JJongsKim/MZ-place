@@ -17,15 +17,18 @@ export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, 
     queryKey: ['getPlacesOfCategory'],
     queryFn: ({ pageParam }) => api.places.getPlacesOfCategory(id, pageParam, queryParams),
     initialPageParam: 1, // v5 달라진 점
+
     getNextPageParam: (lastPage, allPages) => {
       const totalPages = Math.ceil(lastPage.data.totalItems / 12);
       return allPages.length !== totalPages ? allPages.length + 1 : undefined; // return값이 pageParam으로 전달
     },
-    enabled: false,
+
     retry: 0,
   });
 
-  return { data: data?.pages[0].data.result, isLoading, ...rest };
+  const placeData = data?.pages.flatMap(page => page?.data.result) as PlacesType[];
+
+  return { data: placeData, isLoading, ...rest };
 };
 
 export const useGetInfoByPlaceId = (placeId: number) => {

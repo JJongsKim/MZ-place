@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 const ThumbnailListWrap = styled.section`
   width: 375px;
-  height: 800px;
+  height: 820px;
+  margin-bottom: 50px;
   overflow: scroll;
   padding: 0 18px;
 `;
@@ -21,7 +22,7 @@ const NextFetchTarget = styled.div`
 
   width: 100%;
   height: 30px;
-  margin-top: 30px;
+  margin-top: 20px;
   color: ${({ theme }) => theme.colors.olive_green};
   ${({ theme }) => theme.font.B_14};
 `;

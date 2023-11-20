@@ -36,7 +36,6 @@ const CategoryPage = () => {
       price: selectedCost[0],
     },
   );
-  const places = data as PlacesType[];
 
   useEffect(() => {
     refetch();
@@ -59,7 +58,7 @@ const CategoryPage = () => {
           <Loading />
         ) : (
           <ThumbnailList
-            places={places}
+            places={data}
             isLoading={isLoading}
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}

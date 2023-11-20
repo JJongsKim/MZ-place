@@ -69,7 +69,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
         observer.unobserve(nextFetchTargetRef.current);
       }
     };
-  }, [hasNextPage, fetchNextPage]);
+  }, [places]);
 
   return places ? (
     <ThumbnailListWrap>
