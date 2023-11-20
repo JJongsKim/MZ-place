@@ -18,7 +18,7 @@ const FilterList = styled.ul`
 
 const DetailPageContentList = styled.section`
   margin: 10px 0 55px;
-  height: 100vh;
+  height: 100%;
 
   @media screen and (min-width: 1200px) {
     margin-top: 12px;
