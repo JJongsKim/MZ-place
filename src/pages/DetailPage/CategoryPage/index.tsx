@@ -30,10 +30,13 @@ const CategoryPage = () => {
     [selectedCost],
   );
 
-  const { data, refetch, isLoading } = useGetPlacesOfCategory(location.state.id, {
-    price: selectedCost[0],
-  });
-  const places = data?.data.result as PlacesType[];
+  const { data, refetch, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfCategory(
+    location.state.id,
+    {
+      price: selectedCost[0],
+    },
+  );
+  const places = data as PlacesType[];
 
   useEffect(() => {
     refetch();
@@ -52,7 +55,16 @@ const CategoryPage = () => {
         </FilterList>
       )}
       <DetailPageContentList>
-        {isLoading ? <Loading /> : <ThumbnailList places={places} />}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ThumbnailList
+            places={places}
+            isLoading={isLoading}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+          />
+        )}
       </DetailPageContentList>
     </DetailPageWrap>
   );
