@@ -8,22 +8,19 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
-import { useDispatch } from 'react-redux';
-import { setPlacesResult } from '@store/reducers/PlacesReducer';
 
 const CustomFilter = () => {
-  const dispatch = useDispatch();
   const { toast, handleFloatingToast } = useToast();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-  const { data, refetch } = useGetPlacesOfFilter({
+  const { refetch } = useGetPlacesOfFilter({
     price: selectedCost[0],
     filters: selectedActivity.join(','),
     districts: selectedLocation.join(','),
@@ -86,12 +83,6 @@ const CustomFilter = () => {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      dispatch(setPlacesResult(data.data.result));
-    }
-  }, [data, dispatch]);
-
   return (
     <CustomFilterForm onSubmit={handleSubmit}>
       <FilterTypeContainer>
@@ -139,7 +130,7 @@ const CustomFilter = () => {
         </FilterList>
       </FilterTypeContainer>
       <FilterButtonWrap>
-        <ButtonBase name="적용하기" onClick={() => handleSubmit} />
+        <ButtonBase name="적용하기" />
       </FilterButtonWrap>
       {toast && <Toast>필터를 선택해주세요!</Toast>}
     </CustomFilterForm>

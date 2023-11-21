@@ -2,13 +2,24 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
-export const useGetPlacesOfFilter = (queryParams?: Record<string, string | number>) => {
-  const { data, ...rest } = useQuery({
+export const useGetPlacesOfFilter = (queryParam?: Record<string, string | number>) => {
+  const { data, ...rest } = useInfiniteQuery({
     queryKey: ['getPlacesOfFilter'],
-    queryFn: () => api.places.getPlacesOfFilter(queryParams!, 1),
-    enabled: false, // 자동 실행 끄기
+    queryFn: ({ pageParam }) => api.places.getPlacesOfFilter(queryParam!, pageParam),
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage, allPages) => {
+      const totalPages = Math.ceil(lastPage.data.totalItems / 12);
+      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+    },
+
+    retry: 0,
+    enabled: false,
   });
-  return { data, ...rest };
+
+  const filterPlaceData = data?.pages.flatMap(page => page.data.result) as PlacesType[];
+
+  return { data: filterPlaceData, ...rest };
 };
 
 export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, string>) => {
