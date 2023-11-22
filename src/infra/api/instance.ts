@@ -19,8 +19,25 @@ interface APIResponse<T = any> {
   totalItems: number;
 }
 
+// post, delete..
+interface APIResponse2 {
+  message: string;
+  ACCESS_TOKEN?: string;
+}
+
 interface CustomInstance extends AxiosInstance {
   get<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
+    url: string,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
+  post<R = AxiosResponse<APIResponse2>, D = unknown>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
+  delete<R = AxiosResponse<APIResponse2>, D = unknown>(
     url: string,
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
@@ -44,7 +61,7 @@ instance.interceptors.response.use(
     console.log('📍 response -> ', res);
     return res;
   },
-  async err => {
+  err => {
     if (axios.isAxiosError(err)) {
       const status = err.response?.status;
 
