@@ -16,12 +16,7 @@ import { API } from '@application/constant';
 interface APIResponse<T = any> {
   result: T;
   message: string;
-  totalItems: number;
-}
-
-// post, delete..
-interface APIResponse2 {
-  message: string;
+  totalItems?: number;
   ACCESS_TOKEN?: string;
 }
 
@@ -31,13 +26,13 @@ interface CustomInstance extends AxiosInstance {
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
 
-  post<R = AxiosResponse<APIResponse2>, D = unknown>(
+  post<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
 
-  delete<R = AxiosResponse<APIResponse2>, D = unknown>(
+  delete<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
     url: string,
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
