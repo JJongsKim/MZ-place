@@ -60,6 +60,29 @@ interface CourseType {
   image_url?: string;
 }
 
+// 회원가입용 API 전달 타입
+interface SignUpArgsType {
+  nickname: string;
+  user_id: string;
+  password: string;
+}
+
+// 로그인 API 전달 타입
+interface LoginArgsType {
+  user_id: string;
+  password: string;
+}
+
+interface KakaoLoginArgsType {
+  nickname: string;
+  kakao_id: string;
+}
+
+interface NaverLoginArgsType {
+  nickname: string;
+  naver_id: string;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {
