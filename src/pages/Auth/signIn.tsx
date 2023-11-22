@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import AuthLogo from '@components/Auth/AuthLogo';
 import {
   CheckText,
@@ -20,6 +21,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
+import useSignIn from '@hooks/api/users/useSignIn';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -37,7 +39,8 @@ const SignIn = () => {
     }));
   };
 
-  // TODO 백엔드에서 보내주는 status로도 isCheckForm() 관리하기
+  const { mutate: SignInMutate } = useSignIn();
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -45,7 +48,20 @@ const SignIn = () => {
       handleFloatingToast();
 
       setTimeout(() => {
-        navigate('/');
+        SignInMutate(
+          {
+            user_id: signInForm.userId,
+            password: signInForm.userPassword,
+          },
+          {
+            onSuccess: () => {
+              navigate('/');
+            },
+            onError: () => {
+              console.log('🙀 에러입니다 !!!!!');
+            },
+          },
+        );
       }, 2200);
     } else {
       isCheckForm(false);

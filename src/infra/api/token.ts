@@ -1,5 +1,5 @@
 export const setAccessToken = (data: string) => {
-  localStorage.set('accessToken', data);
+  localStorage.setItem('accessToken', data);
 };
 
 export const removeAccessToken = () => {

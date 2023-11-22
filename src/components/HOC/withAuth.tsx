@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import RequestLogin from '@components/MyPage/requestLogin';
@@ -9,18 +8,8 @@ const withAuth = (Component: React.ComponentType) => (props: JSX.Element) => {
   const location = useLocation();
 
   const loginToken = getAccessToken();
-  const [login, isLogin] = useState(false);
 
-  useEffect(() => {
-    if (loginToken) {
-      isLogin(true);
-    }
-    if (!loginToken) {
-      isLogin(false);
-    }
-  }, []);
-
-  return login ? (
+  return loginToken ? (
     <Component {...props} />
   ) : location.pathname === '/my-page' ? (
     <RequestLogin />
