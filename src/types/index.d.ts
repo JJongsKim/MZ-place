@@ -31,6 +31,11 @@ interface PlacesType {
   name: string;
 }
 
+interface PlacesOfMap extends PlacesType {
+  latitude: string;
+  longitude: string;
+}
+
 interface PlaceType {
   category_id: number;
   description: string;
@@ -62,5 +67,8 @@ interface StoreType {
   };
   PlacesReducer: {
     placesResult: PlacesType[];
+  };
+  PlacesOfMapReducer: {
+    placesOfMap: PlacesOfMap[];
   };
 }

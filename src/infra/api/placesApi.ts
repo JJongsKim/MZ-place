@@ -18,6 +18,11 @@ class PlacesApi {
   getInfoByPlaceId = (placeId: number) => {
     return this.api.get(`/places/place${placeId}`);
   };
+
+  // - 거리별 장소 상세조회 API
+  getPlacesNearBy = (queryParams: Record<string, number>) => {
+    return this.api.get('/places/nearby', { params: { ...queryParams } });
+  };
 }
 
 export default new PlacesApi(instance);

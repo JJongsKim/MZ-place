@@ -32,3 +32,14 @@ export const useGetInfoByPlaceId = (placeId: number) => {
 
   return { data, isLoading, ...rest };
 };
+
+export const useGetPlacesNearBy = (queryParams: Record<string, number>) => {
+  const { data, ...rest } = useQuery({
+    queryKey: ['getPlacesNearBy'],
+    queryFn: () => api.places.getPlacesNearBy(queryParams),
+    enabled: false,
+    retry: 1,
+  });
+
+  return { data, ...rest };
+};
