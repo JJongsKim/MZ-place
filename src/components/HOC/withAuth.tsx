@@ -6,7 +6,6 @@ import { getAccessToken } from '@infra/api/token';
 
 const withAuth = (Component: React.ComponentType) => (props: JSX.Element) => {
   const location = useLocation();
-
   const loginToken = getAccessToken();
 
   return loginToken ? (

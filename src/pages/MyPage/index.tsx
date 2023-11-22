@@ -21,6 +21,7 @@ import Toast from '@components/common/Toast';
 import { useNavigate } from 'react-router-dom';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
+import { removeAccessToken } from '@infra/api/token';
 
 const MyPage = () => {
   const naviagte = useNavigate();
@@ -39,6 +40,11 @@ const MyPage = () => {
 
   const storedData = handleGetRecentPlaces().reverse();
 
+  const handleLogout = () => {
+    removeAccessToken();
+    naviagte('/');
+  };
+
   return (
     <MyPageWrap>
       <FirstSection>
@@ -51,7 +57,7 @@ const MyPage = () => {
       </FirstSection>
       <DivideLine />
       <MyPageJobList>
-        <li>로그아웃</li>
+        <li onClick={handleLogout}>로그아웃</li>
         <li>최근 조회한 장소 20곳</li>
         <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
