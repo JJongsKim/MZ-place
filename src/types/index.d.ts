@@ -88,9 +88,6 @@ interface StoreType {
   LocationReducer: {
     currentAddress: string;
   };
-  PlacesReducer: {
-    placesResult: PlacesType[];
-  };
   PlacesOfMapReducer: {
     placesOfMap: PlacesOfMap[];
   };
