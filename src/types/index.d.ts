@@ -31,6 +31,16 @@ interface PlacesType {
   name: string;
 }
 
+interface Top20PlacesType {
+  heart: number;
+  place_id?: number;
+  course_id?: number;
+  place_name?: string;
+  course_name?: string;
+  place_image_url?: string;
+  course_image_url?: string;
+}
+
 interface PlacesOfMap extends PlacesType {
   latitude: string;
   longitude: string;
