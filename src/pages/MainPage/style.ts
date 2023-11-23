@@ -23,4 +23,10 @@ const RecommendTop20 = styled.p`
   ${({ theme }) => theme.font.B_22};
 `;
 
-export { MainPageWrap, RecommendTextWrap, RecommendText, RecommendTop20 };
+const ContentWrap = styled.section`
+  height: 500px;
+  margin-bottom: 50px;
+  overflow: scroll;
+`;
+
+export { MainPageWrap, RecommendTextWrap, RecommendText, RecommendTop20, ContentWrap };
