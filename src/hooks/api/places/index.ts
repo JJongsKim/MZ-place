@@ -75,3 +75,13 @@ export const useGetPlacesNearBy = (queryParams: Record<string, number>) => {
 
   return { data, ...rest };
 };
+
+export const useGetPlacesOfTop20 = () => {
+  const { data, ...rest } = useQuery({
+    queryKey: ['getPlacesOfTop20'],
+    queryFn: () => api.places.getPlacesOfTop20(),
+    retry: 1,
+  });
+
+  return { data: data?.data.result, ...rest };
+};

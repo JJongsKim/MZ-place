@@ -29,6 +29,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
     const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);
 
     updatedRecentPlaces.push({
+      heart: data.heart,
       id: data.id,
       image_url: data.image_url,
       name: data.name,
@@ -78,7 +79,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
           <ThumbnailBox
             key={data.id}
             data={data}
-            like={false}
+            like={data.heart}
             onClick={() => handleClickThumb(data)}
           />
         ))}
