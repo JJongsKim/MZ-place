@@ -7,20 +7,27 @@ import WarningMention from '@components/common/warning';
 import { DetailPageWrap } from '../style';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useGetPlacesOfFilter } from '@hooks/api/places';
 
 const CustomFilterPage = () => {
   const location = useLocation();
-  const places = useSelector((state: StoreType) => state.PlacesReducer.placesResult);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
       <CustomFilterPageWrap>
-        {places === undefined ? (
+        {data === undefined ? (
           <WarningMention text="필터를 선택해주세요!" />
+        ) : data.length === 0 ? (
+          <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
-          <ThumbnailList places={places} />
+          <ThumbnailList
+            places={data}
+            isLoading={isLoading}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+          />
         )}
         <BottomSheet>
           <CustomFilter />
