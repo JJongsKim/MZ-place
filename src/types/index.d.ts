@@ -26,9 +26,11 @@ interface GeolocationAddress {
 }
 
 interface PlacesType {
+  heart: number;
   id: number;
   image_url: string;
   name: string;
+  type?: 'place' | 'course';
 }
 
 interface PlacesOfMap extends PlacesType {

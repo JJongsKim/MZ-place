@@ -23,6 +23,11 @@ class PlacesApi {
   getPlacesNearBy = (queryParams: Record<string, number>) => {
     return this.api.get('/places/nearby', { params: { ...queryParams } });
   };
+
+  // - 메인페이지 TOP20 API
+  getPlacesOfTop20 = () => {
+    return this.api.get('/places');
+  };
 }
 
 export default new PlacesApi(instance);
