@@ -1,4 +1,5 @@
 import Layout from '@components/Layout';
+import KakaoOauthCallback from '@pages/Auth/\bkakao/kakaoOauthCallback';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import CategoryPage from '@pages/DetailPage/CategoryPage';
@@ -32,7 +33,6 @@ function App() {
               <Route path="/search/map" element={<MapPage />} />
               <Route path="/search/like-recommend" element={<LikeRecommendPage />} />
               <Route path="/search/custom" element={<CustomFilterPage />} />
-              {/* TODO 다시 생각해보기. 게시글 라우터를 이렇게 가져가도 맞는건가? */}
               <Route path="/place/:id" element={<ExplainPage />} />
               <Route
                 path="/like"
@@ -45,6 +45,7 @@ function App() {
             </Route>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/oauth" element={<KakaoOauthCallback />} />
           </Routes>
         </Router>
       </ThemeProvider>

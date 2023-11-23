@@ -17,6 +17,7 @@ interface APIResponse<T = any> {
   result: T;
   message: string;
   totalItems?: number;
+  nickname?: string;
   ACCESS_TOKEN?: string;
 }
 

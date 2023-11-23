@@ -25,6 +25,9 @@ import useSignIn from '@hooks/api/users/useSignIn';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
   const { toast, handleFloatingToast } = useToast();
   const [signInForm, setSignInForm] = useState({
     userId: '',
@@ -96,7 +99,9 @@ const SignIn = () => {
           </FormListWrap>
           <SocialWrap>
             <SocialText>SNS로 간편 로그인하기</SocialText>
-            <SocialIcon src={kakao} alt="카카오" />
+            <Link to={kakaoURL}>
+              <SocialIcon src={kakao} alt="카카오" />
+            </Link>
             <SocialIcon src={naver} alt="네이버" />
           </SocialWrap>
           <SubmitWrap>
