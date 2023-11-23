@@ -11,7 +11,7 @@ import { useGetPlacesOfFilter } from '@hooks/api/places';
 
 const CustomFilterPage = () => {
   const location = useLocation();
-  const { data } = useGetPlacesOfFilter();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
 
   return (
     <DetailPageWrap>
@@ -22,7 +22,12 @@ const CustomFilterPage = () => {
         ) : data.length === 0 ? (
           <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
-          <ThumbnailList places={data} />
+          <ThumbnailList
+            places={data}
+            isLoading={isLoading}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+          />
         )}
         <BottomSheet>
           <CustomFilter />
