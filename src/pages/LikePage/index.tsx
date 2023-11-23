@@ -10,13 +10,16 @@ import {
   LikePageWrap,
 } from './style';
 import WarningMention from '@components/common/warning';
+import { getNickname } from '@infra/api/nickname';
 
 const LikePage = () => {
+  const nickname = getNickname();
+
   return (
     <LikePageWrap>
       <LikePageHeader>
         <HeaderItemWrap>
-          <HeaderNameText>수정</HeaderNameText>
+          <HeaderNameText>{nickname}</HeaderNameText>
           <HeaderText>님이 좋아하는 곳</HeaderText>
         </HeaderItemWrap>
         <HeaderLine />

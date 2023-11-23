@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import withAuth from '@components/HOC/withAuth';
 
 import {
@@ -18,16 +19,17 @@ import Modal from '@components/common/Modal';
 import useModal from '@hooks/useModal';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
-import { useNavigate } from 'react-router-dom';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
 import { removeAccessToken } from '@infra/api/token';
+import { getNickname } from '@infra/api/nickname';
 
 const MyPage = () => {
   const naviagte = useNavigate();
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
   const { handleGetRecentPlaces } = RecentViewPlaces();
+  const nickname = getNickname();
 
   const handleDeleteAccount = () => {
     handleCloseModal();
@@ -50,7 +52,7 @@ const MyPage = () => {
       <FirstSection>
         <WelcomeText>반갑습니다!</WelcomeText>
         <UserNameBox>
-          <p>수정</p>
+          <p>{nickname}</p>
           <p>님</p>
         </UserNameBox>
         <InfoText>어떤 작업을 하시겠어요?</InfoText>
