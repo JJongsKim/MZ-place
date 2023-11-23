@@ -6,7 +6,7 @@ import defaultImage from '../../../images/default.png';
 
 interface ThumbnailProps {
   data: PlacesType | PlacesOfMap;
-  like?: boolean;
+  like?: number;
   onClick?: () => void;
 }
 
