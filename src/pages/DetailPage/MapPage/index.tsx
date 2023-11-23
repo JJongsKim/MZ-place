@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const MapPage = () => {
+  const placesOfMap = useSelector((state: StoreType) => state.PlacesOfMapReducer.placesOfMap);
   const location = useLocation();
   const currentAddress = useSelector((state: StoreType) => state.LocationReducer.currentAddress);
 
@@ -22,7 +23,7 @@ const MapPage = () => {
         </MapPageDropdownWrap>
         <Map currentAddress={currentAddress} />
         <BottomSheet>
-          <ThumbnailList />
+          <ThumbnailList places={placesOfMap} />
         </BottomSheet>
       </MapPageWrap>
     </DetailPageWrap>

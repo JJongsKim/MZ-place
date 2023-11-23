@@ -6,7 +6,7 @@ import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import { useEffect, useRef } from 'react';
 
 interface ThumbnailListProps {
-  places?: PlacesType[];
+  places?: PlacesType[] | PlacesOfMap[];
   isLoading?: boolean;
   totalPlaces?: number;
   hasNextPage?: boolean;
@@ -71,7 +71,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
     };
   }, [places]);
 
-  return places ? (
+  return places && places.length !== 0 ? (
     <ThumbnailListWrap>
       <ThumbnailContentArea>
         {places.map(data => (

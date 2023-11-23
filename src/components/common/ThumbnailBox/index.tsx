@@ -5,7 +5,7 @@ import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 import defaultImage from '../../../images/default.png';
 
 interface ThumbnailProps {
-  data: PlacesType;
+  data: PlacesType | PlacesOfMap;
   like?: boolean;
   onClick?: () => void;
 }
