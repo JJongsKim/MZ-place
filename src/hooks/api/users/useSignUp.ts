@@ -3,11 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import { api } from '@infra/api';
 
 const useSignUp = () => {
-  const { data, ...rest } = useMutation({
+  const { ...rest } = useMutation({
     mutationFn: (args: SignUpArgsType) => api.auth.signUp(args),
   });
 
-  return { data, ...rest };
+  return { ...rest };
 };
 
 export default useSignUp;
