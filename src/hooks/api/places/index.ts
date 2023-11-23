@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
@@ -17,7 +18,20 @@ export const useGetPlacesOfFilter = (queryParam?: Record<string, string | number
     enabled: false,
   });
 
-  const filterPlaceData = data?.pages.flatMap(page => page.data.result) as PlacesType[];
+  // 새로운 필터들을 선택 시 장소가 중복되어 담기지 않도록 정리 필요!
+  const filterPlaceData: PlacesType[] = [];
+  const idsSet = new Set<number>();
+
+  if (data?.pages) {
+    data.pages.map((page: any) => {
+      page.data.result.map((place: PlacesType) => {
+        if (!idsSet.has(place.id)) {
+          idsSet.add(place.id);
+          filterPlaceData.push(place);
+        }
+      });
+    });
+  }
 
   return { data: filterPlaceData, ...rest };
 };
