@@ -1,5 +1,6 @@
 import Layout from '@components/Layout';
-import KakaoOauthCallback from '@pages/Auth/\bkakao/kakaoOauthCallback';
+import KakaoOauthCallback from '@pages/Auth/kakao/kakaoOauthCallback';
+import NaverOauthCallback from '@pages/Auth/naver/naverOauthCallback';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import CategoryPage from '@pages/DetailPage/CategoryPage';
@@ -46,6 +47,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/oauth" element={<KakaoOauthCallback />} />
+            <Route path="/naver/oauth" element={<NaverOauthCallback />} />
           </Routes>
         </Router>
       </ThemeProvider>

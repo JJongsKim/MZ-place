@@ -17,3 +17,17 @@ export const useKakaoLogin = (token: string) => {
 
   return { ...rest };
 };
+
+export const useNaverLogin = (token: string) => {
+  const { ...rest } = useMutation({
+    mutationFn: (args: NaverLoginArgsType) => api.auth.naverLogin(args),
+    onSuccess: data => {
+      if (data.data.message === 'LOGIN_SUCCESS') {
+        setAccessToken(token);
+        setNickname(data.data.nickname!);
+      }
+    },
+  });
+
+  return { ...rest };
+};
