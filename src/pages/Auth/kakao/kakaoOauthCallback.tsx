@@ -82,7 +82,6 @@ const KakaoOauthCallback = () => {
     if (SNSLoginInfo.nickname !== '' && SNSLoginInfo.kakao_id) {
       kakaoMuation(SNSLoginInfo, {
         onSuccess: () => {
-          console.log('카카오 로그인 성공!!');
           navigate('/my-page');
         },
         onError: () => {

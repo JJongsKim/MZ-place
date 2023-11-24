@@ -8,8 +8,8 @@ import { useNaverLogin } from '@hooks/api/users/useSNSLogin';
 
 const NaverOauthCallback = () => {
   const navigate = useNavigate();
-  const grantType = 'authorization_code';
   const code = new URL(window.location.href).searchParams.get('code');
+  const grantType = 'authorization_code';
   const CLIENT_ID = `${process.env.REACT_APP_NAVER_CLIENT_ID}`;
   const CLIENT_SECRET = `${process.env.REACT_APP_NAVER_CLIENT_SECRET}`;
 
@@ -45,10 +45,11 @@ const NaverOauthCallback = () => {
         });
 
         setSNSLoginInfo({
-          nickname: userRes.data.response.name,
-          naver_id: userRes.data.response.id,
+          nickname: userRes.data.user.name,
+          naver_id: userRes.data.user.id,
         });
-        setNaverId(userRes.data.response.id);
+        setNaverId(userRes.data.user.id);
+        console.log('네이버 로그인 정보!!::', userRes);
       } catch (error) {
         console.log('🙀 정보가져오기 실패!!!', error);
       }
@@ -69,7 +70,6 @@ const NaverOauthCallback = () => {
     if (SNSLoginInfo.nickname !== '' && SNSLoginInfo.naver_id) {
       naverMutation(SNSLoginInfo, {
         onSuccess: () => {
-          console.log('카카오 로그인 성공!!');
           navigate('/my-page');
         },
         onError: () => {
