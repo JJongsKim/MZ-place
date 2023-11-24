@@ -89,7 +89,7 @@ const MyPage = () => {
           <ModalBox>
             <WithdrawText>정말로 탈퇴하시겠어요?</WithdrawText>
             <SelectBoxWrap>
-              <SelectBox>아니오</SelectBox>
+              <SelectBox onClick={handleCloseModal}>아니오</SelectBox>
               <SelectBox onClick={handleDeleteAccount}>예</SelectBox>
             </SelectBoxWrap>
           </ModalBox>
