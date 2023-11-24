@@ -13,13 +13,14 @@ const NaverOauthCallback = () => {
   const CLIENT_ID = `${process.env.REACT_APP_NAVER_CLIENT_ID}`;
   const CLIENT_SECRET = `${process.env.REACT_APP_NAVER_CLIENT_SECRET}`;
 
+  const [naverId, setNaverId] = useState('');
   const [token, setToken] = useState('');
   const [SNSLoginInfo, setSNSLoginInfo] = useState({
     // 로그인 API에 넣을 정보
     nickname: '',
     naver_id: '',
   });
-  const { mutate: naverMutation } = useNaverLogin(token);
+  const { mutate: naverMutation } = useNaverLogin(naverId);
 
   const getNaverAccessToken = async () => {
     if (code !== undefined && code !== null) {
@@ -47,8 +48,7 @@ const NaverOauthCallback = () => {
           nickname: userRes.data.response.name,
           naver_id: userRes.data.response.id,
         });
-
-        console.log(userRes);
+        setNaverId(userRes.data.response.id);
       } catch (error) {
         console.log('🙀 정보가져오기 실패!!!', error);
       }

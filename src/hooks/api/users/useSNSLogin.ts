@@ -1,15 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
-import { setAccessToken } from '@infra/api/token';
+import { setKakaoId, setNaverId } from '@infra/api/token';
 import { setNickname } from '@infra/api/nickname';
 
-export const useKakaoLogin = (token: string) => {
+export const useKakaoLogin = (kakaoId: string) => {
   const { ...rest } = useMutation({
     mutationFn: (args: KakaoLoginArgsType) => api.auth.kakaoLogin(args),
     onSuccess: data => {
       if (data.data.message === 'LOGIN_SUCCESS') {
-        setAccessToken(token);
+        setKakaoId(kakaoId);
         setNickname(data.data.nickname!);
       }
     },
@@ -18,12 +18,12 @@ export const useKakaoLogin = (token: string) => {
   return { ...rest };
 };
 
-export const useNaverLogin = (token: string) => {
+export const useNaverLogin = (naverId: string) => {
   const { ...rest } = useMutation({
     mutationFn: (args: NaverLoginArgsType) => api.auth.naverLogin(args),
     onSuccess: data => {
       if (data.data.message === 'LOGIN_SUCCESS') {
-        setAccessToken(token);
+        setNaverId(naverId);
         setNickname(data.data.nickname!);
       }
     },

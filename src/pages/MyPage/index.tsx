@@ -21,7 +21,7 @@ import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
-import { getAccessToken, removeAccessToken } from '@infra/api/token';
+import { getAccessToken, getKakaoId, getNaverId, removeAccessToken } from '@infra/api/token';
 import { getNickname } from '@infra/api/nickname';
 import useDeleteUser from '@hooks/api/users/useDeleteUser';
 
@@ -31,13 +31,24 @@ const MyPage = () => {
   const { modal, handleViewModal, handleCloseModal } = useModal();
   const { handleGetRecentPlaces } = RecentViewPlaces();
   const nickname = getNickname();
+
   const token = getAccessToken();
+  const kakaoId = getKakaoId();
+  const naverId = getNaverId();
 
   const { mutate: userDeleteMutation } = useDeleteUser();
   const handleDeleteAccount = () => {
-    if (nickname !== undefined && token !== undefined) {
+    if (token) {
       userDeleteMutation({
         local_token: token!,
+      });
+    } else if (kakaoId) {
+      userDeleteMutation({
+        kakao_id: kakaoId,
+      });
+    } else if (naverId) {
+      userDeleteMutation({
+        naver_id: naverId,
       });
     }
 

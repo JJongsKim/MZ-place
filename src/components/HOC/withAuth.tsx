@@ -2,13 +2,15 @@ import { useLocation } from 'react-router-dom';
 
 import RequestLogin from '@components/MyPage/requestLogin';
 import WarningMention from '@components/common/warning';
-import { getAccessToken } from '@infra/api/token';
+import { getAccessToken, getKakaoId, getNaverId } from '@infra/api/token';
 
 const withAuth = (Component: React.ComponentType) => (props: JSX.Element) => {
   const location = useLocation();
   const loginToken = getAccessToken();
+  const kakaoId = getKakaoId();
+  const naverId = getNaverId();
 
-  return loginToken ? (
+  return loginToken || kakaoId || naverId ? (
     <Component {...props} />
   ) : location.pathname === '/my-page' ? (
     <RequestLogin />

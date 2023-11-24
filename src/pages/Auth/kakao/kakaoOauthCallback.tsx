@@ -13,13 +13,14 @@ const KakaoOauthCallback = () => {
   const REST_API_KEY = `${process.env.REACT_APP_KAKAO_REST_API_KEY}`;
   const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
 
+  const [kakaoId, setKakaoId] = useState('');
   const [token, setToken] = useState(''); // 카카오 토큰 저장
   const [SNSLoginInfo, setSNSLoginInfo] = useState({
     // 로그인 API에 넣을 정보
     nickname: '',
     kakao_id: '',
   });
-  const { mutate: kakaoMuation } = useKakaoLogin(token);
+  const { mutate: kakaoMuation } = useKakaoLogin(kakaoId);
 
   const getKakaoAccessToken = async () => {
     if (code !== undefined && code !== null) {
@@ -60,6 +61,7 @@ const KakaoOauthCallback = () => {
           nickname: userRes.data.properties.nickname,
           kakao_id: userRes.data.id,
         });
+        setKakaoId(userRes.data.id);
       } catch (error) {
         console.log('🙀 정보가져오기 실패!!!', error);
       }
