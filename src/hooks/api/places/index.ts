@@ -45,11 +45,9 @@ export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, 
     initialPageParam: 1, // v5 달라진 점
 
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.data.totalItems) {
-        const totalPages = Math.ceil(lastPage.data.totalItems / 12);
-        return allPages.length !== totalPages ? allPages.length + 1 : undefined;
-        // return값이 pageParam으로 전달
-      }
+      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
+      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+      // return값이 pageParam으로 전달
     },
 
     retry: 0,
