@@ -16,11 +16,24 @@ import { API } from '@application/constant';
 interface APIResponse<T = any> {
   result: T;
   message: string;
-  totalItems: number;
+  totalItems?: number;
+  nickname?: string;
+  ACCESS_TOKEN?: string;
 }
 
 interface CustomInstance extends AxiosInstance {
   get<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
+    url: string,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
+  post<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
+  delete<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
     url: string,
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
@@ -44,7 +57,7 @@ instance.interceptors.response.use(
     console.log('📍 response -> ', res);
     return res;
   },
-  async err => {
+  err => {
     if (axios.isAxiosError(err)) {
       const status = err.response?.status;
 

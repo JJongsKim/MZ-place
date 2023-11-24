@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import withAuth from '@components/HOC/withAuth';
 
 import {
@@ -18,17 +19,39 @@ import Modal from '@components/common/Modal';
 import useModal from '@hooks/useModal';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
-import { useNavigate } from 'react-router-dom';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
+import { getAccessToken, getKakaoId, getNaverId, removeAccessToken } from '@infra/api/token';
+import { getNickname } from '@infra/api/nickname';
+import useDeleteUser from '@hooks/api/users/useDeleteUser';
 
 const MyPage = () => {
   const naviagte = useNavigate();
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
   const { handleGetRecentPlaces } = RecentViewPlaces();
+  const nickname = getNickname();
 
+  const token = getAccessToken();
+  const kakaoId = getKakaoId();
+  const naverId = getNaverId();
+
+  const { mutate: userDeleteMutation } = useDeleteUser();
   const handleDeleteAccount = () => {
+    if (token) {
+      userDeleteMutation({
+        local_token: token!,
+      });
+    } else if (kakaoId) {
+      userDeleteMutation({
+        kakao_id: kakaoId,
+      });
+    } else if (naverId) {
+      userDeleteMutation({
+        naver_id: naverId,
+      });
+    }
+
     handleCloseModal();
     handleFloatingToast();
 
@@ -39,19 +62,24 @@ const MyPage = () => {
 
   const storedData = handleGetRecentPlaces().reverse();
 
+  const handleLogout = () => {
+    removeAccessToken();
+    naviagte('/');
+  };
+
   return (
     <MyPageWrap>
       <FirstSection>
         <WelcomeText>반갑습니다!</WelcomeText>
         <UserNameBox>
-          <p>수정</p>
+          <p>{nickname}</p>
           <p>님</p>
         </UserNameBox>
         <InfoText>어떤 작업을 하시겠어요?</InfoText>
       </FirstSection>
       <DivideLine />
       <MyPageJobList>
-        <li>로그아웃</li>
+        <li onClick={handleLogout}>로그아웃</li>
         <li>최근 조회한 장소 20곳</li>
         <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
@@ -61,7 +89,7 @@ const MyPage = () => {
           <ModalBox>
             <WithdrawText>정말로 탈퇴하시겠어요?</WithdrawText>
             <SelectBoxWrap>
-              <SelectBox>아니오</SelectBox>
+              <SelectBox onClick={handleCloseModal}>아니오</SelectBox>
               <SelectBox onClick={handleDeleteAccount}>예</SelectBox>
             </SelectBoxWrap>
           </ModalBox>

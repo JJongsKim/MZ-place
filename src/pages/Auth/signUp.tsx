@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import AuthLogo from '@components/Auth/AuthLogo';
 import {
   CheckText,
@@ -14,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
+import useSignUp from '@hooks/api/users/useSignUp';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ const SignUp = () => {
     }));
   };
 
+  const { mutate: signUpMutate } = useSignUp();
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e?.preventDefault();
 
@@ -40,7 +44,21 @@ const SignUp = () => {
       handleFloatingToast();
 
       setTimeout(() => {
-        navigate('/sign-in');
+        signUpMutate(
+          {
+            nickname: signUpForm.userName,
+            user_id: signUpForm.userId,
+            password: signUpForm.userPassword,
+          },
+          {
+            onSuccess: () => {
+              navigate('/sign-in');
+            },
+            onError: () => {
+              console.log('🙀 에러입니다 !!!!!');
+            },
+          },
+        );
       }, 2200);
     } else {
       isCheckPassword(false);
