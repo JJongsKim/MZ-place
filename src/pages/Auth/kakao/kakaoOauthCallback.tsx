@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Loading from '@components/common/Loading';
 import { useKakaoLogin } from '@hooks/api/users/useSNSLogin';
-import { useNavigate } from 'react-router-dom';
 
 const KakaoOauthCallback = () => {
   const navigate = useNavigate();
