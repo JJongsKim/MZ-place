@@ -24,8 +24,20 @@ export class AuthApi {
   };
 
   // - 회원 탈퇴
-  deleteUser = () => {
-    return this.api.delete('/users/delete');
+  deleteUser = (args: DeleteUserArgsType) => {
+    const headers: Record<string, string> = {};
+
+    if (args.kakao_id) {
+      headers['kakao_id'] = args.kakao_id;
+    } else if (args.naver_id) {
+      headers['naver_id'] = args.naver_id;
+    } else {
+      headers['local_token'] = args.local_token!;
+    }
+
+    return this.api.delete('/users/delete', {
+      headers: headers,
+    });
   };
 }
 

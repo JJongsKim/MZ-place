@@ -74,6 +74,8 @@ const WithdrawTextBox = styled.div`
   border-radius: 10px;
   background-color: #e8e8e8;
   ${({ theme }) => theme.font.B_13};
+
+  cursor: pointer;
 `;
 
 const ModalBox = styled.div`

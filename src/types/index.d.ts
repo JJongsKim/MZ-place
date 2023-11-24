@@ -85,6 +85,12 @@ interface NaverLoginArgsType {
   naver_id: string;
 }
 
+interface DeleteUserArgsType {
+  kakao_id?: string;
+  naver_id?: string;
+  local_token?: string;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {
