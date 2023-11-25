@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { NextFetchTarget, ThumbnailContentArea, ThumbnailListWrap } from './style';
 import ThumbnailBox from '../ThumbnailBox';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
-import useToast from '@hooks/useToast';
-import Toast from '../Toast';
-import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
 
 interface ThumbnailListProps {
   places?: PlacesType[] | PlacesOfMap[];
@@ -57,59 +53,6 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
 
     handleSaveRecentPlace(updatedRecentPlaces);
   };
-
-  // const { mutate: pushHeartMutation } = usePushHeart();
-  // const { mutate: deleteHeartMutation } = useDeleteHeart();
-
-  // const handleClickHeart = (id: number, heartState: number) => {
-  //   if (Object.keys(userId).length === 0) {
-  //     handleFloatingToast();
-  //   } else {
-  //     if (location.pathname === '/search/course') {
-  //       // - 코스 | 찜이 눌리지 않은 장소
-  //       if (heartState === 0) {
-  //         pushHeartMutation({
-  //           args: {
-  //             type: 'c',
-  //             course_id: id,
-  //           },
-  //           headerArgs: userId,
-  //         });
-  //       }
-  //       // - 코스 | 이미 찜이 눌린 장소
-  //       if (heartState === 1) {
-  //         deleteHeartMutation({
-  //           args: {
-  //             type: 'c',
-  //             course_id: id,
-  //           },
-  //           headerArgs: userId,
-  //         });
-  //       }
-  //     } else {
-  //       // - 일반 | 찜이 눌리지 않은 장소
-  //       if (heartState === 0) {
-  //         pushHeartMutation({
-  //           args: {
-  //             type: 'p',
-  //             place_id: id,
-  //           },
-  //           headerArgs: userId,
-  //         });
-  //       }
-  //       // - 일반 | 이미 찜이 눌린 장소
-  //       if (heartState === 1) {
-  //         deleteHeartMutation({
-  //           args: {
-  //             type: 'p',
-  //             place_id: id,
-  //           },
-  //           headerArgs: userId,
-  //         });
-  //       }
-  //     }
-  //   }
-  // };
 
   // 데이터 무한스크롤
   useEffect(() => {
