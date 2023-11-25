@@ -3,10 +3,13 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
-export const useGetPlacesOfFilter = (queryParam?: Record<string, string | number>) => {
+export const useGetPlacesOfFilter = (
+  queryParam?: Record<string, string | number>,
+  headerArgs?: Record<string, string>,
+) => {
   const { data, ...rest } = useInfiniteQuery({
-    queryKey: ['getPlacesOfFilter'],
-    queryFn: ({ pageParam }) => api.places.getPlacesOfFilter(queryParam!, pageParam),
+    queryKey: ['getPlacesOfFilter', headerArgs],
+    queryFn: ({ pageParam }) => api.places.getPlacesOfFilter(queryParam!, pageParam, headerArgs),
     initialPageParam: 1,
 
     getNextPageParam: (lastPage, allPages) => {

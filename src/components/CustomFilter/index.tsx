@@ -13,18 +13,25 @@ import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
 
-const CustomFilter = () => {
+interface CustomFilterProps {
+  userId?: Record<string, string>;
+}
+
+const CustomFilter = ({ userId }: CustomFilterProps) => {
   const { toast, handleFloatingToast } = useToast();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-  const { refetch } = useGetPlacesOfFilter({
-    price: selectedCost[0],
-    filters: selectedActivity.join(','),
-    districts: selectedLocation.join(','),
-  });
+  const { refetch } = useGetPlacesOfFilter(
+    {
+      price: selectedCost[0],
+      filters: selectedActivity.join(','),
+      districts: selectedLocation.join(','),
+    },
+    userId,
+  );
 
   const handleSelectedFilter = useCallback(
     (arrayName: string, selectedItem: string) => {

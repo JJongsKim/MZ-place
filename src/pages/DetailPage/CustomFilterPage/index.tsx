@@ -9,7 +9,11 @@ import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
 
-const CustomFilterPage = () => {
+interface CustomFilterPageProps {
+  userId?: Record<string, string>;
+}
+
+const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
   const location = useLocation();
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
 
@@ -30,7 +34,7 @@ const CustomFilterPage = () => {
           />
         )}
         <BottomSheet>
-          <CustomFilter />
+          <CustomFilter userId={userId} />
         </BottomSheet>
       </CustomFilterPageWrap>
     </DetailPageWrap>
