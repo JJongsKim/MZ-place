@@ -15,13 +15,19 @@ import MyLocation from '@assets/my-location.svg';
 
 interface MapProps {
   currentAddress: string;
+  userId: Record<string, string>;
 }
 
 const geoLocationOptions = {
   timeout: 6000,
 };
 
-const Map = ({ currentAddress }: MapProps) => {
+/*
+  - 현 위치 인식 지도 렌더링
+  - 드롭다운으로 변경된 currentAddress에 따라 자치구청 기준으로 지도 렌더링
+  - 지도를 움직일때마다 북동쪽-남서쪽 범위에 해당하는 장소 리스트 조회 가능
+*/
+const Map = ({ currentAddress, userId }: MapProps) => {
   const dispatch = useDispatch();
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState<(typeof window.kakao.maps.Marker)[]>([]); // 마커 초기화를 위한 상태값
@@ -39,12 +45,15 @@ const Map = ({ currentAddress }: MapProps) => {
     neLng: 0,
   });
   const { wsLat, wsLng, neLat, neLng } = LatLngRange;
-  const { refetch } = useGetPlacesNearBy({
-    ws_latitude: wsLat,
-    ws_longitude: wsLng,
-    ne_latitude: neLat,
-    ne_longitude: neLng,
-  });
+  const { refetch } = useGetPlacesNearBy(
+    {
+      ws_latitude: wsLat,
+      ws_longitude: wsLng,
+      ne_latitude: neLat,
+      ne_longitude: neLng,
+    },
+    userId,
+  );
 
   const handleChangeLatLng = (bounds: any) => {
     setLatLngRange({
@@ -57,7 +66,7 @@ const Map = ({ currentAddress }: MapProps) => {
 
   useEffect(() => {
     if (!location.isLoading) {
-      window.kakao.maps.load(() => {
+      window.kakao.maps.load(async () => {
         const mapContainer = document.getElementById('map');
         let mapOption;
 
@@ -125,6 +134,9 @@ const Map = ({ currentAddress }: MapProps) => {
             }
           });
         });
+
+        const bounds = map.getBounds();
+        handleChangeLatLng(bounds);
 
         return map;
       });

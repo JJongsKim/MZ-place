@@ -78,10 +78,13 @@ export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string,
   return { data, isLoading, ...rest };
 };
 
-export const useGetPlacesNearBy = (queryParams: Record<string, number>) => {
+export const useGetPlacesNearBy = (
+  queryParams: Record<string, number>,
+  headerArgs?: Record<string, string>,
+) => {
   const { data, ...rest } = useQuery({
-    queryKey: ['getPlacesNearBy'],
-    queryFn: () => api.places.getPlacesNearBy(queryParams),
+    queryKey: ['getPlacesNearBy', headerArgs],
+    queryFn: () => api.places.getPlacesNearBy(queryParams, headerArgs),
     enabled: false,
     retry: 1,
   });

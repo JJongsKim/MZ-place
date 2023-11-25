@@ -9,9 +9,13 @@ import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const MapPage = () => {
-  const placesOfMap = useSelector((state: StoreType) => state.PlacesOfMapReducer.placesOfMap);
+interface MapPageProps {
+  userId: Record<string, string>;
+}
+
+const MapPage = ({ userId }: MapPageProps) => {
   const location = useLocation();
+  const placesOfMap = useSelector((state: StoreType) => state.PlacesOfMapReducer.placesOfMap);
   const currentAddress = useSelector((state: StoreType) => state.LocationReducer.currentAddress);
 
   return (
@@ -21,7 +25,7 @@ const MapPage = () => {
         <MapPageDropdownWrap>
           <DropDown currentAddress={currentAddress} />
         </MapPageDropdownWrap>
-        <Map currentAddress={currentAddress} />
+        <Map currentAddress={currentAddress} userId={userId} />
         <BottomSheet>
           <ThumbnailList places={placesOfMap} />
         </BottomSheet>

@@ -35,8 +35,8 @@ class PlacesApi {
   };
 
   // - 거리별 장소 상세조회 API
-  getPlacesNearBy = (queryParams: Record<string, number>) => {
-    return this.api.get('/places/nearby', { params: { ...queryParams } });
+  getPlacesNearBy = (queryParams: Record<string, number>, headerArgs?: Record<string, string>) => {
+    return this.api.get('/places/nearby', { params: { ...queryParams }, headers: headerArgs });
   };
 
   // - 메인페이지 TOP20 API
