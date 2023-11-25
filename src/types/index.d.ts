@@ -99,4 +99,7 @@ interface StoreType {
   PlacesOfMapReducer: {
     placesOfMap: PlacesOfMap[];
   };
+  UserIdReducer: {
+    userId: Record<string, string>;
+  };
 }
