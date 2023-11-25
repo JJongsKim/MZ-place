@@ -106,6 +106,9 @@ interface StoreType {
   LocationReducer: {
     currentAddress: string;
   };
+  PlacesOfFilterReducer: {
+    placesOfFilter: PlacesType[];
+  };
   PlacesOfMapReducer: {
     placesOfMap: PlacesOfMap[];
   };

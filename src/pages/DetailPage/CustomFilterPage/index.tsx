@@ -8,6 +8,7 @@ import { DetailPageWrap } from '../style';
 import SearchBar from '@components/common/SearchBar';
 import { useLocation } from 'react-router-dom';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
+import { useSelector } from 'react-redux';
 
 interface CustomFilterPageProps {
   userId?: Record<string, string>;
@@ -15,19 +16,22 @@ interface CustomFilterPageProps {
 
 const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
   const location = useLocation();
-  const { data, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
+  const placesOfFilter = useSelector(
+    (state: StoreType) => state.PlacesOfFilterReducer.placesOfFilter,
+  );
+  const { isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
       <CustomFilterPageWrap>
-        {data === undefined ? (
+        {placesOfFilter === undefined ? (
           <WarningMention text="필터를 선택해주세요!" />
-        ) : data.length === 0 ? (
+        ) : placesOfFilter.length === 0 ? (
           <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
           <ThumbnailList
-            places={data}
+            places={placesOfFilter}
             isLoading={isLoading}
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}

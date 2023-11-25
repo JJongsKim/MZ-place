@@ -12,6 +12,8 @@ import React, { useCallback, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
+import { useDispatch } from 'react-redux';
+import { setPlacesOfFilter } from '@store/reducers/PlacesOfFilterReducer';
 
 interface CustomFilterProps {
   userId?: Record<string, string>;
@@ -19,6 +21,7 @@ interface CustomFilterProps {
 
 const CustomFilter = ({ userId }: CustomFilterProps) => {
   const { toast, handleFloatingToast } = useToast();
+  const dispatch = useDispatch();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
@@ -85,8 +88,11 @@ const CustomFilter = ({ userId }: CustomFilterProps) => {
       handleFloatingToast();
     }
     // 조건 걸고 난 후 refetch,
+    // refetch된 데이터를 바로 리듀서에 전달
     else {
-      await refetch();
+      await refetch().then(data => {
+        dispatch(setPlacesOfFilter(data.data?.pages[0].data.result));
+      });
     }
   };
 
