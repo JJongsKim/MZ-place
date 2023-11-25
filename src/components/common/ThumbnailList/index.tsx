@@ -4,6 +4,9 @@ import { NextFetchTarget, ThumbnailContentArea, ThumbnailListWrap } from './styl
 import ThumbnailBox from '../ThumbnailBox';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import useToast from '@hooks/useToast';
+import Toast from '../Toast';
 
 interface ThumbnailListProps {
   places?: PlacesType[] | PlacesOfMap[];
@@ -15,11 +18,16 @@ interface ThumbnailListProps {
 
 const MAX_RECENT_PLACES = 20;
 
-// TODO API 모두 입히면 수정하기
+/*
+  - 장소 썸네일에 대한 정보 전달
+  - 로그인 여부에 따른 찜 API 연결
+*/
 const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: ThumbnailListProps) => {
   const naviagate = useNavigate();
   const { handleGetRecentPlaces, handleSaveRecentPlace } = RecentViewPlaces();
+  const { toast, handleFloatingToast } = useToast();
 
+  const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
   const nextFetchTargetRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickThumb = (data: PlacesType) => {
@@ -40,6 +48,14 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
     }
 
     handleSaveRecentPlace(updatedRecentPlaces);
+  };
+
+  const handleClickHeart = () => {
+    if (Object.keys(userId).length === 0) {
+      handleFloatingToast();
+    } else {
+      console.log('로그인되어있어요!');
+    }
   };
 
   // 데이터 무한스크롤
@@ -80,6 +96,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
             key={data.id}
             data={data}
             like={data.heart}
+            onClickHeart={handleClickHeart}
             onClick={() => handleClickThumb(data)}
           />
         ))}
@@ -87,6 +104,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
       {!isLoading && hasNextPage && (
         <NextFetchTarget ref={nextFetchTargetRef}>• • •</NextFetchTarget>
       )}
+      {toast && <Toast>찜 기능은 로그인 후 이용해주세요!</Toast>}
     </ThumbnailListWrap>
   ) : null;
 };

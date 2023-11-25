@@ -21,35 +21,26 @@ import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
-import { getAccessToken, getKakaoId, getNaverId, removeAccessToken } from '@infra/api/token';
-import { getNickname } from '@infra/api/nickname';
+import { removeAccessToken } from '@infra/api/token';
+import { getNickname, removeNickname } from '@infra/api/nickname';
 import useDeleteUser from '@hooks/api/users/useDeleteUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserId } from '@store/reducers/UserIdReducer';
 
 const MyPage = () => {
   const naviagte = useNavigate();
+  const dispatch = useDispatch();
+  const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
+
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
   const { handleGetRecentPlaces } = RecentViewPlaces();
   const nickname = getNickname();
 
-  const token = getAccessToken();
-  const kakaoId = getKakaoId();
-  const naverId = getNaverId();
-
   const { mutate: userDeleteMutation } = useDeleteUser();
   const handleDeleteAccount = () => {
-    if (token) {
-      userDeleteMutation({
-        local_token: token!,
-      });
-    } else if (kakaoId) {
-      userDeleteMutation({
-        kakao_id: kakaoId,
-      });
-    } else if (naverId) {
-      userDeleteMutation({
-        naver_id: naverId,
-      });
+    if (userId) {
+      userDeleteMutation(userId);
     }
 
     handleCloseModal();
@@ -62,8 +53,14 @@ const MyPage = () => {
 
   const storedData = handleGetRecentPlaces().reverse();
 
-  const handleLogout = () => {
+  const handleRemoveInfos = () => {
     removeAccessToken();
+    removeNickname();
+    dispatch(setUserId({}));
+  };
+
+  const handleLogout = () => {
+    handleRemoveInfos();
     naviagte('/');
   };
 

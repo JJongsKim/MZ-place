@@ -1,4 +1,5 @@
 import Layout from '@components/Layout';
+import { getAccessToken, getKakaoId, getNaverId } from '@infra/api/token';
 import KakaoOauthCallback from '@pages/Auth/kakao/kakaoOauthCallback';
 import NaverOauthCallback from '@pages/Auth/naver/naverOauthCallback';
 import SignIn from '@pages/Auth/signIn';
@@ -13,13 +14,34 @@ import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
 import MyPage from '@pages/MyPage';
 import SearchPage from '@pages/SearchPage';
+import { setUserId } from '@store/reducers/UserIdReducer';
 
 import GlobalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
+  const dispatch = useDispatch();
+
+  const token = getAccessToken();
+  const kakaoId = getKakaoId();
+  const naverId = getNaverId();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(setUserId({ local_token: token }));
+    }
+    if (kakaoId) {
+      dispatch(setUserId({ kakao_id: kakaoId }));
+    }
+    if (naverId) {
+      dispatch(setUserId({ naver_id: naverId }));
+    }
+  }, []);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
