@@ -19,12 +19,13 @@ import { setUserId } from '@store/reducers/UserIdReducer';
 import GlobalStyle from '@styles/globalStyle';
 import { theme } from '@styles/theme';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
   const dispatch = useDispatch();
+  const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
 
   const token = getAccessToken();
   const kakaoId = getKakaoId();
@@ -49,7 +50,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<MainPage />} />
+              <Route path="/" element={<MainPage userId={userId} />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/:menuId" element={<CategoryPage />} />
               <Route path="/search/course" element={<CoursePage />} />

@@ -81,10 +81,11 @@ export const useGetPlacesNearBy = (queryParams: Record<string, number>) => {
   return { data, ...rest };
 };
 
-export const useGetPlacesOfTop20 = () => {
+// 헤더 여부에 따라 top20 띄우기
+export const useGetPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
   const { data, ...rest } = useQuery({
-    queryKey: ['getPlacesOfTop20'],
-    queryFn: () => api.places.getPlacesOfTop20(),
+    queryKey: ['getPlacesOfTop20', headerArgs],
+    queryFn: () => api.places.getPlacesOfTop20(headerArgs),
     retry: 1,
   });
 

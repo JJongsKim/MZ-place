@@ -10,8 +10,12 @@ import {
 } from './style';
 import { useGetPlacesOfTop20 } from '@hooks/api/places';
 
-const MainPage = () => {
-  const { data } = useGetPlacesOfTop20();
+interface MainPageProps {
+  userId: Record<string, string>;
+}
+
+const MainPage = ({ userId }: MainPageProps) => {
+  const { data } = useGetPlacesOfTop20(userId);
   const top20Places = data as PlacesType[];
 
   return (

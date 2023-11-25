@@ -25,8 +25,10 @@ class PlacesApi {
   };
 
   // - 메인페이지 TOP20 API
-  getPlacesOfTop20 = () => {
-    return this.api.get('/places');
+  getPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
+    return this.api.get('/places', {
+      headers: headerArgs,
+    });
   };
 }
 
