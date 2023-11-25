@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface RootState {
-  placesOfFilter: PlacesOfMap[];
+  placesOfFilter: PlacesOfMap[] | undefined;
 }
 
 const initialState: RootState = {
-  placesOfFilter: [],
+  placesOfFilter: undefined,
 };
 
 const PlacesOfFilterReducer = createSlice({
