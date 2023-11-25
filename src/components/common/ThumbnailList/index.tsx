@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,12 +30,9 @@ const MAX_RECENT_PLACES = 20;
 const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: ThumbnailListProps) => {
   const naviagate = useNavigate();
   const { handleGetRecentPlaces, handleSaveRecentPlace } = RecentViewPlaces();
-  const { toast, handleFloatingToast } = useToast();
 
   const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
   const nextFetchTargetRef = useRef<HTMLDivElement | null>(null);
-
-  const [clickHeart, setClickHeart] = useState<HeartDataArgsType>();
 
   /*
     - 장소 상세보기로 이동
@@ -60,42 +58,58 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
     handleSaveRecentPlace(updatedRecentPlaces);
   };
 
-  const { mutate: pushHeartMutation } = usePushHeart();
-  const { mutate: deleteHeartMutation } = useDeleteHeart();
-  const handleChangeHeartState = (id: number) => {
-    if (location.pathname === '/search/course') {
-      setClickHeart({
-        type: 'c',
-        course_id: id,
-      });
-    } else {
-      setClickHeart({
-        type: 'p',
-        place_id: id,
-      });
-    }
-  };
+  // const { mutate: pushHeartMutation } = usePushHeart();
+  // const { mutate: deleteHeartMutation } = useDeleteHeart();
 
-  const handleClickHeart = async (id: number, heartState: number) => {
-    if (Object.keys(userId).length === 0) {
-      handleFloatingToast();
-    } else {
-      await handleChangeHeartState(id);
-
-      // - 찜이 눌리지 않은 장소
-      if (heartState === 0) {
-        if (clickHeart !== undefined) {
-          pushHeartMutation({ args: clickHeart, headerArgs: userId });
-        }
-      }
-      // - 이미 찜이 눌린 장소
-      else if (heartState === 1) {
-        if (clickHeart !== undefined) {
-          deleteHeartMutation({ args: clickHeart, headerArgs: userId });
-        }
-      }
-    }
-  };
+  // const handleClickHeart = (id: number, heartState: number) => {
+  //   if (Object.keys(userId).length === 0) {
+  //     handleFloatingToast();
+  //   } else {
+  //     if (location.pathname === '/search/course') {
+  //       // - 코스 | 찜이 눌리지 않은 장소
+  //       if (heartState === 0) {
+  //         pushHeartMutation({
+  //           args: {
+  //             type: 'c',
+  //             course_id: id,
+  //           },
+  //           headerArgs: userId,
+  //         });
+  //       }
+  //       // - 코스 | 이미 찜이 눌린 장소
+  //       if (heartState === 1) {
+  //         deleteHeartMutation({
+  //           args: {
+  //             type: 'c',
+  //             course_id: id,
+  //           },
+  //           headerArgs: userId,
+  //         });
+  //       }
+  //     } else {
+  //       // - 일반 | 찜이 눌리지 않은 장소
+  //       if (heartState === 0) {
+  //         pushHeartMutation({
+  //           args: {
+  //             type: 'p',
+  //             place_id: id,
+  //           },
+  //           headerArgs: userId,
+  //         });
+  //       }
+  //       // - 일반 | 이미 찜이 눌린 장소
+  //       if (heartState === 1) {
+  //         deleteHeartMutation({
+  //           args: {
+  //             type: 'p',
+  //             place_id: id,
+  //           },
+  //           headerArgs: userId,
+  //         });
+  //       }
+  //     }
+  //   }
+  // };
 
   // 데이터 무한스크롤
   useEffect(() => {
@@ -132,10 +146,10 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
       <ThumbnailContentArea>
         {places.map(data => (
           <ThumbnailBox
+            userId={userId}
             key={data.id}
             data={data}
             like={data.heart}
-            onClickHeart={() => handleClickHeart(data.id, data.heart)}
             onClick={() => handleClickThumb(data)}
           />
         ))}
@@ -143,7 +157,6 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
       {!isLoading && hasNextPage && (
         <NextFetchTarget ref={nextFetchTargetRef}>• • •</NextFetchTarget>
       )}
-      {toast && <Toast>찜 기능은 로그인 후 이용해주세요!</Toast>}
     </ThumbnailListWrap>
   ) : null;
 };

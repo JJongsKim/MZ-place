@@ -40,7 +40,7 @@ const ToastWrap = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   background-color: white;
 
-  z-index: 5;
+  z-index: 8;
   animation: ${ToastAnimation};
   animation-duration: 2.2s;
 `;
