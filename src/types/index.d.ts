@@ -33,6 +33,15 @@ interface PlacesType {
   type?: 'place' | 'course';
 }
 
+interface HeartPlacesType {
+  heart_id: number;
+  heart: number;
+  id: number;
+  type: 'place' | 'course';
+  name: string;
+  image_url: string;
+}
+
 interface PlacesOfMap extends PlacesType {
   latitude: string;
   longitude: string;
