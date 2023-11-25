@@ -52,12 +52,12 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<MainPage userId={userId} />} />
               <Route path="/search" element={<SearchPage />} />
-              <Route path="/search/:menuId" element={<CategoryPage />} />
+              <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
               <Route path="/search/map" element={<MapPage />} />
               <Route path="/search/like-recommend" element={<LikeRecommendPage />} />
               <Route path="/search/custom" element={<CustomFilterPage />} />
-              <Route path="/place/:id" element={<ExplainPage />} />
+              <Route path="/place/:id" element={<ExplainPage userId={userId} />} />
               <Route
                 path="/like"
                 element={<LikePage key={null} type={undefined} props={undefined} />}

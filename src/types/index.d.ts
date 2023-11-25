@@ -52,6 +52,7 @@ interface PlaceType {
   description: string;
   destrict: string;
   id: number;
+  heart: number;
   latitude: string;
   longitude: string;
   name: string;

@@ -1,10 +1,10 @@
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NextFetchTarget, ThumbnailContentArea, ThumbnailListWrap } from './style';
 import ThumbnailBox from '../ThumbnailBox';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
-import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import useToast from '@hooks/useToast';
 import Toast from '../Toast';
 import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';

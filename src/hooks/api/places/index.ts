@@ -38,10 +38,15 @@ export const useGetPlacesOfFilter = (queryParam?: Record<string, string | number
   return { data: filterPlaceData, ...rest };
 };
 
-export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, string>) => {
+export const useGetPlacesOfCategory = (
+  id: number,
+  queryParams?: Record<string, string>,
+  headerArgs?: Record<string, string>,
+) => {
   const { data, isLoading, ...rest } = useInfiniteQuery({
-    queryKey: ['getPlacesOfCategory'],
-    queryFn: ({ pageParam }) => api.places.getPlacesOfCategory(id, pageParam, queryParams),
+    queryKey: ['getPlacesOfCategory', headerArgs],
+    queryFn: ({ pageParam }) =>
+      api.places.getPlacesOfCategory(id, pageParam, queryParams, headerArgs),
     initialPageParam: 1, // v5 달라진 점
 
     getNextPageParam: (lastPage, allPages) => {
@@ -60,10 +65,10 @@ export const useGetPlacesOfCategory = (id: number, queryParams?: Record<string, 
   return { data: placeData, isLoading, ...rest };
 };
 
-export const useGetInfoByPlaceId = (placeId: number) => {
+export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useQuery({
-    queryKey: ['getInfoByPlaceId'],
-    queryFn: () => api.places.getInfoByPlaceId(placeId),
+    queryKey: ['getInfoByPlaceId', headerArgs],
+    queryFn: () => api.places.getInfoByPlaceId(placeId, headerArgs),
     retry: 2,
   });
 

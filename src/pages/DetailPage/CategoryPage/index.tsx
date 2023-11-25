@@ -9,7 +9,11 @@ import Chip from '@components/common/Chip';
 import { useLocation } from 'react-router-dom';
 import Loading from '@components/common/Loading';
 
-const CategoryPage = () => {
+interface CategoryPageProps {
+  userId?: Record<string, string>;
+}
+
+const CategoryPage = ({ userId }: CategoryPageProps) => {
   const location = useLocation();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
@@ -35,6 +39,7 @@ const CategoryPage = () => {
     {
       price: selectedCost[0],
     },
+    userId,
   );
 
   useEffect(() => {

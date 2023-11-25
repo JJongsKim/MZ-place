@@ -1,4 +1,5 @@
 import { ExplainPageWrap, LikeIcon, LocationTitle, ThumbnailBox, ThumbnailBoxWrap } from './style';
+import LikeFull from '@assets/like-full.svg';
 import LikeEmpty from '@assets/like-gray.svg';
 
 import { useLocation } from 'react-router-dom';
@@ -10,11 +11,16 @@ import WarningMention from '@components/common/warning';
 import useReverseGeoCoding from '@hooks/useReverseGeoCoding';
 import Loading from '@components/common/Loading';
 
-const ExplainPage = () => {
+interface ExplainPageProps {
+  userId: Record<string, string>;
+}
+
+const ExplainPage = ({ userId }: ExplainPageProps) => {
   const location = useLocation();
 
   const { isLoading, data } = useGetInfoByPlaceId(
     Number(location.pathname.match(/\/place\/(\d+)/)?.[1]),
+    userId,
   );
   const placeInfo = data?.data.result as PlaceType;
 
@@ -33,7 +39,7 @@ const ExplainPage = () => {
         <>
           <ThumbnailBoxWrap>
             <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" />
-            <LikeIcon src={LikeEmpty} />
+            {placeInfo.heart === 1 ? <LikeIcon src={LikeFull} /> : <LikeIcon src={LikeEmpty} />}
           </ThumbnailBoxWrap>
           <LocationTitle>{location.state}</LocationTitle>
           {placeInfo?.related_course ? (

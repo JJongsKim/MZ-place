@@ -10,13 +10,21 @@ class PlacesApi {
   };
 
   // - 카테고리 API
-  getPlacesOfCategory = (id: number, page: number, queryParams?: Record<string, string>) => {
-    return this.api.get(`/places/category${id}`, { params: { page: page, ...queryParams } });
+  getPlacesOfCategory = (
+    id: number,
+    page: number,
+    queryParams?: Record<string, string>,
+    headerArgs?: Record<string, string>,
+  ) => {
+    return this.api.get(`/places/category${id}`, {
+      params: { page: page, ...queryParams },
+      headers: headerArgs,
+    });
   };
 
   // - id별 장소 상세조회 API
-  getInfoByPlaceId = (placeId: number) => {
-    return this.api.get(`/places/place${placeId}`);
+  getInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
+    return this.api.get(`/places/place${placeId}`, { headers: headerArgs });
   };
 
   // - 거리별 장소 상세조회 API
