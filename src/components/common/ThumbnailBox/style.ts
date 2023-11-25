@@ -1,10 +1,14 @@
 import { styled } from 'styled-components';
 
+const Thumbnail = styled.article`
+  position: relative;
+  z-index: 2;
+`;
+
 const ThumbWrap = styled.div<{
   $imageSrc?: string;
   $defaultImageSrc: string;
 }>`
-  position: relative;
   width: 150px;
   height: 100px;
   border-radius: 20px;
@@ -39,6 +43,13 @@ const LikeIcon = styled.div`
   position: absolute;
   top: 10px;
   right: 12px;
+  z-index: 4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 25px;
   cursor: pointer;
 
   svg {
@@ -48,4 +59,4 @@ const LikeIcon = styled.div`
   }
 `;
 
-export { ThumbWrap, ThumbLabel, LabelText, LikeIcon };
+export { Thumbnail, ThumbWrap, ThumbLabel, LabelText, LikeIcon };
