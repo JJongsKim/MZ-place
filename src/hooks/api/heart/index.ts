@@ -67,6 +67,9 @@ export const useDeleteHeart = () => {
       queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
+
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
     },
   });
 };

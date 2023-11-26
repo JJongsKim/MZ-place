@@ -5,9 +5,11 @@ import { setNickname } from '@infra/api/nickname';
 import { setAccessToken } from '@infra/api/token';
 import { useMutation } from '@tanstack/react-query';
 import { setUserId } from '@store/reducers/UserIdReducer';
+import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 
 const useSignIn = () => {
   const dispatch = useDispatch();
+  const { handleRemoveRecentPlace } = RecentViewPlaces();
 
   return useMutation({
     mutationFn: (args: LoginArgsType) => api.auth.login(args),
@@ -15,6 +17,7 @@ const useSignIn = () => {
       if (data.data.ACCESS_TOKEN !== undefined) {
         setAccessToken(data.data.ACCESS_TOKEN);
         setNickname(data.data.nickname!);
+        handleRemoveRecentPlace();
         dispatch(setUserId({ local_token: data.data.ACCESS_TOKEN }));
       }
     },
