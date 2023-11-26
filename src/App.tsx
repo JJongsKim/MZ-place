@@ -24,6 +24,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
+const HOCprops = {
+  key: null,
+  type: undefined,
+  props: undefined,
+};
+
 function App() {
   const dispatch = useDispatch();
   const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
@@ -56,21 +62,12 @@ function App() {
               <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
               <Route path="/search/map" element={<MapPage userId={userId} />} />
-              <Route
-                path="/search/like-recommend"
-                element={<LikeRecommendPage key={null} type={undefined} props={undefined} />}
-              />
+              <Route path="/search/like-recommend" element={<LikeRecommendPage {...HOCprops} />} />
               <Route path="/search/custom" element={<CustomFilterPage userId={userId} />} />
               <Route path="/place/:id" element={<ExplainPage userId={userId} />} />
               <Route path="/course/:id" element={<CourseExplainPage />} />
-              <Route
-                path="/like"
-                element={<LikePage key={null} type={undefined} props={undefined} />}
-              />
-              <Route
-                path="/my-page"
-                element={<MyPage key={null} type={undefined} props={undefined} />}
-              />
+              <Route path="/like" element={<LikePage {...HOCprops} userId={userId} />} />
+              <Route path="/my-page" element={<MyPage {...HOCprops} userId={userId} />} />
             </Route>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />

@@ -24,13 +24,16 @@ import ThumbnailList from '@components/common/ThumbnailList';
 import { removeAccessToken } from '@infra/api/token';
 import { getNickname, removeNickname } from '@infra/api/nickname';
 import useDeleteUser from '@hooks/api/users/useDeleteUser';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUserId } from '@store/reducers/UserIdReducer';
 
-const MyPage = () => {
+interface MyPageProps {
+  userId: Record<string, string>;
+}
+
+const MyPage = ({ userId }: MyPageProps) => {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
-  const userId = useSelector((state: StoreType) => state.UserIdReducer.userId);
 
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
