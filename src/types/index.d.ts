@@ -25,6 +25,12 @@ interface GeolocationAddress {
   y: number;
 }
 
+interface RecentPlacesType {
+  id: number;
+  image_url: string;
+  name: string;
+}
+
 interface PlacesType {
   heart: number;
   id: number;

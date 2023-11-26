@@ -83,7 +83,7 @@ const MyPage = ({ userId }: MyPageProps) => {
         <li>최근 조회한 장소 20곳</li>
         <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
-      <ThumbnailList places={storedData} />
+      <ThumbnailList places={storedData} recentView={true} />
       {modal && (
         <Modal onClose={handleCloseModal}>
           <ModalBox>

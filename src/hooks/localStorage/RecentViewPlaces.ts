@@ -4,7 +4,7 @@ const RecentViewPlaces = () => {
     return storedData ? JSON.parse(storedData) : [];
   };
 
-  const handleSaveRecentPlace = (places: PlacesType[]) => {
+  const handleSaveRecentPlace = (places: RecentPlacesType[]) => {
     localStorage.setItem('recentPlaces', JSON.stringify(places));
   };
 

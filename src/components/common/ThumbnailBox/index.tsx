@@ -13,10 +13,11 @@ interface ThumbnailProps {
   data: PlacesType | PlacesOfMap;
   userId?: Record<string, string>;
   like?: number;
+  recentView?: boolean | null;
   onClick?: () => void;
 }
 
-const ThumbnailBox = ({ userId, data, like, onClick }: ThumbnailProps) => {
+const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProps) => {
   const { toast, handleFloatingToast } = useToast();
   const [heartState, setHeartState] = useState(false);
 
@@ -92,9 +93,11 @@ const ThumbnailBox = ({ userId, data, like, onClick }: ThumbnailProps) => {
             <LabelText>{data.name}</LabelText>
           </ThumbLabel>
         </ThumbWrap>
-        <LikeIcon onClick={() => handleClickHeart(data.id)}>
-          {heartState ? <LikeFull /> : <LikeEmpty />}
-        </LikeIcon>
+        {!recentView ? (
+          <LikeIcon onClick={() => handleClickHeart(data.id)}>
+            {heartState ? <LikeFull /> : <LikeEmpty />}
+          </LikeIcon>
+        ) : null}
       </Thumbnail>
       {toast && <Toast>찜 기능은 로그인 후 이용해주세요!</Toast>}
     </>

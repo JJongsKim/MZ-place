@@ -7,6 +7,7 @@ import ThumbnailBox from '../ThumbnailBox';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 
 interface ThumbnailListProps {
+  recentView?: boolean;
   places?: PlacesType[] | PlacesOfMap[];
   isLoading?: boolean;
   totalPlaces?: number;
@@ -23,7 +24,13 @@ const MAX_RECENT_PLACES = 20;
     2. Course 이외 장소일땐 body type: 'p'
     3. 메인페이지에서는 전달해주는 type에 따라 'c', 'p'나누기
 */
-const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: ThumbnailListProps) => {
+const ThumbnailList = ({
+  recentView,
+  places,
+  isLoading,
+  hasNextPage,
+  fetchNextPage,
+}: ThumbnailListProps) => {
   const naviagate = useNavigate();
   const { handleGetRecentPlaces, handleSaveRecentPlace } = RecentViewPlaces();
 
@@ -37,11 +44,10 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
   const handleClickThumb = (data: PlacesType) => {
     naviagate(`/place/${data.id}`, { state: data });
 
-    const recentPlaces: PlacesType[] = handleGetRecentPlaces();
+    const recentPlaces: RecentPlacesType[] = handleGetRecentPlaces();
     const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);
 
     updatedRecentPlaces.push({
-      heart: data.heart,
       id: data.id,
       image_url: data.image_url,
       name: data.name,
@@ -93,6 +99,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
             key={data.id}
             data={data}
             like={data.heart}
+            recentView={recentView ? recentView : null}
             onClick={() => handleClickThumb(data)}
           />
         ))}
