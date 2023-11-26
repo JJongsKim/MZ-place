@@ -21,35 +21,29 @@ import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
-import { getAccessToken, getKakaoId, getNaverId, removeAccessToken } from '@infra/api/token';
-import { getNickname } from '@infra/api/nickname';
+import { removeAccessToken } from '@infra/api/token';
+import { getNickname, removeNickname } from '@infra/api/nickname';
 import useDeleteUser from '@hooks/api/users/useDeleteUser';
+import { useDispatch } from 'react-redux';
+import { setUserId } from '@store/reducers/UserIdReducer';
 
-const MyPage = () => {
+interface MyPageProps {
+  userId: Record<string, string>;
+}
+
+const MyPage = ({ userId }: MyPageProps) => {
   const naviagte = useNavigate();
+  const dispatch = useDispatch();
+
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
   const { handleGetRecentPlaces } = RecentViewPlaces();
   const nickname = getNickname();
 
-  const token = getAccessToken();
-  const kakaoId = getKakaoId();
-  const naverId = getNaverId();
-
   const { mutate: userDeleteMutation } = useDeleteUser();
   const handleDeleteAccount = () => {
-    if (token) {
-      userDeleteMutation({
-        local_token: token!,
-      });
-    } else if (kakaoId) {
-      userDeleteMutation({
-        kakao_id: kakaoId,
-      });
-    } else if (naverId) {
-      userDeleteMutation({
-        naver_id: naverId,
-      });
+    if (userId) {
+      userDeleteMutation(userId);
     }
 
     handleCloseModal();
@@ -62,8 +56,14 @@ const MyPage = () => {
 
   const storedData = handleGetRecentPlaces().reverse();
 
-  const handleLogout = () => {
+  const handleRemoveInfos = () => {
     removeAccessToken();
+    removeNickname();
+    dispatch(setUserId({}));
+  };
+
+  const handleLogout = () => {
+    handleRemoveInfos();
     naviagte('/');
   };
 
@@ -83,7 +83,7 @@ const MyPage = () => {
         <li>최근 조회한 장소 20곳</li>
         <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
       </MyPageJobList>
-      <ThumbnailList places={storedData} />
+      <ThumbnailList places={storedData} recentView={true} />
       {modal && (
         <Modal onClose={handleCloseModal}>
           <ModalBox>

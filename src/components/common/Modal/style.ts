@@ -6,6 +6,8 @@ const ModalView = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+
+  z-index: 5;
 `;
 
 const ModalBackground = styled.div`

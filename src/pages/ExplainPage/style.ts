@@ -20,15 +20,15 @@ const ThumbnailBox = styled.img`
   object-fit: contain;
 `;
 
-const LikeIcon = styled.img`
+const LikeIcon = styled.div`
   position: absolute;
   right: 15px;
   bottom: 15px;
-  width: 20px;
-  height: 20px;
   cursor: pointer;
 
   svg {
+    width: 22px;
+    height: 22px;
     fill: #606060;
   }
 `;

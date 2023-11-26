@@ -11,9 +11,22 @@ import {
 } from './style';
 import WarningMention from '@components/common/warning';
 import { getNickname } from '@infra/api/nickname';
+import { useGetPlacesOfHeart } from '@hooks/api/heart';
+import ThumbnailList from '@components/common/ThumbnailList';
+import { useEffect } from 'react';
 
-const LikePage = () => {
+interface LikePageProps {
+  userId: Record<string, string>;
+}
+
+const LikePage = ({ userId }: LikePageProps) => {
   const nickname = getNickname();
+
+  const { data, refetch } = useGetPlacesOfHeart(userId);
+
+  useEffect(() => {
+    refetch();
+  }, [userId]);
 
   return (
     <LikePageWrap>
@@ -25,7 +38,11 @@ const LikePage = () => {
         <HeaderLine />
       </LikePageHeader>
       <ContentArea>
-        <WarningMention text="아직 찜을 누른 곳이 없어요!" />
+        {data?.length === 0 ? (
+          <WarningMention text="아직 찜을 누른 곳이 없어요!" />
+        ) : (
+          <ThumbnailList places={data} />
+        )}
       </ContentArea>
     </LikePageWrap>
   );

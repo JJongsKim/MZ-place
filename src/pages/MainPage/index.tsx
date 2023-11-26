@@ -11,9 +11,13 @@ import {
 import { useGetPlacesOfTop20 } from '@hooks/api/places';
 import { useNavigate } from 'react-router-dom';
 
-const MainPage = () => {
+interface MainPageProps {
+  userId: Record<string, string>;
+}
+
+const MainPage = ({ userId }: MainPageProps) => {
   const navigate = useNavigate();
-  const { data } = useGetPlacesOfTop20();
+  const { data } = useGetPlacesOfTop20(userId);
   const top20Places = data as PlacesType[];
 
   return (

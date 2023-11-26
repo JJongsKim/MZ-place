@@ -25,12 +25,27 @@ interface GeolocationAddress {
   y: number;
 }
 
+interface RecentPlacesType {
+  id: number;
+  image_url: string;
+  name: string;
+}
+
 interface PlacesType {
   heart: number;
   id: number;
   image_url: string;
   name: string;
   type?: 'place' | 'course';
+}
+
+interface HeartPlacesType {
+  heart_id: number;
+  heart: number;
+  id: number;
+  type: 'place' | 'course';
+  name: string;
+  image_url: string;
 }
 
 interface PlacesOfMap extends PlacesType {
@@ -43,6 +58,7 @@ interface PlaceType {
   description: string;
   destrict: string;
   id: number;
+  heart: number;
   latitude: string;
   longitude: string;
   name: string;
@@ -85,10 +101,10 @@ interface NaverLoginArgsType {
   naver_id: string;
 }
 
-interface DeleteUserArgsType {
-  kakao_id?: string;
-  naver_id?: string;
-  local_token?: string;
+interface HeartDataArgsType {
+  type: 'c' | 'p';
+  course_id?: number;
+  place_id?: number;
 }
 
 // redux store 타입
@@ -96,7 +112,13 @@ interface StoreType {
   LocationReducer: {
     currentAddress: string;
   };
+  PlacesOfFilterReducer: {
+    placesOfFilter: PlacesType[];
+  };
   PlacesOfMapReducer: {
     placesOfMap: PlacesOfMap[];
+  };
+  UserIdReducer: {
+    userId: Record<string, string>;
   };
 }

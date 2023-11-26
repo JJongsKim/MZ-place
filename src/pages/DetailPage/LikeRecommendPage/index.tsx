@@ -1,6 +1,7 @@
 import SearchBar from '@components/common/SearchBar';
 import { DetailPageWrap } from '../style';
 import { useLocation } from 'react-router-dom';
+import withAuth from '@components/HOC/withAuth';
 
 const LikeRecommendPage = () => {
   const location = useLocation();
@@ -12,4 +13,4 @@ const LikeRecommendPage = () => {
   );
 };
 
-export default LikeRecommendPage;
+export default withAuth(LikeRecommendPage);
