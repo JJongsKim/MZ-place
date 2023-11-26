@@ -32,14 +32,14 @@ export const usePushHeart = () => {
 
   return useMutation({
     mutationKey: ['pushHeart'],
-    mutationFn: ({
+    mutationFn: async ({
       args,
       headerArgs,
     }: {
       args: HeartDataArgsType;
       headerArgs: Record<string, string>;
     }) => {
-      const result = api.hearts.pushHeart(args, headerArgs);
+      const result = await api.hearts.pushHeart(args, headerArgs);
 
       queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
       queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
@@ -57,14 +57,14 @@ export const useDeleteHeart = () => {
 
   return useMutation({
     mutationKey: ['deleteHeart'],
-    mutationFn: ({
+    mutationFn: async ({
       args,
       headerArgs,
     }: {
       args: HeartDataArgsType;
       headerArgs: Record<string, string>;
     }) => {
-      const result = api.hearts.deleteHeart(args, headerArgs);
+      const result = await api.hearts.deleteHeart(args, headerArgs);
 
       queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
       queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
