@@ -23,13 +23,11 @@ const NaverOauthCallback = () => {
   const { mutate: naverMutation } = useNaverLogin(naverId);
 
   const getNaverAccessToken = async () => {
-    console.log('네이버 코드!!::', code);
     if (code !== undefined && code !== null) {
       try {
         const res = await axios.post(
           `https://nid.naver.com/oauth2.0/token?grant_type=${grantType}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`,
         );
-        console.log('토큰 응답!!::', res);
         setToken(res.data.access_token);
       } catch (error) {
         console.log('🙀 토큰 가져오기 실패!!!', error);
@@ -38,7 +36,6 @@ const NaverOauthCallback = () => {
   };
 
   const getUserInfo = async () => {
-    console.log('토큰 잘 담겼는지!!::', token);
     if (token !== '' && token !== undefined) {
       try {
         const userRes = await axios.post(`https://openapi.naver.com/v1/nid/me`, {
@@ -46,8 +43,6 @@ const NaverOauthCallback = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        console.log('네이버 유저정보!!::', userRes);
 
         setSNSLoginInfo({
           nickname: userRes.data.user.name,

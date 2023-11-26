@@ -26,11 +26,11 @@ import useSignIn from '@hooks/api/users/useSignIn';
 const SignIn = () => {
   const navigate = useNavigate();
   const KAKAO_REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
-  const NAVER_REDIRECT_URI = `${process.env.REACT_APP_NAVER_REDIRECT_URI}`;
+  // const NAVER_REDIRECT_URI = `${process.env.REACT_APP_NAVER_REDIRECT_URI}`;
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`;
-  const naverURL =
-    `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&redirect_uri=${NAVER_REDIRECT_URI}&state=` +
-    Math.random().toString(36).substring(2, 10);
+  // const naverURL =
+  //   `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&redirect_uri=${NAVER_REDIRECT_URI}&state=` +
+  //   Math.random().toString(36).substring(2, 10);
 
   const { toast, handleFloatingToast } = useToast();
   const [signInForm, setSignInForm] = useState({
@@ -107,9 +107,7 @@ const SignIn = () => {
             <Link to={kakaoURL}>
               <SocialIcon src={kakao} alt="카카오" />
             </Link>
-            <Link to={naverURL}>
-              <SocialIcon src={naver} alt="네이버" />
-            </Link>
+            <SocialIcon src={naver} alt="네이버" />
           </SocialWrap>
           <SubmitWrap>
             <Link to="/sign-up">
