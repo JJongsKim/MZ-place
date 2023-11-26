@@ -47,7 +47,7 @@ export const useGetPlacesOfCategory = (
   headerArgs?: Record<string, string>,
 ) => {
   const { data, isLoading, ...rest } = useInfiniteQuery({
-    queryKey: ['getPlacesOfCategory', headerArgs],
+    queryKey: ['getPlacesOfCategory'],
     queryFn: ({ pageParam }) =>
       api.places.getPlacesOfCategory(id, pageParam, queryParams, headerArgs),
     initialPageParam: 1, // v5 달라진 점

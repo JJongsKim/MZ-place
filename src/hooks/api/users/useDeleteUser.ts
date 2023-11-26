@@ -9,7 +9,7 @@ import { setUserId } from '@store/reducers/UserIdReducer';
 const useDeleteUser = () => {
   const dispatch = useDispatch();
 
-  const { ...rest } = useMutation({
+  return useMutation({
     mutationFn: (args: Record<string, string>) => api.auth.deleteUser(args),
     onSuccess: data => {
       if (data.data.message === 'USER_DELETED') {
@@ -19,8 +19,6 @@ const useDeleteUser = () => {
       }
     },
   });
-
-  return { ...rest };
 };
 
 export default useDeleteUser;

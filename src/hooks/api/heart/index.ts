@@ -40,8 +40,9 @@ export const usePushHeart = () => {
       headerArgs: Record<string, string>;
     }) => api.hearts.pushHeart(args, headerArgs),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getPlcaesOfFilter'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlcaesOfCategory'] });
+      queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
+      queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
     },
@@ -60,14 +61,12 @@ export const useDeleteHeart = () => {
       args: HeartDataArgsType;
       headerArgs: Record<string, string>;
     }) => api.hearts.deleteHeart(args, headerArgs),
-    onSuccess: (_, v) => {
-      queryClient.invalidateQueries({ queryKey: ['getPlcaesOfFilter'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlcaesOfCategory'] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
+      queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
-      queryClient.invalidateQueries({
-        queryKey: ['getPlacesOfHeart', v.args.course_id, v.args.place_id],
-      });
     },
   });
 };

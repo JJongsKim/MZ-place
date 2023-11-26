@@ -9,7 +9,7 @@ import { setUserId } from '@store/reducers/UserIdReducer';
 const useSignIn = () => {
   const dispatch = useDispatch();
 
-  const { ...rest } = useMutation({
+  return useMutation({
     mutationFn: (args: LoginArgsType) => api.auth.login(args),
     onSuccess: data => {
       if (data.data.ACCESS_TOKEN !== undefined) {
@@ -19,8 +19,6 @@ const useSignIn = () => {
       }
     },
   });
-
-  return { ...rest };
 };
 
 export default useSignIn;
