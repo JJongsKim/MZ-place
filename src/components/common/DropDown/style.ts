@@ -3,8 +3,8 @@ import { styled } from 'styled-components';
 const DropdownWrap = styled.div`
   position: relative;
   display: flex;
-  width: 75px;
-  height: 26px;
+  width: 85px;
+  height: 27px;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
   z-index: 2;
   background-color: white;
@@ -19,8 +19,9 @@ const DropdownTextWrap = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 75%;
   height: 100%;
+  padding: 0 2px;
   ${({ theme }) => theme.font.B_14};
 `;
 
@@ -48,17 +49,14 @@ const DropdownBtn = styled.img<{
 
 const DropdownListWrap = styled.div`
   position: absolute;
-  top: 24px;
-  width: 75px;
+  top: 25px;
+  left: -1px;
+
+  width: 85px;
   height: 162px;
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
   overflow-y: auto;
   background-color: white;
-
-  @media screen and (min-width: 1200px) {
-    top: 32px;
-    width: 90px;
-  }
 `;
 
 const DropdownList = styled.ul`
@@ -69,12 +67,6 @@ const DropdownList = styled.ul`
     padding: 0 4px;
     margin: 15px 0;
     cursor: pointer;
-  }
-
-  @media screen and (min-width: 1200px) {
-    li {
-      padding: 0 8px;
-    }
   }
 `;
 
