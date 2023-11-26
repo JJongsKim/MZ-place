@@ -12,6 +12,7 @@ const ThumbWrap = styled.div<{
   width: 150px;
   height: 100px;
   border-radius: 20px;
+  border: 1px solid #efefef;
   background: ${({ $imageSrc, $defaultImageSrc }) =>
     $imageSrc ? `url(${$imageSrc})` : `url(${$defaultImageSrc})`};
   background-size: cover;

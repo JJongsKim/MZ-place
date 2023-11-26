@@ -47,6 +47,8 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
 
 const CustomFilterPageWrap = styled.div`
   width: 375px;
+  height: 900px;
+  overflow: scroll;
 `;
 
 export default CustomFilterPage;

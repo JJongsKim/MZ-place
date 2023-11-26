@@ -13,10 +13,8 @@ export const useGetPlacesOfFilter = (
     initialPageParam: 1,
 
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.data.totalItems) {
-        const totalPages = Math.ceil(lastPage.data.totalItems / 12);
-        return allPages.length !== totalPages ? allPages.length + 1 : undefined;
-      }
+      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
+      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
     },
 
     retry: 0,
