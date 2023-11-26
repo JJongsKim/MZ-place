@@ -38,13 +38,16 @@ export const usePushHeart = () => {
     }: {
       args: HeartDataArgsType;
       headerArgs: Record<string, string>;
-    }) => api.hearts.pushHeart(args, headerArgs),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
-      queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
+    }) => {
+      const result = api.hearts.pushHeart(args, headerArgs);
+
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
+      queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+
+      return result;
     },
   });
 };
@@ -60,16 +63,16 @@ export const useDeleteHeart = () => {
     }: {
       args: HeartDataArgsType;
       headerArgs: Record<string, string>;
-    }) => api.hearts.deleteHeart(args, headerArgs),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
-      queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
-      queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
+    }) => {
+      const result = api.hearts.deleteHeart(args, headerArgs);
 
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
+      queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+
+      return result;
     },
   });
 };

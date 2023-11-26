@@ -35,7 +35,7 @@ const ThumbnailList = ({ places, isLoading, hasNextPage, fetchNextPage }: Thumbn
     - 최근 조회 장소 업데이트
   */
   const handleClickThumb = (data: PlacesType) => {
-    naviagate(`/place/${data.id}`, { state: data.name });
+    naviagate(`/place/${data.id}`, { state: data });
 
     const recentPlaces: PlacesType[] = handleGetRecentPlaces();
     const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);
