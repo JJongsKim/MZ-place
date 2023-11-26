@@ -9,6 +9,7 @@ import Art from '@assets/art.svg';
 import Book from '@assets/book.svg';
 import Event from '@assets/event.svg';
 import Eating from '@assets/eating.svg';
+import Culture from '@assets/culture.svg';
 import Etc from '@assets/etc.svg';
 import Map from '@assets/map.svg';
 import LikeMenu from '@assets/like.svg';
@@ -85,7 +86,7 @@ export const MENU = [
   {
     id: 7,
     name: '문화공간',
-    svg: Art,
+    svg: Culture,
     path: 'art',
   },
   {
