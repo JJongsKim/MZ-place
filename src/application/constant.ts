@@ -15,7 +15,6 @@ import LikeMenu from '@assets/like.svg';
 import Custom from '@assets/custom-filter.svg';
 import Course from '@assets/course.svg';
 
-import HealingImg1 from '../images/healing1-picture.jpg';
 import HealingImg2 from '../images/healing2-picture.jpg';
 import MapImg from '../images/map-picture.jpg';
 import MuseumImg from '../images/museum-picture.jpg';
@@ -321,8 +320,8 @@ export const REGION_ARRAY = [
 
 export const AutoSlideImgs = [
   {
-    name: 'healing1Img',
-    src: HealingImg1,
+    name: 'museumImg',
+    src: MuseumImg,
   },
   {
     name: 'mapImg',
@@ -331,10 +330,6 @@ export const AutoSlideImgs = [
   {
     name: 'healing2Img',
     src: HealingImg2,
-  },
-  {
-    name: 'museumImg',
-    src: MuseumImg,
   },
   {
     name: 'paintImg',

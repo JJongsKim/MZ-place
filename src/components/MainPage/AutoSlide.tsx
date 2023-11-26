@@ -2,7 +2,11 @@ import { AutoSlideImgs } from '@application/constant';
 import { AutoSlideWrap, SlideImage, SlideImageList, SlideText } from './style';
 import { useEffect, useRef, useState } from 'react';
 
-const AutoSlide = () => {
+interface AutoSliceProps {
+  onClick: () => void;
+}
+
+const AutoSlide = ({ onClick }: AutoSliceProps) => {
   const [imgIdx, setImgIdx] = useState(0);
   const slideRef = useRef<HTMLUListElement>(null);
 
@@ -21,7 +25,7 @@ const AutoSlide = () => {
   };
 
   return (
-    <AutoSlideWrap>
+    <AutoSlideWrap onClick={onClick}>
       <SlideImageList ref={slideRef} style={slideAnimation}>
         {AutoSlideImgs.map(img => (
           <li key={img.name}>
