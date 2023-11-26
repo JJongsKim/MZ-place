@@ -5,6 +5,7 @@ import NaverOauthCallback from '@pages/Auth/naver/naverOauthCallback';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import CategoryPage from '@pages/DetailPage/CategoryPage';
+import CourseExplainPage from '@pages/DetailPage/CourseExplainPage';
 import CoursePage from '@pages/DetailPage/CoursePage';
 import CustomFilterPage from '@pages/DetailPage/CustomFilterPage';
 import LikeRecommendPage from '@pages/DetailPage/LikeRecommendPage';
@@ -61,6 +62,7 @@ function App() {
               />
               <Route path="/search/custom" element={<CustomFilterPage userId={userId} />} />
               <Route path="/place/:id" element={<ExplainPage userId={userId} />} />
+              <Route path="/course/:id" element={<CourseExplainPage />} />
               <Route
                 path="/like"
                 element={<LikePage key={null} type={undefined} props={undefined} />}
