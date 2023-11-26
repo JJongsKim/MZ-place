@@ -21,7 +21,7 @@ import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
 import ThumbnailList from '@components/common/ThumbnailList';
-import { removeAccessToken } from '@infra/api/token';
+import { removeAccessToken, removeKakaoId, removeNaverId } from '@infra/api/token';
 import { getNickname, removeNickname } from '@infra/api/nickname';
 import useDeleteUser from '@hooks/api/users/useDeleteUser';
 import { useDispatch } from 'react-redux';
@@ -58,6 +58,8 @@ const MyPage = ({ userId }: MyPageProps) => {
 
   const handleRemoveInfos = () => {
     removeAccessToken();
+    removeKakaoId();
+    removeNaverId();
     removeNickname();
     dispatch(setUserId({}));
   };
