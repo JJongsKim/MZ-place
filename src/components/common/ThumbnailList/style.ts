@@ -2,7 +2,6 @@ import { styled } from 'styled-components';
 
 const ThumbnailListWrap = styled.section`
   width: 375px;
-  height: 820px;
   margin-bottom: 50px;
   overflow: scroll;
   padding: 0 18px;
