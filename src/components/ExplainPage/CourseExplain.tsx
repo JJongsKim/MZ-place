@@ -1,5 +1,5 @@
 const CourseExplain = () => {
-  return <section>코스 관련 상세 페이지 컴포넌트</section>;
+  return <section>아직 준비중입니다..</section>;
 };
 
 export default CourseExplain;
