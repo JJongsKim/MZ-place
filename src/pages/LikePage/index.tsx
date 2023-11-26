@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import withAuth from '@components/HOC/withAuth';
 
 import {
