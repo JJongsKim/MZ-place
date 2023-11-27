@@ -1,7 +1,18 @@
+import { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import useToast from '@hooks/useToast';
+
 import {
   CopyButton,
   CopyButtonWrap,
+  CourseIntroImage,
+  CourseIntroLine,
+  CourseIntroText,
+  CourseIntroThumbnail,
+  CourseIntroWrap,
+  CourseLikeIcon,
+  CourseList,
+  CourseTitle,
   InfoIcon,
   InfoIconWrap,
   InfoList,
@@ -9,8 +20,8 @@ import {
   InfoTextWrap,
   MapWrap,
 } from './style';
-import useToast from '@hooks/useToast';
-import { useEffect, useState } from 'react';
+import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
+import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 
 import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
@@ -24,9 +35,10 @@ import { Link } from 'react-router-dom';
 interface DefaultExplainProps {
   placeInfo: PlaceType;
   address: string;
+  isRelatedCourse?: boolean;
 }
 
-const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
+const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainProps) => {
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
@@ -141,6 +153,33 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
           </InfoTextWrap>
         </li>
       )}
+      {/* 코스와 관련된 장소인 경우, 코스 추천
+      TODO: 코스 API 모두 연결 시, 링크연결되도록 수정해보기? */}
+      {isRelatedCourse &&
+        placeInfo.related_course &&
+        placeInfo.related_course.map(course => (
+          <section style={{ marginBottom: '10px' }}>
+            <CourseIntroText>코스</CourseIntroText>
+            <CourseIntroLine />
+            <CourseIntroWrap>
+              <CourseIntroThumbnail>
+                <CourseIntroImage src={course.image_url} alt="장소코스" />
+                <CourseLikeIcon>{course.heart ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>
+              </CourseIntroThumbnail>
+              <CourseTitle>{course.name}</CourseTitle>
+              <CourseList>
+                <li>
+                  <span>소요 시간</span>
+                  {course.duration_time}
+                </li>
+                <li>
+                  <span>기타 정보</span>
+                  {course.price}
+                </li>
+              </CourseList>
+            </CourseIntroWrap>
+          </section>
+        ))}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </InfoList>
   );

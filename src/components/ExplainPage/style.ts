@@ -1,3 +1,4 @@
+import { LikeIcon, ThumbnailBox, ThumbnailBoxWrap } from '@pages/ExplainPage/style';
 import { styled } from 'styled-components';
 
 const InfoList = styled.ul`
@@ -72,6 +73,58 @@ const MapWrap = styled.div`
   }
 `;
 
+const CourseIntroText = styled.p`
+  ${({ theme }) => theme.font.B_16};
+
+  @media screen and (min-width: 1200px) {
+    ${({ theme }) => theme.font.B_18};
+  }
+`;
+
+const CourseIntroLine = styled.hr`
+  width: 325px;
+  border: 0.8px solid ${({ theme }) => theme.colors.text_gray};
+`;
+
+const CourseIntroWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CourseIntroThumbnail = styled(ThumbnailBoxWrap)`
+  height: 150px;
+`;
+
+const CourseIntroImage = styled(ThumbnailBox)``;
+
+const CourseLikeIcon = styled(LikeIcon)``;
+
+const CourseTitle = styled.p`
+  padding: 8px 0 10px;
+  ${({ theme }) => theme.font.B_14};
+
+  @media screen and (min-width: 1200px) {
+    ${({ theme }) => theme.font.B_16};
+  }
+`;
+
+const CourseList = styled.ul`
+  li {
+    ${({ theme }) => theme.font.M_13};
+
+    span {
+      width: 80px;
+      margin-right: 20px;
+      border-radius: 10px;
+      border: 0.8px solid ${({ theme }) => theme.colors.green};
+      text-align: center;
+      ${({ theme }) => theme.font.B_13};
+    }
+
+    margin-bottom: 5px;
+  }
+`;
+
 export {
   InfoList,
   InfoTextWrap,
@@ -81,4 +134,12 @@ export {
   CopyButtonWrap,
   CopyButton,
   MapWrap,
+  CourseIntroText,
+  CourseIntroLine,
+  CourseIntroWrap,
+  CourseIntroThumbnail,
+  CourseIntroImage,
+  CourseLikeIcon,
+  CourseTitle,
+  CourseList,
 };

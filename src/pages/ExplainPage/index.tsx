@@ -8,7 +8,6 @@ import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 import SearchBar from '@components/common/SearchBar';
 import { useGetInfoByPlaceId } from '@hooks/api/places';
 import DefaultExplain from '@components/ExplainPage/DefaultExplain';
-import CourseExplain from '@components/ExplainPage/CourseExplain';
 import WarningMention from '@components/common/warning';
 import useReverseGeoCoding from '@hooks/useReverseGeoCoding';
 import Loading from '@components/common/Loading';
@@ -107,7 +106,11 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
               {placeInfo.related_course.length === 0 ? (
                 <DefaultExplain placeInfo={placeInfo} address={address.address} />
               ) : (
-                <CourseExplain />
+                <DefaultExplain
+                  placeInfo={placeInfo}
+                  address={address.address}
+                  isRelatedCourse={true}
+                />
               )}
             </>
           ) : (

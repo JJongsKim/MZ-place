@@ -72,6 +72,7 @@ interface PlaceType {
 
 interface CourseType {
   id: number;
+  heart: number;
   name: string;
   duration_time: string;
   price: string;
