@@ -64,6 +64,25 @@ export const useGetPlacesOfCategory = (
   return { data: placeData, isLoading, ...rest };
 };
 
+export const useGetPlacesOfCourse = (headerArgs?: Record<string, string>) => {
+  const { data, isLoading, ...rest } = useInfiniteQuery({
+    queryKey: ['getPlacesOfCourse'],
+    queryFn: ({ pageParam }) => api.places.getPlacesOfCourse(pageParam, headerArgs),
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage, allPages) => {
+      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
+      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+    },
+
+    retry: 0,
+  });
+
+  const placeData = data?.pages.flatMap(page => page?.data.result) as PlacesType[];
+
+  return { data: placeData, isLoading, ...rest };
+};
+
 export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getInfoByPlaceId', headerArgs],
