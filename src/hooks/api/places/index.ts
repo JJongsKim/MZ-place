@@ -3,6 +3,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
+// - 맞춤 필터 API hook
 export const useGetPlacesOfFilter = (
   queryParam?: Record<string, string | number>,
   headerArgs?: Record<string, string>,
@@ -39,6 +40,7 @@ export const useGetPlacesOfFilter = (
   return { data: filterPlaceData, ...rest };
 };
 
+// - 카테고리별 API hook
 export const useGetPlacesOfCategory = (
   id: number,
   queryParams?: Record<string, string>,
@@ -64,6 +66,7 @@ export const useGetPlacesOfCategory = (
   return { data: placeData, isLoading, ...rest };
 };
 
+// - 코스 리스트 API hook
 export const useGetPlacesOfCourse = (headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useInfiniteQuery({
     queryKey: ['getPlacesOfCourse'],
@@ -83,6 +86,7 @@ export const useGetPlacesOfCourse = (headerArgs?: Record<string, string>) => {
   return { data: placeData, isLoading, ...rest };
 };
 
+// - <일반> 장소 Id별 API hook
 export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getInfoByPlaceId', headerArgs],
@@ -93,6 +97,7 @@ export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string,
   return { data, isLoading, ...rest };
 };
 
+// - <코스> 코스 Id별 API hook
 export const useGetInfoByCourseId = (courseId: number, headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getInfoByCourseId', headerArgs],
@@ -103,6 +108,7 @@ export const useGetInfoByCourseId = (courseId: number, headerArgs?: Record<strin
   return { data, isLoading, ...rest };
 };
 
+// - 거리별 조회 API hook
 export const useGetPlacesNearBy = (
   queryParams: Record<string, number>,
   headerArgs?: Record<string, string>,
@@ -117,6 +123,7 @@ export const useGetPlacesNearBy = (
   return { data, ...rest };
 };
 
+// - TOP20 API hook
 // 헤더 여부에 따라 top20 띄우기
 export const useGetPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
   const { data, ...rest } = useQuery({
