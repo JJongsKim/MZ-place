@@ -42,7 +42,11 @@ const ThumbnailList = ({
     - 최근 조회 장소 업데이트
   */
   const handleClickThumb = (data: PlacesType) => {
-    naviagate(`/place/${data.id}`, { state: data });
+    if (location.pathname === '/search/course') {
+      naviagate(`/course/${data.id}`, { state: data });
+    } else {
+      naviagate(`/place/${data.id}`, { state: data });
+    }
 
     const recentPlaces: RecentPlacesType[] = handleGetRecentPlaces();
     const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);

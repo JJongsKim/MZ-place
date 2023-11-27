@@ -174,7 +174,7 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
                 </li>
                 <li>
                   <span>기타 정보</span>
-                  {course.price}
+                  {course.price} 공간 있음
                 </li>
               </CourseList>
             </CourseIntroWrap>

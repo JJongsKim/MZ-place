@@ -65,7 +65,7 @@ function App() {
               <Route path="/search/like-recommend" element={<LikeRecommendPage {...HOCprops} />} />
               <Route path="/search/custom" element={<CustomFilterPage userId={userId} />} />
               <Route path="/place/:id" element={<ExplainPage userId={userId} />} />
-              <Route path="/course/:id" element={<CourseExplainPage />} />
+              <Route path="/course/:id" element={<CourseExplainPage userId={userId} />} />
               <Route path="/like" element={<LikePage {...HOCprops} userId={userId} />} />
               <Route path="/my-page" element={<MyPage {...HOCprops} userId={userId} />} />
             </Route>
