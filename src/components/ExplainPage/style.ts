@@ -82,7 +82,7 @@ const CourseIntroText = styled.p`
 `;
 
 const CourseIntroLine = styled.hr`
-  width: 325px;
+  width: 330px;
   border: 0.8px solid ${({ theme }) => theme.colors.text_gray};
 `;
 
