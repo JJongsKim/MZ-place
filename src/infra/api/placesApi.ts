@@ -52,6 +52,9 @@ class PlacesApi {
   };
 
   // - <코스> id별 장소 상세조회 API
+  getInfoByCourseId = (courseId: number, headerArgs?: Record<string, string>) => {
+    return this.api.get(`/places/course${courseId}`, { headers: headerArgs });
+  };
 }
 
 export default new PlacesApi(instance);

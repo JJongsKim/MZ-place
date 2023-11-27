@@ -93,6 +93,16 @@ export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string,
   return { data, isLoading, ...rest };
 };
 
+export const useGetInfoByCourseId = (courseId: number, headerArgs?: Record<string, string>) => {
+  const { data, isLoading, ...rest } = useQuery({
+    queryKey: ['getInfoByCourseId', headerArgs],
+    queryFn: () => api.places.getInfoByCourseId(courseId, headerArgs),
+    retry: 2,
+  });
+
+  return { data, isLoading, ...rest };
+};
+
 export const useGetPlacesNearBy = (
   queryParams: Record<string, number>,
   headerArgs?: Record<string, string>,
