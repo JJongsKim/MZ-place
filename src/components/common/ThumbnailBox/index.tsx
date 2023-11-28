@@ -10,7 +10,7 @@ import useToast from '@hooks/useToast';
 import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
 
 interface ThumbnailProps {
-  data: PlacesType | PlacesOfMap;
+  data: PlacesType | PlacesOfMap | HeartPlacesType;
   userId?: Record<string, string>;
   like?: number;
   recentView?: boolean | null;
@@ -32,7 +32,7 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
     if (userId && Object.keys(userId).length === 0) {
       handleFloatingToast();
     } else {
-      if (location.pathname === '/search/course') {
+      if (location.pathname === '/search/course' || data.type === 'course') {
         // - 코스 | 찜이 눌리지 않은 장소 > 찜 누르기
         if (!heartState) {
           pushHeartMutation({
