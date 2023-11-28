@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ import {
   CourseExplainPageWrap,
   CourseInfoList,
   CourseLikeIcon,
+  CourseMapButton,
   CourseThumbBox,
   CourseThumbnail,
   CourseTime,
@@ -21,6 +23,7 @@ import Loading from '@components/common/Loading';
 import Toast from '@components/common/Toast';
 import WarningMention from '@components/common/warning';
 import CoursePlaceBox from '@components/CourseExplainPage/CoursePlaceBox';
+import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
 
 interface CourseExplainPageProps {
   userId: Record<string, string>;
@@ -28,9 +31,10 @@ interface CourseExplainPageProps {
 
 const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   const location = useLocation();
-  const { toast, handleFloatingToast } = useToast();
 
   const [heartState, setHeartState] = useState(false);
+  const [findAddress, isFindAddress] = useState(true);
+  const { toast, handleFloatingToast } = useToast();
 
   const { isLoading, data } = useGetInfoByCourseId(
     Number(location.pathname.match(/\/course\/(\d+)/)?.[1]),
@@ -42,9 +46,36 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
     coursePlaceInfo.sort((a, b) => a.order_number - b.order_number);
   }
 
-  const handleClickHeart = () => {
+  const { mutate: pushHeartMutation } = usePushHeart();
+  const { mutate: deleteHeartMutation } = useDeleteHeart();
+  const handleClickHeart = (courseId: number) => {
     if (userId && Object.keys(userId).length === 0) {
       handleFloatingToast();
+    } else {
+      // - 코스 상세 | 찜이 눌리지 않은 코스 > 찜 누르기
+      if (location.pathname === '/search/course') {
+        if (!heartState) {
+          pushHeartMutation({
+            args: {
+              type: 'c',
+              course_id: courseId,
+            },
+            headerArgs: userId!,
+          });
+          setHeartState(true);
+        }
+        // - 코스 상세 | 이미 찜이 눌린 코스 > 찜 해제
+        if (heartState) {
+          deleteHeartMutation({
+            args: {
+              type: 'c',
+              course_id: courseId,
+            },
+            headerArgs: userId!,
+          });
+          setHeartState(false);
+        }
+      }
     }
   };
 
@@ -65,7 +96,7 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
           <SearchBar name={courseInfo?.name} backIcon={true} searchIcon={false} />
           <CourseThumbBox>
             <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
-            <CourseLikeIcon onClick={handleClickHeart}>
+            <CourseLikeIcon onClick={() => handleClickHeart(courseInfo?.id)}>
               {heartState ? <LikeFull /> : <LikeEmpty />}
             </CourseLikeIcon>
           </CourseThumbBox>
@@ -83,6 +114,9 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
             </CourseTime>
             <CourseIntroText>코스</CourseIntroText>
             <CourseIntroLine />
+            <li>
+              <CourseMapButton>코스 지도 닫기</CourseMapButton>
+            </li>
             {coursePlaceInfo ? (
               coursePlaceInfo.map(course => (
                 <CoursePlaceBox

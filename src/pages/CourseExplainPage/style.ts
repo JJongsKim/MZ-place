@@ -36,6 +36,17 @@ const CourseTime = styled.ul`
   }
 `;
 
+const CourseMapButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+  ${({ theme }) => theme.font.M_12};
+`;
+
 export {
   CourseExplainPageWrap,
   CourseThumbBox,
@@ -44,4 +55,5 @@ export {
   CourseTitle,
   CourseInfoList,
   CourseTime,
+  CourseMapButton,
 };

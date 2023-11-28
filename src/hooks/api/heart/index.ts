@@ -2,8 +2,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
-// 백엔드 찜 저장이 중복되어 저장
-// 프론트에서 중복 제거 처리
 export const useGetPlacesOfHeart = (headerArgs: Record<string, string>) => {
   const { data, ...rest } = useQuery({
     queryKey: ['getPlacesOfHeart'],
@@ -46,6 +44,7 @@ export const usePushHeart = () => {
       queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfCourse'] });
 
       return result;
     },
@@ -71,6 +70,7 @@ export const useDeleteHeart = () => {
       queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      queryClient.refetchQueries({ queryKey: ['getPlacesOfCourse'] });
 
       return result;
     },
