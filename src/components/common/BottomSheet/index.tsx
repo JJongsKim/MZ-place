@@ -27,7 +27,7 @@ const BottomSheetWrap = styled(motion.div)`
   align-items: center;
 
   position: fixed;
-  top: calc(100% - 150px);
+  top: calc(100% - 140px);
   left: 0;
   right: 0;
   z-index: 2;

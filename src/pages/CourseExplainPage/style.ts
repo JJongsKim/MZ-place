@@ -44,6 +44,7 @@ const CourseMapButton = styled.button`
   height: 30px;
   margin-bottom: 10px;
   border-radius: 10px;
+  color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.olive_green};
   ${({ theme }) => theme.font.M_12};
 `;

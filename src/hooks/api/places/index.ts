@@ -19,7 +19,6 @@ export const useGetPlacesOfFilter = (
     },
 
     retry: 0,
-    enabled: false,
   });
 
   // 새로운 필터들을 선택 시 장소가 중복되어 담기지 않도록 정리 필요!
