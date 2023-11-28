@@ -40,11 +40,17 @@ const CourseMapButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 30px;
-  margin-right: 10px;
+  margin-bottom: 10px;
   border-radius: 10px;
-  background-color: #eee;
+  background-color: ${({ theme }) => theme.colors.olive_green};
   ${({ theme }) => theme.font.M_12};
+`;
+
+const CourseRouteMap = styled.div`
+  width: 100%;
+  height: 300px;
 `;
 
 export {
@@ -56,4 +62,5 @@ export {
   CourseInfoList,
   CourseTime,
   CourseMapButton,
+  CourseRouteMap,
 };
