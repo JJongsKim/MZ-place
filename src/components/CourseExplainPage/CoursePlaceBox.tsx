@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { styled } from 'styled-components';
 
 import DEFAULT_IMAGE from '../../images/default.png';
