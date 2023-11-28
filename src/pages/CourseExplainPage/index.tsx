@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -29,9 +28,9 @@ interface CourseExplainPageProps {
 
 const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   const location = useLocation();
+  const { toast, handleFloatingToast } = useToast();
 
   const [heartState, setHeartState] = useState(false);
-  const { toast, handleFloatingToast } = useToast();
 
   const { isLoading, data } = useGetInfoByCourseId(
     Number(location.pathname.match(/\/course\/(\d+)/)?.[1]),
@@ -43,8 +42,14 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
     coursePlaceInfo.sort((a, b) => a.order_number - b.order_number);
   }
 
+  const handleClickHeart = () => {
+    if (userId && Object.keys(userId).length === 0) {
+      handleFloatingToast();
+    }
+  };
+
   useEffect(() => {
-    if (courseInfo.heart === 1) {
+    if (courseInfo?.heart === 1) {
       setHeartState(true);
     } else {
       setHeartState(false);
@@ -57,12 +62,14 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
         <Loading />
       ) : (
         <>
-          <SearchBar name={courseInfo.name} backIcon={true} searchIcon={false} />
+          <SearchBar name={courseInfo?.name} backIcon={true} searchIcon={false} />
           <CourseThumbBox>
             <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
-            <CourseLikeIcon>{heartState ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>
+            <CourseLikeIcon onClick={handleClickHeart}>
+              {heartState ? <LikeFull /> : <LikeEmpty />}
+            </CourseLikeIcon>
           </CourseThumbBox>
-          <CourseTitle>{courseInfo.name}</CourseTitle>
+          <CourseTitle>{courseInfo?.name}</CourseTitle>
           <CourseInfoList>
             <CourseTime>
               <li>
