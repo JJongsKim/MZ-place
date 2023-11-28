@@ -80,7 +80,7 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
   };
 
   useEffect(() => {
-    if (location.state.heart === 1) {
+    if (placeInfo?.heart === 1) {
       setHeartState(true);
     } else {
       setHeartState(false);
@@ -89,18 +89,18 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
 
   return (
     <ExplainPageWrap>
-      <SearchBar name={location.state.name} backIcon={true} searchIcon={false} />
       {isLoading ? (
         <Loading />
       ) : (
         <>
+          <SearchBar name={placeInfo?.name} backIcon={true} searchIcon={false} />
           <ThumbnailBoxWrap>
             <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" />
             <LikeIcon onClick={() => handleClickHeart(placeInfo.id)}>
               {heartState ? <LikeFull /> : <LikeEmpty />}
             </LikeIcon>
           </ThumbnailBoxWrap>
-          <LocationTitle>{location.state.name}</LocationTitle>
+          <LocationTitle>{placeInfo?.name}</LocationTitle>
           {placeInfo?.related_course ? (
             <>
               {placeInfo.related_course.length === 0 ? (

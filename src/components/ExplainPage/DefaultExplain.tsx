@@ -30,7 +30,7 @@ import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
 import Toast from '@components/common/Toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface DefaultExplainProps {
   placeInfo: PlaceType;
@@ -39,10 +39,15 @@ interface DefaultExplainProps {
 }
 
 const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainProps) => {
+  const navigate = useNavigate();
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
   const [findAddress, isFindAddress] = useState(false);
+
+  const handleMoveCourse = (courseId: number) => {
+    navigate(`/course/${courseId}`);
+  };
 
   useEffect(() => {
     if (findAddress) {
@@ -161,7 +166,7 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
           <section style={{ marginBottom: '10px' }}>
             <CourseIntroText>코스</CourseIntroText>
             <CourseIntroLine />
-            <CourseIntroWrap>
+            <CourseIntroWrap onClick={() => handleMoveCourse(course.id)}>
               <CourseIntroThumbnail>
                 <CourseIntroImage src={course.image_url} alt="장소코스" />
                 <CourseLikeIcon>{course.heart ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>

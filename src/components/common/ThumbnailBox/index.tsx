@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LabelText, LikeIcon, ThumbLabel, ThumbWrap, Thumbnail } from './style';
 import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
 import { ReactComponent as LikeFull } from '@assets/like-full.svg';
-import defaultImage from '../../../images/default.png';
+import DEFAULT_IMAGE from '../../../images/default.png';
 
 import Toast from '../Toast';
 import useToast from '@hooks/useToast';
@@ -20,6 +20,11 @@ interface ThumbnailProps {
 const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProps) => {
   const { toast, handleFloatingToast } = useToast();
   const [heartState, setHeartState] = useState(false);
+
+  // 이미지 로딩 실패 시, default 이미지로 대체
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = `${DEFAULT_IMAGE}`;
+  };
 
   const { mutate: pushHeartMutation } = usePushHeart();
   const { mutate: deleteHeartMutation } = useDeleteHeart();
@@ -88,11 +93,10 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
   return (
     <>
       <Thumbnail>
-        <ThumbWrap onClick={onClick} $imageSrc={data.image_url} $defaultImageSrc={defaultImage}>
-          <ThumbLabel>
-            <LabelText>{data.name}</LabelText>
-          </ThumbLabel>
-        </ThumbWrap>
+        <ThumbWrap onClick={onClick} src={data.image_url} onError={handleImageError} />
+        <ThumbLabel>
+          <LabelText>{data.name}</LabelText>
+        </ThumbLabel>
         {!recentView ? (
           <LikeIcon onClick={() => handleClickHeart(data.id)}>
             {heartState ? <LikeFull /> : <LikeEmpty />}

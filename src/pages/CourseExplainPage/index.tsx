@@ -21,6 +21,7 @@ import { useGetInfoByCourseId } from '@hooks/api/places';
 import Loading from '@components/common/Loading';
 import Toast from '@components/common/Toast';
 import WarningMention from '@components/common/warning';
+import CoursePlaceBox from '@components/CourseExplainPage/CoursePlaceBox';
 
 interface CourseExplainPageProps {
   userId: Record<string, string>;
@@ -37,10 +38,13 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
     userId,
   );
   const courseInfo = data?.data.result as CourseType; // 코스 큰 정보
-  const coursePlaceInfo = courseInfo.places; // 코스 속 상세 장소 정보들
+  const coursePlaceInfo = courseInfo?.places; // 코스 속 상세 장소 정보들
+  if (coursePlaceInfo) {
+    coursePlaceInfo.sort((a, b) => a.order_number - b.order_number);
+  }
 
   useEffect(() => {
-    if (location.state.heart === 1) {
+    if (courseInfo.heart === 1) {
       setHeartState(true);
     } else {
       setHeartState(false);
@@ -49,16 +53,16 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
 
   return (
     <CourseExplainPageWrap>
-      <SearchBar name={location.state.name} backIcon={true} searchIcon={false} />
       {isLoading ? (
         <Loading />
       ) : (
         <>
+          <SearchBar name={courseInfo.name} backIcon={true} searchIcon={false} />
           <CourseThumbBox>
             <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
             <CourseLikeIcon>{heartState ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>
           </CourseThumbBox>
-          <CourseTitle>{location.state.name}</CourseTitle>
+          <CourseTitle>{courseInfo.name}</CourseTitle>
           <CourseInfoList>
             <CourseTime>
               <li>
@@ -72,7 +76,19 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
             </CourseTime>
             <CourseIntroText>코스</CourseIntroText>
             <CourseIntroLine />
-            {courseInfo ? '' : <WarningMention text="다시 새로고침 해주세요!" />}
+            {coursePlaceInfo ? (
+              coursePlaceInfo.map(course => (
+                <CoursePlaceBox
+                  key={course.order_number}
+                  placeId={course.place_id}
+                  placeName={course.place_name}
+                  imageUrl={course.place_image_url}
+                  courseNumber={course.order_number}
+                />
+              ))
+            ) : (
+              <WarningMention text="다시 새로고침 해주세요!" />
+            )}
           </CourseInfoList>
         </>
       )}
