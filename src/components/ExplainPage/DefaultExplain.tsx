@@ -10,7 +10,6 @@ import {
   CourseIntroText,
   CourseIntroThumbnail,
   CourseIntroWrap,
-  CourseLikeIcon,
   CourseList,
   CourseTitle,
   InfoIcon,
@@ -20,8 +19,6 @@ import {
   InfoTextWrap,
   MapWrap,
 } from './style';
-import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
-import { ReactComponent as LikeFull } from '@assets/like-full.svg';
 
 import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
@@ -169,7 +166,6 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
             <CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
               <CourseIntroThumbnail>
                 <CourseIntroImage src={course.image_url} alt="장소코스" />
-                <CourseLikeIcon>{course.heart ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>
               </CourseIntroThumbnail>
               <CourseTitle>{course.name}</CourseTitle>
               <CourseList>

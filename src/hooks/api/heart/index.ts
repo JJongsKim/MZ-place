@@ -44,7 +44,6 @@ export const usePushHeart = () => {
       queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfCourse'] });
 
       return result;
     },
@@ -70,7 +69,6 @@ export const useDeleteHeart = () => {
       queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
       queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfCourse'] });
 
       return result;
     },

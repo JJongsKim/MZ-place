@@ -25,6 +25,7 @@ const CoursePage = ({ userId }: CoursePageProps) => {
           isLoading={isLoading}
           hasNextPage={hasNextPage}
           fetchNextPage={fetchNextPage}
+          recentView={true}
         />
       )}
     </DetailPageWrap>

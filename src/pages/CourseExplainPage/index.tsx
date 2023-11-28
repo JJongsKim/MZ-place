@@ -8,7 +8,6 @@ import Marker from '@assets/marker.svg';
 import {
   CourseExplainPageWrap,
   CourseInfoList,
-  CourseLikeIcon,
   CourseMapButton,
   CourseRouteMap,
   CourseThumbBox,
@@ -17,15 +16,10 @@ import {
   CourseTitle,
 } from './style';
 import { CourseIntroLine, CourseIntroText } from '@components/ExplainPage/style';
-import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
-import { ReactComponent as LikeFull } from '@assets/like-full.svg';
-import useToast from '@hooks/useToast';
 import { useGetInfoByCourseId } from '@hooks/api/places';
 import Loading from '@components/common/Loading';
-import Toast from '@components/common/Toast';
 import WarningMention from '@components/common/warning';
 import CoursePlaceBox from '@components/CourseExplainPage/CoursePlaceBox';
-import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
 
 interface CourseExplainPageProps {
   userId: Record<string, string>;
@@ -40,9 +34,7 @@ interface CourseExplainPageProps {
 const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   const location = useLocation();
 
-  const [heartState, setHeartState] = useState(false);
   const [findAddress, isFindAddress] = useState(false);
-  const { toast, handleFloatingToast } = useToast();
 
   const { isLoading, data } = useGetInfoByCourseId(
     Number(location.pathname.match(/\/course\/(\d+)/)?.[1]),
@@ -53,45 +45,6 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   if (coursePlaceInfo) {
     coursePlaceInfo.sort((a, b) => a.order_number - b.order_number);
   }
-
-  const { mutate: pushHeartMutation } = usePushHeart();
-  const { mutate: deleteHeartMutation } = useDeleteHeart();
-  const handleClickHeart = (courseId: number) => {
-    if (userId && Object.keys(userId).length === 0) {
-      handleFloatingToast();
-    } else {
-      // - 코스 | 찜이 눌리지 않은 장소 > 찜 누르기
-      if (!heartState) {
-        pushHeartMutation({
-          args: {
-            type: 'c',
-            course_id: courseId,
-          },
-          headerArgs: userId!,
-        });
-        setHeartState(true);
-      }
-      // - 코스 | 이미 찜이 눌린 장소 > 찜 해제
-      if (heartState) {
-        deleteHeartMutation({
-          args: {
-            type: 'c',
-            course_id: courseId,
-          },
-          headerArgs: userId!,
-        });
-        setHeartState(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (courseInfo?.heart === 1) {
-      setHeartState(true);
-    } else {
-      setHeartState(false);
-    }
-  }, []);
 
   useEffect(() => {
     if (findAddress && courseInfo && coursePlaceInfo) {
@@ -190,9 +143,6 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
           <SearchBar name={courseInfo?.name} backIcon={true} searchIcon={false} />
           <CourseThumbBox>
             <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
-            <CourseLikeIcon onClick={() => handleClickHeart(courseInfo?.id)}>
-              {heartState ? <LikeFull /> : <LikeEmpty />}
-            </CourseLikeIcon>
           </CourseThumbBox>
           <CourseTitle>{courseInfo?.name}</CourseTitle>
           <CourseInfoList>
@@ -230,7 +180,6 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
           </CourseInfoList>
         </>
       )}
-      {toast && <Toast>찜 기능은 로그인 후 이용해주세요!</Toast>}
     </CourseExplainPageWrap>
   );
 };

@@ -32,52 +32,27 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
     if (userId && Object.keys(userId).length === 0) {
       handleFloatingToast();
     } else {
-      if (location.pathname === '/search/course' || data.type === 'course') {
-        // - 코스 | 찜이 눌리지 않은 장소 > 찜 누르기
-        if (!heartState) {
-          pushHeartMutation({
-            args: {
-              type: 'c',
-              course_id: id,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(true);
-        }
-        // - 코스 | 이미 찜이 눌린 장소 > 찜 해제
-        if (heartState) {
-          deleteHeartMutation({
-            args: {
-              type: 'c',
-              course_id: id,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(false);
-        }
-      } else {
-        // - 일반 | 찜이 눌리지 않은 장소 > 찜 누르기
-        if (!heartState) {
-          pushHeartMutation({
-            args: {
-              type: 'p',
-              place_id: id,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(true);
-        }
-        // - 일반 | 이미 찜이 눌린 장소 > 찜 해제
-        if (heartState) {
-          deleteHeartMutation({
-            args: {
-              type: 'p',
-              place_id: id,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(false);
-        }
+      // - 일반 | 찜이 눌리지 않은 장소 > 찜 누르기
+      if (!heartState) {
+        pushHeartMutation({
+          args: {
+            type: 'p',
+            place_id: id,
+          },
+          headerArgs: userId!,
+        });
+        setHeartState(true);
+      }
+      // - 일반 | 이미 찜이 눌린 장소 > 찜 해제
+      if (heartState) {
+        deleteHeartMutation({
+          args: {
+            type: 'p',
+            place_id: id,
+          },
+          headerArgs: userId!,
+        });
+        setHeartState(false);
       }
     }
   };

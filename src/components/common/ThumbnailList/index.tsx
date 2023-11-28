@@ -20,9 +20,7 @@ const MAX_RECENT_PLACES = 20;
 /*
   - 장소 썸네일에 대한 정보 전달
   - 로그인 여부에 따른 찜 API 연결
-    1. Course 장소일땐 body type: 'c'
-    2. Course 이외 장소일땐 body type: 'p'
-    3. 메인페이지에서는 전달해주는 type에 따라 'c', 'p'나누기
+  - 미래유산코스 썸네일-상세 페이지 찜 기능 제거
 */
 const ThumbnailList = ({
   recentView,
@@ -103,7 +101,7 @@ const ThumbnailList = ({
             key={data.id}
             data={data}
             like={data.heart}
-            recentView={recentView ? recentView : null}
+            recentView={recentView || data.type === 'course' ? true : null}
             onClick={() => handleClickThumb(data)}
           />
         ))}

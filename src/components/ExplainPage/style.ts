@@ -89,6 +89,7 @@ const CourseIntroLine = styled.hr`
 const CourseIntroWrap = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const CourseIntroThumbnail = styled(ThumbnailBoxWrap)`
