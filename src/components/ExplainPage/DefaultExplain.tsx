@@ -166,7 +166,7 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
           <section style={{ marginBottom: '10px' }}>
             <CourseIntroText>코스</CourseIntroText>
             <CourseIntroLine />
-            <CourseIntroWrap onClick={() => handleMoveCourse(course.id)}>
+            <CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
               <CourseIntroThumbnail>
                 <CourseIntroImage src={course.image_url} alt="장소코스" />
                 <CourseLikeIcon>{course.heart ? <LikeFull /> : <LikeEmpty />}</CourseLikeIcon>
