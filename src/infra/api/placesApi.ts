@@ -29,7 +29,7 @@ class PlacesApi {
     });
   };
 
-  // - id별 장소 상세조회 API
+  // - <일반> id별 장소 상세조회 API
   getInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
     return this.api.get(`/places/place${placeId}`, { headers: headerArgs });
   };
@@ -44,6 +44,16 @@ class PlacesApi {
     return this.api.get('/places', {
       headers: headerArgs,
     });
+  };
+
+  // - 코스 리스트 조회 API
+  getPlacesOfCourse = (page: number, headerArgs?: Record<string, string>) => {
+    return this.api.get(`/places/courses`, { params: { page: page }, headers: headerArgs });
+  };
+
+  // - <코스> id별 장소 상세조회 API
+  getInfoByCourseId = (courseId: number, headerArgs?: Record<string, string>) => {
+    return this.api.get(`/places/course${courseId}`, { headers: headerArgs });
   };
 }
 

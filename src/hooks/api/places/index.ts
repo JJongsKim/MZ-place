@@ -3,6 +3,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
+// - 맞춤 필터 API hook
 export const useGetPlacesOfFilter = (
   queryParam?: Record<string, string | number>,
   headerArgs?: Record<string, string>,
@@ -39,6 +40,7 @@ export const useGetPlacesOfFilter = (
   return { data: filterPlaceData, ...rest };
 };
 
+// - 카테고리별 API hook
 export const useGetPlacesOfCategory = (
   id: number,
   queryParams?: Record<string, string>,
@@ -64,6 +66,27 @@ export const useGetPlacesOfCategory = (
   return { data: placeData, isLoading, ...rest };
 };
 
+// - 코스 리스트 API hook
+export const useGetPlacesOfCourse = (headerArgs?: Record<string, string>) => {
+  const { data, isLoading, ...rest } = useInfiniteQuery({
+    queryKey: ['getPlacesOfCourse'],
+    queryFn: ({ pageParam }) => api.places.getPlacesOfCourse(pageParam, headerArgs),
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage, allPages) => {
+      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
+      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+    },
+
+    retry: 0,
+  });
+
+  const placeData = data?.pages.flatMap(page => page?.data.result) as PlacesType[];
+
+  return { data: placeData, isLoading, ...rest };
+};
+
+// - <일반> 장소 Id별 API hook
 export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
   const { data, isLoading, ...rest } = useQuery({
     queryKey: ['getInfoByPlaceId', headerArgs],
@@ -74,6 +97,18 @@ export const useGetInfoByPlaceId = (placeId: number, headerArgs?: Record<string,
   return { data, isLoading, ...rest };
 };
 
+// - <코스> 코스 Id별 API hook
+export const useGetInfoByCourseId = (courseId: number, headerArgs?: Record<string, string>) => {
+  const { data, isLoading, ...rest } = useQuery({
+    queryKey: ['getInfoByCourseId', headerArgs],
+    queryFn: () => api.places.getInfoByCourseId(courseId, headerArgs),
+    retry: 2,
+  });
+
+  return { data, isLoading, ...rest };
+};
+
+// - 거리별 조회 API hook
 export const useGetPlacesNearBy = (
   queryParams: Record<string, number>,
   headerArgs?: Record<string, string>,
@@ -88,6 +123,7 @@ export const useGetPlacesNearBy = (
   return { data, ...rest };
 };
 
+// - TOP20 API hook
 // 헤더 여부에 따라 top20 띄우기
 export const useGetPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
   const { data, ...rest } = useQuery({

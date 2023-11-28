@@ -5,18 +5,12 @@ const Thumbnail = styled.article`
   z-index: 2;
 `;
 
-const ThumbWrap = styled.div<{
-  $imageSrc?: string;
-  $defaultImageSrc: string;
-}>`
+const ThumbWrap = styled.img`
   width: 150px;
   height: 100px;
   border-radius: 20px;
   border: 1px solid #efefef;
-  background: ${({ $imageSrc, $defaultImageSrc }) =>
-    $imageSrc ? `url(${$imageSrc})` : `url(${$defaultImageSrc})`};
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   cursor: pointer;
 `;
 

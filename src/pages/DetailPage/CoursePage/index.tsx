@@ -1,15 +1,33 @@
 import SearchBar from '@components/common/SearchBar';
 import { DetailPageWrap } from '../style';
 import { useLocation } from 'react-router-dom';
-import WarningMention from '@components/common/warning';
+import Loading from '@components/common/Loading';
+import ThumbnailList from '@components/common/ThumbnailList';
+import { useGetPlacesOfCourse } from '@hooks/api/places';
 
-const CoursePage = () => {
+interface CoursePageProps {
+  userId?: Record<string, string>;
+}
+
+const CoursePage = ({ userId }: CoursePageProps) => {
   const location = useLocation();
+
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfCourse(userId);
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
-      <WarningMention text="미래유산코스 페이지는 아직 개발중이에요 :D" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ThumbnailList
+          places={data}
+          isLoading={isLoading}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          recentView={true}
+        />
+      )}
     </DetailPageWrap>
   );
 };

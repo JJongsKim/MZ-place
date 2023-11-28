@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import useToast from '@hooks/useToast';
+
 import {
   CopyButton,
   CopyButtonWrap,
+  CourseIntroImage,
+  CourseIntroLine,
+  CourseIntroText,
+  CourseIntroThumbnail,
+  CourseIntroWrap,
+  CourseList,
+  CourseTitle,
   InfoIcon,
   InfoIconWrap,
   InfoList,
@@ -9,8 +19,6 @@ import {
   InfoTextWrap,
   MapWrap,
 } from './style';
-import useToast from '@hooks/useToast';
-import { useEffect, useState } from 'react';
 
 import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
@@ -19,18 +27,24 @@ import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
 import Toast from '@components/common/Toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface DefaultExplainProps {
   placeInfo: PlaceType;
   address: string;
+  isRelatedCourse?: boolean;
 }
 
-const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
+const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainProps) => {
+  const navigate = useNavigate();
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
   const [findAddress, isFindAddress] = useState(false);
+
+  const handleMoveCourse = (courseId: number) => {
+    navigate(`/course/${courseId}`);
+  };
 
   useEffect(() => {
     if (findAddress) {
@@ -141,6 +155,32 @@ const DefaultExplain = ({ placeInfo, address }: DefaultExplainProps) => {
           </InfoTextWrap>
         </li>
       )}
+      {/* 코스와 관련된 장소인 경우, 코스 추천
+      TODO: 코스 API 모두 연결 시, 링크연결되도록 수정해보기? */}
+      {isRelatedCourse &&
+        placeInfo.related_course &&
+        placeInfo.related_course.map(course => (
+          <section style={{ marginBottom: '10px' }}>
+            <CourseIntroText>코스</CourseIntroText>
+            <CourseIntroLine />
+            <CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
+              <CourseIntroThumbnail>
+                <CourseIntroImage src={course.image_url} alt="장소코스" />
+              </CourseIntroThumbnail>
+              <CourseTitle>{course.name}</CourseTitle>
+              <CourseList>
+                <li>
+                  <span>소요 시간</span>
+                  {course.duration_time}
+                </li>
+                <li>
+                  <span>기타 정보</span>
+                  {course.price} 공간 있음
+                </li>
+              </CourseList>
+            </CourseIntroWrap>
+          </section>
+        ))}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
     </InfoList>
   );

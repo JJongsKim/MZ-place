@@ -5,12 +5,12 @@ import NaverOauthCallback from '@pages/Auth/naver/naverOauthCallback';
 import SignIn from '@pages/Auth/signIn';
 import SignUp from '@pages/Auth/signUp';
 import CategoryPage from '@pages/DetailPage/CategoryPage';
-import CourseExplainPage from '@pages/DetailPage/CourseExplainPage';
 import CoursePage from '@pages/DetailPage/CoursePage';
 import CustomFilterPage from '@pages/DetailPage/CustomFilterPage';
 import LikeRecommendPage from '@pages/DetailPage/LikeRecommendPage';
 import MapPage from '@pages/DetailPage/MapPage';
 import ExplainPage from '@pages/ExplainPage';
+import CourseExplainPage from '@pages/CourseExplainPage';
 import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
 import MyPage from '@pages/MyPage';
@@ -62,10 +62,13 @@ function App() {
               <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
               <Route path="/search/map" element={<MapPage userId={userId} />} />
-              <Route path="/search/like-recommend" element={<LikeRecommendPage {...HOCprops} />} />
+              <Route
+                path="/search/like-recommend"
+                element={<LikeRecommendPage {...HOCprops} userId={userId} />}
+              />
               <Route path="/search/custom" element={<CustomFilterPage userId={userId} />} />
               <Route path="/place/:id" element={<ExplainPage userId={userId} />} />
-              <Route path="/course/:id" element={<CourseExplainPage />} />
+              <Route path="/course/:id" element={<CourseExplainPage userId={userId} />} />
               <Route path="/like" element={<LikePage {...HOCprops} userId={userId} />} />
               <Route path="/my-page" element={<MyPage {...HOCprops} userId={userId} />} />
             </Route>

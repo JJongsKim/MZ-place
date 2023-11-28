@@ -13,7 +13,8 @@ import WarningMention from '@components/common/warning';
 import { getNickname } from '@infra/api/nickname';
 import { useGetPlacesOfHeart } from '@hooks/api/heart';
 import ThumbnailList from '@components/common/ThumbnailList';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Loading from '@components/common/Loading';
 
 interface LikePageProps {
   userId: Record<string, string>;
@@ -21,14 +22,17 @@ interface LikePageProps {
 
 const LikePage = ({ userId }: LikePageProps) => {
   const nickname = getNickname();
+  const [heartData, setHeartData] = useState(false);
 
-  const { data, refetch } = useGetPlacesOfHeart(userId);
+  const { data } = useGetPlacesOfHeart(userId);
 
   useEffect(() => {
-    refetch();
-  }, [userId]);
+    if (data) {
+      setHeartData(true);
+    }
+  }, [data]);
 
-  return (
+  return heartData ? (
     <LikePageWrap>
       <LikePageHeader>
         <HeaderItemWrap>
@@ -45,6 +49,8 @@ const LikePage = ({ userId }: LikePageProps) => {
         )}
       </ContentArea>
     </LikePageWrap>
+  ) : (
+    <Loading />
   );
 };
 

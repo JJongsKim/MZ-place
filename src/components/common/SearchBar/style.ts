@@ -34,7 +34,7 @@ const TitleText = styled.p`
 
 const SearchBarLine = styled.hr`
   width: 350px;
-  color: ${({ theme }) => theme.colors.text_gray};
+  border: 0.8px solid ${({ theme }) => theme.colors.text_gray};
 `;
 
 const BackIcon = styled.img`

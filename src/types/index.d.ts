@@ -72,10 +72,22 @@ interface PlaceType {
 
 interface CourseType {
   id: number;
+  heart: number;
   name: string;
   duration_time: string;
   price: string;
   image_url?: string;
+  places: CoursePlaceType[];
+}
+
+interface CoursePlaceType {
+  heart: number;
+  order_number: number;
+  place_id: number;
+  place_image_url: string;
+  place_name: string;
+  place_latitude: string;
+  place_longitude: string;
 }
 
 // 회원가입용 API 전달 타입
