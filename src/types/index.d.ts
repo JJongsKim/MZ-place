@@ -86,6 +86,8 @@ interface CoursePlaceType {
   place_id: number;
   place_image_url: string;
   place_name: string;
+  place_latitude: string;
+  place_longitude: string;
 }
 
 // 회원가입용 API 전달 타입
