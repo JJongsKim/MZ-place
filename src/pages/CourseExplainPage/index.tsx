@@ -29,6 +29,7 @@ interface CourseExplainPageProps {
   userId: Record<string, string>;
 }
 
+/* 코스 Id별 상세 페이지 */
 const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   const location = useLocation();
 
@@ -52,29 +53,27 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
     if (userId && Object.keys(userId).length === 0) {
       handleFloatingToast();
     } else {
-      // - 코스 상세 | 찜이 눌리지 않은 코스 > 찜 누르기
-      if (location.pathname === '/search/course') {
-        if (!heartState) {
-          pushHeartMutation({
-            args: {
-              type: 'c',
-              course_id: courseId,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(true);
-        }
-        // - 코스 상세 | 이미 찜이 눌린 코스 > 찜 해제
-        if (heartState) {
-          deleteHeartMutation({
-            args: {
-              type: 'c',
-              course_id: courseId,
-            },
-            headerArgs: userId!,
-          });
-          setHeartState(false);
-        }
+      // - 코스 | 찜이 눌리지 않은 장소 > 찜 누르기
+      if (!heartState) {
+        pushHeartMutation({
+          args: {
+            type: 'c',
+            course_id: courseId,
+          },
+          headerArgs: userId!,
+        });
+        setHeartState(true);
+      }
+      // - 코스 | 이미 찜이 눌린 장소 > 찜 해제
+      if (heartState) {
+        deleteHeartMutation({
+          args: {
+            type: 'c',
+            course_id: courseId,
+          },
+          headerArgs: userId!,
+        });
+        setHeartState(false);
       }
     }
   };
