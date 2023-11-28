@@ -6,7 +6,6 @@ export const useGetPlacesOfHeart = (headerArgs: Record<string, string>) => {
   const { data, ...rest } = useQuery({
     queryKey: ['getPlacesOfHeart'],
     queryFn: () => api.hearts.getHeartList(headerArgs),
-    enabled: false,
     retry: 1,
   });
 
