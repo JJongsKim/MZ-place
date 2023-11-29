@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import { REGION_ARRAY } from '@application/constant';
@@ -32,7 +31,6 @@ const geoLocationOptions = {
 */
 const Map = ({ currentAddress, userId }: MapProps) => {
   const dispatch = useDispatch();
-  // const placesOfMap = useSelector((state: StoreType) => state.PlacesOfMapReducer.placesOfMap);
   const { toast, toastMsg, handleFloatingToast } = useToast();
 
   const mapRef = useRef(null);
@@ -213,12 +211,13 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
   useEffect(() => {
     fetchData();
-
-    // if (data?.data.result && Object.keys(data.data.result).length === 0) {
-    //   console.log('데이터!!:::', data.data.result);
-    //   handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
-    // }
   }, [fetchData]);
+
+  useEffect(() => {
+    if (data?.data.result && Object.keys(data.data.result).length === 0) {
+      handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+    }
+  }, [data]);
 
   return location?.isLoading ? (
     <Loading />
