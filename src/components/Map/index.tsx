@@ -12,6 +12,8 @@ import { styled } from 'styled-components';
 
 import Marker from '@assets/marker.svg';
 import MyLocation from '@assets/my-location.svg';
+import useToast from '@hooks/useToast';
+import Toast from '@components/common/Toast';
 
 interface MapProps {
   currentAddress: string;
@@ -29,6 +31,9 @@ const geoLocationOptions = {
 */
 const Map = ({ currentAddress, userId }: MapProps) => {
   const dispatch = useDispatch();
+  // const placesOfMap = useSelector((state: StoreType) => state.PlacesOfMapReducer.placesOfMap);
+  const { toast, toastMsg, handleFloatingToast } = useToast();
+
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState<(typeof window.kakao.maps.Marker)[]>([]); // 마커 초기화를 위한 상태값
 
@@ -124,6 +129,8 @@ const Map = ({ currentAddress, userId }: MapProps) => {
           if (level <= 4) {
             const bounds = map.getBounds();
             handleChangeLatLng(bounds);
+          } else {
+            handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
           }
 
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
@@ -131,6 +138,8 @@ const Map = ({ currentAddress, userId }: MapProps) => {
             if (level <= 4) {
               const zoomBounds = map.getBounds();
               handleChangeLatLng(zoomBounds);
+            } else {
+              handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
             }
           });
         });
@@ -155,8 +164,13 @@ const Map = ({ currentAddress, userId }: MapProps) => {
         const { data } = await refetch();
         dispatch(setPlacesOfMap(data?.data.result));
 
+        // if (data?.data.result && Object.keys(data.data.result).length === 0) {
+        //   console.log('데이터!!:::', data.data.result);
+        //   // handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+        // }
+
         if (mapRef.current) {
-          const places = data?.data.result || [];
+          const places = data?.data.result || undefined;
 
           const markerImageInfo = {
             imageSrc: Marker,
@@ -168,7 +182,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
             null,
           );
 
-          if (Array.isArray(places)) {
+          if (Array.isArray(places) && places.length > 0) {
             // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
             markers.map(existingMarker => existingMarker.setMap(null));
 
@@ -205,7 +219,14 @@ const Map = ({ currentAddress, userId }: MapProps) => {
     fetchData();
   }, [currentAddress, LatLngRange]);
 
-  return location?.isLoading ? <Loading /> : <MapWrap id="map" />;
+  return location?.isLoading ? (
+    <Loading />
+  ) : (
+    <>
+      <MapWrap id="map" />
+      {toast && <Toast>{toastMsg}</Toast>}
+    </>
+  );
 };
 
 const MapWrap = styled.div`
