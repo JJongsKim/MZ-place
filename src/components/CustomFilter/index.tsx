@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
 import {
   CustomFilterForm,
@@ -8,7 +9,7 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
@@ -20,7 +21,7 @@ interface CustomFilterProps {
 }
 
 const CustomFilter = ({ userId }: CustomFilterProps) => {
-  const { toast, handleFloatingToast } = useToast();
+  const { toast, toastMsg, handleFloatingToast } = useToast();
   const dispatch = useDispatch();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
@@ -79,19 +80,21 @@ const CustomFilter = ({ userId }: CustomFilterProps) => {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // 아무 조건을 걸지 않고 적용하기를 누를 시
+    // 아무 조건을 모두 걸지 않고 적용하기를 누를 시
     if (
-      selectedCost.length === 0 &&
-      selectedActivity.length === 0 &&
+      selectedLocation.length === 0 ||
+      selectedActivity.length === 0 ||
       selectedLocation.length === 0
     ) {
-      handleFloatingToast();
+      handleFloatingToast('필터를 모두 선택 후 적용해주세요!');
     }
     // 조건 걸고 난 후 refetch,
     // refetch된 데이터를 바로 리듀서에 전달
     else {
       await refetch().then(data => {
-        dispatch(setPlacesOfFilter(data.data?.pages[0].data.result));
+        const filterData = data.data?.pages.flatMap(page => page.data.result);
+
+        dispatch(setPlacesOfFilter(filterData));
       });
     }
   };
@@ -145,7 +148,7 @@ const CustomFilter = ({ userId }: CustomFilterProps) => {
       <FilterButtonWrap>
         <ButtonBase name="적용하기" />
       </FilterButtonWrap>
-      {toast && <Toast>필터를 선택해주세요!</Toast>}
+      {toast && <Toast>{toastMsg}</Toast>}
     </CustomFilterForm>
   );
 };

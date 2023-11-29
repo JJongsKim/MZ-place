@@ -14,8 +14,8 @@ export const useGetPlacesOfFilter = (
     initialPageParam: 1,
 
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.data.total_places) {
-        const totalPages = Math.ceil(lastPage.data.total_places / 12);
+      if (lastPage.data.totalItems) {
+        const totalPages = Math.ceil(lastPage.data.totalItems / 12);
         return allPages.length < totalPages ? allPages.length + 1 : undefined;
       }
     },
@@ -23,22 +23,7 @@ export const useGetPlacesOfFilter = (
     retry: 0,
   });
 
-  // 새로운 필터들을 선택 시 장소가 중복되어 담기지 않도록 정리 필요!
-  const filterPlaceData: PlacesType[] = [];
-  const idsSet = new Set<number>();
-
-  if (data?.pages) {
-    data.pages.map((page: any) => {
-      page.data.result.map((place: PlacesType) => {
-        if (!idsSet.has(place.id)) {
-          idsSet.add(place.id);
-          filterPlaceData.push(place);
-        }
-      });
-    });
-  }
-
-  return { data: filterPlaceData, ...rest };
+  return { data, ...rest };
 };
 
 // - 카테고리별 API hook
