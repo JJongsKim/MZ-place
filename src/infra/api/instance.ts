@@ -17,7 +17,7 @@ interface APIResponse<T = any> {
   result: T;
   hearts?: HeartPlacesType[];
   message: string;
-  totalItems?: number;
+  total_places?: number;
   nickname?: string;
   ACCESS_TOKEN?: string;
 }

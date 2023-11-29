@@ -14,8 +14,10 @@ export const useGetPlacesOfFilter = (
     initialPageParam: 1,
 
     getNextPageParam: (lastPage, allPages) => {
-      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
-      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+      if (lastPage.data.total_places) {
+        const totalPages = Math.ceil(lastPage.data.total_places / 12);
+        return allPages.length < totalPages ? allPages.length + 1 : undefined;
+      }
     },
 
     retry: 0,
@@ -52,8 +54,10 @@ export const useGetPlacesOfCategory = (
     initialPageParam: 1, // v5 달라진 점
 
     getNextPageParam: (lastPage, allPages) => {
-      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
-      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+      if (lastPage.data.total_places) {
+        const totalPages = Math.ceil(lastPage.data.total_places / 12);
+        return allPages.length < totalPages ? allPages.length + 1 : undefined;
+      }
       // return값이 pageParam으로 전달
     },
 
@@ -73,8 +77,10 @@ export const useGetPlacesOfCourse = (headerArgs?: Record<string, string>) => {
     initialPageParam: 1,
 
     getNextPageParam: (lastPage, allPages) => {
-      const totalPages = Math.ceil(lastPage.data.totalItems! / 12);
-      return allPages.length !== totalPages ? allPages.length + 1 : undefined;
+      if (lastPage.data.total_places) {
+        const totalPages = Math.ceil(lastPage.data.total_places / 12);
+        return allPages.length < totalPages ? allPages.length + 1 : undefined;
+      }
     },
 
     retry: 0,
