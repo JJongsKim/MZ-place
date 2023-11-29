@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 
 import CustomFilter from '@components/CustomFilter';
@@ -6,9 +9,7 @@ import ThumbnailList from '@components/common/ThumbnailList';
 import WarningMention from '@components/common/warning';
 import { DetailPageWrap } from '../style';
 import SearchBar from '@components/common/SearchBar';
-import { useLocation } from 'react-router-dom';
 import { useGetPlacesOfFilter } from '@hooks/api/places';
-import { useSelector } from 'react-redux';
 
 interface CustomFilterPageProps {
   userId?: Record<string, string>;
@@ -16,29 +17,45 @@ interface CustomFilterPageProps {
 
 const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
   const location = useLocation();
-  const placesOfFilter = useSelector(
-    (state: StoreType) => state.PlacesOfFilterReducer.placesOfFilter,
+  const { costFilter, activityFilter, locationFilter } = useSelector(
+    (state: StoreType) => state.FilterReducer,
   );
-  const { isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfFilter();
+
+  const { data, isLoading, refetch, fetchNextPage, hasNextPage } = useGetPlacesOfFilter(
+    {
+      price: costFilter[0],
+      filters: activityFilter.join(','),
+      districts: locationFilter.join(','),
+    },
+    userId,
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await refetch();
+    };
+
+    fetchData();
+  }, [costFilter, activityFilter, locationFilter]);
 
   return (
     <DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} />
       <CustomFilterPageWrap>
-        {placesOfFilter === undefined ? (
+        {costFilter.length === 0 && activityFilter.length === 0 && locationFilter.length === 0 ? (
           <WarningMention text="필터를 선택해주세요!" />
-        ) : placesOfFilter.length === 0 ? (
+        ) : data.length === 0 ? (
           <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
           <ThumbnailList
-            places={placesOfFilter}
+            places={data}
             isLoading={isLoading}
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}
           />
         )}
         <BottomSheet>
-          <CustomFilter userId={userId} />
+          <CustomFilter />
         </BottomSheet>
       </CustomFilterPageWrap>
     </DetailPageWrap>

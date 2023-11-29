@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface RootState {
-  placesOfFilter: PlacesOfMap[] | undefined;
+  placesOfFilter: PlacesType[] | undefined;
 }
 
 const initialState: RootState = {

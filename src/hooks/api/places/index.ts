@@ -23,7 +23,9 @@ export const useGetPlacesOfFilter = (
     retry: 0,
   });
 
-  return { data, ...rest };
+  const filterData = data?.pages.flatMap(page => page.data.result) as PlacesType[];
+
+  return { data: filterData, ...rest };
 };
 
 // - 카테고리별 API hook

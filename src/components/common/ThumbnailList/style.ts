@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 const ThumbnailListWrap = styled.section`
   width: 375px;
-  margin-bottom: 70px;
+  height: 100%;
+  margin-bottom: 150px;
   overflow: scroll;
   padding: 0 18px;
 `;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
 import {
   CustomFilterForm,
@@ -9,33 +8,19 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
-import { useGetPlacesOfFilter } from '@hooks/api/places';
 import { useDispatch } from 'react-redux';
-import { setPlacesOfFilter } from '@store/reducers/PlacesOfFilterReducer';
+import { setActivityFilter, setCostFilter, setLocationFilter } from '@store/reducers/FilterReducer';
 
-interface CustomFilterProps {
-  userId?: Record<string, string>;
-}
-
-const CustomFilter = ({ userId }: CustomFilterProps) => {
-  const { toast, toastMsg, handleFloatingToast } = useToast();
+const CustomFilter = () => {
   const dispatch = useDispatch();
+  const { toast, toastMsg, handleFloatingToast } = useToast();
 
   const [selectedCost, setSelectedCost] = useState<string[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<number[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
-
-  const { refetch } = useGetPlacesOfFilter(
-    {
-      price: selectedCost[0],
-      filters: selectedActivity.join(','),
-      districts: selectedLocation.join(','),
-    },
-    userId,
-  );
 
   const handleSelectedFilter = useCallback(
     (arrayName: string, selectedItem: string) => {
@@ -87,15 +72,10 @@ const CustomFilter = ({ userId }: CustomFilterProps) => {
       selectedLocation.length === 0
     ) {
       handleFloatingToast('필터를 모두 선택 후 적용해주세요!');
-    }
-    // 조건 걸고 난 후 refetch,
-    // refetch된 데이터를 바로 리듀서에 전달
-    else {
-      await refetch().then(data => {
-        const filterData = data.data?.pages.flatMap(page => page.data.result);
-
-        dispatch(setPlacesOfFilter(filterData));
-      });
+    } else {
+      dispatch(setCostFilter(selectedCost));
+      dispatch(setActivityFilter(selectedActivity));
+      dispatch(setLocationFilter(selectedLocation));
     }
   };
 

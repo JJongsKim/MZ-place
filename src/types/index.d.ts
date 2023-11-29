@@ -124,6 +124,11 @@ interface StoreType {
   LocationReducer: {
     currentAddress: string;
   };
+  FilterReducer: {
+    costFilter: string[];
+    activityFilter: number[];
+    locationFilter: string[];
+  };
   PlacesOfFilterReducer: {
     placesOfFilter: PlacesType[];
   };
