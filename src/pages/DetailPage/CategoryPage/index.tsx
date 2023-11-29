@@ -48,7 +48,7 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
 
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <SearchBar name={`${location.state.name}`} backIcon={true} />
       {MENU.some(item => item.name === location.state.name) && (
         <FilterList>
           {COST_FILTER.map(item => (

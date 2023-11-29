@@ -9,15 +9,13 @@ import {
 
 import back from '@assets/back-icon.svg';
 import { useNavigate } from 'react-router-dom';
-import SearchInput from './SearchInput';
 
 interface SearchBarProps {
   name: string;
   backIcon?: boolean;
-  searchIcon?: boolean;
 }
 
-const SearchBar = ({ name, backIcon, searchIcon }: SearchBarProps) => {
+const SearchBar = ({ name, backIcon }: SearchBarProps) => {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
@@ -30,7 +28,6 @@ const SearchBar = ({ name, backIcon, searchIcon }: SearchBarProps) => {
           {backIcon && <BackIcon src={back} alt="뒤로가기" onClick={handleGoBack} />}
           <TitleText>{name}</TitleText>
         </SearchBarTitleWrap>
-        {searchIcon ? <SearchInput searchIcon={searchIcon} /> : null}
       </SearchBarItemWrap>
       <SearchBarLine />
     </SearchBarWrap>

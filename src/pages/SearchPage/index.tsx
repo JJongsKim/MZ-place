@@ -16,7 +16,7 @@ const SearchPage = () => {
 
   return (
     <SearchPageWrap>
-      <SearchBar name="실외활동 탐색" searchIcon={true} />
+      <SearchBar name="실외활동 탐색" />
       <MenuListWrap>
         {MENU.map(menu => (
           <MenuWrap key={menu.id} onClick={() => navigate(`${menu.path}`, { state: menu })}>

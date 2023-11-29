@@ -82,7 +82,7 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
         <Loading />
       ) : (
         <>
-          <SearchBar name={placeInfo?.name} backIcon={true} searchIcon={false} />
+          <SearchBar name={placeInfo?.name} backIcon={true} />
           <ThumbnailBoxWrap>
             <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" />
             <LikeIcon onClick={() => handleClickHeart(placeInfo.id)}>

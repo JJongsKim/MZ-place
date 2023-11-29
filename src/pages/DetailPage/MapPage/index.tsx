@@ -20,7 +20,7 @@ const MapPage = ({ userId }: MapPageProps) => {
 
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <SearchBar name={`${location.state.name}`} backIcon={true} />
       <MapPageWrap>
         <MapPageDropdownWrap>
           <DropDown currentAddress={currentAddress} />

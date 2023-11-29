@@ -48,21 +48,4 @@ const BackIcon = styled.img`
   }
 `;
 
-const SearchIcon = styled.img`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 3px;
-  right: 22px;
-  cursor: pointer;
-`;
-
-export {
-  SearchBarWrap,
-  SearchBarItemWrap,
-  SearchBarTitleWrap,
-  TitleText,
-  SearchBarLine,
-  BackIcon,
-  SearchIcon,
-};
+export { SearchBarWrap, SearchBarItemWrap, SearchBarTitleWrap, TitleText, SearchBarLine, BackIcon };

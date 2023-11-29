@@ -16,7 +16,7 @@ const CoursePage = ({ userId }: CoursePageProps) => {
 
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <SearchBar name={`${location.state.name}`} backIcon={true} />
       {isLoading ? (
         <Loading />
       ) : (

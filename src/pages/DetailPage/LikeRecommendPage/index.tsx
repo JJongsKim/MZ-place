@@ -27,7 +27,7 @@ const LikeRecommendPage = ({ userId }: LikeRecommendPageProps) => {
 
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <SearchBar name={`${location.state.name}`} backIcon={true} />
       {likeData ? (
         <div>추천 데이터 들어갈 자리</div>
       ) : (

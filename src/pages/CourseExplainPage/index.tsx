@@ -140,7 +140,7 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
         <Loading />
       ) : (
         <>
-          <SearchBar name={courseInfo?.name} backIcon={true} searchIcon={false} />
+          <SearchBar name={courseInfo?.name} backIcon={true} />
           <CourseThumbBox>
             <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
           </CourseThumbBox>

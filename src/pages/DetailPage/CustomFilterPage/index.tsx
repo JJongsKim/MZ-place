@@ -23,7 +23,7 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
 
   return (
     <DetailPageWrap>
-      <SearchBar name={`${location.state.name}`} backIcon={true} searchIcon={true} />
+      <SearchBar name={`${location.state.name}`} backIcon={true} />
       <CustomFilterPageWrap>
         {placesOfFilter === undefined ? (
           <WarningMention text="필터를 선택해주세요!" />
