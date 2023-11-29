@@ -74,7 +74,7 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
     } else {
       setHeartState(false);
     }
-  }, []);
+  }, [placeInfo?.heart]);
 
   return (
     <ExplainPageWrap>
