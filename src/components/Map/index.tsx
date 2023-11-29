@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import { REGION_ARRAY } from '@application/constant';
@@ -6,7 +7,7 @@ import { useGetPlacesNearBy } from '@hooks/api/places';
 import useGeoLocation from '@hooks/useGeoLocation';
 import { setPlacesOfMap } from '@store/reducers/PlacesOfMapReducer';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 
@@ -50,7 +51,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
     neLng: 0,
   });
   const { wsLat, wsLng, neLat, neLng } = LatLngRange;
-  const { refetch } = useGetPlacesNearBy(
+  const { data, refetch } = useGetPlacesNearBy(
     {
       ws_latitude: wsLat,
       ws_longitude: wsLng,
@@ -158,66 +159,66 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
     장소 데이터 마커 추가
   */
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await refetch();
-        dispatch(setPlacesOfMap(data?.data.result));
+  const fetchData = useCallback(async () => {
+    try {
+      const { data } = await refetch();
+      dispatch(setPlacesOfMap(data?.data.result));
 
-        // if (data?.data.result && Object.keys(data.data.result).length === 0) {
-        //   console.log('데이터!!:::', data.data.result);
-        //   // handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
-        // }
+      if (mapRef.current) {
+        const places = data?.data.result || undefined;
 
-        if (mapRef.current) {
-          const places = data?.data.result || undefined;
+        const markerImageInfo = {
+          imageSrc: Marker,
+          imageSize: new window.kakao.maps.Size(28, 40),
+        };
+        const markerImage = new window.kakao.maps.MarkerImage(
+          markerImageInfo.imageSrc,
+          markerImageInfo.imageSize,
+          null,
+        );
 
-          const markerImageInfo = {
-            imageSrc: Marker,
-            imageSize: new window.kakao.maps.Size(28, 40),
-          };
-          const markerImage = new window.kakao.maps.MarkerImage(
-            markerImageInfo.imageSrc,
-            markerImageInfo.imageSize,
-            null,
-          );
+        if (Array.isArray(places) && places.length > 0) {
+          // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
+          markers.map(existingMarker => existingMarker.setMap(null));
 
-          if (Array.isArray(places) && places.length > 0) {
-            // 위치 변경 시 마커가 초기화 될 수 있도록 코드 추가
-            markers.map(existingMarker => existingMarker.setMap(null));
+          const newMarkers = places.map(place => {
+            const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
+            const marker = new window.kakao.maps.Marker({ position, image: markerImage });
 
-            const newMarkers = places.map(place => {
-              const position = new window.kakao.maps.LatLng(place.latitude, place.longitude);
-              const marker = new window.kakao.maps.Marker({ position, image: markerImage });
-
-              // 장소 이름 - 인포윈도우로 띄우기
-              window.kakao.maps.event.addListener(marker, 'click', function () {
-                const infowindow = new window.kakao.maps.InfoWindow({
-                  content: `
-                    <div style="display: flex; align-items: center; margin: 8px 5px 10px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                      <p style="font-size: 13px; font-weight: bold;">${place.name}</p>
-                    </div>
-                  `,
-                  removable: true,
-                });
-
-                infowindow.open(mapRef.current, marker);
+            // 장소 이름 - 인포윈도우로 띄우기
+            window.kakao.maps.event.addListener(marker, 'click', function () {
+              const infowindow = new window.kakao.maps.InfoWindow({
+                content: `
+                  <div style="display: flex; align-items: center; margin: 8px 5px 10px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    <p style="font-size: 13px; font-weight: bold;">${place.name}</p>
+                  </div>
+                `,
+                removable: true,
               });
 
-              return marker;
+              infowindow.open(mapRef.current, marker);
             });
 
-            newMarkers.map(item => item.setMap(mapRef.current));
-            setMarkers(newMarkers);
-          }
-        }
-      } catch (error) {
-        console.error('!!!refetch 에러!!!', error);
-      }
-    };
+            return marker;
+          });
 
-    fetchData();
+          newMarkers.map(item => item.setMap(mapRef.current));
+          setMarkers(newMarkers);
+        }
+      }
+    } catch (error) {
+      console.error('!!!refetch 에러!!!', error);
+    }
   }, [currentAddress, LatLngRange]);
+
+  useEffect(() => {
+    fetchData();
+
+    // if (data?.data.result && Object.keys(data.data.result).length === 0) {
+    //   console.log('데이터!!:::', data.data.result);
+    //   handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+    // }
+  }, [fetchData]);
 
   return location?.isLoading ? (
     <Loading />
