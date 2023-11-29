@@ -24,7 +24,6 @@ const RecommendTop20 = styled.p`
 `;
 
 const ContentWrap = styled.section`
-  height: 500px;
   margin-bottom: 50px;
   overflow: scroll;
 `;
