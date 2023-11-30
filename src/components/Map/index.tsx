@@ -129,7 +129,9 @@ const Map = ({ currentAddress, userId }: MapProps) => {
             const bounds = map.getBounds();
             handleChangeLatLng(bounds);
           } else {
-            handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+            setTimeout(() => {
+              handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+            }, 1300);
           }
 
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
@@ -138,7 +140,9 @@ const Map = ({ currentAddress, userId }: MapProps) => {
               const zoomBounds = map.getBounds();
               handleChangeLatLng(zoomBounds);
             } else {
-              handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+              setTimeout(() => {
+                handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+              }, 1300);
             }
           });
         });
@@ -215,7 +219,9 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
   useEffect(() => {
     if (data?.data.result && Object.keys(data.data.result).length === 0) {
-      handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+      setTimeout(() => {
+        handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+      }, 1200);
     }
   }, [data]);
 
