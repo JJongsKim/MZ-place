@@ -40,25 +40,32 @@ const ThumbnailList = ({
     - 최근 조회 장소 업데이트
   */
   const handleClickThumb = (data: PlacesType) => {
-    if (location.pathname === '/search/course') {
-      naviagate(`/course/${data.id}`, { state: data });
-    } else {
-      naviagate(`/place/${data.id}`, { state: data });
-    }
-
     const recentPlaces: RecentPlacesType[] = handleGetRecentPlaces();
     const updatedRecentPlaces = recentPlaces.filter(place => place.id !== data.id);
 
-    updatedRecentPlaces.push({
-      id: data.id,
-      image_url: data.image_url,
-      name: data.name,
-    });
+    if (location.pathname === '/search/course' || data.type === 'course') {
+      naviagate(`/course/${data.id}`, { state: data });
+
+      updatedRecentPlaces.push({
+        id: data.id,
+        image_url: data.image_url,
+        name: data.name,
+        type: 'course',
+      });
+    } else {
+      naviagate(`/place/${data.id}`, { state: data });
+
+      updatedRecentPlaces.push({
+        id: data.id,
+        image_url: data.image_url,
+        name: data.name,
+        type: 'place',
+      });
+    }
 
     if (updatedRecentPlaces.length > MAX_RECENT_PLACES) {
       updatedRecentPlaces.shift();
     }
-
     handleSaveRecentPlace(updatedRecentPlaces);
   };
 

@@ -14,6 +14,7 @@ import Loading from '@components/common/Loading';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
+import DEFAULT_IMAGE from '../../images/default.png';
 
 interface ExplainPageProps {
   userId: Record<string, string>;
@@ -24,6 +25,11 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
 
   const [heartState, setHeartState] = useState(false);
   const { toast, handleFloatingToast } = useToast();
+
+  // 이미지 로딩 실패 시, default 이미지로 대체
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = `${DEFAULT_IMAGE}`;
+  };
 
   const { isLoading, data } = useGetInfoByPlaceId(
     Number(location.pathname.match(/\/place\/(\d+)/)?.[1]),
@@ -84,7 +90,7 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
         <>
           <SearchBar name={placeInfo?.name} backIcon={true} />
           <ThumbnailBoxWrap>
-            <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" />
+            <ThumbnailBox src={placeInfo?.image_url} alt="장소썸네일" onError={handleImageError} />
             <LikeIcon onClick={() => handleClickHeart(placeInfo.id)}>
               {heartState ? <LikeFull /> : <LikeEmpty />}
             </LikeIcon>

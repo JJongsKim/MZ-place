@@ -29,6 +29,7 @@ interface RecentPlacesType {
   id: number;
   image_url: string;
   name: string;
+  type: string;
 }
 
 interface PlacesType {
