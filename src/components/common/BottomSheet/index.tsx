@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { motion } from 'framer-motion';
 import { BOTTOM_SHEET_HEIGHT } from '@application/constant';
 import useBottomSheet from '@hooks/useBottomHook';
 import React from 'react';
@@ -21,7 +20,7 @@ const BottomSheet = ({ children }: BottomSheetProps) => {
   );
 };
 
-const BottomSheetWrap = styled(motion.div)`
+const BottomSheetWrap = styled.div`
   display: flex;
   flex-direction: column; // 바텀시트의 핸들, body 세로정렬
   align-items: center;
