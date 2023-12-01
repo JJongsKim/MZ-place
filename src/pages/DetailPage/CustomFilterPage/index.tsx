@@ -17,7 +17,7 @@ interface CustomFilterPageProps {
 
 const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
   const location = useLocation();
-  const { costFilter, activityFilter, locationFilter } = useSelector(
+  const { costFilter, activityFilter, locationFilter, submitFilter } = useSelector(
     (state: StoreType) => state.FilterReducer,
   );
 
@@ -54,7 +54,7 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
             fetchNextPage={fetchNextPage}
           />
         )}
-        <BottomSheet>
+        <BottomSheet submitState={submitFilter}>
           <CustomFilter />
         </BottomSheet>
       </CustomFilterPageWrap>

@@ -4,12 +4,14 @@ interface RootState {
   costFilter: string[];
   activityFilter: number[];
   locationFilter: string[];
+  submitFilter: boolean;
 }
 
 const initialState: RootState = {
   costFilter: [],
   activityFilter: [],
   locationFilter: [],
+  submitFilter: false,
 };
 
 const FilterReducer = createSlice({
@@ -25,9 +27,13 @@ const FilterReducer = createSlice({
     setLocationFilter: (state, action) => {
       state.locationFilter = action.payload;
     },
+    setSubmitFilter: (state, action) => {
+      state.submitFilter = action.payload;
+    },
   },
 });
 
-export const { setCostFilter, setActivityFilter, setLocationFilter } = FilterReducer.actions;
+export const { setCostFilter, setActivityFilter, setLocationFilter, setSubmitFilter } =
+  FilterReducer.actions;
 
 export default FilterReducer.reducer;

@@ -129,6 +129,7 @@ interface StoreType {
     costFilter: string[];
     activityFilter: number[];
     locationFilter: string[];
+    submitFilter: boolean;
   };
   PlacesOfFilterReducer: {
     placesOfFilter: PlacesType[];

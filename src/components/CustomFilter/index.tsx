@@ -1,3 +1,6 @@
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
 import {
   CustomFilterForm,
@@ -8,11 +11,14 @@ import {
 } from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
-import React, { useCallback, useState } from 'react';
 import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
-import { useDispatch } from 'react-redux';
-import { setActivityFilter, setCostFilter, setLocationFilter } from '@store/reducers/FilterReducer';
+import {
+  setActivityFilter,
+  setCostFilter,
+  setLocationFilter,
+  setSubmitFilter,
+} from '@store/reducers/FilterReducer';
 
 const CustomFilter = () => {
   const dispatch = useDispatch();
@@ -76,6 +82,7 @@ const CustomFilter = () => {
       dispatch(setCostFilter(selectedCost));
       dispatch(setActivityFilter(selectedActivity));
       dispatch(setLocationFilter(selectedLocation));
+      dispatch(setSubmitFilter(true));
     }
   };
 

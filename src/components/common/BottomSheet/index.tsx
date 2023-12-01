@@ -1,14 +1,26 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
+
 import { BOTTOM_SHEET_HEIGHT } from '@application/constant';
 import useBottomSheet from '@hooks/useBottomHook';
-import React from 'react';
+import { setSubmitFilter } from '@store/reducers/FilterReducer';
 
 interface BottomSheetProps {
   children: React.ReactElement;
+  submitState?: boolean;
 }
 
-const BottomSheet = ({ children }: BottomSheetProps) => {
+const BottomSheet = ({ children, submitState }: BottomSheetProps) => {
+  const dispatch = useDispatch();
   const { sheet, handleClickSheet } = useBottomSheet();
+
+  useEffect(() => {
+    if (submitState) {
+      handleClickSheet();
+      dispatch(setSubmitFilter(false));
+    }
+  }, [submitState]);
 
   return (
     <BottomSheetWrap ref={sheet}>
