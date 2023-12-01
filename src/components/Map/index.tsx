@@ -189,16 +189,18 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
             // 장소 이름 - 인포윈도우로 띄우기
             window.kakao.maps.event.addListener(marker, 'click', function () {
-              const infowindow = new window.kakao.maps.InfoWindow({
+              const placeOverlay = new window.kakao.maps.CustomOverlay({
+                position: position,
                 content: `
-                  <div style="display: flex; align-items: center; margin: 8px 5px 10px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    <p style="font-size: 13px; font-weight: bold;">${place.name}</p>
+                  <div style="background-color: #fff; border: 1px solid #19bb35; 
+                  padding: 5px 10px; border-radius: 10px; position: absolute; bottom: 34px; left: -34px;
+                  z-index: 5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    <a href='/place/${place.id}'><p style="font-size: 13px; font-weight: bold;">${place.name}</p></a>
                   </div>
                 `,
-                removable: true,
               });
 
-              infowindow.open(mapRef.current, marker);
+              placeOverlay.setMap(mapRef.current);
             });
 
             return marker;
