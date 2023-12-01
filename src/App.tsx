@@ -15,6 +15,7 @@ import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
 import MyPage from '@pages/MyPage';
 import SearchPage from '@pages/SearchPage';
+import NotFoundPage from '@pages/NotFoundPage';
 import { setUserId } from '@store/reducers/UserIdReducer';
 
 import GlobalStyle from '@styles/globalStyle';
@@ -58,6 +59,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<MainPage userId={userId} />} />
+              <Route path="/*" element={<NotFoundPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
