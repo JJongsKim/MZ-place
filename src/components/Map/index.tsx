@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import { REGION_ARRAY } from '@application/constant';
@@ -33,6 +32,9 @@ const geoLocationOptions = {
 const Map = ({ currentAddress, userId }: MapProps) => {
   const dispatch = useDispatch();
   const { toast, toastMsg, handleFloatingToast } = useToast();
+  const [openOverlay, setOpenOverlay] = useState<typeof window.kakao.maps.CustomOverlay | null>(
+    null,
+  ); // 열린 오버레이 상태값
 
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState<(typeof window.kakao.maps.Marker)[]>([]); // 마커 초기화를 위한 상태값
@@ -126,7 +128,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
         window.kakao.maps.event.addListener(map, 'dragend', function () {
           let level = map.getLevel();
-          if (level <= 4) {
+          if (level <= 5) {
             const bounds = map.getBounds();
             handleChangeLatLng(bounds);
           } else {
@@ -137,7 +139,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
             level = map.getLevel();
-            if (level <= 4) {
+            if (level <= 5) {
               const zoomBounds = map.getBounds();
               handleChangeLatLng(zoomBounds);
             } else {
@@ -201,7 +203,14 @@ const Map = ({ currentAddress, userId }: MapProps) => {
                 `,
               });
 
+              // 클릭 시 현재 열린 오버레이가 있는지 확인
+              if (openOverlay !== null) {
+                console.log('이미 열렸어요!');
+                openOverlay.setMap(null);
+              }
+
               placeOverlay.setMap(mapRef.current);
+              setOpenOverlay(placeOverlay);
             });
 
             return marker;
@@ -214,7 +223,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
     } catch (error) {
       console.error('!!!refetch 에러!!!', error);
     }
-  }, [currentAddress, LatLngRange]);
+  }, [currentAddress, LatLngRange, openOverlay]);
 
   useEffect(() => {
     fetchData();
@@ -224,7 +233,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
     if (data?.data.result && Object.keys(data.data.result).length === 0) {
       setTimeout(() => {
         handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
-      }, 1200);
+      }, 1000);
     }
   }, [data]);
 
