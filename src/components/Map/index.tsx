@@ -196,7 +196,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
                 position: position,
                 content: `
                   <div style="background-color: #fff; border: 1px solid #19bb35; 
-                  padding: 5px 10px; border-radius: 10px; position: absolute; bottom: 34px; left: -34px;
+                  padding: 5px 10px; border-radius: 10px; position: absolute; bottom: 38px; left: -34px;
                   z-index: 5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     <a href='/place/${place.id}'><p style="font-size: 13px; font-weight: bold;">${place.name}🔗</p></a>
                   </div>
