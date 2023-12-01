@@ -32,6 +32,9 @@ const geoLocationOptions = {
 const Map = ({ currentAddress, userId }: MapProps) => {
   const dispatch = useDispatch();
   const { toast, toastMsg, handleFloatingToast } = useToast();
+  const [openOverlay, setOpenOverlay] = useState<typeof window.kakao.maps.CustomOverlay | null>(
+    null,
+  ); // 열린 오버레이 상태값
 
   const mapRef = useRef(null);
   const [markers, setMarkers] = useState<(typeof window.kakao.maps.Marker)[]>([]); // 마커 초기화를 위한 상태값
@@ -125,20 +128,24 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
         window.kakao.maps.event.addListener(map, 'dragend', function () {
           let level = map.getLevel();
-          if (level <= 4) {
+          if (level <= 5) {
             const bounds = map.getBounds();
             handleChangeLatLng(bounds);
           } else {
-            handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+            setTimeout(() => {
+              handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+            }, 1300);
           }
 
           window.kakao.maps.event.addListener(map, 'zoom_changed', function () {
             level = map.getLevel();
-            if (level <= 4) {
+            if (level <= 5) {
               const zoomBounds = map.getBounds();
               handleChangeLatLng(zoomBounds);
             } else {
-              handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+              setTimeout(() => {
+                handleFloatingToast('지도 범위를 벗어났어요! 확대해주세요 :D');
+              }, 1300);
             }
           });
         });
@@ -185,16 +192,25 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
             // 장소 이름 - 인포윈도우로 띄우기
             window.kakao.maps.event.addListener(marker, 'click', function () {
-              const infowindow = new window.kakao.maps.InfoWindow({
+              const placeOverlay = new window.kakao.maps.CustomOverlay({
+                position: position,
                 content: `
-                  <div style="display: flex; align-items: center; margin: 8px 5px 10px; padding-right: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    <p style="font-size: 13px; font-weight: bold;">${place.name}</p>
+                  <div style="background-color: #fff; border: 1px solid #19bb35; 
+                  padding: 5px 10px; border-radius: 10px; position: absolute; bottom: 38px; left: -34px;
+                  z-index: 5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    <a href='/place/${place.id}'><p style="font-size: 13px; font-weight: bold;">${place.name}🔗</p></a>
                   </div>
                 `,
-                removable: true,
               });
 
-              infowindow.open(mapRef.current, marker);
+              // 클릭 시 현재 열린 오버레이가 있는지 확인
+              if (openOverlay !== null) {
+                console.log('이미 열렸어요!');
+                openOverlay.setMap(null);
+              }
+
+              placeOverlay.setMap(mapRef.current);
+              setOpenOverlay(placeOverlay);
             });
 
             return marker;
@@ -207,7 +223,7 @@ const Map = ({ currentAddress, userId }: MapProps) => {
     } catch (error) {
       console.error('!!!refetch 에러!!!', error);
     }
-  }, [currentAddress, LatLngRange]);
+  }, [currentAddress, LatLngRange, openOverlay]);
 
   useEffect(() => {
     fetchData();
@@ -215,7 +231,9 @@ const Map = ({ currentAddress, userId }: MapProps) => {
 
   useEffect(() => {
     if (data?.data.result && Object.keys(data.data.result).length === 0) {
-      handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+      setTimeout(() => {
+        handleFloatingToast('추천 장소가 없어요! 다른 곳으로 이동해주세요 :D');
+      }, 1000);
     }
   }, [data]);
 

@@ -8,11 +8,6 @@ const DropdownWrap = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.text_gray};
   z-index: 2;
   background-color: white;
-
-  @media screen and (min-width: 1200px) {
-    width: 90px;
-    height: 34px;
-  }
 `;
 
 const DropdownTextWrap = styled.p`
