@@ -29,6 +29,11 @@ class PlacesApi {
     });
   };
 
+  // - 유저별 찜 기반 장소 추천 API
+  getPlacesOfLikeRecommend = (headerArgs?: Record<string, string>) => {
+    return this.api.get('/places/recommend', { headers: headerArgs });
+  };
+
   // - <일반> id별 장소 상세조회 API
   getInfoByPlaceId = (placeId: number, headerArgs?: Record<string, string>) => {
     return this.api.get(`/places/place${placeId}`, { headers: headerArgs });

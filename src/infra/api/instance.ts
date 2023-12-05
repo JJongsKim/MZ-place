@@ -15,6 +15,7 @@ import { API } from '@application/constant';
 
 interface APIResponse<T = any> {
   result: T;
+  recommendations?: T;
   hearts?: HeartPlacesType[];
   message: string;
   total_places?: number;
