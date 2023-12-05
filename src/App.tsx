@@ -60,7 +60,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<MainPage userId={userId} />} />
               <Route path="/*" element={<NotFoundPage />} />
-              <Route path="/search" element={<SearchPage />} />
+              <Route path="/search" element={<SearchPage userId={userId} />} />
               <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
               <Route path="/search/map" element={<MapPage userId={userId} />} />

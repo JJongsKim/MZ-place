@@ -1,4 +1,4 @@
-import SearchBar from '@components/common/SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 import {
   MenuDivideLine,
@@ -9,10 +9,41 @@ import {
   SearchPageWrap,
 } from './style';
 import { CUSTOM_MENU, MENU } from '@application/constant';
-import { useNavigate } from 'react-router-dom';
+import { useGetPlacesOfHeart } from '@hooks/api/heart';
+import SearchBar from '@components/common/SearchBar';
+import { useEffect } from 'react';
 
-const SearchPage = () => {
+interface SearchPageProps {
+  userId: Record<string, string>;
+}
+
+const SearchPage = ({ userId }: SearchPageProps) => {
   const navigate = useNavigate();
+  const { data, refetch } = useGetPlacesOfHeart(userId);
+
+  const handleMoveCustomMenu = (
+    customPath: string,
+    custom: {
+      name: string;
+      svg: string;
+      path: string;
+    },
+  ) => {
+    if (custom.name === '찜 기반 추천') {
+      navigate(`${customPath}`, {
+        state: {
+          likeLength: data.length,
+          custom,
+        },
+      });
+    } else {
+      navigate(`${customPath}`, { state: custom });
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <SearchPageWrap>
@@ -28,7 +59,7 @@ const SearchPage = () => {
       <MenuDivideLine />
       <MenuListWrap>
         {CUSTOM_MENU.map(custom => (
-          <MenuWrap key={custom.name} onClick={() => navigate(`${custom.path}`, { state: custom })}>
+          <MenuWrap key={custom.name} onClick={() => handleMoveCustomMenu(custom.path, custom)}>
             <MenuIcon src={custom.svg} />
             <MenuName>{custom.name}</MenuName>
           </MenuWrap>
