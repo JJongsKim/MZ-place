@@ -126,3 +126,14 @@ export const useGetPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
 
   return { data: data?.data.result, ...rest };
 };
+
+// - 유저별 찜 기반 장소 추천 API hook
+export const useGetPlacesOfLikeRecommend = (headerArgs?: Record<string, string>) => {
+  const { data, isLoading, ...rest } = useQuery({
+    queryKey: ['getPlacesOfLikeRecommend', headerArgs],
+    queryFn: () => api.places.getPlacesOfLikeRecommend(headerArgs),
+    retry: 1,
+  });
+
+  return { recommendData: data?.data.recommendations as PlacesType[], isLoading, ...rest };
+};
