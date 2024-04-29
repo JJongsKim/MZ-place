@@ -36,7 +36,6 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
       if (!heartState) {
         pushHeartMutation({
           args: {
-            type: 'p',
             place_id: id,
           },
           headerArgs: userId!,
@@ -47,7 +46,6 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
       if (heartState) {
         deleteHeartMutation({
           args: {
-            type: 'p',
             place_id: id,
           },
           headerArgs: userId!,

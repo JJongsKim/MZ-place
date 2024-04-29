@@ -115,7 +115,6 @@ interface NaverLoginArgsType {
 }
 
 interface HeartDataArgsType {
-  type: 'c' | 'p';
   course_id?: number;
   place_id?: number;
 }

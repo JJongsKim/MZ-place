@@ -108,7 +108,9 @@ const SignIn = () => {
             <Link to={kakaoURL}>
               <SocialIcon src={kakao} alt="카카오" />
             </Link>
-            <SocialIcon src={naver} alt="네이버" />
+            <Link to={naverURL}>
+              <SocialIcon src={naver} alt="네이버" />
+            </Link>
           </SocialWrap>
           <SubmitWrap>
             <Link to="/sign-up">

@@ -53,7 +53,6 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
       if (!heartState) {
         pushHeartMutation({
           args: {
-            type: 'p',
             place_id: id,
           },
           headerArgs: userId!,
@@ -64,7 +63,6 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
       if (heartState) {
         deleteHeartMutation({
           args: {
-            type: 'p',
             place_id: id,
           },
           headerArgs: userId!,
