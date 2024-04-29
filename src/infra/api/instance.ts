@@ -36,6 +36,12 @@ interface CustomInstance extends AxiosInstance {
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
 
+  put<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
   delete<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
     url: string,
     config?: AxiosRequestConfig<D>,

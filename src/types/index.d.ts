@@ -119,6 +119,13 @@ interface HeartDataArgsType {
   place_id?: number;
 }
 
+interface ReviewArgsType {
+  course_id?: number;
+  place_id?: number;
+  content: string;
+  rating: number;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {
