@@ -2,23 +2,7 @@ import { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import useToast from '@hooks/useToast';
 
-import {
-  CopyButton,
-  CopyButtonWrap,
-  CourseIntroImage,
-  CourseIntroLine,
-  CourseIntroText,
-  CourseIntroThumbnail,
-  CourseIntroWrap,
-  CourseList,
-  CourseTitle,
-  InfoIcon,
-  InfoIconWrap,
-  InfoList,
-  InfoText,
-  InfoTextWrap,
-  MapWrap,
-} from './style';
+import * as S from './style';
 
 import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
@@ -26,6 +10,7 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
+import EmptyStar from '@assets/star-empty.svg';
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -85,90 +70,102 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
   }, [findAddress]);
 
   return (
-    <InfoList>
+    <S.InfoList>
       {/* - 주소 - */}
       <li>
-        <InfoTextWrap>
-          <InfoIconWrap>
-            <InfoIcon src={Pin} />
-          </InfoIconWrap>
-          <InfoText>{address}</InfoText>
-        </InfoTextWrap>
-        <CopyButtonWrap>
+        <S.InfoTextWrap>
+          <S.InfoIconWrap>
+            <S.InfoIcon src={Pin} />
+          </S.InfoIconWrap>
+          <S.InfoText>{address}</S.InfoText>
+        </S.InfoTextWrap>
+        <S.CopyButtonWrap>
           <CopyToClipboard text={address} onCopy={handleFloatingToast}>
-            <CopyButton>복사하기</CopyButton>
+            <S.CopyButton>복사하기</S.CopyButton>
           </CopyToClipboard>
-          <CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
+          <S.CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
             {findAddress ? '지도 닫기' : '길 찾기'}
-          </CopyButton>
-        </CopyButtonWrap>
-        {findAddress && <MapWrap id="map" />}
+          </S.CopyButton>
+        </S.CopyButtonWrap>
+        {findAddress && <S.MapWrap id="map" />}
       </li>
       {/* - 전화번호 - */}
       {placeInfo.phone_number && (
         <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={Phone} />
-            </InfoIconWrap>
-            <InfoText>{placeInfo.phone_number}</InfoText>
-          </InfoTextWrap>
-          <CopyButtonWrap>
+          <S.InfoTextWrap>
+            <S.InfoIconWrap>
+              <S.InfoIcon src={Phone} />
+            </S.InfoIconWrap>
+            <S.InfoText>{placeInfo.phone_number}</S.InfoText>
+          </S.InfoTextWrap>
+          <S.CopyButtonWrap>
             <CopyToClipboard text={placeInfo.phone_number} onCopy={handleFloatingToast}>
-              <CopyButton>복사하기</CopyButton>
+              <S.CopyButton>복사하기</S.CopyButton>
             </CopyToClipboard>
-          </CopyButtonWrap>
+          </S.CopyButtonWrap>
         </li>
       )}
       {/* - 운영시간 - */}
       {placeInfo.work_time && (
         <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={Time} />
-            </InfoIconWrap>
-            <InfoText>{placeInfo.work_time}</InfoText>
-          </InfoTextWrap>
+          <S.InfoTextWrap>
+            <S.InfoIconWrap>
+              <S.InfoIcon src={Time} />
+            </S.InfoIconWrap>
+            <S.InfoText>{placeInfo.work_time}</S.InfoText>
+          </S.InfoTextWrap>
         </li>
       )}
       {/* - 가격 | 이외 정보 - */}
       <li>
-        <InfoTextWrap>
-          <InfoIconWrap>
-            <InfoIcon src={InfoEtc} />
-          </InfoIconWrap>
-          <InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</InfoText>
-        </InfoTextWrap>
+        <S.InfoTextWrap>
+          <S.InfoIconWrap>
+            <S.InfoIcon src={InfoEtc} />
+          </S.InfoIconWrap>
+          <S.InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</S.InfoText>
+        </S.InfoTextWrap>
       </li>
       {/* - 홈페이지 링크 - */}
       {placeInfo.page_url && (
         <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={LinkIcon} />
-            </InfoIconWrap>
-            <InfoText>
+          <S.InfoTextWrap>
+            <S.InfoIconWrap>
+              <S.InfoIcon src={LinkIcon} />
+            </S.InfoIconWrap>
+            <S.InfoText>
               <Link to={placeInfo.page_url}>
                 <u>홈페이지 주소</u>
               </Link>
-            </InfoText>
-          </InfoTextWrap>
+            </S.InfoText>
+          </S.InfoTextWrap>
         </li>
       )}
+      <li>
+        <S.InfoTextWrap>
+          <S.InfoIconWrap>
+            <S.InfoIcon src={EmptyStar} />
+          </S.InfoIconWrap>
+          <S.InfoText>
+            <u onClick={() => navigate('/reviews')} style={{ cursor: 'pointer' }}>
+              리뷰 보러가기
+            </u>
+          </S.InfoText>
+        </S.InfoTextWrap>
+      </li>
       {/* 코스와 관련된 장소인 경우, 코스 추천
       TODO: 코스 API 모두 연결 시, 링크연결되도록 수정해보기? */}
       {isRelatedCourse &&
         placeInfo.related_course &&
         placeInfo.related_course.map(course => (
           <section style={{ marginBottom: '10px' }}>
-            <CourseIntroText>코스</CourseIntroText>
-            <CourseIntroLine />
-            <CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
-              <CourseIntroThumbnail>
-                <CourseIntroImage src={course.image_url} alt="장소코스" />
-              </CourseIntroThumbnail>
-              <CourseTitle>{course.name}</CourseTitle>
-              <CourseList>
+            <S.CourseIntroText>코스</S.CourseIntroText>
+            <S.CourseIntroLine />
+            <S.CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
+              <S.CourseIntroThumbnail>
+                <S.CourseIntroImage src={course.image_url} alt="장소코스" />
+              </S.CourseIntroThumbnail>
+              <S.CourseTitle>{course.name}</S.CourseTitle>
+              <S.CourseList>
                 <li>
                   <span>소요 시간</span>
                   {course.duration_time}
@@ -177,12 +174,12 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
                   <span>기타 정보</span>
                   {course.price} 공간 있음
                 </li>
-              </CourseList>
-            </CourseIntroWrap>
+              </S.CourseList>
+            </S.CourseIntroWrap>
           </section>
         ))}
       {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
-    </InfoList>
+    </S.InfoList>
   );
 };
 
