@@ -50,7 +50,7 @@ interface CustomInstance extends AxiosInstance {
 
 const instance: CustomInstance = axios.create({
   baseURL: API,
-  withCredentials: true,
+  // withCredentials: true,
   headers: {},
 });
 
