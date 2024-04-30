@@ -338,6 +338,24 @@ export const AutoSlideImgs = [
   },
 ];
 
+export const RatingStarArr = [
+  {
+    rating: 5,
+  },
+  {
+    rating: 4,
+  },
+  {
+    rating: 3,
+  },
+  {
+    rating: 2,
+  },
+  {
+    rating: 1,
+  },
+];
+
 export const MIN_Y = 200; // bottom sheet 최대로 높이 올라간 y 값
 export const MAX_Y = window.innerHeight - 80; // bottom sheet 높이 최대로 내려간 y 값
 export const BOTTOM_SHEET_HEIGHT = window.innerHeight - MIN_Y;

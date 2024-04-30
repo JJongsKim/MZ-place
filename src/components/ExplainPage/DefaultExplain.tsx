@@ -12,8 +12,11 @@ import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
 import FullStar from '@assets/star-full.svg';
+import activeBtn from '@assets/dropdown.svg';
+
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { RatingStarArr } from '@application/constant';
 
 interface DefaultExplainProps {
   placeInfo: PlaceType;
@@ -27,10 +30,25 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
   const { toast, handleFloatingToast } = useToast();
 
   const [findAddress, isFindAddress] = useState(false);
+  const [postReview, setPostReview] = useState(false);
+
+  const [rating, setRating] = useState(5);
+  const [ratingContent, setRatingContent] = useState('');
+
+  const [clicked, isClicked] = useState(false);
   const [defaultState, setDefaultState] = useState('default');
 
   const handleMoveCourse = (courseId: number) => {
     navigate(`/course/${courseId}`);
+  };
+
+  const handleClickBtn = () => {
+    isClicked(!clicked);
+  };
+
+  const handleClickRatingStar = (rating: number) => {
+    setRating(rating);
+    isClicked(false);
   };
 
   useEffect(() => {
@@ -95,8 +113,50 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
               <p>별점별점</p>
               <p>00개</p>
             </S.ReviewSummary>
-            <button>리뷰 쓰기</button>
+            <button onClick={() => setPostReview(true)}>리뷰 쓰기</button>
           </S.ReviewHeader>
+
+          {postReview && (
+            <S.ReviewPostWrap>
+              <S.ReviewPostHeader>
+                <S.ReviewPostDropdown>
+                  <S.ReviewPostDropdownText>
+                    {Array.from({ length: rating }, (_, index) => (
+                      <img key={index} src={FullStar} height="15" />
+                    ))}
+                  </S.ReviewPostDropdownText>
+                  <S.ReviewPostDropdownBtnWrap onClick={handleClickBtn}>
+                    <S.ReviewPostDropdownBtn src={activeBtn} $clicked={clicked} />
+                  </S.ReviewPostDropdownBtnWrap>
+                  {clicked && (
+                    <S.ReviewPostDropdownListWrap>
+                      <S.ReviewPostDropdownList>
+                        {RatingStarArr.map(item => (
+                          <li key={item.rating}>
+                            {Array.from({ length: item.rating }, (_, index) => (
+                              <img
+                                key={index}
+                                src={FullStar}
+                                height="15"
+                                onClick={() => handleClickRatingStar(item.rating)}
+                              />
+                            ))}
+                          </li>
+                        ))}
+                      </S.ReviewPostDropdownList>
+                    </S.ReviewPostDropdownListWrap>
+                  )}
+                </S.ReviewPostDropdown>
+                <button onClick={() => setPostReview(false)}>닫기</button>
+              </S.ReviewPostHeader>
+              <S.ReviewPostContent
+                id="reviewContent"
+                name="reviewContent"
+                onChange={e => setRatingContent(e.target.value)}
+              />
+            </S.ReviewPostWrap>
+          )}
+
           <ul>
             <li>
               <S.ReviewUserInfo>

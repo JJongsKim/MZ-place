@@ -1,10 +1,18 @@
+import {
+  DropdownBtn,
+  DropdownBtnWrap,
+  DropdownList,
+  DropdownListWrap,
+  DropdownTextWrap,
+  DropdownWrap,
+} from '@components/common/DropDown/style';
 import { LikeIcon, ThumbnailBox, ThumbnailBoxWrap } from '@pages/ExplainPage/style';
 import { styled } from 'styled-components';
 
 const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 100%;
   padding: 0 25px;
   margin-bottom: 80px;
 
@@ -132,6 +140,7 @@ const ReviewWrap = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0 25px;
+  margin-bottom: 100px;
 `;
 
 const ReviewHeader = styled.div`
@@ -171,6 +180,52 @@ const ReviewUserInfo = styled.div`
 const ReviewContent = styled.p`
   font-size: 0.8rem;
   padding: 5px 0;
+`;
+
+const ReviewPostWrap = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+`;
+
+const ReviewPostHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
+
+const ReviewPostContent = styled.textarea`
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  font-size: 0.8rem;
+
+  resize: none;
+  border: none;
+  outline: none;
+  background-color: #f4f4f4;
+`;
+
+const ReviewPostDropdown = styled(DropdownWrap)`
+  width: 100px;
+  height: 20px;
+`;
+const ReviewPostDropdownText = styled(DropdownTextWrap)`
+  width: 90%;
+`;
+const ReviewPostDropdownBtnWrap = styled(DropdownBtnWrap)``;
+const ReviewPostDropdownBtn = styled(DropdownBtn)`
+  width: 14px;
+`;
+const ReviewPostDropdownListWrap = styled(DropdownListWrap)`
+  top: 18px;
+
+  width: 100px;
+  height: 130px;
+`;
+const ReviewPostDropdownList = styled(DropdownList)`
+  li {
+    margin: 8px 0;
+  }
 `;
 
 const SelectBox = styled.div`
@@ -213,4 +268,13 @@ export {
   ReviewSummary,
   ReviewUserInfo,
   ReviewContent,
+  ReviewPostWrap,
+  ReviewPostHeader,
+  ReviewPostContent,
+  ReviewPostDropdown,
+  ReviewPostDropdownText,
+  ReviewPostDropdownBtnWrap,
+  ReviewPostDropdownBtn,
+  ReviewPostDropdownListWrap,
+  ReviewPostDropdownList,
 };
