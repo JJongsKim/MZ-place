@@ -15,7 +15,6 @@ import LikePage from '@pages/LikePage';
 import MainPage from '@pages/MainPage';
 import MyPage from '@pages/MyPage';
 import SearchPage from '@pages/SearchPage';
-import ReviewPage from '@pages/ReviewPage';
 import NotFoundPage from '@pages/NotFoundPage';
 import { setUserId } from '@store/reducers/UserIdReducer';
 
@@ -74,7 +73,6 @@ function App() {
               <Route path="/course/:id" element={<CourseExplainPage userId={userId} />} />
               <Route path="/like" element={<LikePage {...HOCprops} userId={userId} />} />
               <Route path="/my-page" element={<MyPage {...HOCprops} userId={userId} />} />
-              <Route path="/reviews" element={<ReviewPage />} />
             </Route>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />

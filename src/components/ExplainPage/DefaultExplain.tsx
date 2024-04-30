@@ -10,7 +10,6 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
-import EmptyStar from '@assets/star-empty.svg';
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -140,18 +139,6 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
           </S.InfoTextWrap>
         </li>
       )}
-      <li>
-        <S.InfoTextWrap>
-          <S.InfoIconWrap>
-            <S.InfoIcon src={EmptyStar} />
-          </S.InfoIconWrap>
-          <S.InfoText>
-            <u onClick={() => navigate('/reviews')} style={{ cursor: 'pointer' }}>
-              리뷰 보러가기
-            </u>
-          </S.InfoText>
-        </S.InfoTextWrap>
-      </li>
       {/* 코스와 관련된 장소인 경우, 코스 추천
       TODO: 코스 API 모두 연결 시, 링크연결되도록 수정해보기? */}
       {isRelatedCourse &&

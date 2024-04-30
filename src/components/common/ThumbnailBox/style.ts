@@ -18,7 +18,7 @@ const ThumbLabel = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 30px;
+  height: 26px;
   position: absolute;
   bottom: 0;
   padding: 0 10px;
