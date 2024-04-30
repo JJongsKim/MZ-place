@@ -126,6 +126,69 @@ const CourseList = styled.ul`
   }
 `;
 
+const ReviewWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 25px;
+`;
+
+const ReviewHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  button {
+    background-color: transparent;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.green};
+  }
+`;
+
+const ReviewSummary = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    padding: 0 6px;
+    font-size: 0.8rem;
+  }
+`;
+
+const ReviewUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  p {
+    margin-right: 6px;
+  }
+`;
+
+const ReviewContent = styled.p`
+  font-size: 0.8rem;
+  padding: 5px 0;
+`;
+
+const SelectBox = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const SelectButton = styled.button<{
+  $state: boolean;
+}>`
+  width: 50%;
+  height: 20px;
+  background-color: transparent;
+  border-bottom: ${props => props.$state && '2px solid #bababa'};
+  color: ${({ theme }) => theme.colors.gray};
+`;
+
 export {
   InfoList,
   InfoTextWrap,
@@ -143,4 +206,11 @@ export {
   CourseLikeIcon,
   CourseTitle,
   CourseList,
+  SelectBox,
+  SelectButton,
+  ReviewWrap,
+  ReviewHeader,
+  ReviewSummary,
+  ReviewUserInfo,
+  ReviewContent,
 };
