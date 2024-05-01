@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
@@ -25,7 +25,7 @@ export const useGetPlacesOfHeart = (headerArgs: Record<string, string>) => {
 };
 
 export const usePushHeart = () => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['pushHeart'],
@@ -38,11 +38,11 @@ export const usePushHeart = () => {
     }) => {
       const result = await api.hearts.pushHeart(args, headerArgs);
 
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
-      queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
+      // queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
 
       return result;
     },
@@ -50,7 +50,7 @@ export const usePushHeart = () => {
 };
 
 export const useDeleteHeart = () => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['deleteHeart'],
@@ -63,11 +63,11 @@ export const useDeleteHeart = () => {
     }) => {
       const result = await api.hearts.deleteHeart(args, headerArgs);
 
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
-      queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
-      queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfFilter'] });
+      // queryClient.refetchQueries({ queryKey: ['getInfoByPlaceId'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesNearBy'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfTop20'] });
+      // queryClient.refetchQueries({ queryKey: ['getPlacesOfCategory'] });
 
       return result;
     },
