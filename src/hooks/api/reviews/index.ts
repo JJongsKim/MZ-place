@@ -2,10 +2,10 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { api } from '@infra/api';
 
 // - 리뷰 조회 API hook
-export const useGetReviews = (args: Record<string, string>) => {
+export const useGetReviews = (queryParams: Record<string, string | number>) => {
   const { data, ...rest } = useQuery({
     queryKey: ['getReviews'],
-    queryFn: () => api.reviews.getReviews(args),
+    queryFn: () => api.reviews.getReviews(queryParams),
     retry: 1,
   });
 
@@ -56,7 +56,7 @@ export const useDeleteReviews = () => {
       args,
       headerArgs,
     }: {
-      args: Record<string, string>;
+      args: Record<string, number>;
       headerArgs: Record<string, string>;
     }) => {
       const result = await api.reviews.deleteReviews(headerArgs, args);

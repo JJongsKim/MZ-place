@@ -182,7 +182,7 @@ const ReviewContent = styled.p`
   padding: 5px 0;
 `;
 
-const ReviewPostWrap = styled.div`
+const ReviewPostWrap = styled.form`
   width: 100%;
   margin-bottom: 10px;
 `;
@@ -196,6 +196,7 @@ const ReviewPostHeader = styled.div`
 const ReviewPostContent = styled.textarea`
   width: 100%;
   height: 120px;
+  margin-bottom: 5px;
   padding: 10px;
   font-size: 0.8rem;
 
@@ -225,6 +226,16 @@ const ReviewPostDropdownListWrap = styled(DropdownListWrap)`
 const ReviewPostDropdownList = styled(DropdownList)`
   li {
     margin: 8px 0;
+  }
+`;
+
+const ReviewPostButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.green};
   }
 `;
 
@@ -277,4 +288,5 @@ export {
   ReviewPostDropdownBtn,
   ReviewPostDropdownListWrap,
   ReviewPostDropdownList,
+  ReviewPostButtonWrap,
 };

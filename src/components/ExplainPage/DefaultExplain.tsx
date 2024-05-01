@@ -17,26 +17,57 @@ import activeBtn from '@assets/dropdown.svg';
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { RatingStarArr } from '@application/constant';
+import { useGetReviews, usePostReviews } from '@hooks/api/reviews';
 
 interface DefaultExplainProps {
+  userId: Record<string, string>;
+  placeNum: number;
   placeInfo: PlaceType;
   address: string;
   isRelatedCourse?: boolean;
 }
 
-const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainProps) => {
+const DefaultExplain = ({
+  userId,
+  placeNum,
+  placeInfo,
+  address,
+  isRelatedCourse,
+}: DefaultExplainProps) => {
   const navigate = useNavigate();
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
-  const [findAddress, isFindAddress] = useState(false);
-  const [postReview, setPostReview] = useState(false);
+  const { data } = useGetReviews({
+    type: 'p',
+    num: placeNum,
+  });
+  console.log(data);
+
+  const { mutate: postReviewsMutation } = usePostReviews();
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    postReviewsMutation({
+      args: {
+        place_id: placeNum,
+        rating: rating,
+        content: ratingContent,
+      },
+      headerArgs: userId,
+    });
+  };
+
+  // console.log(userId);
+
+  const [findAddress, isFindAddress] = useState(false); // 지도
+  const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
 
   const [rating, setRating] = useState(5);
   const [ratingContent, setRatingContent] = useState('');
 
   const [clicked, isClicked] = useState(false);
-  const [defaultState, setDefaultState] = useState('default');
+  const [defaultState, setDefaultState] = useState('default'); // 상세정보 파트 or 리뷰 파트
 
   const handleMoveCourse = (courseId: number) => {
     navigate(`/course/${courseId}`);
@@ -117,7 +148,7 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
           </S.ReviewHeader>
 
           {postReview && (
-            <S.ReviewPostWrap>
+            <S.ReviewPostWrap onSubmit={handleSubmit}>
               <S.ReviewPostHeader>
                 <S.ReviewPostDropdown>
                   <S.ReviewPostDropdownText>
@@ -154,6 +185,9 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
                 name="reviewContent"
                 onChange={e => setRatingContent(e.target.value)}
               />
+              <S.ReviewPostButtonWrap>
+                <button type="submit">등록</button>
+              </S.ReviewPostButtonWrap>
             </S.ReviewPostWrap>
           )}
 

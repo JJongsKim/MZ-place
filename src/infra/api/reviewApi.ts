@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { instance } from './instance';
 
 export class ReviewApi {
   constructor(private api: typeof instance) {}
 
-  getReviews = (args: Record<string, string>) => {
-    return this.api.get('/reviews', args);
+  getReviews = (queryParams: Record<string, string | number>) => {
+    return this.api.get('/reviews', {
+      params: { ...queryParams },
+    });
   };
 
   postReviews = (headerArgs: Record<string, string>, args: ReviewArgsType) => {
@@ -15,10 +18,13 @@ export class ReviewApi {
     return this.api.put('/reviews', args, { headers: headerArgs });
   };
 
-  deleteReviews = (headerArgs: Record<string, string>, args: Record<string, string>) => {
+  deleteReviews = (headerArgs: Record<string, string>, args: Record<string, number>) => {
     return this.api.delete('/reviews', {
-      headers: headerArgs,
-      data: args,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        ...headerArgs,
+      },
+      data: { ...args },
     });
   };
 }

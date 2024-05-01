@@ -20,8 +20,11 @@ interface ExplainPageProps {
   userId: Record<string, string>;
 }
 
+const regex = /\/([^/]+)\/([^/]+)/;
+
 const ExplainPage = ({ userId }: ExplainPageProps) => {
   const location = useLocation();
+  const locationNum = Number(location.pathname.match(regex)?.[2]);
 
   const [heartState, setHeartState] = useState(false);
   const { toast, handleFloatingToast } = useToast();
@@ -31,10 +34,7 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
     event.currentTarget.src = `${DEFAULT_IMAGE}`;
   };
 
-  const { isLoading, data } = useGetInfoByPlaceId(
-    Number(location.pathname.match(/\/place\/(\d+)/)?.[1]),
-    userId,
-  );
+  const { isLoading, data } = useGetInfoByPlaceId(locationNum, userId);
   const placeInfo = data?.data.result as PlaceType;
 
   const address = useReverseGeoCoding({
@@ -97,9 +97,16 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
           {placeInfo?.related_course ? (
             <>
               {placeInfo.related_course.length === 0 ? (
-                <DefaultExplain placeInfo={placeInfo} address={address.address} />
+                <DefaultExplain
+                  userId={userId}
+                  placeNum={locationNum}
+                  placeInfo={placeInfo}
+                  address={address.address}
+                />
               ) : (
                 <DefaultExplain
+                  userId={userId}
+                  placeNum={locationNum}
                   placeInfo={placeInfo}
                   address={address.address}
                   isRelatedCourse={true}
