@@ -46,10 +46,6 @@ const ReviewUserInfo = styled.div`
   align-items: center;
   font-size: 0.8rem;
   font-weight: 500;
-
-  p {
-    margin-right: 6px;
-  }
 `;
 
 const ReviewList = styled.li`
@@ -70,7 +66,7 @@ const ReviewListEditWrap = styled.div`
 
 const ReviewContent = styled.p`
   font-size: 0.8rem;
-  padding: 5px 0;
+  padding: 10px 0;
 `;
 
 const ReviewPostWrap = styled.form`
@@ -130,6 +126,13 @@ const ReviewPostButtonWrap = styled.div`
   }
 `;
 
+const EditForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  font-weight: 500;
+`;
+
 export {
   ReviewWrap,
   ReviewHeader,
@@ -148,4 +151,5 @@ export {
   ReviewPostDropdownListWrap,
   ReviewPostDropdownList,
   ReviewPostButtonWrap,
+  EditForm,
 };

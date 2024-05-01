@@ -40,6 +40,8 @@ export const usePostReviews = () => {
 
 // - 리뷰 수정 API hook
 export const useEditReviews = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['editReviews'],
     mutationFn: async ({
@@ -52,6 +54,12 @@ export const useEditReviews = () => {
       const result = await api.reviews.editReviews(headerArgs, args);
 
       return result;
+    },
+
+    onSuccess: data => {
+      if (data.data.message === 'REVIEW_UPDATED') {
+        queryClient.invalidateQueries({ queryKey: ['getReviews'] });
+      }
     },
   });
 };
@@ -76,7 +84,6 @@ export const useDeleteReviews = () => {
 
     onSuccess: data => {
       if (data.data.message === 'DELETE_SUCCESS') {
-        console.log('지우기 성공!');
         queryClient.invalidateQueries({ queryKey: ['getReviews'] });
       }
     },
