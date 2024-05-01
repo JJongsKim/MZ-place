@@ -83,6 +83,10 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
       },
       headerArgs: userId,
     });
+
+    setPostReview(false);
+    setRating(5);
+    setRatingContent('');
   };
 
   return (
