@@ -18,7 +18,7 @@ import ReviewList from '@components/common/ReviewList';
 
 interface DefaultExplainProps {
   userId: Record<string, string>;
-  placeNum: number;
+  placeId: number;
   placeInfo: PlaceType;
   address: string;
   isRelatedCourse?: boolean;
@@ -26,7 +26,7 @@ interface DefaultExplainProps {
 
 const DefaultExplain = ({
   userId,
-  placeNum,
+  placeId,
   placeInfo,
   address,
   isRelatedCourse,
@@ -35,9 +35,9 @@ const DefaultExplain = ({
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
-  const { data } = useGetReviews({
+  const { reviewData } = useGetReviews({
     type: 'p',
-    num: placeNum,
+    num: placeId,
   });
 
   const [findAddress, isFindAddress] = useState(false); // 지도
@@ -103,9 +103,9 @@ const DefaultExplain = ({
       </S.SelectBox>
       {defaultState === 'review' ? (
         <ReviewList
-          reviewData={data?.data.reviews}
+          reviewData={reviewData?.data.reviews}
           placeType="place"
-          placeNum={placeNum}
+          placeNum={placeId}
           userId={userId}
         />
       ) : (

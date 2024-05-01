@@ -201,8 +201,8 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
       <S.ReviewHeader>
         <S.ReviewSummary>
           <img src={FullStar} />
-          <p>{reviewAvg}</p>
-          <p>{reviewData?.length}개</p>
+          {reviewData && reviewData.length === 0 ? <p>0.00</p> : <p>{reviewAvg}</p>}
+          {reviewData && reviewData.length === 0 ? <p>0개</p> : <p>{reviewData?.length}개</p>}
         </S.ReviewSummary>
         <button
           onClick={() => {
@@ -262,85 +262,92 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
 
       {/* 리뷰 조회 | 수정 | 삭제 */}
       <ul style={{ width: '100%' }}>
-        {reviewData?.map(review => (
-          <S.ReviewList key={review.id}>
-            {/* 리뷰 수정 - editReview(true) & 본인 리뷰 */}
-            {editReview && review.user === userNickname ? (
-              <S.EditForm onSubmit={handleEdit}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '5px',
-                  }}
-                >
-                  <p style={{ marginRight: '6px' }}>{review.user}</p>
-                  <S.ReviewPostDropdown>
-                    <S.ReviewPostDropdownText>
-                      {Array.from({ length: rating }, (_, index) => (
+        {reviewData && reviewData.length !== 0 ? (
+          <>
+            {reviewData?.map(review => (
+              <S.ReviewList key={review.id}>
+                {/* 리뷰 수정 - editReview(true) & 본인 리뷰 */}
+                {editReview && review.user === userNickname ? (
+                  <S.EditForm onSubmit={handleEdit}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '5px',
+                      }}
+                    >
+                      <p style={{ marginRight: '6px' }}>{review.user}</p>
+                      <S.ReviewPostDropdown>
+                        <S.ReviewPostDropdownText>
+                          {Array.from({ length: rating }, (_, index) => (
+                            <img key={index} src={FullStar} height="15" />
+                          ))}
+                        </S.ReviewPostDropdownText>
+                        <S.ReviewPostDropdownBtnWrap onClick={handleClickDropdown}>
+                          <S.ReviewPostDropdownBtn src={activeBtn} $clicked={clicked} />
+                        </S.ReviewPostDropdownBtnWrap>
+                        {clicked && (
+                          <S.ReviewPostDropdownListWrap>
+                            <S.ReviewPostDropdownList>
+                              {RatingStarArr.map(item => (
+                                <li key={item.rating}>
+                                  {Array.from({ length: item.rating }, (_, index) => (
+                                    <img
+                                      key={index}
+                                      src={FullStar}
+                                      height="15"
+                                      onClick={() => handleClickRatingStar(item.rating)}
+                                    />
+                                  ))}
+                                </li>
+                              ))}
+                            </S.ReviewPostDropdownList>
+                          </S.ReviewPostDropdownListWrap>
+                        )}
+                      </S.ReviewPostDropdown>
+                      <S.ReviewListEditWrap>
+                        <button type="submit">재등록</button>
+                        <button onClick={handleCloseEditBtn}>닫기</button>
+                      </S.ReviewListEditWrap>
+                    </div>
+                    <S.ReviewPostContent
+                      id="reviewContent"
+                      name="reviewContent"
+                      onChange={e => setRatingContent(e.target.value)}
+                      defaultValue={review.content}
+                    />
+                  </S.EditForm>
+                ) : (
+                  <>
+                    {/* 리뷰 조회 */}
+                    <S.ReviewUserInfo>
+                      <p style={{ marginRight: '6px' }}>{review.user}</p>
+                      {Array.from({ length: review.rating }, (_, index) => (
                         <img key={index} src={FullStar} height="15" />
                       ))}
-                    </S.ReviewPostDropdownText>
-                    <S.ReviewPostDropdownBtnWrap onClick={handleClickDropdown}>
-                      <S.ReviewPostDropdownBtn src={activeBtn} $clicked={clicked} />
-                    </S.ReviewPostDropdownBtnWrap>
-                    {clicked && (
-                      <S.ReviewPostDropdownListWrap>
-                        <S.ReviewPostDropdownList>
-                          {RatingStarArr.map(item => (
-                            <li key={item.rating}>
-                              {Array.from({ length: item.rating }, (_, index) => (
-                                <img
-                                  key={index}
-                                  src={FullStar}
-                                  height="15"
-                                  onClick={() => handleClickRatingStar(item.rating)}
-                                />
-                              ))}
-                            </li>
-                          ))}
-                        </S.ReviewPostDropdownList>
-                      </S.ReviewPostDropdownListWrap>
-                    )}
-                  </S.ReviewPostDropdown>
-                  <S.ReviewListEditWrap>
-                    <button type="submit">재등록</button>
-                    <button onClick={handleCloseEditBtn}>닫기</button>
-                  </S.ReviewListEditWrap>
-                </div>
-                <S.ReviewPostContent
-                  id="reviewContent"
-                  name="reviewContent"
-                  onChange={e => setRatingContent(e.target.value)}
-                  defaultValue={review.content}
-                />
-              </S.EditForm>
-            ) : (
-              <>
-                {/* 리뷰 조회 */}
-                <S.ReviewUserInfo>
-                  <p style={{ marginRight: '6px' }}>{review.user}</p>
-                  {Array.from({ length: review.rating }, (_, index) => (
-                    <img key={index} src={FullStar} height="15" />
-                  ))}
-                  {Array.from({ length: 5 - review.rating }, (_, index) => (
-                    <img key={index} src={EmptyStar} height="15" />
-                  ))}
-                </S.ReviewUserInfo>
-                <S.ReviewContent>{review.content}</S.ReviewContent>
-              </>
-            )}
+                      {Array.from({ length: 5 - review.rating }, (_, index) => (
+                        <img key={index} src={EmptyStar} height="15" />
+                      ))}
+                    </S.ReviewUserInfo>
+                    <S.ReviewContent>{review.content}</S.ReviewContent>
+                  </>
+                )}
 
-            {review.user === userNickname && !editReview && (
-              <S.ReviewListEditWrap>
-                <button onClick={() => handleClickEditBtn(review.rating, review.content)}>
-                  수정
-                </button>
-                <button onClick={handleViewModal}>삭제</button>
-              </S.ReviewListEditWrap>
-            )}
-          </S.ReviewList>
-        ))}
+                {review.user === userNickname && !editReview && (
+                  <S.ReviewListEditWrap>
+                    <button onClick={() => handleClickEditBtn(review.rating, review.content)}>
+                      수정
+                    </button>
+                    <button onClick={handleViewModal}>삭제</button>
+                  </S.ReviewListEditWrap>
+                )}
+              </S.ReviewList>
+            ))}
+          </>
+        ) : (
+          // 리뷰 0개인 경우
+          <S.NonReviewWrap>아직 리뷰가 없어요 🤔</S.NonReviewWrap>
+        )}
       </ul>
       {modal && (
         <Modal onClose={handleCloseModal}>

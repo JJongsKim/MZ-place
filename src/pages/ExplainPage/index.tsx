@@ -99,14 +99,14 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
               {placeInfo.related_course.length === 0 ? (
                 <DefaultExplain
                   userId={userId}
-                  placeNum={locationNum}
+                  placeId={locationNum}
                   placeInfo={placeInfo}
                   address={address.address}
                 />
               ) : (
                 <DefaultExplain
                   userId={userId}
-                  placeNum={locationNum}
+                  placeId={locationNum}
                   placeInfo={placeInfo}
                   address={address.address}
                   isRelatedCourse={true}

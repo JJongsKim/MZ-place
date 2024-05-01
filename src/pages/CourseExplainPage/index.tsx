@@ -5,21 +5,19 @@ import { useLocation } from 'react-router-dom';
 import SearchBar from '@components/common/SearchBar';
 import Marker from '@assets/marker.svg';
 
+import * as S from './style';
 import {
-  CourseExplainPageWrap,
-  CourseInfoList,
-  CourseMapButton,
-  CourseRouteMap,
-  CourseThumbBox,
-  CourseThumbnail,
-  CourseTime,
-  CourseTitle,
-} from './style';
-import { CourseIntroLine, CourseIntroText } from '@components/ExplainPage/style';
+  CourseIntroLine,
+  CourseIntroText,
+  SelectBox,
+  SelectButton,
+} from '@components/ExplainPage/style';
 import { useGetInfoByCourseId } from '@hooks/api/places';
 import Loading from '@components/common/Loading';
 import WarningMention from '@components/common/warning';
 import CoursePlaceBox from '@components/CourseExplainPage/CoursePlaceBox';
+import ReviewList from '@components/common/ReviewList';
+import { useGetReviews } from '@hooks/api/reviews';
 
 interface CourseExplainPageProps {
   userId: Record<string, string>;
@@ -31,10 +29,15 @@ interface CourseExplainPageProps {
   - 지도에 N코스 별 마커 생성
   - 마커 사이 선으로 표시
 */
+
+const regex = /\/([^/]+)\/([^/]+)/;
+
 const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   const location = useLocation();
+  const courseId = Number(location.pathname.match(regex)?.[2]);
 
   const [findAddress, isFindAddress] = useState(false);
+  const [defaultState, setDefaultState] = useState('default'); // 상세정보 파트 or 리뷰 파트
 
   const { isLoading, data } = useGetInfoByCourseId(
     Number(location.pathname.match(/\/course\/(\d+)/)?.[1]),
@@ -45,6 +48,11 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   if (coursePlaceInfo) {
     coursePlaceInfo.sort((a, b) => a.order_number - b.order_number);
   }
+
+  const { reviewData } = useGetReviews({
+    type: 'c',
+    num: courseId,
+  });
 
   useEffect(() => {
     if (findAddress && courseInfo && coursePlaceInfo) {
@@ -135,52 +143,76 @@ const CourseExplainPage = ({ userId }: CourseExplainPageProps) => {
   }, [findAddress]);
 
   return (
-    <CourseExplainPageWrap>
+    <S.CourseExplainPageWrap>
       {isLoading ? (
         <Loading />
       ) : (
         <>
           <SearchBar name={courseInfo?.name} backIcon={true} />
-          <CourseThumbBox>
-            <CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
-          </CourseThumbBox>
-          <CourseTitle>{courseInfo?.name}</CourseTitle>
-          <CourseInfoList>
-            <CourseTime>
-              <li>
-                <span>소요시간</span>
-                {courseInfo.duration_time}
+          <S.CourseThumbBox>
+            <S.CourseThumbnail src={courseInfo.image_url} alt="장소썸네일" />
+          </S.CourseThumbBox>
+          <S.CourseTitle>{courseInfo?.name}</S.CourseTitle>
+
+          <SelectBox>
+            <SelectButton
+              $state={defaultState === 'default' ? true : false}
+              onClick={() => setDefaultState('default')}
+            >
+              상세정보
+            </SelectButton>
+            <SelectButton
+              $state={defaultState === 'review' ? true : false}
+              onClick={() => setDefaultState('review')}
+            >
+              리뷰
+            </SelectButton>
+          </SelectBox>
+          {defaultState === 'review' ? (
+            <ReviewList
+              reviewData={reviewData?.data.reviews}
+              placeType="place"
+              placeNum={courseId}
+              userId={userId}
+            />
+          ) : (
+            <S.CourseInfoList>
+              <S.CourseTime>
+                <li>
+                  <span>소요시간</span>
+                  {courseInfo.duration_time}
+                </li>
+                <li>
+                  <span>기타 정보</span>
+                  {courseInfo.price} 공간 있음
+                </li>
+              </S.CourseTime>
+              <CourseIntroText>코스</CourseIntroText>
+              <CourseIntroLine />
+              <li style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <S.CourseMapButton type="button" onClick={() => isFindAddress(!findAddress)}>
+                  {findAddress ? '코스 지도 닫기' : '코스 지도 열기'}
+                </S.CourseMapButton>
+                {findAddress ? <S.CourseRouteMap id="map" /> : null}
               </li>
-              <li>
-                <span>기타 정보</span>
-                {courseInfo.price} 공간 있음
-              </li>
-            </CourseTime>
-            <CourseIntroText>코스</CourseIntroText>
-            <CourseIntroLine />
-            <li style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <CourseMapButton type="button" onClick={() => isFindAddress(!findAddress)}>
-                {findAddress ? '코스 지도 닫기' : '코스 지도 열기'}
-              </CourseMapButton>
-              {findAddress ? <CourseRouteMap id="map" /> : null}
-            </li>
-            {coursePlaceInfo ? (
-              coursePlaceInfo.map(course => (
-                <CoursePlaceBox
-                  key={course.order_number}
-                  placeId={course.place_id}
-                  placeName={course.place_name}
-                  imageUrl={course.place_image_url}
-                  courseNumber={course.order_number}
-                />
-              ))
-            ) : (
-              <WarningMention text="다시 새로고침 해주세요!" />
-            )}
-          </CourseInfoList>
+              {coursePlaceInfo ? (
+                coursePlaceInfo.map(course => (
+                  <CoursePlaceBox
+                    key={course.order_number}
+                    placeId={course.place_id}
+                    placeName={course.place_name}
+                    imageUrl={course.place_image_url}
+                    courseNumber={course.order_number}
+                  />
+                ))
+              ) : (
+                <WarningMention text="다시 새로고침 해주세요!" />
+              )}
+            </S.CourseInfoList>
+          )}
         </>
       )}
-    </CourseExplainPageWrap>
+    </S.CourseExplainPageWrap>
   );
 };
 

@@ -9,7 +9,7 @@ export const useGetReviews = (queryParams: Record<string, string | number>) => {
     retry: 1,
   });
 
-  return { data, ...rest };
+  return { reviewData: data, ...rest };
 };
 
 // - 리뷰 작성 API hook

@@ -133,6 +133,16 @@ const EditForm = styled.form`
   font-weight: 500;
 `;
 
+const NonReviewWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14vh;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
+
 export {
   ReviewWrap,
   ReviewHeader,
@@ -152,4 +162,5 @@ export {
   ReviewPostDropdownList,
   ReviewPostButtonWrap,
   EditForm,
+  NonReviewWrap,
 };
