@@ -12,14 +12,14 @@ import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
 interface ThumbnailProps {
   data: PlacesType | PlacesOfMap | HeartPlacesType;
   userId?: Record<string, string>;
-  like?: number;
+  like?: boolean;
   recentView?: boolean | null;
   onClick?: () => void;
 }
 
 const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProps) => {
   const { toast, handleFloatingToast } = useToast();
-  const [heartState, setHeartState] = useState(false);
+  const [heartState, setHeartState] = useState(like);
 
   // 이미지 로딩 실패 시, default 이미지로 대체
   const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -56,12 +56,8 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
   };
 
   useEffect(() => {
-    if (like === 1) {
-      setHeartState(true);
-    } else {
-      setHeartState(false);
-    }
-  }, []);
+    setHeartState(like);
+  }, [like]);
 
   return (
     <>

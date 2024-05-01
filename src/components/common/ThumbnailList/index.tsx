@@ -107,7 +107,7 @@ const ThumbnailList = ({
             userId={userId}
             key={data.id}
             data={data}
-            like={data.heart}
+            like={data.heart === 1 ? true : false}
             recentView={recentView || data.type === 'course' ? true : null}
             onClick={() => handleClickThumb(data)}
           />
