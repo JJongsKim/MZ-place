@@ -37,10 +37,10 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
   const [nonLogin, setNonLogin] = useState(false);
   const [alreadyReview, setAlreadyReview] = useState(false);
 
-  const [clicked, isClicked] = useState(false);
-  const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
-  const [rating, setRating] = useState(5);
-  const [ratingContent, setRatingContent] = useState('');
+  const [postReview, setPostReview] = useState(false); // 리뷰 쓰는창 state
+  const [clicked, isClicked] = useState(false); // 드롭다운
+  const [rating, setRating] = useState(5); // 별점 선택
+  const [ratingContent, setRatingContent] = useState(''); // 리뷰 작성란
 
   const handleClickBtn = () => {
     isClicked(!clicked);
