@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import useToast from '@hooks/useToast';
@@ -11,13 +10,11 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
-import FullStar from '@assets/star-full.svg';
-import activeBtn from '@assets/dropdown.svg';
 
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
-import { RatingStarArr } from '@application/constant';
-import { useGetReviews, usePostReviews } from '@hooks/api/reviews';
+import { useGetReviews } from '@hooks/api/reviews';
+import ReviewList from '@components/common/ReviewList';
 
 interface DefaultExplainProps {
   userId: Record<string, string>;
@@ -42,45 +39,12 @@ const DefaultExplain = ({
     type: 'p',
     num: placeNum,
   });
-  const reviewData = data?.data.reviews;
-  const reviewAvg =
-    reviewData &&
-    (reviewData.reduce((acc, cur) => acc + cur.rating, 0) / reviewData.length).toFixed(2);
-
-  const { mutate: postReviewsMutation } = usePostReviews();
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    postReviewsMutation({
-      args: {
-        place_id: placeNum,
-        rating: rating,
-        content: ratingContent,
-      },
-      headerArgs: userId,
-    });
-  };
 
   const [findAddress, isFindAddress] = useState(false); // 지도
-  const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
-
-  const [rating, setRating] = useState(5);
-  const [ratingContent, setRatingContent] = useState('');
-
-  const [clicked, isClicked] = useState(false);
   const [defaultState, setDefaultState] = useState('default'); // 상세정보 파트 or 리뷰 파트
 
   const handleMoveCourse = (courseId: number) => {
     navigate(`/course/${courseId}`);
-  };
-
-  const handleClickBtn = () => {
-    isClicked(!clicked);
-  };
-
-  const handleClickRatingStar = (rating: number) => {
-    setRating(rating);
-    isClicked(false);
   };
 
   useEffect(() => {
@@ -138,74 +102,7 @@ const DefaultExplain = ({
         </S.SelectButton>
       </S.SelectBox>
       {defaultState === 'review' ? (
-        <S.ReviewWrap>
-          <S.ReviewHeader>
-            <S.ReviewSummary>
-              <img src={FullStar} />
-              <p>{reviewAvg}</p>
-              <p>{reviewData?.length}개</p>
-            </S.ReviewSummary>
-            <button onClick={() => setPostReview(true)}>리뷰 쓰기</button>
-          </S.ReviewHeader>
-
-          {postReview && (
-            <S.ReviewPostWrap onSubmit={handleSubmit}>
-              <S.ReviewPostHeader>
-                <S.ReviewPostDropdown>
-                  <S.ReviewPostDropdownText>
-                    {Array.from({ length: rating }, (_, index) => (
-                      <img key={index} src={FullStar} height="15" />
-                    ))}
-                  </S.ReviewPostDropdownText>
-                  <S.ReviewPostDropdownBtnWrap onClick={handleClickBtn}>
-                    <S.ReviewPostDropdownBtn src={activeBtn} $clicked={clicked} />
-                  </S.ReviewPostDropdownBtnWrap>
-                  {clicked && (
-                    <S.ReviewPostDropdownListWrap>
-                      <S.ReviewPostDropdownList>
-                        {RatingStarArr.map(item => (
-                          <li key={item.rating}>
-                            {Array.from({ length: item.rating }, (_, index) => (
-                              <img
-                                key={index}
-                                src={FullStar}
-                                height="15"
-                                onClick={() => handleClickRatingStar(item.rating)}
-                              />
-                            ))}
-                          </li>
-                        ))}
-                      </S.ReviewPostDropdownList>
-                    </S.ReviewPostDropdownListWrap>
-                  )}
-                </S.ReviewPostDropdown>
-                <button onClick={() => setPostReview(false)}>닫기</button>
-              </S.ReviewPostHeader>
-              <S.ReviewPostContent
-                id="reviewContent"
-                name="reviewContent"
-                onChange={e => setRatingContent(e.target.value)}
-              />
-              <S.ReviewPostButtonWrap>
-                <button type="submit">등록</button>
-              </S.ReviewPostButtonWrap>
-            </S.ReviewPostWrap>
-          )}
-
-          <ul>
-            {reviewData?.map(review => (
-              <S.ReviewList key={review.id}>
-                <S.ReviewUserInfo>
-                  <p>{review.user}</p>
-                  {Array.from({ length: review.rating }, (_, index) => (
-                    <img key={index} src={FullStar} height="15" />
-                  ))}
-                </S.ReviewUserInfo>
-                <S.ReviewContent>{review.content}</S.ReviewContent>
-              </S.ReviewList>
-            ))}
-          </ul>
-        </S.ReviewWrap>
+        <ReviewList reviewData={data?.data.reviews} placeNum={placeNum} userId={userId} />
       ) : (
         <S.InfoList>
           {/* - 주소 - */}
