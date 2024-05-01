@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as S from './style';
 import * as MP from '@pages/MyPage/style';
 
