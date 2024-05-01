@@ -2,23 +2,7 @@ import { useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import useToast from '@hooks/useToast';
 
-import {
-  CopyButton,
-  CopyButtonWrap,
-  CourseIntroImage,
-  CourseIntroLine,
-  CourseIntroText,
-  CourseIntroThumbnail,
-  CourseIntroWrap,
-  CourseList,
-  CourseTitle,
-  InfoIcon,
-  InfoIconWrap,
-  InfoList,
-  InfoText,
-  InfoTextWrap,
-  MapWrap,
-} from './style';
+import * as S from './style';
 
 import Marker from '@assets/marker.svg';
 import Pin from '@assets/pin.svg';
@@ -26,21 +10,38 @@ import Time from '@assets/time.svg';
 import Phone from '@assets/phone.svg';
 import InfoEtc from '@assets/info-etc.svg';
 import LinkIcon from '@assets/link.svg';
+
 import Toast from '@components/common/Toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { useGetReviews } from '@hooks/api/reviews';
+import ReviewList from '@components/common/ReviewList';
 
 interface DefaultExplainProps {
+  userId: Record<string, string>;
+  placeId: number;
   placeInfo: PlaceType;
   address: string;
   isRelatedCourse?: boolean;
 }
 
-const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainProps) => {
+const DefaultExplain = ({
+  userId,
+  placeId,
+  placeInfo,
+  address,
+  isRelatedCourse,
+}: DefaultExplainProps) => {
   const navigate = useNavigate();
   const { description } = placeInfo;
   const { toast, handleFloatingToast } = useToast();
 
-  const [findAddress, isFindAddress] = useState(false);
+  const { reviewData } = useGetReviews({
+    type: 'p',
+    num: placeId,
+  });
+
+  const [findAddress, isFindAddress] = useState(false); // 지도
+  const [defaultState, setDefaultState] = useState('default'); // 상세정보 파트 or 리뷰 파트
 
   const handleMoveCourse = (courseId: number) => {
     navigate(`/course/${courseId}`);
@@ -85,104 +86,129 @@ const DefaultExplain = ({ placeInfo, address, isRelatedCourse }: DefaultExplainP
   }, [findAddress]);
 
   return (
-    <InfoList>
-      {/* - 주소 - */}
-      <li>
-        <InfoTextWrap>
-          <InfoIconWrap>
-            <InfoIcon src={Pin} />
-          </InfoIconWrap>
-          <InfoText>{address}</InfoText>
-        </InfoTextWrap>
-        <CopyButtonWrap>
-          <CopyToClipboard text={address} onCopy={handleFloatingToast}>
-            <CopyButton>복사하기</CopyButton>
-          </CopyToClipboard>
-          <CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
-            {findAddress ? '지도 닫기' : '길 찾기'}
-          </CopyButton>
-        </CopyButtonWrap>
-        {findAddress && <MapWrap id="map" />}
-      </li>
-      {/* - 전화번호 - */}
-      {placeInfo.phone_number && (
-        <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={Phone} />
-            </InfoIconWrap>
-            <InfoText>{placeInfo.phone_number}</InfoText>
-          </InfoTextWrap>
-          <CopyButtonWrap>
-            <CopyToClipboard text={placeInfo.phone_number} onCopy={handleFloatingToast}>
-              <CopyButton>복사하기</CopyButton>
-            </CopyToClipboard>
-          </CopyButtonWrap>
-        </li>
+    <>
+      <S.SelectBox>
+        <S.SelectButton
+          $state={defaultState === 'default' ? true : false}
+          onClick={() => setDefaultState('default')}
+        >
+          상세정보
+        </S.SelectButton>
+        <S.SelectButton
+          $state={defaultState === 'review' ? true : false}
+          onClick={() => setDefaultState('review')}
+        >
+          리뷰
+        </S.SelectButton>
+      </S.SelectBox>
+      {defaultState === 'review' ? (
+        <ReviewList
+          reviewData={reviewData?.data.reviews}
+          placeType="place"
+          placeNum={placeId}
+          userId={userId}
+        />
+      ) : (
+        <S.InfoList>
+          {/* - 주소 - */}
+          <li>
+            <S.InfoTextWrap>
+              <S.InfoIconWrap>
+                <S.InfoIcon src={Pin} />
+              </S.InfoIconWrap>
+              <S.InfoText>{address}</S.InfoText>
+            </S.InfoTextWrap>
+            <S.CopyButtonWrap>
+              <CopyToClipboard text={address} onCopy={handleFloatingToast}>
+                <S.CopyButton>복사하기</S.CopyButton>
+              </CopyToClipboard>
+              <S.CopyButton type="button" onClick={() => isFindAddress(!findAddress)}>
+                {findAddress ? '지도 닫기' : '길 찾기'}
+              </S.CopyButton>
+            </S.CopyButtonWrap>
+            {findAddress && <S.MapWrap id="map" />}
+          </li>
+          {/* - 전화번호 - */}
+          {placeInfo.phone_number && (
+            <li>
+              <S.InfoTextWrap>
+                <S.InfoIconWrap>
+                  <S.InfoIcon src={Phone} />
+                </S.InfoIconWrap>
+                <S.InfoText>{placeInfo.phone_number}</S.InfoText>
+              </S.InfoTextWrap>
+              <S.CopyButtonWrap>
+                <CopyToClipboard text={placeInfo.phone_number} onCopy={handleFloatingToast}>
+                  <S.CopyButton>복사하기</S.CopyButton>
+                </CopyToClipboard>
+              </S.CopyButtonWrap>
+            </li>
+          )}
+          {/* - 운영시간 - */}
+          {placeInfo.work_time && (
+            <li>
+              <S.InfoTextWrap>
+                <S.InfoIconWrap>
+                  <S.InfoIcon src={Time} />
+                </S.InfoIconWrap>
+                <S.InfoText>{placeInfo.work_time}</S.InfoText>
+              </S.InfoTextWrap>
+            </li>
+          )}
+          {/* - 가격 | 이외 정보 - */}
+          <li>
+            <S.InfoTextWrap>
+              <S.InfoIconWrap>
+                <S.InfoIcon src={InfoEtc} />
+              </S.InfoIconWrap>
+              <S.InfoText>
+                {description === '' ? '편하게 산책다녀오세요 :D' : description}
+              </S.InfoText>
+            </S.InfoTextWrap>
+          </li>
+          {/* - 홈페이지 링크 - */}
+          {placeInfo.page_url && (
+            <li>
+              <S.InfoTextWrap>
+                <S.InfoIconWrap>
+                  <S.InfoIcon src={LinkIcon} />
+                </S.InfoIconWrap>
+                <S.InfoText>
+                  <Link to={placeInfo.page_url}>
+                    <u>홈페이지 주소</u>
+                  </Link>
+                </S.InfoText>
+              </S.InfoTextWrap>
+            </li>
+          )}
+          {isRelatedCourse &&
+            placeInfo.related_course &&
+            placeInfo.related_course.map(course => (
+              <section style={{ marginBottom: '10px' }}>
+                <S.CourseIntroText>코스</S.CourseIntroText>
+                <S.CourseIntroLine />
+                <S.CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
+                  <S.CourseIntroThumbnail>
+                    <S.CourseIntroImage src={course.image_url} alt="장소코스" />
+                  </S.CourseIntroThumbnail>
+                  <S.CourseTitle>{course.name}</S.CourseTitle>
+                  <S.CourseList>
+                    <li>
+                      <span>소요 시간</span>
+                      {course.duration_time}
+                    </li>
+                    <li>
+                      <span>기타 정보</span>
+                      {course.price} 공간 있음
+                    </li>
+                  </S.CourseList>
+                </S.CourseIntroWrap>
+              </section>
+            ))}
+          {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
+        </S.InfoList>
       )}
-      {/* - 운영시간 - */}
-      {placeInfo.work_time && (
-        <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={Time} />
-            </InfoIconWrap>
-            <InfoText>{placeInfo.work_time}</InfoText>
-          </InfoTextWrap>
-        </li>
-      )}
-      {/* - 가격 | 이외 정보 - */}
-      <li>
-        <InfoTextWrap>
-          <InfoIconWrap>
-            <InfoIcon src={InfoEtc} />
-          </InfoIconWrap>
-          <InfoText>{description === '' ? '편하게 산책다녀오세요 :D' : description}</InfoText>
-        </InfoTextWrap>
-      </li>
-      {/* - 홈페이지 링크 - */}
-      {placeInfo.page_url && (
-        <li>
-          <InfoTextWrap>
-            <InfoIconWrap>
-              <InfoIcon src={LinkIcon} />
-            </InfoIconWrap>
-            <InfoText>
-              <Link to={placeInfo.page_url}>
-                <u>홈페이지 주소</u>
-              </Link>
-            </InfoText>
-          </InfoTextWrap>
-        </li>
-      )}
-      {/* 코스와 관련된 장소인 경우, 코스 추천
-      TODO: 코스 API 모두 연결 시, 링크연결되도록 수정해보기? */}
-      {isRelatedCourse &&
-        placeInfo.related_course &&
-        placeInfo.related_course.map(course => (
-          <section style={{ marginBottom: '10px' }}>
-            <CourseIntroText>코스</CourseIntroText>
-            <CourseIntroLine />
-            <CourseIntroWrap key={course.id} onClick={() => handleMoveCourse(course.id)}>
-              <CourseIntroThumbnail>
-                <CourseIntroImage src={course.image_url} alt="장소코스" />
-              </CourseIntroThumbnail>
-              <CourseTitle>{course.name}</CourseTitle>
-              <CourseList>
-                <li>
-                  <span>소요 시간</span>
-                  {course.duration_time}
-                </li>
-                <li>
-                  <span>기타 정보</span>
-                  {course.price} 공간 있음
-                </li>
-              </CourseList>
-            </CourseIntroWrap>
-          </section>
-        ))}
-      {toast && <Toast>클립보드에 복사되었습니다!</Toast>}
-    </InfoList>
+    </>
   );
 };
 

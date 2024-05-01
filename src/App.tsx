@@ -41,13 +41,13 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      dispatch(setUserId({ local_token: token }));
+      dispatch(setUserId({ 'local-token': token }));
     }
     if (kakaoId) {
-      dispatch(setUserId({ kakao_id: kakaoId }));
+      dispatch(setUserId({ 'kakao-id': kakaoId }));
     }
     if (naverId) {
-      dispatch(setUserId({ naver_id: naverId }));
+      dispatch(setUserId({ 'naver-id': naverId }));
     }
   }, []);
 

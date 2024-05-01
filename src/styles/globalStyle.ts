@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    background-color: transparent none;
+    background-color: transparent;
     border: none;
     margin: 0;
     padding: 0;

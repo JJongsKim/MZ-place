@@ -18,7 +18,7 @@ export const useKakaoLogin = (kakaoId: string) => {
         setKakaoId(kakaoId);
         setNickname(data.data.nickname!);
         handleRemoveRecentPlace();
-        dispatch(setUserId({ kakao_id: kakaoId }));
+        dispatch(setUserId({ 'kakao-id': kakaoId }));
       }
     },
   });
@@ -35,7 +35,7 @@ export const useNaverLogin = (naverId: string) => {
         setNaverId(naverId);
         setNickname(data.data.nickname!);
         handleRemoveRecentPlace();
-        dispatch(setUserId({ naver_id: naverId }));
+        dispatch(setUserId({ 'naver-id': naverId }));
       }
     },
   });

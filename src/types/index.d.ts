@@ -115,9 +115,24 @@ interface NaverLoginArgsType {
 }
 
 interface HeartDataArgsType {
-  type: 'c' | 'p';
   course_id?: number;
   place_id?: number;
+}
+
+interface ReviewArgsType {
+  course_id?: number;
+  place_id?: number;
+  content: string;
+  rating: number;
+}
+
+interface ReviewDataType {
+  content: string;
+  created_at: string;
+  id: number;
+  rating: number;
+  updated_at: string;
+  user: string;
 }
 
 // redux store 타입

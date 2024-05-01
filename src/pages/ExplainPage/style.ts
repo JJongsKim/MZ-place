@@ -17,7 +17,7 @@ const ThumbnailBoxWrap = styled.div`
 const ThumbnailBox = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 const LikeIcon = styled.div`

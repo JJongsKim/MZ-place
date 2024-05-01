@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 100%;
   padding: 0 25px;
   margin-bottom: 80px;
 
@@ -126,6 +126,22 @@ const CourseList = styled.ul`
   }
 `;
 
+const SelectBox = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const SelectButton = styled.button<{
+  $state: boolean;
+}>`
+  width: 50%;
+  height: 20px;
+  background-color: transparent;
+  border-bottom: ${props => props.$state && '2px solid #bababa'};
+  color: ${({ theme }) => theme.colors.gray};
+`;
+
 export {
   InfoList,
   InfoTextWrap,
@@ -143,4 +159,6 @@ export {
   CourseLikeIcon,
   CourseTitle,
   CourseList,
+  SelectBox,
+  SelectButton,
 };

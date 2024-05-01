@@ -15,6 +15,7 @@ import { API } from '@application/constant';
 
 interface APIResponse<T = any> {
   result: T;
+  reviews: ReviewDataType[];
   recommendations?: T;
   hearts?: HeartPlacesType[];
   message: string;
@@ -36,6 +37,12 @@ interface CustomInstance extends AxiosInstance {
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
 
+  put<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig<D>,
+  ): Promise<R>;
+
   delete<T = unknown, R = AxiosResponse<APIResponse<T>>, D = unknown>(
     url: string,
     config?: AxiosRequestConfig<D>,
@@ -44,7 +51,7 @@ interface CustomInstance extends AxiosInstance {
 
 const instance: CustomInstance = axios.create({
   baseURL: API,
-  withCredentials: true,
+  // withCredentials: true,
   headers: {},
 });
 

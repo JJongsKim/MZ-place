@@ -18,7 +18,7 @@ const useSignIn = () => {
         setAccessToken(data.data.ACCESS_TOKEN);
         setNickname(data.data.nickname!);
         handleRemoveRecentPlace();
-        dispatch(setUserId({ local_token: data.data.ACCESS_TOKEN }));
+        dispatch(setUserId({ 'local-token': data.data.ACCESS_TOKEN }));
       }
     },
   });
