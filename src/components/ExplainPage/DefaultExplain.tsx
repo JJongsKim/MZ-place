@@ -102,7 +102,12 @@ const DefaultExplain = ({
         </S.SelectButton>
       </S.SelectBox>
       {defaultState === 'review' ? (
-        <ReviewList reviewData={data?.data.reviews} placeNum={placeNum} userId={userId} />
+        <ReviewList
+          reviewData={data?.data.reviews}
+          placeType="place"
+          placeNum={placeNum}
+          userId={userId}
+        />
       ) : (
         <S.InfoList>
           {/* - 주소 - */}

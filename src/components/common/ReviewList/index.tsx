@@ -1,25 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as S from './style';
+import * as MP from '@pages/MyPage/style';
 
 import FullStar from '@assets/star-full.svg';
 import activeBtn from '@assets/dropdown.svg';
 
+import Toast from '../Toast';
+import Modal from '../Modal';
+
 import { RatingStarArr } from '@application/constant';
 import { getNickname } from '@infra/api/nickname';
 import { useState } from 'react';
-import { usePostReviews } from '@hooks/api/reviews';
+import { useDeleteReviews, usePostReviews } from '@hooks/api/reviews';
+import useToast from '@hooks/useToast';
+import useModal from '@hooks/useModal';
 
 interface ReviewListProps {
   placeNum: number; // 장소 및 코스 id
+  placeType?: 'place' | 'course';
   userId: Record<string, string>;
   reviewData: ReviewDataType[] | undefined;
 }
 
-const ReviewList = ({ reviewData, placeNum, userId }: ReviewListProps) => {
+const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps) => {
   const userNickname = getNickname();
-
   const reviewAvg =
     reviewData &&
     (reviewData.reduce((acc, cur) => acc + cur.rating, 0) / reviewData.length).toFixed(2);
+
+  console.log(reviewData);
+
+  const { toast, handleFloatingToast } = useToast();
+  const { modal, handleViewModal, handleCloseModal } = useModal();
 
   const [clicked, isClicked] = useState(false);
   const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
@@ -33,6 +45,30 @@ const ReviewList = ({ reviewData, placeNum, userId }: ReviewListProps) => {
   const handleClickRatingStar = (rating: number) => {
     setRating(rating);
     isClicked(false);
+  };
+
+  const { mutate: deleteReviewsMutation } = useDeleteReviews();
+  const handleDeleteReview = () => {
+    if (placeType === 'place') {
+      deleteReviewsMutation({
+        args: {
+          place_id: placeNum,
+        },
+        headerArgs: userId,
+      });
+    }
+    if (placeType === 'course') {
+      console.log('course 리뷰 삭제 실행!');
+      deleteReviewsMutation({
+        args: {
+          course_id: placeNum,
+        },
+        headerArgs: userId,
+      });
+    }
+
+    handleCloseModal();
+    handleFloatingToast();
   };
 
   const { mutate: postReviewsMutation } = usePostReviews();
@@ -118,12 +154,24 @@ const ReviewList = ({ reviewData, placeNum, userId }: ReviewListProps) => {
             {review.user === userNickname && (
               <S.ReviewListEditWrap>
                 <button>수정</button>
-                <button>삭제</button>
+                <button onClick={handleViewModal}>삭제</button>
               </S.ReviewListEditWrap>
             )}
           </S.ReviewList>
         ))}
       </ul>
+      {modal && (
+        <Modal onClose={handleCloseModal}>
+          <MP.ModalBox>
+            <MP.WithdrawText>정말로 삭제하시겠어요?</MP.WithdrawText>
+            <MP.SelectBoxWrap>
+              <MP.SelectBox onClick={handleCloseModal}>아니오</MP.SelectBox>
+              <MP.SelectBox onClick={handleDeleteReview}>예</MP.SelectBox>
+            </MP.SelectBoxWrap>
+          </MP.ModalBox>
+        </Modal>
+      )}
+      {toast && <Toast>리뷰가 삭제되었습니다.</Toast>}
     </S.ReviewWrap>
   );
 };

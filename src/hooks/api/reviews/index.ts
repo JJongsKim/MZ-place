@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '@infra/api';
 
 // - 리뷰 조회 API hook
@@ -14,6 +14,8 @@ export const useGetReviews = (queryParams: Record<string, string | number>) => {
 
 // - 리뷰 작성 API hook
 export const usePostReviews = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['postReviews'],
     mutationFn: async ({
@@ -26,6 +28,12 @@ export const usePostReviews = () => {
       const result = await api.reviews.postReviews(headerArgs, args);
 
       return result;
+    },
+
+    onSuccess: data => {
+      if (data.data.message === 'POST_REVIEW_SUCCESS') {
+        queryClient.invalidateQueries({ queryKey: ['getReviews'] });
+      }
     },
   });
 };
@@ -50,6 +58,8 @@ export const useEditReviews = () => {
 
 // - 리뷰 삭제 API hook
 export const useDeleteReviews = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['deleteReviews'],
     mutationFn: async ({
@@ -62,6 +72,13 @@ export const useDeleteReviews = () => {
       const result = await api.reviews.deleteReviews(headerArgs, args);
 
       return result;
+    },
+
+    onSuccess: data => {
+      if (data.data.message === 'DELETE_SUCCESS') {
+        console.log('지우기 성공!');
+        queryClient.invalidateQueries({ queryKey: ['getReviews'] });
+      }
     },
   });
 };
