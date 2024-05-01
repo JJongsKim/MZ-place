@@ -10,7 +10,7 @@ import Modal from '../Modal';
 
 import { RatingStarArr } from '@application/constant';
 import { getNickname } from '@infra/api/nickname';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDeleteReviews, usePostReviews } from '@hooks/api/reviews';
 import useToast from '@hooks/useToast';
 import useModal from '@hooks/useModal';
@@ -32,6 +32,9 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
 
   const { toast, handleFloatingToast } = useToast();
   const { modal, handleViewModal, handleCloseModal } = useModal();
+
+  const [nonLogin, setNonLogin] = useState(false);
+  const [alreadyReview, setAlreadyReview] = useState(false);
 
   const [clicked, isClicked] = useState(false);
   const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
@@ -58,7 +61,6 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
       });
     }
     if (placeType === 'course') {
-      console.log('course 리뷰 삭제 실행!');
       deleteReviewsMutation({
         args: {
           course_id: placeNum,
@@ -75,19 +77,41 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    postReviewsMutation({
-      args: {
-        place_id: placeNum,
-        rating: rating,
-        content: ratingContent,
-      },
-      headerArgs: userId,
-    });
+    if (userId && Object.values(userId).length === 0) {
+      setNonLogin(true);
+    } else if (reviewData?.some(item => item.user === userNickname)) {
+      setAlreadyReview(true);
+    } else {
+      postReviewsMutation({
+        args: {
+          place_id: placeNum,
+          rating: rating,
+          content: ratingContent,
+        },
+        headerArgs: userId,
+      });
 
-    setPostReview(false);
-    setRating(5);
-    setRatingContent('');
+      setPostReview(false);
+      setRating(5);
+      setRatingContent('');
+    }
   };
+
+  useEffect(() => {
+    if (nonLogin) {
+      setTimeout(() => {
+        setNonLogin(false);
+      }, 2000);
+    }
+  }, [nonLogin]);
+
+  useEffect(() => {
+    if (alreadyReview) {
+      setTimeout(() => {
+        setAlreadyReview(false);
+      }, 2000);
+    }
+  }, [alreadyReview]);
 
   return (
     <S.ReviewWrap>
@@ -176,6 +200,8 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
         </Modal>
       )}
       {toast && <Toast>리뷰가 삭제되었습니다.</Toast>}
+      {nonLogin && <Toast>로그인 후 이용해주세요!</Toast>}
+      {alreadyReview && <Toast>이미 작성한 리뷰가 있어요!</Toast>}
     </S.ReviewWrap>
   );
 };
