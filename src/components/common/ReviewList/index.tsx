@@ -3,6 +3,7 @@ import * as S from './style';
 import * as MP from '@pages/MyPage/style';
 
 import FullStar from '@assets/star-full.svg';
+import EmptyStar from '@assets/star-empty.svg';
 import activeBtn from '@assets/dropdown.svg';
 
 import Toast from '../Toast';
@@ -175,6 +176,9 @@ const ReviewList = ({ reviewData, placeNum, placeType, userId }: ReviewListProps
               <p>{review.user}</p>
               {Array.from({ length: review.rating }, (_, index) => (
                 <img key={index} src={FullStar} height="15" />
+              ))}
+              {Array.from({ length: 5 - review.rating }, (_, index) => (
+                <img key={index} src={EmptyStar} height="15" />
               ))}
             </S.ReviewUserInfo>
             <S.ReviewContent>{review.content}</S.ReviewContent>
