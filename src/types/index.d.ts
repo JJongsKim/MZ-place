@@ -126,6 +126,15 @@ interface ReviewArgsType {
   rating: number;
 }
 
+interface ReviewDataType {
+  content: string;
+  created_at: string;
+  id: number;
+  rating: number;
+  updated_at: string;
+  user: string;
+}
+
 // redux store 타입
 interface StoreType {
   LocationReducer: {

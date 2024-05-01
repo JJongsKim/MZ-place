@@ -163,6 +163,7 @@ const ReviewSummary = styled.div`
   p {
     padding: 0 6px;
     font-size: 0.8rem;
+    font-weight: 500;
   }
 `;
 
@@ -175,6 +176,10 @@ const ReviewUserInfo = styled.div`
   p {
     margin-right: 6px;
   }
+`;
+
+const ReviewList = styled.li`
+  margin-bottom: 10px;
 `;
 
 const ReviewContent = styled.p`
@@ -278,6 +283,7 @@ export {
   ReviewHeader,
   ReviewSummary,
   ReviewUserInfo,
+  ReviewList,
   ReviewContent,
   ReviewPostWrap,
   ReviewPostHeader,

@@ -42,7 +42,10 @@ const DefaultExplain = ({
     type: 'p',
     num: placeNum,
   });
-  console.log(data);
+  const reviewData = data?.data.reviews;
+  const reviewAvg =
+    reviewData &&
+    (reviewData.reduce((acc, cur) => acc + cur.rating, 0) / reviewData.length).toFixed(2);
 
   const { mutate: postReviewsMutation } = usePostReviews();
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -57,8 +60,6 @@ const DefaultExplain = ({
       headerArgs: userId,
     });
   };
-
-  // console.log(userId);
 
   const [findAddress, isFindAddress] = useState(false); // 지도
   const [postReview, setPostReview] = useState(false); // 리뷰 쓰기
@@ -141,8 +142,8 @@ const DefaultExplain = ({
           <S.ReviewHeader>
             <S.ReviewSummary>
               <img src={FullStar} />
-              <p>별점별점</p>
-              <p>00개</p>
+              <p>{reviewAvg}</p>
+              <p>{reviewData?.length}개</p>
             </S.ReviewSummary>
             <button onClick={() => setPostReview(true)}>리뷰 쓰기</button>
           </S.ReviewHeader>
@@ -192,13 +193,17 @@ const DefaultExplain = ({
           )}
 
           <ul>
-            <li>
-              <S.ReviewUserInfo>
-                <p>유저명</p>
-                <img src={FullStar} height="15" />
-              </S.ReviewUserInfo>
-              <S.ReviewContent>내용</S.ReviewContent>
-            </li>
+            {reviewData?.map(review => (
+              <S.ReviewList key={review.id}>
+                <S.ReviewUserInfo>
+                  <p>{review.user}</p>
+                  {Array.from({ length: review.rating }, (_, index) => (
+                    <img key={index} src={FullStar} height="15" />
+                  ))}
+                </S.ReviewUserInfo>
+                <S.ReviewContent>{review.content}</S.ReviewContent>
+              </S.ReviewList>
+            ))}
           </ul>
         </S.ReviewWrap>
       ) : (
