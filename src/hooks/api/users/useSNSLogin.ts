@@ -24,18 +24,18 @@ export const useKakaoLogin = (kakaoId: string) => {
   });
 };
 
-export const useNaverLogin = (naverId: string) => {
+export const useNaverLogin = () => {
   const dispatch = useDispatch();
   const { handleRemoveRecentPlace } = RecentViewPlaces();
 
   return useMutation({
-    mutationFn: (args: NaverLoginArgsType) => api.auth.naverLogin(args),
+    mutationFn: (token: string) => api.auth.naverLogin(token),
     onSuccess: data => {
-      if (data.data.message === 'LOGIN_SUCCESS') {
-        setNaverId(naverId);
-        setNickname(data.data.nickname!);
+      if (data.data.message === 'User login' || data.data.message === 'User signup') {
+        setNaverId(data.data.naver_id);
+        setNickname(data.data.name);
         handleRemoveRecentPlace();
-        dispatch(setUserId({ 'naver-id': naverId }));
+        dispatch(setUserId({ 'naver-id': data.data.naver_id }));
       }
     },
   });

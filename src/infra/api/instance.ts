@@ -22,6 +22,8 @@ interface APIResponse<T = any> {
   total_places?: number;
   totalItems?: number;
   nickname?: string;
+  name: string;
+  naver_id: string;
   ACCESS_TOKEN?: string;
 }
 
