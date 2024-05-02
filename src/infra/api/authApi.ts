@@ -19,8 +19,8 @@ export class AuthApi {
   };
 
   // - 네이버 소셜 로그인 API
-  naverLogin = (args: NaverLoginArgsType) => {
-    return this.api.post('/users/naverlogin', args);
+  naverLogin = (token: string) => {
+    return this.api.post('/users/naverlogin', token);
   };
 
   // - 회원 탈퇴

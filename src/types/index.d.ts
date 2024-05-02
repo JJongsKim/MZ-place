@@ -109,11 +109,6 @@ interface KakaoLoginArgsType {
   kakao_id: string;
 }
 
-interface NaverLoginArgsType {
-  nickname: string;
-  naver_id: string;
-}
-
 interface HeartDataArgsType {
   course_id?: number;
   place_id?: number;
