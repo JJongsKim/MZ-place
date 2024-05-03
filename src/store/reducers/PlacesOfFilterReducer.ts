@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface RootState {
-  categoryId: number;
   categoryRibbon: number[];
   categoryCost: string[];
   categoryRating: string[];
 }
 
 const initialState: RootState = {
-  categoryId: 0,
   categoryRibbon: [],
   categoryCost: [],
   categoryRating: [],
@@ -18,10 +16,6 @@ const PlacesOfFilterReducer = createSlice({
   name: 'PlacesOfMapReducer',
   initialState,
   reducers: {
-    setIdOfCategory: (state, action) => {
-      state.categoryId = action.payload;
-    },
-
     // 블루리본 개수
     setRibbonOfCategory: (state, action) => {
       state.categoryRibbon = action.payload;
@@ -39,7 +33,7 @@ const PlacesOfFilterReducer = createSlice({
   },
 });
 
-export const { setIdOfCategory, setRibbonOfCategory, setCostOfCategory, setRatingOfCategory } =
+export const { setRibbonOfCategory, setCostOfCategory, setRatingOfCategory } =
   PlacesOfFilterReducer.actions;
 
 export default PlacesOfFilterReducer.reducer;

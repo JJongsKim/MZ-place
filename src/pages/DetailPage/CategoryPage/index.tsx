@@ -34,7 +34,6 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
   const [selectedCost, setSelectedCost] = useState<string[]>(categoryCost);
   const [selectedRating, setSelectedRating] = useState<string[]>(categoryRating);
   const [selectedRibbon, setSelectedRibbon] = useState<number[]>(categoryRibbon);
-  // const [prevCategoryId, setPrevCategoryId] = useState<number | null>(null); // 이전 categoryId 저장하기 위한 state
 
   // 무료 / 유료 선택
   const handleSelectedCost = useCallback(

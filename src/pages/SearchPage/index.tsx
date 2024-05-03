@@ -12,6 +12,12 @@ import { CUSTOM_MENU, MENU } from '@application/constant';
 import { useGetPlacesOfHeart } from '@hooks/api/heart';
 import SearchBar from '@components/common/SearchBar';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  setCostOfCategory,
+  setRatingOfCategory,
+  setRibbonOfCategory,
+} from '@store/reducers/PlacesOfFilterReducer';
 
 interface SearchPageProps {
   userId: Record<string, string>;
@@ -19,6 +25,7 @@ interface SearchPageProps {
 
 const SearchPage = ({ userId }: SearchPageProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { data, refetch } = useGetPlacesOfHeart(userId);
 
   const handleMoveCustomMenu = (
@@ -43,6 +50,9 @@ const SearchPage = ({ userId }: SearchPageProps) => {
 
   useEffect(() => {
     refetch();
+    dispatch(setCostOfCategory([]));
+    dispatch(setRatingOfCategory([]));
+    dispatch(setRibbonOfCategory([]));
   }, []);
 
   return (
