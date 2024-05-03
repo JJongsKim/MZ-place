@@ -14,6 +14,12 @@ import { useGetPlacesOfCategory } from '@hooks/api/places';
 import Chip from '@components/common/Chip';
 import { useLocation } from 'react-router-dom';
 import Loading from '@components/common/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setCostOfCategory,
+  setRatingOfCategory,
+  setRibbonOfCategory,
+} from '@store/reducers/PlacesOfFilterReducer';
 
 interface CategoryPageProps {
   userId?: Record<string, string>;
@@ -21,10 +27,15 @@ interface CategoryPageProps {
 
 const CategoryPage = ({ userId }: CategoryPageProps) => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const storeData = useSelector((store: StoreType) => store.PlacesOfFilterReducer);
+  const { categoryCost, categoryRating, categoryRibbon } = storeData;
 
-  const [selectedCost, setSelectedCost] = useState<string[]>([]);
-  const [selectedRating, setSelectedRating] = useState<string[]>([]);
-  const [selectedRibbon, setSelectedRibbon] = useState<number[]>([]);
+  const [selectedCost, setSelectedCost] = useState<string[]>(categoryCost);
+  const [selectedRating, setSelectedRating] = useState<string[]>(categoryRating);
+  const [selectedRibbon, setSelectedRibbon] = useState<number[]>(categoryRibbon);
+
+  // 무료 / 유료 선택
   const handleSelectedCost = useCallback(
     (selectedItem: string) => {
       const newFilter = new Set<string>(selectedCost);
@@ -38,10 +49,12 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
 
       const returnFilter = Array.from(newFilter);
       setSelectedCost(returnFilter);
+      dispatch(setCostOfCategory(returnFilter));
     },
     [selectedCost],
   );
 
+  // 별점 높은순 / 낮은순 선택
   const handleSelectedRating = useCallback(
     (selectedItem: string) => {
       const newFilter = new Set<string>(selectedRating);
@@ -55,10 +68,12 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
 
       const returnRating = Array.from(newFilter);
       setSelectedRating(returnRating);
+      dispatch(setRatingOfCategory(returnRating));
     },
     [selectedRating],
   );
 
+  // 블루리본 개수 선택
   const handleSelectedRibbon = useCallback(
     (selectedItem: number) => {
       const newFilter = new Set<number>(selectedRibbon);
@@ -72,23 +87,31 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
 
       const returnRibbon = Array.from(newFilter);
       setSelectedRibbon(returnRibbon);
+      dispatch(setRibbonOfCategory(returnRibbon));
     },
     [selectedRibbon],
   );
 
+  const queryParam: Record<string, string | number> = {};
+  if (categoryCost) {
+    queryParam.price = categoryCost[0];
+  }
+  if (categoryRating) {
+    queryParam.rating = categoryRating[0];
+  }
+  if (categoryRibbon) {
+    queryParam.ribbon = categoryRibbon[0];
+  }
+
   const { data, refetch, isLoading, fetchNextPage, hasNextPage } = useGetPlacesOfCategory(
     location.state.id,
-    {
-      price: selectedCost[0],
-      ribbon: selectedRibbon[0],
-      rating: selectedRating[0],
-    },
+    queryParam,
     userId,
   );
 
   useEffect(() => {
     refetch();
-  }, [selectedCost, selectedRating, selectedRibbon]);
+  }, [categoryCost, categoryRibbon, categoryRating]);
 
   return (
     <DetailPageWrap>
@@ -104,7 +127,7 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
                   <Chip
                     value={ribbon.type}
                     size="xsmall"
-                    isClicked={selectedRibbon.includes(ribbon.id)}
+                    isClicked={categoryRibbon.includes(ribbon.id)}
                   />
                 </li>
               ))}
@@ -115,7 +138,7 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
               {/* 일반 카테고리용 유료/무료 필터 */}
               {COST_FILTER.map(item => (
                 <li key={item.id} onClick={() => handleSelectedCost(item.id)}>
-                  <Chip value={item.type} size="small" isClicked={selectedCost.includes(item.id)} />
+                  <Chip value={item.type} size="small" isClicked={categoryCost.includes(item.id)} />
                 </li>
               ))}
             </FilterList>
@@ -125,7 +148,7 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
             <FilterListLabel>별점</FilterListLabel>
             {RATING_FILTER.map(rat => (
               <li key={rat.id} onClick={() => handleSelectedRating(rat.id)}>
-                <Chip value={rat.type} size="small" isClicked={selectedRating.includes(rat.id)} />
+                <Chip value={rat.type} size="small" isClicked={categoryRating.includes(rat.id)} />
               </li>
             ))}
           </FilterList>
