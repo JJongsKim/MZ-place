@@ -1,23 +1,45 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface RootState {
-  placesOfFilter: PlacesType[] | undefined;
+  categoryId: number;
+  categoryRibbon: number[];
+  categoryCost: string[];
+  categoryRating: string[];
 }
 
 const initialState: RootState = {
-  placesOfFilter: undefined,
+  categoryId: 0,
+  categoryRibbon: [],
+  categoryCost: [],
+  categoryRating: [],
 };
 
 const PlacesOfFilterReducer = createSlice({
   name: 'PlacesOfMapReducer',
   initialState,
   reducers: {
-    setPlacesOfFilter: (state, action) => {
-      state.placesOfFilter = action.payload;
+    setIdOfCategory: (state, action) => {
+      state.categoryId = action.payload;
+    },
+
+    // 블루리본 개수
+    setRibbonOfCategory: (state, action) => {
+      state.categoryRibbon = action.payload;
+    },
+
+    // 무료/유료
+    setCostOfCategory: (state, action) => {
+      state.categoryCost = action.payload;
+    },
+
+    // 별점 높은순/낮은순
+    setRatingOfCategory: (state, action) => {
+      state.categoryRating = action.payload;
     },
   },
 });
 
-export const { setPlacesOfFilter } = PlacesOfFilterReducer.actions;
+export const { setIdOfCategory, setRibbonOfCategory, setCostOfCategory, setRatingOfCategory } =
+  PlacesOfFilterReducer.actions;
 
 export default PlacesOfFilterReducer.reducer;

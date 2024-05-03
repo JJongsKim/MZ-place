@@ -142,7 +142,10 @@ interface StoreType {
     submitFilter: boolean;
   };
   PlacesOfFilterReducer: {
-    placesOfFilter: PlacesType[];
+    categoryId: number;
+    categoryRibbon: number[];
+    categoryCost: string[];
+    categoryRating: string[];
   };
   PlacesOfMapReducer: {
     placesOfMap: PlacesOfMap[];

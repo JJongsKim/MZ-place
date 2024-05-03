@@ -48,6 +48,7 @@ export const useGetPlacesOfCategory = (
       // return값이 pageParam으로 전달
     },
 
+    enabled: false,
     retry: 0,
   });
 
