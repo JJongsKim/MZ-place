@@ -121,7 +121,7 @@ export const useGetPlacesOfTop20 = (headerArgs?: Record<string, string>) => {
   const { data, ...rest } = useQuery({
     queryKey: ['getPlacesOfTop20', headerArgs],
     queryFn: () => api.places.getPlacesOfTop20(headerArgs),
-    retry: 1,
+    retry: 0,
   });
 
   return { data: data?.data.result, ...rest };

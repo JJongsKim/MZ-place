@@ -21,7 +21,7 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
     (state: StoreType) => state.FilterReducer,
   );
 
-  const { data, isLoading, refetch, fetchNextPage, hasNextPage } = useGetPlacesOfFilter(
+  const { data, isLoading, isError, refetch, fetchNextPage, hasNextPage } = useGetPlacesOfFilter(
     {
       price: costFilter[0],
       filters: activityFilter.join(','),
@@ -44,7 +44,7 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
       <CustomFilterPageWrap>
         {costFilter.length === 0 && activityFilter.length === 0 && locationFilter.length === 0 ? (
           <WarningMention text="필터를 선택해주세요!" />
-        ) : data.length === 0 ? (
+        ) : data?.length === 0 || isError ? (
           <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
           <ThumbnailList
