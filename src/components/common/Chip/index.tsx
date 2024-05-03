@@ -2,7 +2,7 @@ import { ChipWrap } from './style';
 
 interface ChipProps {
   value: string;
-  size?: 'small';
+  size?: 'small' | 'xsmall';
   isClicked?: boolean;
 }
 
