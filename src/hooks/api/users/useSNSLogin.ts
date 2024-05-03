@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 
@@ -29,7 +30,7 @@ export const useNaverLogin = () => {
   const { handleRemoveRecentPlace } = RecentViewPlaces();
 
   return useMutation({
-    mutationFn: (token: string) => api.auth.naverLogin(token),
+    mutationFn: (code: string) => api.auth.naverLogin(code),
     onSuccess: data => {
       if (data.data.message === 'User login' || data.data.message === 'User signup') {
         setNaverId(data.data.naver_id);
