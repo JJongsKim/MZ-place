@@ -59,7 +59,6 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<MainPage userId={userId} />} />
-              <Route path="/*" element={<NotFoundPage />} />
               <Route path="/search" element={<SearchPage userId={userId} />} />
               <Route path="/search/:menuId" element={<CategoryPage userId={userId} />} />
               <Route path="/search/course" element={<CoursePage />} />
@@ -78,6 +77,7 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/oauth" element={<KakaoOauthCallback />} />
             <Route path="/naver/oauth" element={<NaverOauthCallback />} />
+            <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </ThemeProvider>
