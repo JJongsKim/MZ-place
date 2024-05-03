@@ -6,10 +6,31 @@ const DetailPageWrap = styled.div`
   align-items: center;
 `;
 
+const FilterListWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  margin-top: 10px;
+
+  ul:nth-child(1) {
+    padding-left: 28px;
+  }
+  ul:nth-child(2) {
+    padding-left: 8px;
+  }
+`;
+
+const FilterListLabel = styled.p`
+  position: absolute;
+  font-size: 0.8rem;
+  font-weight: 600;
+  top: -18px;
+  padding: 0 2px;
+`;
+
 const FilterList = styled.ul`
   display: flex;
-  width: 375px;
-  padding: 0 30px;
+  position: relative;
 
   li {
     margin-right: 6px;
@@ -45,7 +66,9 @@ const CustomFilterPageWrap = styled.div`
 
 export {
   DetailPageWrap,
+  FilterListWrap,
   FilterList,
+  FilterListLabel,
   DetailPageContentList,
   MapPageWrap,
   MapPageDropdownWrap,

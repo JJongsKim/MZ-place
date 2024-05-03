@@ -31,7 +31,7 @@ export const useGetPlacesOfFilter = (
 // - 카테고리별 API hook
 export const useGetPlacesOfCategory = (
   id: number,
-  queryParams?: Record<string, string>,
+  queryParams?: Record<string, string | number>,
   headerArgs?: Record<string, string>,
 ) => {
   const { data, isLoading, ...rest } = useInfiniteQuery({

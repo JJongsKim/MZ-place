@@ -131,6 +131,32 @@ export const COST_FILTER = [
   },
 ];
 
+export const RATING_FILTER = [
+  {
+    id: 'des',
+    type: '높은순',
+  },
+  {
+    id: 'asc',
+    type: '낮은순',
+  },
+];
+
+export const BLUERIBBON_FILTER = [
+  {
+    id: 1,
+    type: '1개',
+  },
+  {
+    id: 2,
+    type: '2개',
+  },
+  {
+    id: 3,
+    type: '3개',
+  },
+];
+
 export const ACTIVE_TASTE = [
   {
     id: 1,

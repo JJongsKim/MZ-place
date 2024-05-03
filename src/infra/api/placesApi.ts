@@ -20,7 +20,7 @@ class PlacesApi {
   getPlacesOfCategory = (
     id: number,
     page: number,
-    queryParams?: Record<string, string>,
+    queryParams?: Record<string, string | number>,
     headerArgs?: Record<string, string>,
   ) => {
     return this.api.get(`/places/category${id}`, {
