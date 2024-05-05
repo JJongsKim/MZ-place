@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { ExplainPageWrap, LikeIcon, LocationTitle, ThumbnailBox, ThumbnailBoxWrap } from './style';
@@ -30,9 +30,9 @@ const ExplainPage = ({ userId }: ExplainPageProps) => {
   const { toast, handleFloatingToast } = useToast();
 
   // 이미지 로딩 실패 시, default 이미지로 대체
-  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = `${DEFAULT_IMAGE}`;
-  };
+  }, []);
 
   const { isLoading, data } = useGetInfoByPlaceId(locationNum, userId);
   const placeInfo = data?.data.result as PlaceType;
