@@ -1,7 +1,8 @@
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 import DEFAULT_IMAGE from '../../images/default.png';
-import { useNavigate } from 'react-router-dom';
 
 interface CoursePlaceBoxProps {
   placeId: number;
@@ -18,9 +19,9 @@ const CoursePlaceBox = ({ placeId, placeName, imageUrl, courseNumber }: CoursePl
   };
 
   // 이미지 로딩 실패 시, default 이미지로 대체
-  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = `${DEFAULT_IMAGE}`;
-  };
+  }, []);
 
   return (
     <CoursePlaceBoxWrap onClick={handleClickCoursePlace}>

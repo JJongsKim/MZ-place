@@ -1,13 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import {
-  MenuDivideLine,
-  MenuIcon,
-  MenuListWrap,
-  MenuName,
-  MenuWrap,
-  SearchPageWrap,
-} from './style';
+import * as S from './style';
 import { CUSTOM_MENU, MENU } from '@application/constant';
 import { useGetPlacesOfHeart } from '@hooks/api/heart';
 import SearchBar from '@components/common/SearchBar';
@@ -56,26 +49,26 @@ const SearchPage = ({ userId }: SearchPageProps) => {
   }, []);
 
   return (
-    <SearchPageWrap>
+    <S.SearchPageWrap>
       <SearchBar name="실외활동 탐색" />
-      <MenuListWrap>
+      <S.MenuListWrap>
         {MENU.map(menu => (
-          <MenuWrap key={menu.id} onClick={() => navigate(`${menu.path}`, { state: menu })}>
-            <MenuIcon src={menu.svg} />
-            <MenuName>{menu.name}</MenuName>
-          </MenuWrap>
+          <S.MenuWrap key={menu.id} onClick={() => navigate(`${menu.path}`, { state: menu })}>
+            <S.MenuIcon src={menu.svg} />
+            <S.MenuName>{menu.name}</S.MenuName>
+          </S.MenuWrap>
         ))}
-      </MenuListWrap>
-      <MenuDivideLine />
-      <MenuListWrap>
+      </S.MenuListWrap>
+      <S.MenuDivideLine />
+      <S.MenuListWrap>
         {CUSTOM_MENU.map(custom => (
-          <MenuWrap key={custom.name} onClick={() => handleMoveCustomMenu(custom.path, custom)}>
-            <MenuIcon src={custom.svg} />
-            <MenuName>{custom.name}</MenuName>
-          </MenuWrap>
+          <S.MenuWrap key={custom.name} onClick={() => handleMoveCustomMenu(custom.path, custom)}>
+            <S.MenuIcon src={custom.svg} />
+            <S.MenuName>{custom.name}</S.MenuName>
+          </S.MenuWrap>
         ))}
-      </MenuListWrap>
-    </SearchPageWrap>
+      </S.MenuListWrap>
+    </S.SearchPageWrap>
   );
 };
 
