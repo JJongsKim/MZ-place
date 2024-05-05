@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* 
@@ -53,36 +51,7 @@ interface CustomInstance extends AxiosInstance {
 
 const instance: CustomInstance = axios.create({
   baseURL: API,
-  // withCredentials: true,
   headers: {},
 });
-
-// 요청 인터셉터
-instance.interceptors.request.use(req => {
-  console.log('🗣 request -> ', req);
-  return req;
-});
-
-// 응답 인터셉터
-instance.interceptors.response.use(
-  res => {
-    console.log('📍 response -> ', res);
-    return res;
-  },
-  err => {
-    if (axios.isAxiosError(err)) {
-      const status = err.response?.status;
-
-      // 임시 코드
-      if (status === 400) {
-        console.log('데이터가 존재하지 않아요!');
-      }
-      if (status === 404) {
-        console.log('잘못된 값을 넣었어요!');
-      }
-    }
-    return Promise.reject(err);
-  },
-);
 
 export { instance };

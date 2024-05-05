@@ -1,30 +1,18 @@
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import * as S from './style';
+import ThumbnailList from '@components/common/ThumbnailList';
+import Toast from '@components/common/Toast';
+import Modal from '@components/common/Modal';
 import withAuth from '@components/HOC/withAuth';
 
-import {
-  DivideLine,
-  FirstSection,
-  InfoText,
-  ModalBox,
-  MyPageJobList,
-  MyPageWrap,
-  SelectBox,
-  SelectBoxWrap,
-  UserNameBox,
-  WelcomeText,
-  WithdrawText,
-  WithdrawTextBox,
-} from './style';
-import Modal from '@components/common/Modal';
 import useModal from '@hooks/useModal';
 import useToast from '@hooks/useToast';
-import Toast from '@components/common/Toast';
 import RecentViewPlaces from '@hooks/localStorage/RecentViewPlaces';
-import ThumbnailList from '@components/common/ThumbnailList';
+import useDeleteUser from '@hooks/api/users/useDeleteUser';
 import { removeAccessToken, removeKakaoId, removeNaverId } from '@infra/api/token';
 import { getNickname, removeNickname } from '@infra/api/nickname';
-import useDeleteUser from '@hooks/api/users/useDeleteUser';
-import { useDispatch } from 'react-redux';
 import { setUserId } from '@store/reducers/UserIdReducer';
 
 interface MyPageProps {
@@ -70,35 +58,35 @@ const MyPage = ({ userId }: MyPageProps) => {
   };
 
   return (
-    <MyPageWrap>
-      <FirstSection>
-        <WelcomeText>반갑습니다!</WelcomeText>
-        <UserNameBox>
+    <S.MyPageWrap>
+      <S.FirstSection>
+        <S.WelcomeText>반갑습니다!</S.WelcomeText>
+        <S.UserNameBox>
           <p>{nickname}</p>
           <p>님</p>
-        </UserNameBox>
-        <InfoText>어떤 작업을 하시겠어요?</InfoText>
-      </FirstSection>
-      <DivideLine />
-      <MyPageJobList>
+        </S.UserNameBox>
+        <S.InfoText>어떤 작업을 하시겠어요?</S.InfoText>
+      </S.FirstSection>
+      <S.DivideLine />
+      <S.MyPageJobList>
         <li onClick={handleLogout}>로그아웃</li>
         <li>최근 조회한 장소 20곳</li>
-        <WithdrawTextBox onClick={handleViewModal}>회원탈퇴</WithdrawTextBox>
-      </MyPageJobList>
+        <S.WithdrawTextBox onClick={handleViewModal}>회원탈퇴</S.WithdrawTextBox>
+      </S.MyPageJobList>
       <ThumbnailList places={storedData} recentView={true} />
       {modal && (
         <Modal onClose={handleCloseModal}>
-          <ModalBox>
-            <WithdrawText>정말로 탈퇴하시겠어요?</WithdrawText>
-            <SelectBoxWrap>
-              <SelectBox onClick={handleCloseModal}>아니오</SelectBox>
-              <SelectBox onClick={handleDeleteAccount}>예</SelectBox>
-            </SelectBoxWrap>
-          </ModalBox>
+          <S.ModalBox>
+            <S.WithdrawText>정말로 탈퇴하시겠어요?</S.WithdrawText>
+            <S.SelectBoxWrap>
+              <S.SelectBox onClick={handleCloseModal}>아니오</S.SelectBox>
+              <S.SelectBox onClick={handleDeleteAccount}>예</S.SelectBox>
+            </S.SelectBoxWrap>
+          </S.ModalBox>
         </Modal>
       )}
       {toast && <Toast>탈퇴되었습니다. 다음에 또 만나요!</Toast>}
-    </MyPageWrap>
+    </S.MyPageWrap>
   );
 };
 

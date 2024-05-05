@@ -1,21 +1,13 @@
-/* eslint-disable no-console */
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as S from './style';
+
 import AuthLogo from '@components/Auth/AuthLogo';
-import {
-  CheckText,
-  DeskTopViewWrap,
-  FormListWrap,
-  SignForm,
-  SignFormWrap,
-  SubmitText,
-  SubmitWrap,
-} from './style';
 import InputBase from '@components/common/InputBase';
 import ButtonBase from '@components/common/ButtonBase';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import useToast from '@hooks/useToast';
 import Toast from '@components/common/Toast';
 import useSignUp from '@hooks/api/users/useSignUp';
+import useToast from '@hooks/useToast';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -54,9 +46,6 @@ const SignUp = () => {
             onSuccess: () => {
               navigate('/sign-in');
             },
-            onError: () => {
-              console.log('🙀 에러입니다 !!!!!');
-            },
           },
         );
       }, 2200);
@@ -66,11 +55,11 @@ const SignUp = () => {
   };
 
   return (
-    <DeskTopViewWrap>
-      <SignFormWrap>
+    <S.DeskTopViewWrap>
+      <S.SignFormWrap>
         <AuthLogo title="회원가입" />
-        <SignForm onSubmit={handleSubmit}>
-          <FormListWrap>
+        <S.SignForm onSubmit={handleSubmit}>
+          <S.FormListWrap>
             <li>
               <InputBase
                 placeholder="이름을 입력해주세요!"
@@ -107,18 +96,18 @@ const SignUp = () => {
                 onChange={e => handleChangeForm('checkPassword', e.target.value)}
               />
             </li>
-            {!checkPassword && <CheckText>비밀번호를 다시 확인해주세요!</CheckText>}
-          </FormListWrap>
-          <SubmitWrap>
+            {!checkPassword && <S.CheckText>비밀번호를 다시 확인해주세요!</S.CheckText>}
+          </S.FormListWrap>
+          <S.SubmitWrap>
             <Link to="/sign-in">
-              <SubmitText>이미 가입하셨나요?</SubmitText>
+              <S.SubmitText>이미 가입하셨나요?</S.SubmitText>
             </Link>
             <ButtonBase name="회원가입" />
-          </SubmitWrap>
-        </SignForm>
-      </SignFormWrap>
+          </S.SubmitWrap>
+        </S.SignForm>
+      </S.SignFormWrap>
       {toast && <Toast>회원가입이 완료되었어요!</Toast>}
-    </DeskTopViewWrap>
+    </S.DeskTopViewWrap>
   );
 };
 

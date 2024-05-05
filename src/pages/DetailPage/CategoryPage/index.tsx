@@ -1,20 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
-
-import SearchBar from '@components/common/SearchBar';
-import {
-  DetailPageContentList,
-  DetailPageWrap,
-  FilterList,
-  FilterListLabel,
-  FilterListWrap,
-} from '../style';
-import { BLUERIBBON_FILTER, COST_FILTER, MENU, RATING_FILTER } from '@application/constant';
-import ThumbnailList from '@components/common/ThumbnailList';
-import { useGetPlacesOfCategory } from '@hooks/api/places';
-import Chip from '@components/common/Chip';
-import { useLocation } from 'react-router-dom';
-import Loading from '@components/common/Loading';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
+import * as S from '../style';
+import { useGetPlacesOfCategory } from '@hooks/api/places';
+
+import { BLUERIBBON_FILTER, COST_FILTER, MENU, RATING_FILTER } from '@application/constant';
+import SearchBar from '@components/common/SearchBar';
+import ThumbnailList from '@components/common/ThumbnailList';
+import Chip from '@components/common/Chip';
+import Loading from '@components/common/Loading';
 import {
   setCostOfCategory,
   setRatingOfCategory,
@@ -114,13 +109,13 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
   }, [categoryCost, categoryRibbon, categoryRating]);
 
   return (
-    <DetailPageWrap>
+    <S.DetailPageWrap>
       <SearchBar name={`${location.state.name}`} backIcon={true} />
       {MENU.some(item => item.name === location.state.name) && (
-        <FilterListWrap>
+        <S.FilterListWrap>
           {location.state.name === '맛집/카페' ? (
-            <FilterList>
-              <FilterListLabel>블루리본</FilterListLabel>
+            <S.FilterList>
+              <S.FilterListLabel>블루리본</S.FilterListLabel>
               {/* 맛집/카페 카테고리용 블루리본 필터 */}
               {BLUERIBBON_FILTER.map(ribbon => (
                 <li key={ribbon.id} onClick={() => handleSelectedRibbon(ribbon.id)}>
@@ -131,30 +126,30 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
                   />
                 </li>
               ))}
-            </FilterList>
+            </S.FilterList>
           ) : (
-            <FilterList>
-              <FilterListLabel>가격</FilterListLabel>
+            <S.FilterList>
+              <S.FilterListLabel>가격</S.FilterListLabel>
               {/* 일반 카테고리용 유료/무료 필터 */}
               {COST_FILTER.map(item => (
                 <li key={item.id} onClick={() => handleSelectedCost(item.id)}>
                   <Chip value={item.type} size="small" isClicked={categoryCost.includes(item.id)} />
                 </li>
               ))}
-            </FilterList>
+            </S.FilterList>
           )}
           {/* 전체 카테고리 적용 별점순 필터 */}
-          <FilterList>
-            <FilterListLabel>별점</FilterListLabel>
+          <S.FilterList>
+            <S.FilterListLabel>별점</S.FilterListLabel>
             {RATING_FILTER.map(rat => (
               <li key={rat.id} onClick={() => handleSelectedRating(rat.id)}>
                 <Chip value={rat.type} size="small" isClicked={categoryRating.includes(rat.id)} />
               </li>
             ))}
-          </FilterList>
-        </FilterListWrap>
+          </S.FilterList>
+        </S.FilterListWrap>
       )}
-      <DetailPageContentList>
+      <S.DetailPageContentList>
         {isLoading ? (
           <Loading />
         ) : (
@@ -165,8 +160,8 @@ const CategoryPage = ({ userId }: CategoryPageProps) => {
             fetchNextPage={fetchNextPage}
           />
         )}
-      </DetailPageContentList>
-    </DetailPageWrap>
+      </S.DetailPageContentList>
+    </S.DetailPageWrap>
   );
 };
 

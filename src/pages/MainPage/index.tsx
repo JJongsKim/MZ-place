@@ -1,13 +1,7 @@
 import ThumbnailList from '@components/common/ThumbnailList';
 import AutoSlide from '@components/MainPage/AutoSlide';
 
-import {
-  ContentWrap,
-  MainPageWrap,
-  RecommendText,
-  RecommendTextWrap,
-  RecommendTop20,
-} from './style';
+import * as S from './style';
 import { useGetPlacesOfTop20 } from '@hooks/api/places';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +15,7 @@ const MainPage = ({ userId }: MainPageProps) => {
   const top20Places = data as PlacesType[];
 
   return (
-    <MainPageWrap>
+    <S.MainPageWrap>
       <AutoSlide
         onClick={() =>
           navigate('/search/custom', {
@@ -31,12 +25,12 @@ const MainPage = ({ userId }: MainPageProps) => {
           })
         }
       />
-      <RecommendTextWrap>
-        <RecommendText>서울산책 회원들이 추천하는</RecommendText>
-        <RecommendTop20>TOP20</RecommendTop20>
-      </RecommendTextWrap>
-      <ContentWrap>{top20Places && <ThumbnailList places={top20Places} />}</ContentWrap>
-    </MainPageWrap>
+      <S.RecommendTextWrap>
+        <S.RecommendText>서울산책 회원들이 추천하는</S.RecommendText>
+        <S.RecommendTop20>TOP20</S.RecommendTop20>
+      </S.RecommendTextWrap>
+      <S.ContentWrap>{top20Places && <ThumbnailList places={top20Places} />}</S.ContentWrap>
+    </S.MainPageWrap>
   );
 };
 

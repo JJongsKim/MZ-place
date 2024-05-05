@@ -2,13 +2,7 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ACTIVE_TASTE, COST_FILTER, REGION_ARRAY } from '@application/constant';
-import {
-  CustomFilterForm,
-  FilterButtonWrap,
-  FilterList,
-  FilterTitle,
-  FilterTypeContainer,
-} from './style';
+import * as S from './style';
 import Chip from '@components/common/Chip';
 import ButtonBase from '@components/common/ButtonBase';
 import useToast from '@hooks/useToast';
@@ -87,20 +81,20 @@ const CustomFilter = () => {
   };
 
   return (
-    <CustomFilterForm onSubmit={handleSubmit}>
-      <FilterTypeContainer>
-        <FilterTitle>유료/무료 여부</FilterTitle>
-        <FilterList>
+    <S.CustomFilterForm onSubmit={handleSubmit}>
+      <S.FilterTypeContainer>
+        <S.FilterTitle>유료/무료 여부</S.FilterTitle>
+        <S.FilterList>
           {COST_FILTER.map(item => (
             <li key={item.id} onClick={() => handleSelectedFilter('cost', item.id)}>
               <Chip size="small" value={item.type} isClicked={selectedCost?.includes(item.id)} />
             </li>
           ))}
-        </FilterList>
-      </FilterTypeContainer>
-      <FilterTypeContainer>
-        <FilterTitle>활동 취향</FilterTitle>
-        <FilterList>
+        </S.FilterList>
+      </S.FilterTypeContainer>
+      <S.FilterTypeContainer>
+        <S.FilterTitle>활동 취향</S.FilterTitle>
+        <S.FilterList>
           {ACTIVE_TASTE.map(item => (
             <li key={item.id} onClick={() => handleSelectedActivity(item.id)}>
               <Chip
@@ -110,11 +104,11 @@ const CustomFilter = () => {
               />
             </li>
           ))}
-        </FilterList>
-      </FilterTypeContainer>
-      <FilterTypeContainer>
-        <FilterTitle>활동 지역</FilterTitle>
-        <FilterList>
+        </S.FilterList>
+      </S.FilterTypeContainer>
+      <S.FilterTypeContainer>
+        <S.FilterTitle>활동 지역</S.FilterTitle>
+        <S.FilterList>
           {REGION_ARRAY.map(
             item =>
               item.locationName !== '현 위치' && (
@@ -130,13 +124,13 @@ const CustomFilter = () => {
                 </li>
               ),
           )}
-        </FilterList>
-      </FilterTypeContainer>
-      <FilterButtonWrap>
+        </S.FilterList>
+      </S.FilterTypeContainer>
+      <S.FilterButtonWrap>
         <ButtonBase name="적용하기" />
-      </FilterButtonWrap>
+      </S.FilterButtonWrap>
       {toast && <Toast>{toastMsg}</Toast>}
-    </CustomFilterForm>
+    </S.CustomFilterForm>
   );
 };
 

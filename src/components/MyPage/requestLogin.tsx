@@ -1,6 +1,7 @@
-import ButtonBase from '@components/common/ButtonBase';
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import ButtonBase from '@components/common/ButtonBase';
 
 const RequestLogin = () => {
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { LabelText, LikeIcon, ThumbLabel, ThumbWrap, Thumbnail } from './style';
 import { ReactComponent as LikeEmpty } from '@assets/like-gray.svg';
@@ -22,9 +22,9 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
   const [heartState, setHeartState] = useState(like);
 
   // 이미지 로딩 실패 시, default 이미지로 대체
-  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = `${DEFAULT_IMAGE}`;
-  };
+  }, []);
 
   const { mutate: pushHeartMutation } = usePushHeart();
   const { mutate: deleteHeartMutation } = useDeleteHeart();
