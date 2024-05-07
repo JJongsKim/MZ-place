@@ -178,7 +178,46 @@ yarn start
 - 회원 탈퇴와 같이 예민한 작업은 한 번 더 확인 모달을 띄운 후, 유저가 원한다면 탈퇴를 진행하도록 했습니다.
 
 ## [프로젝트 UI 확인하기]
-[서울산책 최종시연영상(배속ver) 보러오세요!](https://youtu.be/bkNFukoFNGQ)🙌🏻
+
+|메인페이지|탐색 페이지|로그인유도|
+|:--:|:--:|:--:|
+|<img width="298" alt="메인페이지" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/d6ae775b-cb63-4e83-a043-e66273a092bf">|<img width="297" alt="카테고리페이지" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/fa97b567-69b1-4a28-9379-7996effaac88">|<img width="299" alt="로그인유도" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/b7df41e5-dc51-4033-b7f9-c25e99649405">|
+
+|로그인 페이지|회원가입 페이지|마이페이지-비로그인|
+|:--:|:--:|:--:|
+|<img width="295" alt="로그인" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/c392ffd8-955d-40da-ab14-7139ea1fc8f4">|<img width="297" alt="회원가입" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/4d44d8b3-7707-4fd9-aae5-f49a4defc509">|<img width="296" alt="마이페이지-비로그인" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/0fe9fae5-6a3d-4605-817f-26b9c30bbc3b">|
+
+|마이페이지-로그인|찜 목록 페이지|찜 기반 추천-로그인|찜 기반 추천리스트 UBCF+IBCF|
+|:--:|:--:|:--:|:--:|
+|<img width="298" alt="마이페이지-로그인" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/9f749698-cbc0-40b9-9a08-28a37bae9f46">|<img width="297" alt="찜 목록" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/41ec69aa-6d86-4b95-867a-c4e381a584c3">|<img width="297" alt="찜 기반 추천-로그인" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/2886e6d7-3eab-4ac9-934a-98918adfabf6">|<img width="298" alt="찜 기반 추천 리스트 UBCF_IBCF" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/c578dff3-322b-45df-a667-dcea352306b9">|
+
+|카테고리 예시|상세 페이지 예시|맞춤 필터 페이지|맞춤 필터|
+|:--:|:--:|:--:|:--:|
+|<img width="357" alt="스크린샷 2024-05-07 오후 9 15 22" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/200e5d51-4f7c-461d-a69c-6f5a73740e50">|<img width="357" alt="스크린샷 2024-05-07 오후 9 13 52" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/6d98bf0b-10d5-4ab7-a039-154e20e75f05">|<img width="298" alt="맞춤 필터 페이지" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/bfbccdc5-2873-419a-9407-9254af6ae90f">|<img width="296" alt="맞춤 필터 바텀 시트" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/b3777579-5e7d-4f7d-8e3b-eb7a2ba9cdd1">|
+
+|거리별 추천페이지-현위치|거리별 추천페이지|거리별 추천페이지|거리별 추천 커스텀오버레이|
+|:--:|:--:|:--:|:--:|
+|<img width="299" alt="거리별추천 페이지-현위치" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/2cc2cc9b-76e5-4272-8f7a-26a8bf46b79f">|<img width="299" alt="거리별추천 페이지1" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/919fa49c-2f06-4050-8ef7-fa7fcfcdcbf1">|<img width="297" alt="거리별추천 페이지2" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/8ac4e3a4-c79a-42c9-87b6-144185193447">|<img width="298" alt="거리별추천 커스텀오버레이" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/eb5775f7-d8e8-49e5-806c-551fbf44fa34">|
+
+|미래유산코스 페이지|코스 지도|코스 목록|코스 상세페이지|
+|:--:|:--:|:--:|:--:|
+|<img width="298" alt="미래유산코스 페이지" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/89403686-6591-4598-9272-528c3164b577">|<img width="298" alt="코스 지도" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/2d27452a-6858-4b20-b498-6412fddc6b65">|<img width="298" alt="코스 목록" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/55a24aa8-cd73-4d94-a8b6-238e388783b5">|<img width="298" alt="원하는 코스-상세페이지" src="https://github.com/JJongsKim/Seoul-Walk/assets/81777778/d1d4d48e-87e9-4e80-9ddd-ba912ca89eb9">|
+
+|리뷰 작성|리뷰 수정|리뷰 삭제|
+|:--:|:--:|:--:|
+|![리뷰작성](https://github.com/JJongsKim/Seoul-Walk/assets/81777778/76210448-ee2f-4284-89b8-ed42b753fa53)|![리뷰수정](https://github.com/JJongsKim/Seoul-Walk/assets/81777778/a27f7942-c1fb-46f5-a48c-658c5eb183cc)|![리뷰 삭제](https://github.com/JJongsKim/Seoul-Walk/assets/81777778/a81f8955-616d-4b5e-bf43-b9dcb0bf5daa)|
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
