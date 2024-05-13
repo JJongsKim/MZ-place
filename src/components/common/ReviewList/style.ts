@@ -67,6 +67,7 @@ const ReviewListEditWrap = styled.div`
 const ReviewContent = styled.p`
   font-size: 0.8rem;
   padding: 10px 0;
+  line-height: 20px;
 `;
 
 const ReviewPostWrap = styled.form`
