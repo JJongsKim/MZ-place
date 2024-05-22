@@ -43,7 +43,7 @@ const CustomFilterPage = ({ userId }: CustomFilterPageProps) => {
       <SearchBar name={`${location.state.name}`} backIcon={true} />
       <CustomFilterPageWrap>
         {costFilter.length === 0 && activityFilter.length === 0 && locationFilter.length === 0 ? (
-          <WarningMention text="필터를 선택해주세요!" />
+          <WarningMention text="하단 회색바를 눌러 필터를 선택해주세요!" />
         ) : data?.length === 0 || isError ? (
           <WarningMention text="해당 필터에 맞는 장소가 없어요!" />
         ) : (
