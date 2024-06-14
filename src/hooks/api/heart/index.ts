@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { api } from '@infra/api';
 
@@ -25,8 +25,6 @@ export const useGetPlacesOfHeart = (headerArgs: Record<string, string>) => {
 };
 
 export const usePushHeart = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationKey: ['pushHeart'],
     mutationFn: async ({
@@ -40,22 +38,10 @@ export const usePushHeart = () => {
 
       return result;
     },
-
-    onSuccess: data => {
-      if (data.data.message === 'ADD_TO_HEART_SUCCESS') {
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
-        queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
-      }
-    },
   });
 };
 
 export const useDeleteHeart = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationKey: ['deleteHeart'],
     mutationFn: async ({
@@ -68,16 +54,6 @@ export const useDeleteHeart = () => {
       const result = await api.hearts.deleteHeart(args, headerArgs);
 
       return result;
-    },
-
-    onSuccess: data => {
-      if (data.data.message === 'DELETE_SUCCESS') {
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfTop20'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfCategory'] });
-        queryClient.invalidateQueries({ queryKey: ['getInfoByPlaceId'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesOfFilter'] });
-        queryClient.invalidateQueries({ queryKey: ['getPlacesNearBy'] });
-      }
     },
   });
 };

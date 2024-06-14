@@ -8,6 +8,7 @@ import DEFAULT_IMAGE from '../../../images/default.png';
 import Toast from '../Toast';
 import useToast from '@hooks/useToast';
 import { useDeleteHeart, usePushHeart } from '@hooks/api/heart';
+import debounce from '@hooks/debounce';
 
 interface ThumbnailProps {
   data: PlacesType | PlacesOfMap | HeartPlacesType;
@@ -55,6 +56,8 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
     }
   };
 
+  const debounceClickHeart = debounce(handleClickHeart, 300);
+
   useEffect(() => {
     setHeartState(like);
   }, [like]);
@@ -67,7 +70,7 @@ const ThumbnailBox = ({ userId, data, like, recentView, onClick }: ThumbnailProp
           <LabelText>{data.name}</LabelText>
         </ThumbLabel>
         {!recentView ? (
-          <LikeIcon onClick={() => handleClickHeart(data.id)}>
+          <LikeIcon onClick={() => debounceClickHeart(data.id)}>
             {heartState ? <LikeFull /> : <LikeEmpty />}
           </LikeIcon>
         ) : null}
