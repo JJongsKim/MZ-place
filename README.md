@@ -22,6 +22,12 @@
 
 ![팀원소개](https://github.com/JJongsKim/Seoul-Walk/assets/81777778/08da5de7-81da-4264-bada-2aa5e207bcf9)
 
+## 2024 서울 열린데이터광장 공공데이터 활용 창업경진대회 - 발표심사작
+|🍃 발표 심사작 선정 🍃|
+|:--:|
+|![경진대회](https://github.com/JJongsKim/Seoul-Walk/assets/81777778/a3dd31e9-c0c9-4720-a4e3-902085ccdeaa)|
+
+
 ## [프로젝트 실행 방법]
 
 > 🚨 해당 프로젝트는 env를 사전에 필요로 합니다.
